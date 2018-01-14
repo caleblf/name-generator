@@ -26,15 +26,6 @@ def make_form_placeholder(v):
     return language.LiteralForm(v)
 
 
-def parse_probabilistic_form_clause(s):
-    elements = s.split(maxsplit=1)
-    try:
-        odds = int(elements[0])
-        return parse_form_exp(elements[1]), odds
-    except ValueError:
-        return parse_form_exp(s.strip()), 1
-
-
 def load_from_file(filename):
     """Load a language from a file."""
     try:
@@ -42,23 +33,27 @@ def load_from_file(filename):
             data = yaml.load(f)
     except yaml.error.YAMLError as e:
         raise ValueError('Improperly formatted YAML file') from e
-    name = data['name'];
+    try:
+        name = data['name']
+        forms = data.get('forms', {})
+        root = data['root']
+    except KeyError as e:
+        raise ValueError('Missing required field: %s' % e.args[0])
+
     if not isinstance(name, str):
         raise ValueError('Non-string language name')
-    forms = data.get('forms', {})
     if not isinstance(forms, dict):
         raise ValueError('Tagged forms table not a dictionary')
     tagged_forms = {k: make_form_placeholder(v) for k, v in forms.items()}
 
     def parse_form_exp(exp):
-        if not isinstance(v, str):
+        if not isinstance(exp, str):
             raise ValueError('Non-string form expression')
         if exp.startswith('('): # concatenation
             if not exp.endswith(')'):
                 raise ValueError('Unmatched parenthesis in form expression: %s' % exp)
             return language.ConcatenativeForm([
-                parse_form_exp(s)
-                for s in exp[1:-1].split()
+                parse_form_exp(s) for s in exp[1:-1].split()
             ])
         if exp.startswith('$'): # tag
             try:
@@ -68,8 +63,17 @@ def load_from_file(filename):
         # literal
         return language.LiteralForm(exp)
 
+    def parse_probabilistic_form_clause(s):
+        elements = s.split(maxsplit=1)
+        try:
+            odds = int(elements[0])
+            return parse_form_exp(elements[1]), odds
+        except ValueError:
+            return parse_form_exp(s.strip()), 1
+
+
     # parse root form
-    root_form = parse_form_exp(data['root'])
+    root_form = parse_form_exp(root)
 
     # parse tagged forms
     for tag, form in tagged_forms.items():
