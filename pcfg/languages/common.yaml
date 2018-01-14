@@ -1,0 +1,163 @@
+# Angle-Saxon sounding language
+name: Common
+
+root: ($start $mid $end)
+
+forms:
+  start:
+    - ($v $tc)
+    - $syllable
+    - $chunk
+  mid:
+    - 2 $empty
+    - ($v $tc)
+    - $syllable
+    - $chunk
+  syllable: ($c $v $tc)
+  end:
+    - ($v $tc)
+    - $v
+    - $syllable
+    - 2 $end-chunk
+  empty: ""
+
+  chunk:
+    - jax
+    - fred
+    - ald
+    - art
+    - ulf
+    - walt
+    - hild
+    - os
+    - thur
+    - gwin
+    - gwid
+    - al
+    - wil
+    - bil
+    - win
+    - don
+    - quen
+    - quin
+    - ash
+    - mir
+  end-chunk:
+    - issa
+    - een
+    - ita
+    - ia
+    - 2 ie
+    - ina
+    - ice
+    - ra
+    - ene
+    - rine
+    - lene
+    - ula
+    - yssa
+    - ima
+    - essa
+    - "on"
+    - art
+    - ton
+    - sha
+    - drew
+    - grid
+    - ythe
+    - quith
+    - wild
+    - son
+    - sson
+    - sdottir
+    - iel
+    - frith
+    - mund
+    - wulf
+    - noth
+    - ric
+    - ic
+    - us
+    - ius
+    - a
+    - ulf
+    - ald
+    - thur
+    - or
+    - win
+    - don
+    - nulf
+    - ax
+  tc:
+    - r
+    - t
+    - rt
+    - th
+    - p
+    - s
+    - sp
+    - sk
+    - sh
+    - d
+    - f
+    - ld
+    - g
+    - ck
+    - l
+    - x
+    - b
+    - n
+    - m
+  c:
+    - w
+    - r
+    - t
+    - tr
+    - th
+    - y
+    - p
+    - pr
+    - s
+    - sh
+    - st
+    - sl
+    - sm
+    - sn
+    - sp
+    - spr
+    - sc
+    - scr
+    - d
+    - dr
+    - f
+    - fr
+    - g
+    - gr
+    - gl
+    - h
+    - hr
+    - j
+    - k
+    - l
+    - z
+    - c
+    - cr
+    - ch
+    - cl
+    - v
+    - b
+    - br
+    - bl
+    - n
+    - m
+  v:
+    - 2 e
+    - 2 u
+    - 2 i
+    - 2 o
+    - 2 a
+    - 2 y
+    - ia
+    - io
+    - ae
+    - ee

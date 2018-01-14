@@ -5,11 +5,11 @@ root: ($start $mid $end)
 
 forms:
   start:
-    - ($v $tc)
-    - $syllable
+    - 2 ($v $tc)
+    - 3 $syllable
   mid:
     - 1 $empty
-    - 2 $syllable
+    - 1 $syllable
   syllable: ($c $v $tc)
   end:
     - 3 $syllable
@@ -18,25 +18,21 @@ forms:
   empty: ""
 
   v:
-    - a
-    - ae
+    - 2 a
+    - 2 i
+    - 2 o
+    - 3 u
     - ei
-    - i
-    - o
-    - u
     - ai
+    - ia
     - io
     - oi
     - eo
     - ao
-    - ui
     - ua
-    - ue
   tc:
     - r
     - t
-    - p
-    - s
     - d
     - f
     - g
