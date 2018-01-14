@@ -26,9 +26,11 @@ def make_form_placeholder(v):
 
 def load_from_file(filename):
     """Load a language from a file."""
-    with open(filename, 'r') as f:
-        data = yaml.load(f)
-    
+    try:
+        with open(filename, 'r') as f:
+            data = yaml.load(f)
+    except yaml.error.YAMLError as e:
+        raise ValueError('Improperly formatted YAML file') from e
     name = data['name'];
     tagged_forms = {k: make_form_placeholder(v) for k, v in data['forms'].items()}
 
@@ -50,9 +52,11 @@ def load_from_file(filename):
 
     def parse_probabilistic_form_clause(s):
         elements = s.split(maxsplit=1)
-        if len(elements) != 2:
-            raise ValueError('Invalid probabilistic form clause: %s' % s)
-        return parse_form_exp(elements[1]), int(elements[0])
+        try:
+            odds = int(elements[0])
+            return parse_form_exp(elements[1]), odds
+        except ValueError:
+            return parse_form_exp(s.strip()), 1
 
     # parse root form
     root_form = parse_form_exp(data['root'])
@@ -64,6 +68,6 @@ def load_from_file(filename):
                 parse_probabilistic_form_clause,
                 data['forms'][tag])))
         elif isinstance(form, language.ConcatenativeForm):
-            form.set_forms(parse_form_exp(data['forms'][tag]))
+            form.set_forms(parse_form_exp(data['forms'][tag]).forms)
 
     return language.Language(name, root_form)

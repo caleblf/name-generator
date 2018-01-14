@@ -71,4 +71,4 @@ class Language:
         self.grammar = grammar
 
     def generate(self):
-        return self.grammar.express()
+        return self.grammar.express().capitalize()
