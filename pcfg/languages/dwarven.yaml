@@ -1,0 +1,76 @@
+# Dwarven-sounding Language
+name: Dwarven
+
+root: ($start $mid $end)
+
+forms:
+  start:
+    - ($v $tc)
+    - $syllable
+  mid:
+    - 1 $empty
+    - 2 $syllable
+  syllable: ($c $v $tc)
+  end:
+    - 3 $syllable
+    - 2 ($v $tc)
+    - 1 $v
+  empty: ""
+
+  v:
+    - a
+    - ae
+    - ei
+    - i
+    - o
+    - u
+    - ai
+    - io
+    - oi
+    - eo
+    - ao
+    - ui
+    - ua
+    - ue
+  tc:
+    - r
+    - t
+    - p
+    - s
+    - d
+    - f
+    - g
+    - k
+    - l
+    - z
+    - x
+    - v
+    - n
+    - m
+    - rt
+    - th
+    - sh
+  c:
+    - w
+    - r
+    - t
+    - p
+    - s
+    - d
+    - f
+    - g
+    - h
+    - k
+    - l
+    - z
+    - v
+    - b
+    - n
+    - m
+    - tr
+    - gr
+    - dv
+    - th
+    - thr
+    - dr
+    - br

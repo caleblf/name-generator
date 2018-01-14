@@ -1,5 +1,5 @@
 # Elven-sounding Language
-name: elven
+name: Elven
 
 root: ($start $mid $end)
 
@@ -9,7 +9,8 @@ forms:
     - $syllable
   mid:
     - 1 $empty
-    - 3 $syllable
+    - 2 $syllable
+    - 4 ($v $tc)
   syllable: ($c $v $tc)
   end:
     - 3 ($v $tc)
