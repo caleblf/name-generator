@@ -8,23 +8,21 @@ from generator import parsing
 
 
 credit_blurb = """
-PCFG Name Generator v1.0
+PCFG Name Generator v1.0 (2018-01-13)
 By Iguanotron
-2018-01-13
 """
 
 help_blurb = """Commands:
-
-help
-\tDisplay this text
-exit
-\tExit session
-list
-\tList the currently loaded languages
-load <filename>
-\tLoad the specified language file from ./languages
-build <language_key_or_name> [amount]
-\tGenerate names from a language"""
+  help
+  \tDisplay this text
+  exit
+  \tExit session
+  list
+  \tList the currently loaded languages
+  load <filename>
+  \tLoad the specified language file from ./languages
+  build <language_key_or_name> [amount]
+  \tGenerate names from a language"""
 
 
 def init():
