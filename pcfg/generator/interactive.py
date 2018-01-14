@@ -17,6 +17,8 @@ help_blurb = """Commands:
   \tDisplay this text
   exit
   \tExit session
+  quit
+  \tExit session
   list
   \tList the currently loaded languages
   load <filename>
@@ -97,7 +99,7 @@ def init():
 
         if cmd in ('h', 'help'):
             help_command()
-        elif cmd in ('e', 'exit'):
+        elif cmd in ('e', 'exit', 'q', 'quit'):
             if num_args == 0:
                 exit_command()
             else:
