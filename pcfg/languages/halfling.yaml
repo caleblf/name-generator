@@ -1,0 +1,127 @@
+# Hobbit-sounding language
+name: Halfling
+
+root: $root
+
+forms:
+  root:
+    - ($start $end)
+    - ($onset $connector $coda)
+  start:
+    - ($v $tc)
+    - $syllable
+    - $chunk
+  end:
+    - ($v $tc)
+    - $v
+    - $syllable
+    - $chunk
+  syllable: ($c $v $tc)
+  onset:
+    - $v
+    - ($c $v)
+  coda:
+    - 5 $v
+    - 5 ($v $tc)
+    - 2 y
+
+  chunk:
+    - sam
+    - wise
+    - gam
+    - gee
+    - ben
+    - drew
+    - took
+    - brook
+    - hill
+    - half
+    - mill
+    - wood
+    - ton
+
+  connector:
+    - rd
+    - 2 rr
+    - 2 gg
+    - 2 pp
+    - rt
+    - tr
+    - d
+    - lb
+    - lt
+    - ln
+    - lm
+    - mm
+    - nn
+    - cl
+    - 2 sh
+    - sw
+    - vl
+    - lv
+    - cr
+    - sn
+    - sp
+    - pl
+    - pr
+    - fr
+    - st
+    - th
+    - rl
+    - fl
+    - nd
+    - ld
+    - gl
+    - ff
+    - ll
+
+  tc:
+    - r
+    - s
+    - d
+    - g
+    - l
+    - 3 n
+    - 3 m
+  c:
+    - w
+    - r
+    - t
+    - tr
+    - th
+    - y
+    - p
+    - pl
+    - s
+    - sh
+    - st
+    - sm
+    - sn
+    - sl
+    - d
+    - dr
+    - f
+    - fr
+    - fl
+    - g
+    - gr
+    - gl
+    - h
+    - j
+    - k
+    - l
+    - c
+    - cr
+    - cl
+    - v
+    - b
+    - br
+    - bl
+    - n
+    - m
+  v:
+    - 3 a
+    - 3 i
+    - 3 o
+    - ia
+
