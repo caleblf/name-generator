@@ -1,0 +1,10 @@
+name: Example
+
+root: ($start $end)
+
+forms:
+  start: a
+
+  end:
+    - 1 (b $end)
+    - 1 c
