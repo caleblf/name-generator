@@ -1,0 +1,80 @@
+# Orcish-sounding language
+name: Orcish
+
+root: ($start $mid $end)
+
+forms:
+  start:
+    - ($v $tc)
+    - $syllable
+  mid:
+    - 4 $empty
+    - ($v $tc)
+    - $syllable
+  syllable: ($c $v $tc)
+  end:
+    - ($v $tc)
+    - $v
+    - $syllable
+  empty: ""
+
+  tc:
+    - 5 r
+    - t
+    - th
+    - s
+    - sh
+    - sk
+    - st
+    - d
+    - f
+    - 6 g
+    - h
+    - k
+    - l
+    - z
+    - b
+    - 2 n
+    - m
+  c:
+    - 2 r
+    - t
+    - tr
+    - th
+    - y
+    - s
+    - 2 sh
+    - sk
+    - skr
+    - skl
+    - 2 sn
+    - sm
+    - st
+    - sl
+    - shl
+    - skl
+    - d
+    - f
+    - fr
+    - 3 g
+    - gl
+    - 2 gr
+    - h
+    - k
+    - kr
+    - l
+    - z
+    - zh
+    - v
+    - vr
+    - b
+    - br
+    - bl
+    - 2 n
+    - m
+  v:
+    - 4 u
+    - 4 o
+    - 2 a
+    - ia
+    - ao
