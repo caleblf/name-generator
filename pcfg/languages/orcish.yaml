@@ -13,9 +13,9 @@ forms:
     - $syllable
   syllable: ($c $v $tc)
   end:
-    - ($v $tc)
+    - 3 ($v $tc)
     - $v
-    - $syllable
+    - 2 $syllable
   empty: ""
 
   tc:
