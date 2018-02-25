@@ -3,7 +3,6 @@
 import sys
 import os
 
-
 from generator import parsing
 
 
