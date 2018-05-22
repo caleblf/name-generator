@@ -68,7 +68,7 @@ def load_from_file(filename):
         try:
             odds = int(elements[0])
             return parse_form_exp(elements[1]), odds
-        except ValueError:
+        except (ValueError, IndexError):
             return parse_form_exp(s.strip()), 1
 
 
