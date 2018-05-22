@@ -1,25 +1,77 @@
-# Anglo-Saxon sounding language
+# Fantasy Germanic-sounding language
 name: Common
 
-root: ($start $mid $end)
+root: $name
 
 forms:
-  start:
+  name:
+    - 1 $name-4
+    - 2 $name-3
+    - 3 $name-2
+    - 2 $name-1
+
+  # There are two types of syllables used here: vowel-syllables and chunks
+  # Vowel-syllables are built directly from phonetic segments
+  # Chunks are premade syllables taken from a list
+
+  name-4: # full 4-syllable name
+    - $v-name-4
+    - ($c $v-name-4)
+    - $ch-name-4
+  name-3: # full 3-syllable name
+    - $v-name-3
+    - ($c $v-name-3)
+    - $ch-name-3
+  name-2: # full 2-syllable name
+    - $v-name-2
+    - ($c $v-name-2)
+    - $ch-name-2
+  name-1: # full 1-syllable name; note not using single end-chunks
+    - ($c $v)
     - ($v $tc)
-    - $syllable
-    - $chunk
-  mid:
-    - 2 $empty
-    - ($v $tc)
-    - $syllable
-    - $chunk
-  syllable: ($c $v $tc)
-  end:
-    - ($v $tc)
-    - $v
-    - $syllable
-    - 2 $end-chunk
-  empty: ""
+    - ($c $v $tc)
+
+  # names starting with vowel-syllables
+  v-name-4:
+    - ($v $v-v $v-name-3)
+    - ($v $v-ch $ch-name-3)
+  v-name-3:
+    - ($v $v-v $v-name-2)
+    - ($v $v-ch $ch-name-2)
+  v-name-2:
+    - ($v $v-v $v-name-1)
+    - ($v $v-ch $ch-name-1)
+  v-name-1:
+    - ($v $v-ch) # end
+
+  # names starting with chunks
+  ch-name-4:
+    - ($chunk $ch-v $v-name-3)
+    - ($chunk $ch-ch $ch-name-3)
+  ch-name-3:
+    - ($chunk $ch-v $v-name-2)
+    - ($chunk $ch-ch $ch-name-2)
+  ch-name-2:
+    - ($chunk $ch-v $v-name-1)
+    - ($chunk $ch-ch $ch-name-1)
+  ch-name-1:
+    - ($end-chunk) # end
+
+  # connectors between syllable types
+  v-v:
+    - $link
+  v-ch:
+    - $tc
+    - ""
+  ch-v:
+    - $c
+    - ""
+  ch-ch:
+    - ""
+
+  # ---------------
+  # Boilerplate End
+  # ---------------
 
   chunk:
     - jax
@@ -94,6 +146,10 @@ forms:
     - orn
     - ild
     - ian
+  link:
+    - 5 $tc
+    - 2 ($tc $c)
+    - "'"
   tc:
     - r
     - t
