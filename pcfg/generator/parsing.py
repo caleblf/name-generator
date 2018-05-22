@@ -71,7 +71,6 @@ def load_from_file(filename):
         except (ValueError, IndexError):
             return parse_form_exp(s.strip()), 1
 
-
     # parse root form
     root_form = parse_form_exp(root)
 
