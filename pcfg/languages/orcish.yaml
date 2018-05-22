@@ -1,22 +1,36 @@
 # Orcish-sounding language
 name: Orcish
 
-root: ($start $mid $end)
+root: $name
 
 forms:
-  start:
+  name:
+    - 1 $name-3
+    - 3 $name-2
+    - 2 $name-1
+
+  name-3: # full 3-syllable name
+    - $v-name-3
+    - ($c $v-name-3)
+  name-2: # full 2-syllable name
+    - $v-name-2
+    - ($c $v-name-2)
+  name-1: # full 1-syllable name
     - ($v $tc)
-    - $syllable
-  mid:
-    - 4 $empty
-    - ($v $tc)
-    - $syllable
-  syllable: ($c $v $tc)
-  end:
-    - 3 ($v $tc)
-    - $v
-    - 2 $syllable
-  empty: ""
+    - ($c $v $tc)
+
+  # names starting with vowel-syllables
+  v-name-3:
+    - ($v $link $v-name-2)
+  v-name-2:
+    - ($v $link $v-name-1)
+  v-name-1: # note no single vowels or ames ending in vowels
+    - ($v $tc) # end
+
+  link: # connectors between vowels
+    - 4 $tc
+    - 2 ($tc $c)
+    - 1 '
 
   tc:
     - 5 r
@@ -73,4 +87,4 @@ forms:
     - 4 o
     - 2 a
     - ia
-    - ao
+    - au
