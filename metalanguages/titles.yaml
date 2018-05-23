@@ -87,9 +87,10 @@ forms:
     - Owl
     - Bat
     - Rat
-    # Items
+    # Rocks
     - Diamond
     - Crystal
+    - Stone
     # Weapons
     - Spear
     - Blade
@@ -98,6 +99,7 @@ forms:
     - Arrow
     - Dagger
     - Club
+    - Lance
     # Armor
     - Shield
     - Mantle
@@ -114,11 +116,16 @@ forms:
     - Gate
     - Tower
     - Door
+    - Pyramid
+    - Manse
+    - Tomb
     # Natural places
     - River
     - Grove
     - Mountain
     - Shore
+    - Tarn
+    - Desert
     # Astronomical bodies
     - Moon
     - Sun
@@ -139,8 +146,8 @@ forms:
     - Eye
 
   adjective:
-    - 4 $color
-    - 4 $digit-adj
+    - 5 $color
+    - 5 $digit-adj
     - Shark-toothed
     - Half-dead
     - One-eyed
@@ -216,9 +223,7 @@ forms:
     - Toothless
     - Unblinking
     - Beautiful
-    # State of matter
-    - Solid
-    - Liquid
+    - Plain
     - Gassy
     # Perception
     - Slightly Off
@@ -234,13 +239,14 @@ forms:
     - Rich
     - Poor
     # State
-    - Perpertually Drunk
+    - Drunkard
     - Sober
     # Region of origin
     - Northron
     - Southron
     - Westron
     - Eastron
+    - Beyonder
     # Profession
     - Poet
     - Bard
@@ -261,3 +267,6 @@ forms:
     - Rat
     - Mouse
     - Bear
+    # Fanciful titles
+    - Myrmidon
+    - Zephyr
