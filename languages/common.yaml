@@ -20,16 +20,16 @@ forms:
     - $ch-name-4
   name-3: # full 3-syllable name
     - $v-name-3
-    - ($c $v-name-3)
-    - $ch-name-3
+    - 2 ($c $v-name-3)
+    - 2 $ch-name-3
   name-2: # full 2-syllable name
     - $v-name-2
-    - ($c $v-name-2)
-    - $ch-name-2
+    - 2 ($c $v-name-2)
+    - 2 $ch-name-2
   name-1: # full 1-syllable name; note not using single end-chunks
     - ($c $v)
     - ($v $tc)
-    - ($c $v $tc)
+    - 3 ($c $v $tc)
 
   # names starting with vowel-syllables
   v-name-4:
