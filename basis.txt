@@ -4,5 +4,6 @@ load dwarven
 load halfling
 load orcish
 load-meta titles
+load-meta professions
 activate titles
 list
