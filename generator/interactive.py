@@ -3,7 +3,11 @@
 import sys
 import os
 import operator
-import readline # enable history for input()
+# enable history for input() on unix
+try:
+    import readline
+except ImportError:
+    pass
 
 from generator import parsing
 
