@@ -1,0 +1,183 @@
+# Heroic titles
+name: Titles
+
+priority: 1  # low priority = acts earlier
+
+in: name
+out: $titled-name
+
+forms:
+  titled-name:
+    - 20 ($name $the $title)
+    - 4 ($name $of-the $sigil-phrase)
+    - 1 ($adjective $sp $name)
+
+  the: " the "
+  of-the: " of the "
+  sp: " "
+
+  color:
+    - Golden
+    - Argent
+    - Sable
+    - Red
+    - Blue
+    - Green
+    - White
+    - Orange
+    - Black
+    - Grey
+    - Yellow
+    - Purple
+    - Chartreuse
+    - Crimson
+    - Azure
+    - Violet
+    - Magenta
+    - Brown
+    - Beige
+    - Indigo
+    - "Light Cyan"
+
+  sigil-phrase:
+    - ($sigil-mod-s $sp $sigil)
+    - ($sigil-mod-pl $sp $sigil s)
+
+  sigil-mod-s:
+    - 4 $color
+    - Majestic
+    - Great
+    - Noble
+    - Fallen
+    - Broken
+  sigil-mod-pl:
+    - 4 $color
+    - Two
+    - Three
+    - Four
+    - Five
+    - Six
+    - Seven
+    - Nine
+    - Dozen
+    - Multitudinous
+
+  sigil:
+    - Bone
+    - Claw
+    - Spear
+    - Blade
+    - Sword
+    - Shield
+    - Rose
+    - Mantle
+    - Gauntlet
+    - Wand
+    - Bow
+    - Arrow
+    - Helm
+    - Gate
+    - River
+    - Boar
+    - Cat
+    - Lion
+    - Moon
+    - Sun
+    - Tower
+    - Door
+    - Grove
+    - Mountain
+
+  adjective:
+    - 4 $digit-adj
+    - Shark-toothed
+    - Half-dead
+    - One-eyed
+    - One-eared
+    - Fingerless
+    - Twice-cursed
+    - Thrice-cursed
+
+  digit-adj:
+    - 3 ($digit-count -fingered)
+    - 1 ($digit-count -toed)
+
+  digit-count:
+    - Four
+    - 2 Six
+    - 2 Seven
+    - Eight
+    - 2 Nine
+    - Eleven
+
+  title:
+    - 10 $color
+    - Vague
+    - Quick
+    - Nimble
+    - Lean
+    - Stout
+    - Feeble
+    - Invisible
+    - Deathless
+    - Wise
+    - Brave
+    - Cordial
+    - Incompetent
+    - Blind
+    - Deaf
+    - Impractical
+    - Daft
+    - Crabby
+    - Half-Wit
+    - Spineless
+    - Solid
+    - Liquid
+    - Gassy
+    - Honest
+    - Sincere
+    - Incongruously Cheerful
+    - Bizarre
+    - Planetouched
+    - Wrinkled
+    - Reckless
+    - Slightly Off
+    - Smelly
+    - Silver-Tongued
+    - Dragon-Slayer
+    - Irksome
+    - Unladylike
+    - Truculent
+    - Blind
+    - Toothless
+    - Flirtatious
+    - Nimble
+    - Boorish
+    - Mighty
+    - Forthright
+    - Stand-up Guy
+    - Swanky
+    - Inconsistent
+    - Clever
+    - Visible
+    - Self-absorbed
+    - Tall
+    - Strong
+    - Enduring
+    - Craven
+    - Blessed
+    - Lucky
+    - Thrice-cursed
+    - Boneless
+    - Rich
+    - Poor
+    - Perpertually Drunk
+    - Sober
+    - Unblinking
+    - Fool
+    - Northron
+    - Southron
+    - Westron
+    - Eastron
+    - Thief
+    - Barbarian

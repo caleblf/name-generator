@@ -20,6 +20,14 @@ class LiteralForm(Form):
         return self.value
 
 
+class VariableForm(LiteralForm):
+    """A form whose value may be changed externally.
+    Used in metalanguages for nesting.
+    """
+    def set(self, data):
+        self.value = data
+
+
 class ConcatenativeForm(Form):
     """Form which expresses as a concatenation of subforms."""
 
@@ -72,3 +80,24 @@ class Language:
 
     def generate(self):
         return self.grammar.express().capitalize()
+
+
+class Metalanguage:
+    """A grammar including variable forms.
+
+    Has the following properties:
+        name : str, the name of the metalanguage
+        grammar : Form
+        priority : int, the priority that this language should be generated at
+        variable_form : VariableForm, the variable form which may be modified
+    """
+
+    def __init__(self, name, grammar, priority, variable_form):
+        self.name = name
+        self.grammar = grammar
+        self.priority = priority
+        self.variable_form = variable_form
+
+    def generate(self, data):
+        self.variable_form.set(data)
+        return self.grammar.express()
