@@ -1,0 +1,109 @@
+# Anglo-Saxon names
+# Model is from Gary Gygax's Extraordinary Book of Names by Malcolm Bowers
+name: Anglo-Saxon
+
+root: $name
+
+forms:
+  name:
+    - $single-element
+    - $male-two-element
+    - $female-two-element
+
+  male-two-element: ($male-first $male-second)
+  female-two-element: ($female-first $female-second)
+
+  male-first:
+    - $male-first-common
+    - $male-first-all
+  female-first:
+    - $female-first-common
+    - $female-first-all
+
+  male-second:
+    - $male-second-common
+    - $male-second-all
+  female-second:
+    - $female-second-common
+    - $female-second-all
+
+  single-element: [
+    Acca, Aeaba, Aeffa, Aeldra, Aelfa, Aelle, Aette, Anna, Bass, Beda, Bica,
+    Binni, Blacey, Blithe, Bliths, Blostm, Bondi, Botta, Brand, Brant, Budda,
+    Bugge, Bynni, Cada, Cana, Cearl, Cille, Clac, Cola, Cutha, Cyppe, Denu,
+    Dodda, Eabae, Eafa, Eni, Fearn, Freca, Gal, Geol, Goda, Grim, Hacca,
+    Haele, Haki, Hasta, Hedde, Hengist, Horsa, Hrafn, Hring, Hugi, Ine, Lilla,
+    Moll, Mul, Octa, Offa, Ogga, Orm, Peada, Penda, Praen, Pymma, Reod, Saba, 
+    Sebbi, Snel, Sped, Swan, Swein, Thearle, Tofi, Toki, Tole, Tripp, Tubbi,
+    Tukka, Tunni, Wace, Wada, Waed, Warer, Wini, Witta, Wuffa, Yffi
+  ]
+
+  male-first-common: [
+    Aelf, Aethel, Beald, Beorht, Cuth, Cyne, Deor, Ead, Eald, Gar, God, Here,
+    Leof, Os, Sae, Sige, Thur, Wig, Wine, Wul
+  ]
+
+  male-first-all: [
+    Ac, Aelf, Aenes, Aethel, Aew, Ard, Arm, Baerh, Barda, Bay, Beald, Bel, Beo,
+    Beorht, Beorn, Beran, Bitan, Blac, Blaec, Blaed, Bland, Bote, Bregu, Brun,
+    Burg, Cadda, Caed, Cen, Ceol, Cuic, Cuth, Cyne, Daeg, Daegel, Daegga, Deal,
+    Deor, Dern, Dude, Dun, Ead, Eald, Ealh, Ean, Ear, Ecg, Eofor, Frea, Frith,
+    Gar, Geat, Gisel, Glaed, God, Gold, Graeg, Grim, Guth, Halig, Hard, Hari,
+    Heah, Heana, Heard, Heathu, Helm, Heort, Here, Herle, Hlot, Hoga, Holen,
+    Hrof, Hroth, Hun, Hwit, In, Isen, Kettil, Lang, Leod, Leof, Mael, Maer,
+    Maht, Mund, North, Noth, Oe, Ondes, Ord, Orme, Os, Rand, Raegen, Read, Ric,
+    Rim, Ruh, Run, Sa, Sae, Scroc, Secg, Sel, Sig, Sige, Snel, Stan, Strang,
+    Sunu, Swet, Swith, Theod, Thur, Tila, Tort, Treuwe, Trum, Wacer, Waer,
+    Wald, Walt, Weald, Weard, Wict, Wig, Wil, Wine, Wulf, Wusc
+  ]
+
+  male-second-common: [
+    beald, beorht, frith, gar, geat, hard, heard, here, maer, mund, noth, raed,
+    ric, sige, stan, weald, weard, wig, wine, wulf
+  ]
+
+  male-second-all: [
+    aeldra, aesc, arm, beald, beorht, beorn, bert, bote, brand, cromb, cyne,
+    deal, deor, dreda, ecg, eofer, frea, frith, fugol, gar, gard, geat, gild,
+    glaed, god, gold, grim, gyr, haele, hard, heah, heard, helm, here, hun, in,
+    kettil, lac, leod, leof, mael, maer, ma ht, mann, mon, mund, noth, nyd,
+    raed, rand, ric, rim, run, sele, sig, sige, snel, son, stan, sterre,
+    strang, sunu, swith, thorne, uald, wacer,  waer, wald, walh, walt, weald,
+    weard, weorth, wict, wig, wil, wine, wini, wise, wold, wulf, wyn
+  ]
+
+  female-first-common: [
+    Aelf, Aethel, Beald, Beorht, Cwen, Deor, Ead, Eald, God, Gunn, Hild, Leof,
+    Mild, Os, Sae, Sige, Thur, Wig, Wine, Wulf
+  ]
+
+  female-first-all: [
+    Ac, Aelf, Aenes, Aethel, Aew, Ard, Arm, Baerh, Barda, Bay, Beald, Bel, Beo,
+    Beorht, Beorn, Beran, Bitan, Blac, Blaec, Blaed,Bland, Bote, Bregu, Brun,
+    Burg, Cadda, Caed, Cen, Ceol, Cuic, Cuth, Cwen, Cyne, Daeg, Daegel, Daegga,
+    Deal, Deor, Dern, Dude,Dun, Ead, Eald, Ealh, Ean, Ear, Ecg, Eofor, Frea,
+    Frith, Gar, Geat, Gisel, Glaed, God, Gold, Graeg, Grim, Gunn, Guth, Halig,
+    Hard, Hari,Heah, Heana, Heard, Heathu, Helm, Heort, Here, Herle, Hild,
+    Hlot, Hoga, Holen, Hrof, Hroth, Hun, Hwit, In, Isen, Kettil, Lang, Leod,
+    Leof, Mael, Maer, Maht, Mild, Mund, North, Noth, Oe, Ondes, Ord, Orme, Os,
+    Raegen, Rand, Read, Ric, Rim, Ruh, Run, Sa, Sae, Secg,Sele, Sig, Sige,
+    Snel, Stan, Strang, Sunu, Swet, Swith, Theod, Thur, Tila, Tort, Treuwe,
+    Trum, Tun, Wacer, Waer, Wald, Walt, Weald,Weard, Wict, Wig, Wil, Wine,
+    Wulf, Wusc
+  ]
+
+  female-second-common: [
+    beald, beorht, burg, flaed, frith, gifu, gyth, here, hild, leofu, maer, or,
+    raed, ric, sige, thryth, waru, weald, wig, wulf
+  ]
+
+  female-second-all: [
+    aeldra, aesc, arm, beald, beorht, beorn, bert, bote, brand, burg, cromb,
+    cyne, deal, deor, dreda, ecg, eofer, flaed, frea, frith,fugol, gar, geat,
+    gifu, gild, glaed, god, gold, grim, gyr, gyth, haele, hard, heah, heard,
+    helm, here, hild, hun, in, kettil, lac, leod, leofu,mael, maer, maht, mon,
+    noth, nyd, or, raed, rand, ric, rim, run, sele, sig, sige, snel, son, stan,
+    sterre, strang, sunu, swith, thorne,thryth, uald, wacer, wald, walh, waru,
+    walt, weald, weard, weorth, wict, wig, wil, wini, wise, wold, wulf, wyn,
+    wythe
+  ]

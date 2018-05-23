@@ -1,0 +1,1 @@
+Name languages based on Gary Gygax's Extraordinary Book of Names by Malcolm Bowers
