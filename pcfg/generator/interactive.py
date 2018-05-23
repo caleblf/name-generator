@@ -36,10 +36,7 @@ help_blurb = """Commands:
 get_metalanguage_priority = operator.attrgetter('priority')
 
 
-def init():
-    print(credit_blurb)
-    print(help_blurb)
-
+def init(args):
     languages_by_name = {}
     language_list = []
     metalanguages_by_name = {}
@@ -161,15 +158,8 @@ def init():
                 return
         print('Deactivated %s' % metalanguage.name)
 
-    while True:
-        try:
-            tokens = input('> ').split()
-        except (EOFError, KeyboardInterrupt):
-            print()
-            exit_command()
-            tokens = None
-        if not tokens:
-            continue
+    def execute(command):
+        tokens = command.split()
         cmd = tokens[0]
         num_args = len(tokens) - 1
 
@@ -219,4 +209,25 @@ def init():
                       % ('few' if num_args < 1 else 'many', num_args))
         else:
             print('Command not recognized; try `help` for a list of valid commands')
-        
+
+    # parse commands given as argument, if given
+    if args.commands:
+        print(args.i)
+        try:
+            with open(args.commands, 'r') as f:
+                for cmd in f:
+                    execute(cmd)
+        except IOError:
+            print('Could not open file: %s' % args.commands)
+            exit(2)
+
+    # Run interactive session, if so directed
+    if (not args.commands) or args.i:
+        print(credit_blurb)
+        print(help_blurb)
+        while True:
+            try:
+                execute(input('> '))
+            except (EOFError, KeyboardInterrupt):
+                print()
+                exit_command()
