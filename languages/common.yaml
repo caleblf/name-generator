@@ -168,13 +168,13 @@ forms:
     - nt
     - nth
     - rn
-    - rs
     - st
     - th
     - sk
     - ld
     - lf
     - ng
+    - rk
     - x
   tc: # consonant clusters for the ends of syllables
     - r
