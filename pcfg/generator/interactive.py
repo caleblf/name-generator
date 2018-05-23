@@ -125,7 +125,10 @@ def init(args):
             print('Invalid amount (must be a positive integer): %s' % amt)
         print('Building %d from %s:' % (amt, language.name))
         for i in range(amt):
-            result = language.generate()
+            if args.color:
+                result = '\033[1;36m%s\033[0m' % language.generate()
+            else:
+                result = language.generate()
             for mlang in active_metalanguages:
                 result = mlang.generate(result)
             print(result)
@@ -212,17 +215,16 @@ def init(args):
 
     # parse commands given as argument, if given
     if args.commands:
-        print(args.i)
         try:
             with open(args.commands, 'r') as f:
                 for cmd in f:
                     execute(cmd)
         except IOError:
-            print('Could not open file: %s' % args.commands)
+            print('Could not open file: %s' % args.commands, file=sys.stderr)
             exit(2)
 
     # Run interactive session, if so directed
-    if (not args.commands) or args.i:
+    if (not args.commands) or args.interactive:
         print(credit_blurb)
         print(help_blurb)
         while True:
