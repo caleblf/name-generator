@@ -28,7 +28,7 @@ help_blurb = """Commands:
   \tLoad the specified metalanguage file from ./metalanguages
   activate <metalanguage_key_or_name>
   \tActivate the specified metalanguage for future builds
-  dactivate <metalanguage_key_or_name>
+  deactivate <metalanguage_key_or_name>
   \tDeactivate the specified metalanguage for future builds
   build <language_key_or_name> [amount]
   \tGenerate names from a language"""
@@ -143,7 +143,7 @@ def init(args):
                 print('Metalanguage not recognized: %s' % metalang_key)
                 return
         active_metalanguages.append(metalanguage)
-        print('activated %s' % metalanguage.name)
+        print('Activated %s' % metalanguage.name)
         active_metalanguages.sort(key=get_metalanguage_priority)
 
     def deactivate_command(metalang_key):
