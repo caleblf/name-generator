@@ -225,7 +225,7 @@ def init(args):
                     execute(cmd)
         except IOError:
             print('Could not open file: %s' % args.commands, file=sys.stderr)
-            exit(2)
+            sys.exit(2)
 
     # Run interactive session, if so directed
     if (not args.commands) or args.interactive:
