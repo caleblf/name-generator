@@ -174,6 +174,8 @@ def init(args):
 
     def execute(command):
         tokens = command.split()
+        if not tokens:
+            return
         cmd = tokens[0]
         num_args = len(tokens) - 1
 
@@ -224,6 +226,7 @@ def init(args):
         else:
             print('Command not recognized; try `help` for a list of valid commands')
 
+
     # parse commands given as argument, if given
     if args.commands:
         try:
@@ -233,11 +236,12 @@ def init(args):
         except IOError:
             print('Could not open file: %s' % args.commands, file=sys.stderr)
             sys.exit(2)
+    else:
+        report(credit_blurb)
+        report(help_blurb)
 
     # Run interactive session, if so directed
     if (not args.commands) or args.interactive:
-        print(credit_blurb)
-        print(help_blurb)
         while True:
             try:
                 execute(input('> '))
