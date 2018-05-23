@@ -1,21 +1,37 @@
 # Dwarven-sounding Language
 name: Dwarven
 
-root: ($start $mid $end)
+root: $name
 
 forms:
-  start:
-    - 2 ($v $tc)
-    - 3 $syllable
-  mid:
-    - 1 $empty
-    - 1 $syllable
-  syllable: ($c $v $tc)
-  end:
-    - 3 $syllable
-    - 2 ($v $tc)
-    - 1 $v
-  empty: ""
+  name:
+    - 1 $name-3
+    - 3 $name-2
+    - 2 $name-1
+
+  name-3: # full 3-syllable name
+    - $v-name-3
+    - ($c $v-name-3)
+  name-2: # full 2-syllable name
+    - $v-name-2
+    - ($c $v-name-2)
+  name-1: # full 1-syllable name
+    - ($v $tc)
+    - ($c $v $tc)
+
+  # names starting with vowel-syllables
+  v-name-3:
+    - ($v $link $v-name-2)
+  v-name-2:
+    - ($v $link $v-name-1)
+  v-name-1:
+    - 3 ($v $tc)
+    - $v
+
+  link: # connectors between vowels
+    - 3 $tc
+    - 2 ($tc $c)
+    - 1 '
 
   v:
     - 2 a

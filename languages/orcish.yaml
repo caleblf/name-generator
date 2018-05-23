@@ -16,8 +16,8 @@ forms:
     - $v-name-2
     - ($c $v-name-2)
   name-1: # full 1-syllable name
-    - ($v $tc)
-    - ($c $v $tc)
+    - $v-name-1
+    - ($c $v-name-1)
 
   # names starting with vowel-syllables
   v-name-3:
