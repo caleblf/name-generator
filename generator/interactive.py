@@ -41,7 +41,7 @@ def init(args):
     language_list = []
     metalanguages_by_name = {}
     metalanguage_list = []
-    active_metalanguages = []
+    active_metalanguages = [] # kept in sorted order by priority
 
     def help_command():
         print(help_blurb)
@@ -54,13 +54,13 @@ def init(args):
         if language_list:
             print('Languages loaded:')
             for i, language in enumerate(language_list):
-                print('%d\t%s' % (i, language.name))
+                print('  %d\t%s' % (i, language.name))
         else:
             print('No languages loaded.')
         if metalanguage_list:
             print('Metalanguages loaded:')
             for i, metalanguage in enumerate(metalanguage_list):
-                print('%d\t%s%s' % (
+                print('  %d\t%s%s' % (
                     i,
                     metalanguage.name,
                     '\t(active)' if metalanguage in active_metalanguages else ''
@@ -142,9 +142,12 @@ def init(args):
             except KeyError:
                 print('Metalanguage not recognized: %s' % metalang_key)
                 return
+        if metalanguage in active_metalanguages:
+            print('Metalanguage already active: %s' % metalanguage.name)
+            return
         active_metalanguages.append(metalanguage)
-        print('Activated %s' % metalanguage.name)
         active_metalanguages.sort(key=get_metalanguage_priority)
+        print('Activated %s' % metalanguage.name)
 
     def deactivate_command(metalang_key):
         try:
@@ -152,13 +155,14 @@ def init(args):
         except (ValueError, IndexError):
             try:
                 metalanguage = metalanguages_by_name[metalang_key.casefold()]
-                active_metalanguages.remove(metalanguage)
             except KeyError:
                 print('Metalanguage not recognized: %s' % metalang_key)
                 return
-            except ValueError:
-                print('Metalanguage not active: %s' % metalang_key)
-                return
+        try:
+            active_metalanguages.remove(metalanguage)
+        except ValueError:
+            print('Metalanguage not active: %s' % metalanguage.name)
+            return
         print('Deactivated %s' % metalanguage.name)
 
     def execute(command):
