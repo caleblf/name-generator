@@ -1,0 +1,130 @@
+# English Traditional names
+# Model is from Gary Gygax's Extraordinary Book of Names by Malcolm Bowers
+name: Traditional English
+
+root: $name
+
+forms:
+  name: ($personal $sp $family)
+
+  sp: " "
+
+  personal:
+    - $male-personal
+    - $female-personal
+
+  male-personal:
+    - $male-personal-common
+    - $male-personal-standard
+  female-personal:
+    - $female-personal-common
+    - $female-personal-standard
+
+  male-personal-common: [
+
+    Alf, Bob, Dick, Fred, Harry, Jack, Ned, Nick, Sam, Ted, Tom, Will
+  
+  ]
+
+  male-personal-standard: [
+
+    Al, Alf, Andy, Art, Ben, Bert, Bill, Billy, Bob, Carl, Dan, Dick, Don, Ed,
+    Eddie, Frank, Fred, Gib, Gil, Greg, Guy, Hal, Harry, Jack, Jed, Jim, Joe,
+    Ken, Kitt, Len, Marty, Mick, Nat, Ned, Neddie, Nick, Ollie, Pete, Pip,
+    Rick, Robin, Rollo, Russ, Sam, Seth, Sid, Stan, Tad, Ted, Tim, Toby, Todd,
+    Tom, Tony, Wal, Will, Willie
+  
+  ]
+
+  female-personal-common: [
+
+    Ann, Bess, Jenny, Kate, Meg, Molly, Nan, Nell, Peg, Polly, Sally, Sue
+  
+  ]
+
+  female-personal-standard: [
+
+    Aggy, Ally, Ann, Annie, Babs, Bea, Bess, Bessie, Betsy, Betty, Biddy,
+    Bonny, Cissy, Daisy, Dot, Dottie, Ellie, Ethel, Evie, Hannah, Jan, Jane,
+    Janet, Jen, Jenny, Jessie, Jill, Joan, Judy, Julie, Kate, Kitty, Lexie,
+    Lily, Liz, Lizzie, Lynn, Maggie, Meg, Millie, Minnie, Moll, Molly, Nan,
+    Nell, Nelly, Nora, Peg, Peggy, Polly, Rose, Rosie, Sal, Sally, Sue, Tess,
+    Tilly
+  
+  ]
+
+  family: [
+
+    Adshead, Akers, Antell, Applegarth, Babb, Babbs, Baffin, Bagg, Baggett,
+    Bagnall, Baldey, Bamber, Bark, Barling, Barnstable, Barraclough, Bastable,
+    Bastin, Bather, Batkin, Batt, Bazley, Bebb, Beddall, Beeby, Beecroft,
+    Beedell, Bellis, Belsey, Berridge, Besley, Bibby, Bickle, Biddle,
+    Biddulph, Bigg, Binks, Binns, Bisp, Biss, Blenk, Blenkin, Boam, Bobo,
+    Boddington, Boffey, Bonger, Bonney, Bonser, Borrett, Bossey, Botterill,
+    Botting, Bottom, Bottomley, Botwright, Bowser, Bracher, Brasnett, Brayley,
+    Breary, Brickwood, Brindley, Broadfoot, Broadribb, Brocksopp, Broster,
+    Buckmaster, Budge, Buffard, Bugg, Buggy, Bulger, Bulman, Bunce, Bunt,
+    Burrow, Bushby, Buss, Cade, Cadwaller, Cantrill, Cardno, Catlow,
+    Cattermole, Chaffe, Chaffer, Chard, Chettle, Chilcott, Chitty, Chivers,
+    Chubb, Chugg, Clewes, Coaker, Cobden, Cobley, Coggan, Coggins, Collop,
+    Coney, Coote, Copp, Coppard, Cornock, Cossey, Cottle, Coultip, Crang,
+    Crimp, Croom, Crowles, Cubitt, Cullimore, Cuss, Custance, Cuthbert,
+    Dabbin, Dabbing, Dabbs, Dagg, Dainty, Deeley, Derrick, Dibb, Dibble,
+    Diccox, Diggins, Diggle, Diggles, Digweed, Dimmock, Dinsdale, Dipple,
+    Dobbie, Dobby, Doggett, Dorey, Drabble, Draycott, Dring, Drudge, Duffield,
+    Dufty, Duggan, Duggleby, Dumbrell, Dunkley, Eatwell, Eggins, Entwistle,
+    Erlam, Etchells, Fairclough, Felgate, Fensome, Fenton, Fidge, Fidoe, Figg,
+    Filer, Fincham, Firkins, Flann, Flanner, Flippance, Flook, Flunder,
+    Followes, Fooks, Fremlin, Frisby, Frogley, Frohock, Froome, Frow, Fuggle,
+    Furse, Furze, Gabb, Gaffey, Gagg, Gander, Garbutt, Garlick, Garn, Gazard,
+    Gedge, Giblett, Giddy, Gigg, Gilliat, Gimble, Gimson, Ginger, Gipps,
+    Girdler, Gissing, Gleave, Goggin, Gollogly, Gomm, Goodier, Gook, Gorringe,
+    Gorwyn, Gosden, Gribble, Grigg, Griggs, Grill, Grimble, Grimes, Grimshaw,
+    Grist, Grubb, Guckeen, Guckian, Guild, Gull, Gully, Gumbold, Gummer,
+    Gummidge, Gurden, Haffenden, Hales, Halse, Harpham, Hartle, Hatch,
+    Hayhurst, Hearle, Henley, Henwood, Heppell, Herrick, Herring, Hesketh,
+    Hext, Hicken, Hickmott, Higman, Hinchcliffe, Hindmarsh, Hobley, Hoddy,
+    Hogben, Holdom, Hollick, Holtom, Honeysett, Hook, Hopley, Hopps, Horrocks,
+    Horsfall, Horwood, Hotten, Housely, Howie, Huff, Huffam, Hutton, Huxtable,
+    Icke, Idden, Inskip, Iveson, Izzard, Jaggs, Jellis, Jepson, Jesty, Keel,
+    Keetley, Kerkin, Kerslake, Kettley, Killick, Kinch, Knaggs, Kneebone,
+    Knopp, Knott, Lagden, Laslett, Laverick, Leaper, Leggett, Liddane, Liddy,
+    Liggan, Lithgoe, Lobb, Lodder, Looby, Loody, Lubbock, Luff, Lugard, Lugg,
+    Lumsden, Lyle, Mabb, Mabbitt, Mabbot, Mabbs, Mabbutt, Maffey, Mallam,
+    Mangold, Mapp, Mappin, Marfell, Matthams, Maunder, Maxted, Mayo, Meech,
+    Meeson, Meggison, Meggitt, Meggs, Mellings, Merrikin, Metherell, Mew,
+    Miggles, Miggs, Milsom, Milson, Minchin, Minns, Mobbs, Moberly, Mockler,
+    Mogford, Mogg, Moggs, Morkam, Morphett, Mossman, Mossop, Mottershead,
+    Moulds, Muddle, Muddock, Mudge, Mullock, Murch, Murfin, Murfitt, Musson,
+    Mustill, Mutter, Mutton, Nance, Napper, Neep, Negus, Netherway, Newitt,
+    Niblett, Nickless, Noad, Nobbs, Noblet, Nosworthy, Nottage, Nutt, Offen,
+    Oram, Orcutt, Ord, Orpe, Paddock, Paddon, Pannell, Parham, Pavey, Peay,
+    Peever, Pegg, Pegge, Pegler, Pegrum, Pelly, Pelter, Pendle, Petch,
+    Petcher, Petchey, Pettipher, Philp, Phippen, Phippin, Pickersgill,
+    Pickley, Pickwell, Pidduck, Pigg, Pilkington, Pimblett, Pingree, Pinch,
+    Pinn, Pither, Pochin, Poggs, Polkinghorne, Pomeroy, Pomfret,
+    Postlethwaite, Potticary, Poxon, Pring, Pringle, Prisk, Proudfoot,
+    Puddicombe, Pudding, Puddy, Pugsley, Purslove, Pym, Quaife, Quain, Quenby,
+    Quibell, Quigg, Raddle, Ranby, Rapkins, Ratter, Reakes, Reeson, Riddle,
+    Rix, Roddis, Rosser, Ruddle, Ruffle, Rugg, Rumming, Rump, Sadd, Samways,
+    Sankey, Scantlebury, Scoones, Scouse, Scragg, Scrimgeour, Scroggs, Scruby,
+    Scutt, Sefton, Selth, Semmens, Seward, Shalloo, Sharples, Siggers, Sirett,
+    Skeels, Skerrett, Slee, Sluggett, Smedley, Snoddy, Snuggs, Sparrow,
+    Sparrowhawke, Spink, Spinks, Spriggs, Springett, Sproat, Sprunt, Spurle,
+    Spurrett, Spurrier, Squance, Squarey, Squibb, Squirrel, Staines, Steggal,
+    Stelfox, Stirk, Stith, Strag, Straw, Strutt, Stubbins, Stuppies, Suggett,
+    Swaffer, Swaffield, Swarbrick, Symes, Tabor, Tagg, Tapping, Tarr, Tassell,
+    Teale, Thew, Thick, Thornber, Thwaites, Tibbins, Tibbits, Tibbles,
+    Tibbotts, Tink, Tippell, Tipping, Tippins, Tippling, Tipton, Tisser,
+    Tittmuss, Tobitt, Tonks, Topping, Towse, Toye, Tozer, Trafford, Treasure,
+    Tremlett, Trett, Trible, Tricker, Tripe, Trippe, Tripper, Trist, Troake,
+    Trotter, Trouncer, Trumble, Tudge, Tuffin, Tufley, Tulk, Tully, Tumman,
+    Tunks, Tunnah, Tunnicliffe, Turnock, Tween, Tyrer, Unsworth, Uttley,
+    Varney, Vooght, Wackrill, Waddilove, Waddilow, Walthew, Waltho, Walwin,
+    Wanless, Wann, Waple, Waring, Warrilow, Welburn, Wenden, Werrett, Wescott,
+    Whinnett, Whiskard, Whisker, Whitefoot, Whitlow, Wibberley, Widdicombe,
+    Widdows, Widdup, Wigg, Wigley, Wilberforce, Wilmer, Wintle, Witherden,
+    Witney, Witter, Wolnoth, Woodhead, Wookey, Woolland, Woombill, Worrel,
+    Worsley, Wortley, Wragg, Wrixon, Yeandle, Yeend, Yemm, Yould
+
+  ]
