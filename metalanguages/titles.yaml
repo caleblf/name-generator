@@ -62,6 +62,7 @@ forms:
     - Lost
     - Cursed
     - Blessed
+    - Ancient
   sigil-mod-pl:
     - 3 $sigil-mod-s
     - 3 $color
