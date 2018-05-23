@@ -2,6 +2,11 @@ import itertools
 import random
 
 
+def capitalize_words(s):
+    """Capitalize each space-delimited word in a string."""
+    return ' '.join(w.capitalize() for w in s.split())
+
+
 class Form:
     """Abstract base class for grammatical forms."""
 
@@ -79,7 +84,7 @@ class Language:
         self.grammar = grammar
 
     def generate(self):
-        return self.grammar.express().capitalize()
+        return capitalize_words(self.grammar.express())
 
 
 class Metalanguage:
