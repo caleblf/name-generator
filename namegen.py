@@ -21,6 +21,9 @@ if __name__ == '__main__':
     parser.add_argument('-w', '--suppress-warnings',
                         action='store_true',
                         help='Suppress compatibility warnings')
+    parser.add_argument('-q', '--quiet',
+                        action='store_true',
+                        help='Suppress success confirmation messages')
     args = parser.parse_args()
 
     if args.color:

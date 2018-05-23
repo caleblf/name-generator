@@ -44,11 +44,17 @@ def init(args):
     metalanguage_list = []
     active_metalanguages = [] # kept in sorted order by priority
 
+    if args.quiet:
+        def report(*args, **kwargs):
+            pass
+    else:
+        report = print
+
     def help_command():
         print(help_blurb)
     
     def exit_command():
-        print('Exiting...')
+        report('Exiting...')
         sys.exit()
     
     def list_command():
@@ -72,7 +78,7 @@ def init(args):
     def load_language_command(filename):
         if '.' not in filename:
             filename += '.yaml'
-        print('Loading from %s...' % filename)
+        report('Loading from %s...' % filename)
         try:
             language = parsing.load_language_file(os.path.join(
                 os.path.dirname(os.path.dirname(__file__)),
@@ -85,14 +91,14 @@ def init(args):
         except ValueError as e:
             print('Error parsing language file: %s' % e.args[0])
             return
-        print('Successfully loaded %s (%d)' % (language.name, len(language_list)))
+        report('Successfully loaded %s (%d)' % (language.name, len(language_list)))
         language_list.append(language)
         languages_by_name[language.name.casefold()] = language
 
     def load_metalanguage_command(filename):
         if '.' not in filename:
             filename += '.yaml'
-        print('Loading from %s...' % filename)
+        report('Loading from %s...' % filename)
         try:
             metalanguage = parsing.load_metalanguage_file(os.path.join(
                 os.path.dirname(os.path.dirname(__file__)),
@@ -105,7 +111,7 @@ def init(args):
         except ValueError as e:
             print('Error parsing metalanguage file: %s' % e.args[0])
             return
-        print('Successfully loaded %s (%d)' % (metalanguage.name, len(metalanguage_list)))
+        report('Successfully loaded %s (%d)' % (metalanguage.name, len(metalanguage_list)))
         metalanguage_list.append(metalanguage)
         metalanguages_by_name[metalanguage.name.casefold()] = metalanguage
 
@@ -124,7 +130,7 @@ def init(args):
             print('Invalid amount (must be a positive integer): %s' % amt)
         if amt <= 0:
             print('Invalid amount (must be a positive integer): %s' % amt)
-        print('Building %d from %s:' % (amt, language.name))
+        report('Building %d from %s:' % (amt, language.name))
         for i in range(amt):
             if args.color:
                 result = '\033[1;36m%s\033[0m' % language.generate()
@@ -144,11 +150,11 @@ def init(args):
                 print('Metalanguage not recognized: %s' % metalang_key)
                 return
         if metalanguage in active_metalanguages:
-            print('Metalanguage already active: %s' % metalanguage.name)
+            report('Metalanguage already active: %s' % metalanguage.name)
             return
         active_metalanguages.append(metalanguage)
         active_metalanguages.sort(key=get_metalanguage_priority)
-        print('Activated %s' % metalanguage.name)
+        report('Activated %s' % metalanguage.name)
 
     def deactivate_command(metalang_key):
         try:
@@ -162,9 +168,9 @@ def init(args):
         try:
             active_metalanguages.remove(metalanguage)
         except ValueError:
-            print('Metalanguage not active: %s' % metalanguage.name)
+            report('Metalanguage not active: %s' % metalanguage.name)
             return
-        print('Deactivated %s' % metalanguage.name)
+        report('Deactivated %s' % metalanguage.name)
 
     def execute(command):
         tokens = command.split()
