@@ -60,6 +60,10 @@ def parse_forms(forms, tagged_forms, root):
         return language.LiteralForm(exp)
 
     def parse_probabilistic_form_clause(s):
+        if s is None:
+            raise ValueError('Empty form clause')
+        if not isinstance(s, str):
+            raise ValueError('Non-string form clause')
         elements = s.split(maxsplit=1)
         try:
             odds = int(elements[0])
