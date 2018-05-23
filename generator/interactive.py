@@ -3,6 +3,7 @@
 import sys
 import os
 import operator
+import readline # enable history for input()
 
 from generator import parsing
 
