@@ -8,8 +8,8 @@ out: $titled-name
 
 forms:
   titled-name:
-    - 20 ($name $the $title)
-    - 4 ($name $of-the $sigil-phrase)
+    - 10 ($name $the $title)
+    - 5 ($name $of-the $sigil-phrase)
     - 1 ($adjective $sp $name)
 
   the: " the "
@@ -37,7 +37,7 @@ forms:
     - Brown
     - Beige
     - Indigo
-    - "Light Cyan"
+    - Cyan
 
   sigil-phrase:
     - ($sigil-mod-s $sp $sigil)
@@ -50,9 +50,15 @@ forms:
     - Noble
     - Fallen
     - Broken
+    - Cloven
+    - Lost
+    - Cursed
+    - Blessed
   sigil-mod-pl:
-    - 4 $color
+    - 3 $sigil-mod-s
+    - 3 $color
     - Two
+    - Twin
     - Three
     - Four
     - Five
@@ -62,33 +68,68 @@ forms:
     - Dozen
     - Multitudinous
 
-  sigil:
-    - Bone
-    - Claw
+  sigil: # must pluralize with -s suffix
+    # Animals
+    - Bear
+    - Lion
+    - Boar
+    - Cat
+    - Toad
+    - Owl
+    - Bat
+    - Rat
+    # Items
+    - Diamond
+    - Crystal
+    # Weapons
     - Spear
     - Blade
     - Sword
-    - Shield
-    - Rose
-    - Mantle
-    - Gauntlet
-    - Wand
     - Bow
     - Arrow
+    - Dagger
+    - Club
+    # Armor
+    - Shield
+    - Mantle
+    - Gauntlet
     - Helm
+    - Crown
+    # Magical foci
+    - Wand
+    - Orb
+    # Books
+    - Scroll
+    - Tome
+    # Structures
     - Gate
-    - River
-    - Boar
-    - Cat
-    - Lion
-    - Moon
-    - Sun
     - Tower
     - Door
+    # Natural places
+    - River
     - Grove
     - Mountain
+    # Astronomical bodies
+    - Moon
+    - Sun
+    - Star
+    # Plants
+    - Clover
+    - Rose
+    - Oak
+    - Elm
+    # Body parts
+    - Fist
+    - Heart
+    - Skull
+    - Bone
+    - Claw
+    - Talon
+    - Hand
+    - Eye
 
   adjective:
+    - 4 $color
     - 4 $digit-adj
     - Shark-toothed
     - Half-dead
@@ -112,72 +153,97 @@ forms:
 
   title:
     - 10 $color
-    - Vague
+    # Physical ability
     - Quick
     - Nimble
+    - Feeble
+    - Strong
+    - Enduring
+    # Statue
     - Lean
     - Stout
-    - Feeble
-    - Invisible
-    - Deathless
+    - Tall
+    - Fat
+    # Mental ability
+    - Incompetent
+    - Daft
+    - Half-Wit
+    - Silver-Tongued
+    - Clever
+    # Virtue
+    - Great
     - Wise
     - Brave
+    - Honest
+    - Mighty
+    # Vice
+    - Spineless
+    - Craven
+    - Fool
+    # Personality
+    - Vague
     - Cordial
-    - Incompetent
+    - Crabby
+    - Incongruously Cheerful
+    - Reckless
+    - Unladylike
+    - Truculent
+    - Flirtatious
+    - Boorish
+    - Forthright
+    - Swanky
+    - Inconsistent
+    - Lunatic
+    # Feat
+    - Deathless
+    - Dragon-Slayer
+    # Physical trait
+    - Invisible
     - Blind
     - Deaf
-    - Impractical
-    - Daft
-    - Crabby
-    - Half-Wit
-    - Spineless
+    - Wrinkled
+    - Smelly
+    - Toothless
+    - Unblinking
+    - Beautiful
+    # State of matter
     - Solid
     - Liquid
     - Gassy
-    - Honest
-    - Sincere
-    - Incongruously Cheerful
-    - Bizarre
-    - Planetouched
-    - Wrinkled
-    - Reckless
+    # Perception
     - Slightly Off
-    - Smelly
-    - Silver-Tongued
-    - Dragon-Slayer
+    - Bizarre
     - Irksome
-    - Unladylike
-    - Truculent
-    - Blind
-    - Toothless
-    - Flirtatious
-    - Nimble
-    - Boorish
-    - Mighty
-    - Forthright
     - Stand-up Guy
-    - Swanky
-    - Inconsistent
-    - Clever
-    - Visible
-    - Self-absorbed
-    - Tall
-    - Strong
-    - Enduring
-    - Craven
+    # Higher power
+    - Planetouched
     - Blessed
     - Lucky
     - Thrice-cursed
-    - Boneless
+    # Class
     - Rich
     - Poor
+    # State
     - Perpertually Drunk
     - Sober
-    - Unblinking
-    - Fool
+    # Region of origin
     - Northron
     - Southron
     - Westron
     - Eastron
+    # Profession
+    - Poet
+    - Bard
+    - Singer
     - Thief
     - Barbarian
+    - Warrior
+    - Magician
+    - Trapper
+    # Animal
+    - Boar
+    - Leopard
+    - Eagle
+    - Cheetah
+    - Worm
+    - Toad
