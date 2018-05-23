@@ -8,7 +8,7 @@ from generator import parsing
 
 
 credit_blurb = """
-PCFG Name Generator v1.0 (2018-01-13)
+PCFG Name Generator v1.1 (2018-05-22)
 By Iguanotron
 """
 
