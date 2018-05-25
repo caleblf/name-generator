@@ -153,8 +153,7 @@ forms:
     - One-eyed
     - One-eared
     - Fingerless
-    - Twice-cursed
-    - Thrice-cursed
+    - Crooked
 
   digit-adj:
     - 3 ($digit-count -fingered)
@@ -181,18 +180,21 @@ forms:
     - Stout
     - Tall
     - Fat
+    - Giant
     # Mental ability
     - Incompetent
     - Daft
     - Half-Wit
     - Silver-Tongued
     - Clever
+    - Mad
     # Virtue
     - Great
     - Wise
     - Brave
     - Honest
     - Mighty
+    - Pious
     # Vice
     - Spineless
     - Craven
@@ -211,9 +213,14 @@ forms:
     - Swanky
     - Inconsistent
     - Lunatic
+    - Quiet
+    - Merciful
+    - Vain
     # Feat
     - Deathless
-    - Dragon-Slayer
+    - Dragonslayer
+    - Titan-killer
+    - Magnificent
     # Physical trait
     - Invisible
     - Blind
@@ -223,21 +230,28 @@ forms:
     - Toothless
     - Unblinking
     - Beautiful
+    - Fair
     - Plain
     - Gassy
+    - Hirsute
+    - Bald
     # Perception
     - Slightly Off
     - Bizarre
     - Irksome
     - Stand-up Guy
+    - Cruel
+    - Butcher
     # Higher power
     - Planetouched
+    - Fey
     - Blessed
     - Lucky
     - Thrice-cursed
     # Class
     - Rich
     - Poor
+    - Miserly
     # State
     - Drunkard
     - Sober
@@ -256,6 +270,7 @@ forms:
     - Warrior
     - Magician
     - Trapper
+    - Enchanter
     # Animal
     - Boar
     - Leopard
@@ -267,6 +282,8 @@ forms:
     - Rat
     - Mouse
     - Bear
+    - Snake
+    - Fox
     # Fanciful titles
     - Myrmidon
     - Zephyr
