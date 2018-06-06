@@ -47,8 +47,10 @@ forms:
     - Crystalline
 
   sigil-phrase:
-    - ($sigil-mod-s $sp $sigil)
-    - ($sigil-mod-pl $sp $sigil s)
+    - 2 ($sigil-mod-s $sp $sigil)
+    - 2 ($sigil-mod-pl $sp $sigil s)
+    - $sigil
+    - ($sigil s)
 
   sigil-mod-s:
     - 4 $color
