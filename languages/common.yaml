@@ -16,20 +16,20 @@ forms:
 
   name-4: # full 4-syllable name
     - $v-name-4
-    - ($c $v-name-4)
+    - ($c-long $v-name-4)
     - $ch-name-4
   name-3: # full 3-syllable name
     - $v-name-3
-    - 2 ($c $v-name-3)
+    - 2 ($c-long $v-name-3)
     - 2 $ch-name-3
   name-2: # full 2-syllable name
     - $v-name-2
-    - 2 ($c $v-name-2)
+    - 2 ($c-long $v-name-2)
     - 2 $ch-name-2
   name-1: # full 1-syllable name; note not using single end-chunks
-    - ($c $v)
+    - ($c-long $v)
     - ($v $c-end)
-    - 3 ($c $v $c-end)
+    - 3 ($c-long $v $c-end)
 
   # names starting with vowel-syllables
   v-name-4:
@@ -141,6 +141,7 @@ forms:
     - ald
     - thur
     - or
+    - ar
     - win
     - don
     - nulf
@@ -156,6 +157,8 @@ forms:
     - 4 ($tc $c)
     - ll
     - rr
+    - rg
+    - ng
     - x
     - "'"
   c-end: # consonant clusters for the ends names
@@ -200,32 +203,24 @@ forms:
     - th
     - y
     - p
-    - pr
     - s
     - sh
     - st
     - sl
-    - sm
-    - sn
     - sp
-    - spr
     - sc
-    - scr
     - d
     - dr
     - f
     - fr
     - g
     - gr
-    - gl
     - h
-    - hr
     - j
     - k
     - l
     - z
     - c
-    - cr
     - ch
     - cl
     - v
@@ -234,6 +229,16 @@ forms:
     - bl
     - n
     - m
+  c-long: # consonants for the starts of names only
+    - 29 $c # likelihood = number of basic consonants
+    - sm
+    - sn
+    - scr
+    - spr
+    - gl
+    - hr
+    - cr
+    - pr
   v:
     - 2 e
     - 2 u
