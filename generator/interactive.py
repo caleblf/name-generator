@@ -249,6 +249,9 @@ def init(args):
         while True:
             try:
                 execute(input('> '))
-            except (EOFError, KeyboardInterrupt):
+            except KeyboardInterrupt:
+            	print()
+            	print('Interrupted')
+            except EOFError:
                 print()
                 exit_command()
