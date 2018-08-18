@@ -1,9 +1,5 @@
-load common
-load elven
-load dwarven
-load halfling
-load orcish
-load-meta titles
-load-meta professions
+load languages
+load metalanguages
+activate common
 activate titles
 list
