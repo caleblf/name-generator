@@ -56,19 +56,17 @@ class ProbabilisticForm(Form):
     forms and rel_odds must be the same length.
     """
 
-    def __init__(self, forms, rel_odds):
-        self.set_forms(forms, rel_odds)
+    def __init__(self, forms, weights):
+        self.set_forms(forms, weights)
 
-    def set_forms(self, forms, rel_odds):
-        if len(forms) != len(rel_odds):
-            raise ValueError("Mismatch in length of forms and rel_odds")
+    def set_forms(self, forms, weights):
+        if len(forms) != len(weights):
+            raise ValueError("Mismatch in number of forms and weights")
         self.forms = forms
-        self.rel_odds = rel_odds
+        self.cum_weights = list(itertools.accumulate(weights))
 
     def express(self):
-        return random.choice(list(itertools.chain.from_iterable(
-            itertools.repeat(f, n) for f, n in zip(self.forms, self.rel_odds)
-        ))).express()
+        return random.choices(self.forms, cum_weights=self.cum_weights)[0].express()
 
 
 class Language:
