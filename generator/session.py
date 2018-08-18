@@ -21,7 +21,7 @@ def print_error(*args, **kwargs):
 
 def print_color_error(*args, **kwargs):
     """Print to stderr in color."""
-    print(*(f'\033[1;31m{arg}\033[0m' for arg in args), file=sys.stderr, **kwargs)
+    print(*(f'\033[0;31m{arg}\033[0m' for arg in args), file=sys.stderr, **kwargs)
 
 
 class NameGeneratorSession:

@@ -1,5 +1,5 @@
 load languages
 load metalanguages
 activate common
-activate titles
+activate title
 list
