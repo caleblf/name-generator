@@ -1,5 +1,6 @@
 # Dwarven-sounding Language
 name: Dwarven
+kind: language
 
 root: $name
 

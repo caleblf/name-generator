@@ -1,5 +1,6 @@
 # Extensible template for language specification
 name: Template
+kind: language
 
 root: $name
 

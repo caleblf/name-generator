@@ -1,5 +1,6 @@
 # Hobbit-sounding language
 name: Halfling
+kind: language
 
 root: $root
 

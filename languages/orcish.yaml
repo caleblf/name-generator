@@ -1,5 +1,6 @@
 # Orcish-sounding language
 name: Orcish
+kind: language
 
 root: $name
 

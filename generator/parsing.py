@@ -18,10 +18,10 @@ def make_form_placeholder(v):
         raise ValueError('Non-string form expression in tag')
     if v.startswith('('): # concatenation
         if not v.endswith(')'):
-            raise ValueError('Unmatched parenthesis in tagged form expression: %s' % v)
+            raise ValueError(f'Unmatched parenthesis in tagged form expression: {v}')
         return language.ConcatenativeForm([])
     if v.startswith('$'): # tag
-        raise ValueError('Tag at top level in tagged form expression: %s' % v)
+        raise ValueError(f'Tag at top level in tagged form expression: {v}')
     # literal
     return language.LiteralForm(v)
 
@@ -47,7 +47,7 @@ def parse_forms(forms, tagged_forms, root):
             raise ValueError('Non-string form expression')
         if exp.startswith('('): # concatenation
             if not exp.endswith(')'):
-                raise ValueError('Unmatched parenthesis in form expression: %s' % exp)
+                raise ValueError(f'Unmatched parenthesis in form expression: {exp}')
             return language.ConcatenativeForm([
                 parse_form_exp(s) for s in exp[1:-1].split()
             ])
@@ -55,7 +55,7 @@ def parse_forms(forms, tagged_forms, root):
             try:
                 return tagged_forms[exp[1:]]
             except KeyError:
-                raise ValueError('Unknown tag in form expression: %s' % exp)
+                raise ValueError(f'Unknown tag in form expression: {exp}')
         # literal
         return language.LiteralForm(exp)
 
@@ -84,15 +84,14 @@ def parse_forms(forms, tagged_forms, root):
     return root_form
 
 
-def load_language_file(filename):
-    """Load a language from a file."""
-    data = get_yaml_data(filename)
+def load_language(data):
+    """Load a language from YAML data."""
     try:
         name = data['name']
         root = data['root']
         forms = data.get('forms', {})
     except KeyError as e:
-        raise ValueError('Missing required field: %s' % e.args[0])
+        raise ValueError(f'Missing required field: {e.args[0]}')
 
     if not isinstance(name, str):
         raise ValueError('Non-string language name')
@@ -106,9 +105,8 @@ def load_language_file(filename):
     return language.Language(name, root_form)
 
 
-def load_metalanguage_file(filename):
-    """Load a metalanguage from a file."""
-    data = get_yaml_data(filename)
+def load_metalanguage(data):
+    """Load a metalanguage from YAML data."""
     try:
         name = data['name']
         root = data['out']
@@ -116,7 +114,7 @@ def load_metalanguage_file(filename):
         in_tag = data['in']
         priority = data['priority']
     except KeyError as e:
-        raise ValueError('Missing required field: %s' % e.args[0])
+        raise ValueError(f'Missing required field: {e.args[0]}')
 
     if not isinstance(name, str):
         raise ValueError('Non-string metalanguage name')
@@ -134,3 +132,18 @@ def load_metalanguage_file(filename):
     root_form = parse_forms(forms, tagged_forms, root)
 
     return language.Metalanguage(name, root_form, priority, in_form)
+
+
+def load_file(path):
+    """Load a language or metalanguage from a file."""
+    data = get_yaml_data(path)
+    try:
+        kind = data['kind']
+    except KeyError as e:
+        raise ValueError(f'Could not determine if {path} defines a language or metalanguage')
+
+    if kind == 'language':
+        return load_language(data)
+    if kind == 'metalanguage':
+        return load_metalanguage(data)
+    raise ValueError(f'Invalid file kind in {path}')

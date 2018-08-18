@@ -1,15 +1,15 @@
 """Command-line interface for the name generator."""
 
 import sys
-import os
-import operator
-# enable history for input() on unix
+
+# enable history for input() on *nix
 try:
     import readline
 except ImportError:
     pass
 
 from generator import parsing
+from generator.session import NameGeneratorSession, print_error, print_color_error, noop
 
 
 credit_blurb = """
@@ -38,143 +38,49 @@ help_blurb = """Commands:
   build <language_key_or_name> [amount]
   \tGenerate names from a language"""
 
-get_metalanguage_priority = operator.attrgetter('priority')
+
+def print_help():
+    print(help_blurb)
 
 
-def init(args):
-    languages_by_name = {}
-    language_list = []
-    metalanguages_by_name = {}
-    metalanguage_list = []
-    active_metalanguages = [] # kept in sorted order by priority
+def run(**kwargs):
+    """Run an interactive name generator session."""
+    session = NameGeneratorSession(**kwargs)
 
-    if args.quiet:
-        def report(*args, **kwargs):
-            pass
-    else:
-        report = print
+    use_color = kwargs.get('color', False)
+    error = print_color_error if use_color else print_error
+    report = noop if kwargs.get('quiet', False) else print
 
-    def help_command():
-        print(help_blurb)
-    
-    def exit_command():
+    def exit_session():
         report('Exiting...')
         sys.exit()
-    
-    def list_command():
-        if language_list:
-            print('Languages loaded:')
-            for i, language in enumerate(language_list):
-                print('  %d\t%s' % (i, language.name))
+
+    def validate_num_args(arg_counts_accepted, num_args):
+        if num_args in arg_counts_accepted:
+            return True
+
+        if len(arg_counts_accepted) <= 2:
+            expected = ' or '.join(map(str, arg_counts_accepted))
         else:
-            print('No languages loaded.')
-        if metalanguage_list:
-            print('Metalanguages loaded:')
-            for i, metalanguage in enumerate(metalanguage_list):
-                print('  %d\t%s%s' % (
-                    i,
-                    metalanguage.name,
-                    '\t(active)' if metalanguage in active_metalanguages else ''
-                ))
-        else:
-            print('No metalanguages loaded.')
+            expected = ', '.join([str(n) for n in arg_counts_accepted][:-1]) + f', or {arg_counts_accepted[-1]}'
     
-    def load_language_command(filename):
-        if '.' not in filename:
-            filename += '.yaml'
-        report('Loading from %s...' % filename)
-        try:
-            language = parsing.load_language_file(os.path.join(
-                os.path.dirname(os.path.dirname(__file__)),
-                'languages',
-                filename
-            ))
-        except OSError:
-            print('Could not read from file: %s' % filename)
-            return
-        except ValueError as e:
-            print('Error parsing language file: %s' % e.args[0])
-            return
-        report('Successfully loaded %s (%d)' % (language.name, len(language_list)))
-        language_list.append(language)
-        languages_by_name[language.name.casefold()] = language
+        if all(num_args < n for n in arg_counts_accepted):
+            error(f'Too few arguments (expected {expected}, got {num_args})')
+        elif all(num_args > n for n in arg_counts_accepted):
+            error(f'Too many arguments (expected {expected}, got {num_args})')
+        else:
+            error(f'Invalid number of arguments (expected {expected}, got {num_args})')
+        return False
 
-    def load_metalanguage_command(filename):
-        if '.' not in filename:
-            filename += '.yaml'
-        report('Loading from %s...' % filename)
-        try:
-            metalanguage = parsing.load_metalanguage_file(os.path.join(
-                os.path.dirname(os.path.dirname(__file__)),
-                'metalanguages',
-                filename
-            ))
-        except OSError:
-            print('Could not read from file: %s' % filename)
-            return
-        except ValueError as e:
-            print('Error parsing metalanguage file: %s' % e.args[0])
-            return
-        report('Successfully loaded %s (%d)' % (metalanguage.name, len(metalanguage_list)))
-        metalanguage_list.append(metalanguage)
-        metalanguages_by_name[metalanguage.name.casefold()] = metalanguage
-
-    def build_command(lang_key, amt=1):
-        try:
-            language = language_list[int(lang_key)]
-        except (ValueError, IndexError):
-            try:
-                language = languages_by_name[lang_key.casefold()]
-            except KeyError:
-                print('Language not recognized: %s' % lang_key)
-                return
-        try:
-            amt = int(amt)
-        except ValueError:
-            print('Invalid amount (must be a positive integer): %s' % amt)
-        if amt <= 0:
-            print('Invalid amount (must be a positive integer): %s' % amt)
-        report('Building %d from %s:' % (amt, language.name))
-        for i in range(amt):
-            if args.color:
-                result = '\033[1;36m%s\033[0m' % language.generate()
-            else:
-                result = language.generate()
-            for mlang in active_metalanguages:
-                result = mlang.generate(result)
-            print(result)
-
-    def activate_command(metalang_key):
-        try:
-            metalanguage = metalanguage_list[int(metalang_key)]
-        except (ValueError, IndexError):
-            try:
-                metalanguage = metalanguages_by_name[metalang_key.casefold()]
-            except KeyError:
-                print('Metalanguage not recognized: %s' % metalang_key)
-                return
-        if metalanguage in active_metalanguages:
-            report('Metalanguage already active: %s' % metalanguage.name)
-            return
-        active_metalanguages.append(metalanguage)
-        active_metalanguages.sort(key=get_metalanguage_priority)
-        report('Activated %s' % metalanguage.name)
-
-    def deactivate_command(metalang_key):
-        try:
-            metalanguage = metalanguage_list[int(metalang_key)]
-        except (ValueError, IndexError):
-            try:
-                metalanguage = metalanguages_by_name[metalang_key.casefold()]
-            except KeyError:
-                print('Metalanguage not recognized: %s' % metalang_key)
-                return
-        try:
-            active_metalanguages.remove(metalanguage)
-        except ValueError:
-            report('Metalanguage not active: %s' % metalanguage.name)
-            return
-        report('Deactivated %s' % metalanguage.name)
+    command_dispatch_table = [
+        (['h', 'help'], [0], print_help),
+        (['e', 'q', 'exit', 'quit'], [0], exit_session),
+        (['o', 'load', 'open'], [1], session.load),
+        (['l', 'list'], [0], session.list),
+        (['b', 'build'], [0, 1], session.build),
+        (['a', 'activate'], [1], session.activate),
+        (['d', 'deactivate'], [1], session.deactivate),
+    ]
 
     def execute(command):
         tokens = command.split()
@@ -183,75 +89,37 @@ def init(args):
         cmd = tokens[0]
         num_args = len(tokens) - 1
 
-        if cmd in ('h', 'help'):
-            help_command()
-        elif cmd in ('e', 'exit', 'q', 'quit'):
-            if num_args == 0:
-                exit_command()
-            else:
-                print('Too many arguments (expected 0, got %d)' % num_args)
-        elif cmd in ('l', 'list'):
-            if num_args == 0:
-                list_command()
-            else:
-                print('Too many arguments (expected 0, got %d)' % num_args)
-        elif cmd in ('o', 'load', 'open'):
-            if num_args == 1:
-                load_language_command(tokens[1])
-            else:
-                print('Too %s arguments (expected 1, got %d)'
-                      % ('few' if num_args < 1 else 'many', num_args))
-        elif cmd in ('m', 'load-meta', 'open-meta'):
-            if num_args == 1:
-                load_metalanguage_command(tokens[1])
-            else:
-                print('Too %s arguments (expected 1, got %d)'
-                      % ('few' if num_args < 1 else 'many', num_args))
-        elif cmd in ('b', 'build'):
-            if num_args == 1:
-                build_command(tokens[1])
-            elif num_args == 2:
-                build_command(tokens[1], tokens[2])
-            else:
-                print('Too %s arguments (expected 1 or 2, got %d)'
-                      % ('few' if num_args < 1 else 'many', num_args))
-        elif cmd in ('a', 'activate'):
-            if num_args == 1:
-                activate_command(tokens[1])
-            else:
-                print('Too %s arguments (expected 1, got %d)'
-                      % ('few' if num_args < 1 else 'many', num_args))
-        elif cmd in ('d', 'deactivate'):
-            if num_args == 1:
-                deactivate_command(tokens[1])
-            else:
-                print('Too %s arguments (expected 1, got %d)'
-                      % ('few' if num_args < 1 else 'many', num_args))
-        else:
-            print('Command not recognized; try `help` for a list of valid commands')
+        for commands, arg_counts_accepted, command_func in command_dispatch_table:
+            if cmd in commands:
+                if not validate_num_args(arg_counts_accepted, num_args):
+                    return
+                command_func(*tokens[1:])
+                return
+        error('Command not recognized; try `help` for a list of valid commands')
 
-
-    # parse commands given as argument, if given
-    if args.commands:
+    # parse prelude if given
+    if kwargs.get('commands'):
         try:
-            with open(args.commands, 'r') as f:
+            with open(kwargs['commands'], 'r') as f:
                 for cmd in f:
                     execute(cmd)
         except IOError:
-            print('Could not open file: %s' % args.commands, file=sys.stderr)
+            error('Could not open file: %s' % kwargs['commands'], file=sys.stderr)
             sys.exit(2)
+        except KeyboardInterrupt:
+            report('Interrupted')
     else:
         report(credit_blurb)
         report(help_blurb)
 
-    # Run interactive session, if so directed
-    if (not args.commands) or args.interactive:
+    # Run interactive session
+    if (not kwargs.get('commands')) or kwargs.get('interactive'):
         while True:
             try:
-                execute(input('> '))
+                execute(input(f'[{session.active_name}]> '))
             except KeyboardInterrupt:
-            	print()
-            	print('Interrupted')
+                report()
+                report('Interrupted')
             except EOFError:
-                print()
+                report()
                 exit_command()

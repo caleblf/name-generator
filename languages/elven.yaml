@@ -1,5 +1,6 @@
 # Elven-sounding Language
 name: Elven
+kind: language
 
 root: ($start $mid $end)
 

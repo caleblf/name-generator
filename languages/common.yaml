@@ -1,5 +1,6 @@
 # Fantasy Germanic-sounding language
 name: Common
+kind: language
 
 root: $name
 

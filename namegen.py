@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 
 import sys
+
+if (sys.version_info.major, sys.version_info.minor) < (3, 6):
+    print('Python version not supported (3.6 or later required', file=sys.stderr)
+    sys.exit(1)
+
 import argparse
 
 from generator import interactive
@@ -34,4 +39,4 @@ if __name__ == '__main__':
             if not args.suppress_warnings:
                 print('The `colorama` package is required for color support on some platforms. To suppress this warning, use the -w flag.', file=sys.stderr)
 
-    interactive.init(args)
+    interactive.run(**vars(args))
