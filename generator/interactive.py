@@ -13,7 +13,7 @@ from generator.session import NameGeneratorSession, print_error, print_color_err
 
 
 credit_blurb = """
-PCFG Name Generator v1.1 (2018-05-22)
+PCFG Name Generator v1.2 (2018-08-18)
 By Iguanotron
 """
 
