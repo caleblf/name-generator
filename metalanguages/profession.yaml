@@ -1,5 +1,5 @@
-# Medieval professions
-name: Professions
+# Medieval profession
+name: Profession
 kind: metalanguage
 
 priority: 3  # low priority = acts earlier

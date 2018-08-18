@@ -1,5 +1,5 @@
 # Heroic titles
-name: Titles
+name: Title
 kind: metalanguage
 
 priority: 1  # low priority = acts earlier
