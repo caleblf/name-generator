@@ -27,16 +27,13 @@ help_blurb = """Commands:
   \tList the currently loaded languages and metalanguages
   load <filename>
   open <filename>
-  \tLoad the specified language file from ./languages
-  load-meta <filename>
-  open-meta <filename>
-  \tLoad the specified metalanguage file from ./metalanguages
-  activate <metalanguage_key_or_name>
-  \tActivate the specified metalanguage for future builds
-  deactivate <metalanguage_key_or_name>
-  \tDeactivate the specified metalanguage for future builds
-  build <language_key_or_name> [amount]
-  \tGenerate names from a language"""
+  \tLoad the specified file or folder of files
+  activate <name>
+  \tActivate the specified language or metalanguage for future builds
+  deactivate <name>
+  \tDeactivate the specified language or metalanguage for future builds
+  build [amount]
+  \tGenerate names from the active language"""
 
 
 def print_help():
