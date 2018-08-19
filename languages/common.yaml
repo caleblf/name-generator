@@ -163,6 +163,9 @@ forms:
     - awn
     - ed
     - fred
+    - orne
+    - gold
+    - gar
   link:
     - 6 $tc
     - 6 $c
@@ -175,7 +178,7 @@ forms:
     - ld
     - x
     - "'"
-  c-end: # consonant clusters for the ends names
+  c-end: # consonant clusters for the ends of names
     - 15 $tc
     - ll
     - rr
