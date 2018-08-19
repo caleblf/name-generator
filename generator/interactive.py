@@ -96,13 +96,13 @@ def run(**kwargs):
         error('Command not recognized; try `help` for a list of valid commands')
 
     # parse prelude if given
-    if kwargs.get('commands'):
+    if kwargs.get('commandfile'):
         try:
-            with open(kwargs['commands'], 'r') as f:
+            with open(kwargs['commandfile'], 'r') as f:
                 for cmd in f:
                     execute(cmd)
         except IOError:
-            error('Could not open file: %s' % kwargs['commands'], file=sys.stderr)
+            error('Could not open file: %s' % kwargs['commandfile'], file=sys.stderr)
             sys.exit(1)
         except KeyboardInterrupt:
             report('Interrupted')
@@ -111,7 +111,7 @@ def run(**kwargs):
         report(help_blurb)
 
     # Run interactive session
-    if (not kwargs.get('commands')) or kwargs.get('interactive'):
+    if (not kwargs.get('commandfile')) or kwargs.get('interactive'):
         while True:
             try:
                 execute(input(f'[{session.active_name}]> '))
