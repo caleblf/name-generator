@@ -176,10 +176,9 @@ forms:
     - x
     - "'"
   c-end: # consonant clusters for the ends names
-    - 10 $tc
+    - 15 $tc
     - ll
     - rr
-    - rl
     - nn
     - pp
     - nt
