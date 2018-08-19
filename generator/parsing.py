@@ -16,11 +16,11 @@ def make_form_placeholder(v):
         return language.ProbabilisticForm([], [])
     if not isinstance(v, str):
         raise ValueError('Non-string form expression in tag')
-    if v.startswith('('): # concatenation
+    if v.startswith('('):  # concatenation
         if not v.endswith(')'):
             raise ValueError(f'Unmatched parenthesis in tagged form expression: {v}')
         return language.ConcatenativeForm([])
-    if v.startswith('$'): # tag
+    if v.startswith('$'):  # tag
         raise ValueError(f'Tag at top level in tagged form expression: {v}')
     # literal
     return language.LiteralForm(v)
@@ -45,13 +45,13 @@ def parse_forms(forms, tagged_forms, root):
     def parse_form_exp(exp):
         if not isinstance(exp, str):
             raise ValueError('Non-string form expression')
-        if exp.startswith('('): # concatenation
+        if exp.startswith('('):  # concatenation
             if not exp.endswith(')'):
                 raise ValueError(f'Unmatched parenthesis in form expression: {exp}')
             return language.ConcatenativeForm([
                 parse_form_exp(s) for s in exp[1:-1].split()
             ])
-        if exp.startswith('$'): # tag
+        if exp.startswith('$'):  # tag
             try:
                 return tagged_forms[exp[1:]]
             except KeyError:
@@ -97,7 +97,7 @@ def load_language(data):
         raise ValueError('Non-string language name')
     if not isinstance(forms, dict):
         raise ValueError('Tagged forms table not a dictionary')
-    
+
     tagged_forms = {k: make_form_placeholder(v) for k, v in forms.items()}
 
     root_form = parse_forms(forms, tagged_forms, root)
@@ -140,7 +140,8 @@ def load_file(path):
     try:
         kind = data['kind']
     except KeyError as e:
-        raise ValueError(f'Could not determine if {path} defines a language or metalanguage')
+        raise ValueError(f'Could not determine if {path} defines '
+                         'a language or a metalanguage')
 
     if kind == 'language':
         return load_language(data)

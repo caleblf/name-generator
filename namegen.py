@@ -19,7 +19,8 @@ if __name__ == '__main__':
                         help='Commands to execute')
     parser.add_argument('-i', '--interactive',
                         action='store_true',
-                        help='If commands are passed, enter interactive mode after executing commands')
+                        help='If commands are passed, enter interactive mode '
+                             'after executing commands')
     parser.add_argument('-c', '--color',
                         action='store_true',
                         help='Use colored text for names')
@@ -33,10 +34,12 @@ if __name__ == '__main__':
 
     if args.color:
         try:
-            import colorama # MS Windows color support
+            import colorama  # for MS Windows color support
             colorama.init()
         except ImportError:
             if not args.suppress_warnings:
-                print('The `colorama` package is required for color support on some platforms. To suppress this warning, use the -w flag.', file=sys.stderr)
+                print('The `colorama` package is required for color support '
+                      'on some platforms. To suppress this warning, use '
+                      'the -w flag.', file=sys.stderr)
 
     interactive.run(**vars(args))

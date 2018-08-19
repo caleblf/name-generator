@@ -29,6 +29,7 @@ class VariableForm(LiteralForm):
     """A form whose value may be changed externally.
     Used in metalanguages for nesting.
     """
+
     def set(self, data):
         self.value = data
 
@@ -50,8 +51,8 @@ class ProbabilisticForm(Form):
     """Form which may express as any of its subforms.
 
     Requires the following initialization parameters:
-        forms : list/tuple of Form, the forms which may be expressed by this form
-        rel_odds : list/tuple of int, the relative odds of each form being expressed
+        forms : sequence of Form, the forms which may be expressed by this form
+        weights : sequence of int, the relative odds of expressing each form
 
     forms and rel_odds must be the same length.
     """

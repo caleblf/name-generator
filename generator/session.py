@@ -21,7 +21,7 @@ def print_error(*args, **kwargs):
 
 def print_color_error(*args, **kwargs):
     """Print to stderr in color."""
-    print(*(f'\033[0;31m{arg}\033[0m' for arg in args), file=sys.stderr, **kwargs)
+    print_error(*(f'\033[0;31m{arg}\033[0m' for arg in args), **kwargs)
 
 
 class NameGeneratorSession:
@@ -68,10 +68,12 @@ class NameGeneratorSession:
 
         # Don't allow name collisions, even between languages and metalanguages
         if loaded.name.casefold() in self.languages:
-            self.error(f'Tried to load {loaded.name}, but a language with this name was already loaded.')
+            self.error(f'Tried to load {loaded.name}, but a '
+                       'language with this name was already loaded.')
             return
         if loaded.name.casefold() in self.metalanguages:
-            self.error(f'Tried to load {loaded.name}, but a metalanguage with this name was already loaded.')
+            self.error(f'Tried to load {loaded.name}, but a '
+                       'metalanguage with this name was already loaded.')
             return
 
         if isinstance(loaded, language.Language):
@@ -86,19 +88,21 @@ class NameGeneratorSession:
         if self.languages:
             print('Languages loaded:')
             for lang in self.languages.values():
-                print(f'  {lang.name}' + ('\t(active)' if lang is self.active_language else ''))
+                print(f'  {lang.name}' + '\t(active)' * (lang is self.active_language))
         else:
             print('No languages loaded.')
 
         if self.metalanguages:
             print('Metalanguages loaded:')
             for mlang in self.metalanguages.values():
-                print(f'  {mlang.name}' + ('\t(active)' if mlang in self.active_metalanguages else ''))
+                print(f'  {mlang.name}' +
+                      '\t(active)' * (mlang in self.active_metalanguages))
         else:
             print('No metalanguages loaded.')
 
     def build(self, amt=1):
-        """Build a number of names from the active language, and output to standard output."""
+        """Build a number of names from the active language.
+        Print results to standard output."""
         try:
             amt = int(amt)
         except ValueError:
@@ -110,8 +114,8 @@ class NameGeneratorSession:
             self.error('No language is active')
             return
 
-        self.report(f'Building {amt} from {self.active_language.name}'
-                    f' with {", ".join(mlang.name for mlang in self.active_metalanguages)}:')
+        self.report(f'Building {amt} from {self.active_language.name} with '
+                    ', '.join(mlang.name for mlang in self.active_metalanguages) + ':')
         for _ in range(amt):
             result = self.active_language.generate()
             if self.use_color:

@@ -8,8 +8,8 @@ try:
 except ImportError:
     pass
 
-from generator import parsing
-from generator.session import NameGeneratorSession, print_error, print_color_error, noop
+from generator.session import (NameGeneratorSession,
+                               print_error, print_color_error, noop)
 
 
 credit_blurb = """
@@ -59,8 +59,9 @@ def run(**kwargs):
         if len(arg_counts_accepted) <= 2:
             expected = ' or '.join(map(str, arg_counts_accepted))
         else:
-            expected = ', '.join([str(n) for n in arg_counts_accepted][:-1]) + f', or {arg_counts_accepted[-1]}'
-    
+            expected = (', '.join([str(n) for n in arg_counts_accepted][:-1]) +
+                        f', or {arg_counts_accepted[-1]}')
+
         if all(num_args < n for n in arg_counts_accepted):
             error(f'Too few arguments (expected {expected}, got {num_args})')
         elif all(num_args > n for n in arg_counts_accepted):
@@ -86,11 +87,11 @@ def run(**kwargs):
         cmd = tokens[0]
         num_args = len(tokens) - 1
 
-        for commands, arg_counts_accepted, command_func in command_dispatch_table:
+        for commands, arg_counts_accepted, cmd_func in command_dispatch_table:
             if cmd in commands:
                 if not validate_num_args(arg_counts_accepted, num_args):
                     return
-                command_func(*tokens[1:])
+                cmd_func(*tokens[1:])
                 return
         error('Command not recognized; try `help` for a list of valid commands')
 
@@ -119,4 +120,4 @@ def run(**kwargs):
                 report('Interrupted')
             except EOFError:
                 report()
-                exit_command()
+                exit_session()
