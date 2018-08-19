@@ -8,8 +8,8 @@ forms:
   name:
     - 1 $name-4
     - 3 $name-3
-    - 4 $name-2
-    - 3 $name-1
+    - 6 $name-2
+    - 4 $name-1
 
   # There are two types of syllables used here: vowel-syllables and chunks
   # Vowel-syllables are built directly from phonetic segments
@@ -154,12 +154,14 @@ forms:
     - awn
   link:
     - 6 $tc
-    - 5 $c
+    - 6 $c
     - 4 ($tc $c)
     - ll
     - rr
     - rg
     - ng
+    - ck
+    - ld
     - x
     - "'"
   c-end: # consonant clusters for the ends names
@@ -179,6 +181,7 @@ forms:
     - lf
     - ng
     - rk
+    - ck
     - x
   tc: # consonant clusters for the ends of syllables
     - r
@@ -189,9 +192,7 @@ forms:
     - sh
     - d
     - f
-    - ld
     - g
-    - ck
     - l
     - b
     - n

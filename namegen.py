@@ -7,7 +7,7 @@ if (sys.version_info.major, sys.version_info.minor) < (3, 6):
     sys.exit(1)
 
 try:
-    import pyyaml
+    import yaml
 except ImportError:
     print('Missing third party dependency: `pyyaml`', file=sys.stderr)
     sys.exit(1)
