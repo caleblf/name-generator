@@ -117,7 +117,7 @@ class NameGeneratorSession:
             self.error('No language is active')
             return
 
-        self.report(f'Building {amt} from {self.active_language.name} with '
+        self.report(f'Building {amt} from {self.active_language.name} with ' +
                     ', '.join(mlang.name for mlang in self.active_metalanguages) + ':')
         for _ in range(amt):
             result = self.active_language.generate()
