@@ -75,7 +75,7 @@ def run(**kwargs):
         (['e', 'q', 'exit', 'quit'], [0], exit_session),
         (['o', 'load', 'open'], [1], session.load),
         (['l', 'list'], [0], session.list),
-        (['b', 'build'], [0, 1], session.build),
+        (['b', 'g', 'build', 'gen', 'generate'], [0, 1], session.build),
         (['a', 'activate'], [1], session.activate),
         (['d', 'deactivate'], [1], session.deactivate),
     ]
