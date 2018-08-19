@@ -3,7 +3,13 @@
 import sys
 
 if (sys.version_info.major, sys.version_info.minor) < (3, 6):
-    print('Python version not supported (3.6 or later required', file=sys.stderr)
+    print('Python version not supported (3.6 or later required)', file=sys.stderr)
+    sys.exit(1)
+
+try:
+    import pyyaml
+except ImportError:
+    print('Missing third party dependency: `pyyaml`', file=sys.stderr)
     sys.exit(1)
 
 import argparse
@@ -38,8 +44,8 @@ if __name__ == '__main__':
             colorama.init()
         except ImportError:
             if not args.suppress_warnings:
-                print('The `colorama` package is required for color support '
-                      'on some platforms. To suppress this warning, use '
-                      'the -w flag.', file=sys.stderr)
+                print('The `colorama` package is required for color output '
+                      'support on some platforms. To suppress this warning, '
+                      'use the -w flag.', file=sys.stderr)
 
     interactive.run(**vars(args))

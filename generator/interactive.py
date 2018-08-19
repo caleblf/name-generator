@@ -103,7 +103,7 @@ def run(**kwargs):
                     execute(cmd)
         except IOError:
             error('Could not open file: %s' % kwargs['commands'], file=sys.stderr)
-            sys.exit(2)
+            sys.exit(1)
         except KeyboardInterrupt:
             report('Interrupted')
     else:
