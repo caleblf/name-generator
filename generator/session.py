@@ -77,25 +77,28 @@ class NameGeneratorSession:
             return
 
         if isinstance(loaded, language.Language):
-            self.report(f'Successfully loaded language: {loaded.name}')
+            self.report(f'Loaded language: {loaded.name}')
             self.languages[loaded.name.casefold()] = loaded
         else:  # metalanguage
-            self.report(f'Successfully loaded metalanguage: {loaded.name}')
+            self.report(f'Loaded metalanguage: {loaded.name}')
             self.metalanguages[loaded.name.casefold()] = loaded
 
     def list(self):
         """List loaded languages and metalanguages to standard output."""
         if self.languages:
             print('Languages loaded:')
+            max_name_length = max(len(name) for name in self.languages)
             for lang in self.languages.values():
-                print(f'  {lang.name}' + '\t(active)' * (lang is self.active_language))
+                print(f'  {lang.name:<{max_name_length}s}' +
+                      '\t(active)' * (lang is self.active_language))
         else:
             print('No languages loaded.')
 
         if self.metalanguages:
             print('Metalanguages loaded:')
+            max_name_length = max(len(name) for name in self.metalanguages)
             for mlang in self.metalanguages.values():
-                print(f'  {mlang.name}' +
+                print(f'  {mlang.name:<{max_name_length}s}' +
                       '\t(active)' * (mlang in self.active_metalanguages))
         else:
             print('No metalanguages loaded.')
