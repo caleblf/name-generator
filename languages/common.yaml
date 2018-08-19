@@ -100,15 +100,26 @@ forms:
     - ild
     - ian
     - ray
+    - ing
   end-chunk:
+    - $end-chunk-f
+    - $end-chunk-m
+  end-chunk-f: # endings that will usually result in feminine-sounding names
+    - sdottir
+    - 4 ia
+    - 3 a
+    - 2 sha
+    - 2 illa
+    - 2 ie
+    - 2 iel
+    - 2 ara
     - issa
     - een
     - ita
-    - ia
-    - 2 ie
     - ina
     - ice
     - ra
+    - na
     - ene
     - rine
     - lene
@@ -116,20 +127,19 @@ forms:
     - yssa
     - ima
     - essa
-    - "on"
-    - art
-    - ton
-    - sha
-    - drew
     - grid
     - ythe
     - quith
-    - wild
-    - son
-    - sson
-    - sdottir
-    - iel
     - frith
+    - wen
+  end-chunk-m: # endings that will usually result in masculine-sounding names
+    - sson
+    - son
+    - "on"
+    - art
+    - ton
+    - drew
+    - wild
     - mund
     - wulf
     - noth
@@ -137,7 +147,6 @@ forms:
     - ic
     - us
     - ius
-    - a
     - ulf
     - ald
     - thur
@@ -152,6 +161,8 @@ forms:
     - ian
     - ray
     - awn
+    - ed
+    - fred
   link:
     - 6 $tc
     - 6 $c

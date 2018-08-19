@@ -1,4 +1,4 @@
-# Heroic titles
+# Heroic title
 name: Title
 kind: metalanguage
 
@@ -19,6 +19,7 @@ forms:
 
   color:
     - Golden
+    - Silver
     - Argent
     - Sable
     - Red
@@ -122,6 +123,7 @@ forms:
     - Pyramid
     - Manse
     - Tomb
+    - Spire
     # Natural places
     - River
     - Grove
@@ -171,7 +173,7 @@ forms:
     - Eleven
 
   title:
-    - 10 $color
+    - 12 $color
     # Physical ability
     - Quick
     - Nimble
@@ -198,6 +200,7 @@ forms:
     - Honest
     - Mighty
     - Pious
+    - Noble
     # Vice
     - Spineless
     - Craven
@@ -239,6 +242,7 @@ forms:
     - Hirsute
     - Bald
     # Perception
+    - Fearsome
     - Slightly Off
     - Bizarre
     - Irksome
@@ -264,16 +268,19 @@ forms:
     - Westron
     - Eastron
     - Beyonder
+    - Barbarian
     # Profession
     - Poet
     - Bard
     - Singer
     - Thief
-    - Barbarian
     - Warrior
+    - Archer
     - Magician
+    - Witch
     - Trapper
     - Enchanter
+    - Artificer
     # Animal
     - Boar
     - Leopard
