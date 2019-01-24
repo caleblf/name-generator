@@ -6,7 +6,7 @@ import Random
 import Dict
 
 import Language
-import Languages
+import Manifest
 
 
 -- MAIN
@@ -34,7 +34,7 @@ type alias Model =
 init : () -> (Model, Cmd Msg)
 init _ =
   ( { name = "..."
-    , selectedLanguage = Languages.default
+    , selectedLanguage = Manifest.defaultLanguage
     }
   , Cmd.none
   )
@@ -62,9 +62,9 @@ update msg ({ name, selectedLanguage } as model) =
       , Cmd.none
       )
     SelectLanguage languageName ->
-      ( case Dict.get languageName Languages.languagesByName of
+      ( case Dict.get languageName Manifest.languagesByName of
           Nothing -> model
-          Just language -> { model | selectedLanguage = language }
+          Just language -> { model | name = "...", selectedLanguage = language }
       , Cmd.none
       )
 
@@ -97,7 +97,7 @@ view model =
 viewLanguageSelector : String -> Html Msg
 viewLanguageSelector activeLanguageName =
   Html.select [ Html.Events.onInput SelectLanguage ]
-    <| List.map (.name >> Html.text >> List.singleton >> Html.option []) Languages.languages
+    <| List.map (.name >> Html.text >> List.singleton >> Html.option []) Manifest.languages
 
 languageOption : Language.Language -> Html Msg
 languageOption language =

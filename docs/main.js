@@ -4482,7 +4482,7 @@ var elm$random$Random$constant = function (value) {
 		return _Utils_Tuple2(value, seed);
 	};
 };
-var author$project$Languages$dummy = {
+var author$project$Manifest$dummyLanguage = {
 	aq: function (_n0) {
 		return elm$random$Random$constant('...');
 	},
@@ -4732,41 +4732,6 @@ var author$project$Language$pick = function (weightedForms) {
 		return elm$random$Random$constant('');
 	}
 };
-var author$project$Language$lit = F2(
-	function (s, _n0) {
-		return elm$random$Random$constant(s);
-	});
-var author$project$Language$p = F2(
-	function (weight, value) {
-		return _Utils_Tuple2(
-			weight,
-			author$project$Language$lit(value));
-	});
-var author$project$Language$u = author$project$Language$p(1);
-var author$project$Elven$tc = function (_n0) {
-	return author$project$Language$pick(
-		_List_fromArray(
-			[
-				author$project$Language$u('l'),
-				author$project$Language$u('r'),
-				author$project$Language$u('n'),
-				author$project$Language$u('m')
-			]));
-};
-var author$project$Elven$v = function (_n0) {
-	return author$project$Language$pick(
-		_List_fromArray(
-			[
-				A2(author$project$Language$p, 3, 'a'),
-				A2(author$project$Language$p, 3, 'i'),
-				A2(author$project$Language$p, 3, 'e'),
-				A2(author$project$Language$p, 2, 'ia'),
-				A2(author$project$Language$p, 2, 'io'),
-				A2(author$project$Language$p, 1, 'ai'),
-				A2(author$project$Language$p, 1, 'o'),
-				A2(author$project$Language$p, 1, 'u')
-			]));
-};
 var elm$core$Basics$append = _Utils_append;
 var elm$random$Random$map2 = F3(
 	function (func, _n0, _n1) {
@@ -4795,7 +4760,1020 @@ var author$project$Language$cat = F2(
 				elm$core$Basics$apR(0),
 				forms));
 	});
-var author$project$Elven$end = function (_n0) {
+var author$project$Language$lit = F2(
+	function (s, _n0) {
+		return elm$random$Random$constant(s);
+	});
+var author$project$Languages$Common$tc = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('r')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('t')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('th')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('p')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('s')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('sh')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('d')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('f')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('g')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('l')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('b')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('n')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('m'))
+			]));
+};
+var author$project$Languages$Common$c_end = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(15, author$project$Languages$Common$tc),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('ll')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('rr')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('nn')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('pp')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('nt')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('nth')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('rn')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('st')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('th')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('sk')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('ld')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('lf')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('ng')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('rk')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('ck')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('x'))
+			]));
+};
+var author$project$Languages$Common$c = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('w')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('r')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('t')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('tr')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('th')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('y')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('p')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('s')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('sh')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('st')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('sl')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('sp')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('sc')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('d')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('dr')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('f')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('fr')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('g')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('gr')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('h')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('j')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('k')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('l')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('z')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('c')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('ch')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('cl')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('v')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('b')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('br')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('bl')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('n')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('m'))
+			]));
+};
+var author$project$Languages$Common$c_long = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(29, author$project$Languages$Common$c),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('sm')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('sn')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('scr')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('spr')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('gl')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('hr')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('cr')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('pr'))
+			]));
+};
+var author$project$Languages$Common$v = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(
+				2,
+				author$project$Language$lit('e')),
+				_Utils_Tuple2(
+				2,
+				author$project$Language$lit('u')),
+				_Utils_Tuple2(
+				2,
+				author$project$Language$lit('i')),
+				_Utils_Tuple2(
+				2,
+				author$project$Language$lit('o')),
+				_Utils_Tuple2(
+				2,
+				author$project$Language$lit('a')),
+				_Utils_Tuple2(
+				2,
+				author$project$Language$lit('y')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('ia')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('io')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('ae')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('ee'))
+			]));
+};
+var author$project$Languages$Common$name_1 = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(
+				1,
+				author$project$Language$cat(
+					_List_fromArray(
+						[author$project$Languages$Common$c_long, author$project$Languages$Common$v]))),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$cat(
+					_List_fromArray(
+						[author$project$Languages$Common$v, author$project$Languages$Common$c_end]))),
+				_Utils_Tuple2(
+				3,
+				author$project$Language$cat(
+					_List_fromArray(
+						[author$project$Languages$Common$c_long, author$project$Languages$Common$v, author$project$Languages$Common$c_end])))
+			]));
+};
+var author$project$Languages$Common$ch_ch = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit(''))
+			]));
+};
+var author$project$Languages$Common$end_chunk_f = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('sdottir')),
+				_Utils_Tuple2(
+				4,
+				author$project$Language$lit('ia')),
+				_Utils_Tuple2(
+				3,
+				author$project$Language$lit('a')),
+				_Utils_Tuple2(
+				2,
+				author$project$Language$lit('sha')),
+				_Utils_Tuple2(
+				2,
+				author$project$Language$lit('illa')),
+				_Utils_Tuple2(
+				2,
+				author$project$Language$lit('ie')),
+				_Utils_Tuple2(
+				2,
+				author$project$Language$lit('iel')),
+				_Utils_Tuple2(
+				2,
+				author$project$Language$lit('ara')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('issa')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('een')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('ita')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('ina')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('ice')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('ra')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('na')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('ene')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('rine')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('lene')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('ula')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('yssa')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('ima')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('essa')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('grid')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('ythe')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('quith')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('frith')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('wen'))
+			]));
+};
+var author$project$Languages$Common$end_chunk_m = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('sson')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('son')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('on')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('art')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('ton')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('drew')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('wild')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('mund')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('wulf')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('noth')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('ric')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('ic')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('us')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('ius')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('ulf')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('ald')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('thur')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('or')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('ar')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('win')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('don')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('nulf')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('ax')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('orn')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('ild')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('ian')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('ray')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('awn')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('ed')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('fred')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('orne')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('gold')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('gar'))
+			]));
+};
+var author$project$Languages$Common$end_chunk = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(1, author$project$Languages$Common$end_chunk_f),
+				_Utils_Tuple2(1, author$project$Languages$Common$end_chunk_m)
+			]));
+};
+var author$project$Languages$Common$ch_name_1 = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(
+				1,
+				author$project$Language$cat(
+					_List_fromArray(
+						[author$project$Languages$Common$end_chunk])))
+			]));
+};
+var author$project$Languages$Common$ch_v = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(1, author$project$Languages$Common$c),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit(''))
+			]));
+};
+var author$project$Languages$Common$chunk = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('jax')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('fred')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('ald')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('art')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('ulf')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('walt')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('hild')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('os')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('thur')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('gwin')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('gwid')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('al')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('wil')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('bil')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('win')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('don')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('quen')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('quin')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('ash')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('mir')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('orn')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('ild')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('ian')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('ray')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('ing'))
+			]));
+};
+var author$project$Languages$Common$v_name_1 = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(
+				1,
+				author$project$Language$cat(
+					_List_fromArray(
+						[author$project$Languages$Common$v, author$project$Languages$Common$c_end]))),
+				_Utils_Tuple2(1, author$project$Languages$Common$v)
+			]));
+};
+var author$project$Languages$Common$ch_name_2 = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(
+				1,
+				author$project$Language$cat(
+					_List_fromArray(
+						[author$project$Languages$Common$chunk, author$project$Languages$Common$ch_v, author$project$Languages$Common$v_name_1]))),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$cat(
+					_List_fromArray(
+						[author$project$Languages$Common$chunk, author$project$Languages$Common$ch_ch, author$project$Languages$Common$ch_name_1])))
+			]));
+};
+var author$project$Languages$Common$v_ch = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(1, author$project$Languages$Common$tc),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit(''))
+			]));
+};
+var author$project$Languages$Common$link = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(6, author$project$Languages$Common$tc),
+				_Utils_Tuple2(6, author$project$Languages$Common$c),
+				_Utils_Tuple2(
+				4,
+				author$project$Language$cat(
+					_List_fromArray(
+						[author$project$Languages$Common$tc, author$project$Languages$Common$c]))),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('ll')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('rr')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('rg')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('ng')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('ck')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('ld')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('x')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('\''))
+			]));
+};
+var author$project$Languages$Common$v_v = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(1, author$project$Languages$Common$link)
+			]));
+};
+var author$project$Languages$Common$v_name_2 = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(
+				1,
+				author$project$Language$cat(
+					_List_fromArray(
+						[author$project$Languages$Common$v, author$project$Languages$Common$v_v, author$project$Languages$Common$v_name_1]))),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$cat(
+					_List_fromArray(
+						[author$project$Languages$Common$v, author$project$Languages$Common$v_ch, author$project$Languages$Common$ch_name_1])))
+			]));
+};
+var author$project$Languages$Common$name_2 = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(1, author$project$Languages$Common$v_name_2),
+				_Utils_Tuple2(
+				2,
+				author$project$Language$cat(
+					_List_fromArray(
+						[author$project$Languages$Common$c_long, author$project$Languages$Common$v_name_2]))),
+				_Utils_Tuple2(2, author$project$Languages$Common$ch_name_2)
+			]));
+};
+var author$project$Languages$Common$ch_name_3 = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(
+				1,
+				author$project$Language$cat(
+					_List_fromArray(
+						[author$project$Languages$Common$chunk, author$project$Languages$Common$ch_v, author$project$Languages$Common$v_name_2]))),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$cat(
+					_List_fromArray(
+						[author$project$Languages$Common$chunk, author$project$Languages$Common$ch_ch, author$project$Languages$Common$ch_name_2])))
+			]));
+};
+var author$project$Languages$Common$v_name_3 = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(
+				1,
+				author$project$Language$cat(
+					_List_fromArray(
+						[author$project$Languages$Common$v, author$project$Languages$Common$v_v, author$project$Languages$Common$v_name_2]))),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$cat(
+					_List_fromArray(
+						[author$project$Languages$Common$v, author$project$Languages$Common$v_ch, author$project$Languages$Common$ch_name_2])))
+			]));
+};
+var author$project$Languages$Common$name_3 = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(1, author$project$Languages$Common$v_name_3),
+				_Utils_Tuple2(
+				2,
+				author$project$Language$cat(
+					_List_fromArray(
+						[author$project$Languages$Common$c_long, author$project$Languages$Common$v_name_3]))),
+				_Utils_Tuple2(2, author$project$Languages$Common$ch_name_3)
+			]));
+};
+var author$project$Languages$Common$ch_name_4 = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(
+				1,
+				author$project$Language$cat(
+					_List_fromArray(
+						[author$project$Languages$Common$chunk, author$project$Languages$Common$ch_v, author$project$Languages$Common$v_name_3]))),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$cat(
+					_List_fromArray(
+						[author$project$Languages$Common$chunk, author$project$Languages$Common$ch_ch, author$project$Languages$Common$ch_name_3])))
+			]));
+};
+var author$project$Languages$Common$v_name_4 = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(
+				1,
+				author$project$Language$cat(
+					_List_fromArray(
+						[author$project$Languages$Common$v, author$project$Languages$Common$v_v, author$project$Languages$Common$v_name_3]))),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$cat(
+					_List_fromArray(
+						[author$project$Languages$Common$v, author$project$Languages$Common$v_ch, author$project$Languages$Common$ch_name_3])))
+			]));
+};
+var author$project$Languages$Common$name_4 = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(1, author$project$Languages$Common$v_name_4),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$cat(
+					_List_fromArray(
+						[author$project$Languages$Common$c_long, author$project$Languages$Common$v_name_4]))),
+				_Utils_Tuple2(1, author$project$Languages$Common$ch_name_4)
+			]));
+};
+var author$project$Languages$Common$name = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(1, author$project$Languages$Common$name_4),
+				_Utils_Tuple2(3, author$project$Languages$Common$name_3),
+				_Utils_Tuple2(6, author$project$Languages$Common$name_2),
+				_Utils_Tuple2(4, author$project$Languages$Common$name_1)
+			]));
+};
+var author$project$Languages$Common$common = {aq: author$project$Languages$Common$name, au: 'Common'};
+var author$project$Languages$Dwarven$c = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('w')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('r')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('t')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('p')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('s')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('d')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('f')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('g')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('h')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('k')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('l')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('z')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('v')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('b')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('n')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('m')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('tr')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('gr')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('dv')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('th')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('thr')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('dr')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('br'))
+			]));
+};
+var author$project$Languages$Dwarven$tc = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('r')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('t')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('d')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('f')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('g')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('k')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('l')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('z')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('x')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('v')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('n')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('m')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('rt')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('th')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('sh'))
+			]));
+};
+var author$project$Languages$Dwarven$v = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(
+				2,
+				author$project$Language$lit('a')),
+				_Utils_Tuple2(
+				2,
+				author$project$Language$lit('i')),
+				_Utils_Tuple2(
+				2,
+				author$project$Language$lit('o')),
+				_Utils_Tuple2(
+				3,
+				author$project$Language$lit('u')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('ei')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('ai')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('ia')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('oi')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('eo')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('ua'))
+			]));
+};
+var author$project$Languages$Dwarven$name_1 = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(
+				1,
+				author$project$Language$cat(
+					_List_fromArray(
+						[author$project$Languages$Dwarven$v, author$project$Languages$Dwarven$tc]))),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$cat(
+					_List_fromArray(
+						[author$project$Languages$Dwarven$c, author$project$Languages$Dwarven$v, author$project$Languages$Dwarven$tc])))
+			]));
+};
+var author$project$Languages$Dwarven$link = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(3, author$project$Languages$Dwarven$tc),
+				_Utils_Tuple2(
+				2,
+				author$project$Language$cat(
+					_List_fromArray(
+						[author$project$Languages$Dwarven$tc, author$project$Languages$Dwarven$c]))),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('\''))
+			]));
+};
+var author$project$Languages$Dwarven$v_name_1 = function (_n0) {
 	return author$project$Language$pick(
 		_List_fromArray(
 			[
@@ -4803,12 +5781,111 @@ var author$project$Elven$end = function (_n0) {
 				3,
 				author$project$Language$cat(
 					_List_fromArray(
-						[author$project$Elven$v, author$project$Elven$tc]))),
-				_Utils_Tuple2(2, author$project$Elven$v)
+						[author$project$Languages$Dwarven$v, author$project$Languages$Dwarven$tc]))),
+				_Utils_Tuple2(1, author$project$Languages$Dwarven$v)
 			]));
 };
-var author$project$Elven$empty = author$project$Language$lit('');
-var author$project$Elven$c = function (_n0) {
+var author$project$Languages$Dwarven$v_name_2 = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(
+				1,
+				author$project$Language$cat(
+					_List_fromArray(
+						[author$project$Languages$Dwarven$v, author$project$Languages$Dwarven$link, author$project$Languages$Dwarven$v_name_1])))
+			]));
+};
+var author$project$Languages$Dwarven$name_2 = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(1, author$project$Languages$Dwarven$v_name_2),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$cat(
+					_List_fromArray(
+						[author$project$Languages$Dwarven$c, author$project$Languages$Dwarven$v_name_2])))
+			]));
+};
+var author$project$Languages$Dwarven$v_name_3 = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(
+				1,
+				author$project$Language$cat(
+					_List_fromArray(
+						[author$project$Languages$Dwarven$v, author$project$Languages$Dwarven$link, author$project$Languages$Dwarven$v_name_2])))
+			]));
+};
+var author$project$Languages$Dwarven$name_3 = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(1, author$project$Languages$Dwarven$v_name_3),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$cat(
+					_List_fromArray(
+						[author$project$Languages$Dwarven$c, author$project$Languages$Dwarven$v_name_3])))
+			]));
+};
+var author$project$Languages$Dwarven$name = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(1, author$project$Languages$Dwarven$name_3),
+				_Utils_Tuple2(3, author$project$Languages$Dwarven$name_2),
+				_Utils_Tuple2(2, author$project$Languages$Dwarven$name_1)
+			]));
+};
+var author$project$Languages$Dwarven$dwarven = {aq: author$project$Languages$Dwarven$name, au: 'Dwarven'};
+var author$project$Language$p = F2(
+	function (weight, value) {
+		return _Utils_Tuple2(
+			weight,
+			author$project$Language$lit(value));
+	});
+var author$project$Language$u = author$project$Language$p(1);
+var author$project$Languages$Elven$tc = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				author$project$Language$u('l'),
+				author$project$Language$u('r'),
+				author$project$Language$u('n'),
+				author$project$Language$u('m')
+			]));
+};
+var author$project$Languages$Elven$v = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				A2(author$project$Language$p, 3, 'a'),
+				A2(author$project$Language$p, 3, 'i'),
+				A2(author$project$Language$p, 3, 'e'),
+				A2(author$project$Language$p, 2, 'ia'),
+				A2(author$project$Language$p, 2, 'io'),
+				A2(author$project$Language$p, 1, 'ai'),
+				A2(author$project$Language$p, 1, 'o'),
+				A2(author$project$Language$p, 1, 'u')
+			]));
+};
+var author$project$Languages$Elven$end = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(
+				3,
+				author$project$Language$cat(
+					_List_fromArray(
+						[author$project$Languages$Elven$v, author$project$Languages$Elven$tc]))),
+				_Utils_Tuple2(2, author$project$Languages$Elven$v)
+			]));
+};
+var author$project$Languages$Elven$empty = author$project$Language$lit('');
+var author$project$Languages$Elven$c = function (_n0) {
 	return author$project$Language$pick(
 		_List_fromArray(
 			[
@@ -4827,23 +5904,23 @@ var author$project$Elven$c = function (_n0) {
 				author$project$Language$u('b')
 			]));
 };
-var author$project$Elven$syllable = author$project$Language$cat(
+var author$project$Languages$Elven$syllable = author$project$Language$cat(
 	_List_fromArray(
-		[author$project$Elven$c, author$project$Elven$v, author$project$Elven$tc]));
-var author$project$Elven$mid = function (_n0) {
+		[author$project$Languages$Elven$c, author$project$Languages$Elven$v, author$project$Languages$Elven$tc]));
+var author$project$Languages$Elven$mid = function (_n0) {
 	return author$project$Language$pick(
 		_List_fromArray(
 			[
-				_Utils_Tuple2(1, author$project$Elven$empty),
-				_Utils_Tuple2(2, author$project$Elven$syllable),
+				_Utils_Tuple2(1, author$project$Languages$Elven$empty),
+				_Utils_Tuple2(2, author$project$Languages$Elven$syllable),
 				_Utils_Tuple2(
 				4,
 				author$project$Language$cat(
 					_List_fromArray(
-						[author$project$Elven$v, author$project$Elven$tc])))
+						[author$project$Languages$Elven$v, author$project$Languages$Elven$tc])))
 			]));
 };
-var author$project$Elven$start = function (_n0) {
+var author$project$Languages$Elven$start = function (_n0) {
 	return author$project$Language$pick(
 		_List_fromArray(
 			[
@@ -4851,16 +5928,670 @@ var author$project$Elven$start = function (_n0) {
 				1,
 				author$project$Language$cat(
 					_List_fromArray(
-						[author$project$Elven$v, author$project$Elven$tc]))),
-				_Utils_Tuple2(1, author$project$Elven$syllable)
+						[author$project$Languages$Elven$v, author$project$Languages$Elven$tc]))),
+				_Utils_Tuple2(1, author$project$Languages$Elven$syllable)
 			]));
 };
-var author$project$Elven$root = author$project$Language$cat(
+var author$project$Languages$Elven$root = author$project$Language$cat(
 	_List_fromArray(
-		[author$project$Elven$start, author$project$Elven$mid, author$project$Elven$end]));
-var author$project$Elven$elven = {aq: author$project$Elven$root, au: 'Elven'};
-var author$project$Languages$languages = _List_fromArray(
-	[author$project$Elven$elven]);
+		[author$project$Languages$Elven$start, author$project$Languages$Elven$mid, author$project$Languages$Elven$end]));
+var author$project$Languages$Elven$elven = {aq: author$project$Languages$Elven$root, au: 'Elven'};
+var author$project$Languages$Halfling$tc = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('r')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('s')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('d')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('g')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('l')),
+				_Utils_Tuple2(
+				3,
+				author$project$Language$lit('n')),
+				_Utils_Tuple2(
+				3,
+				author$project$Language$lit('m'))
+			]));
+};
+var author$project$Languages$Halfling$v = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(
+				3,
+				author$project$Language$lit('a')),
+				_Utils_Tuple2(
+				3,
+				author$project$Language$lit('i')),
+				_Utils_Tuple2(
+				3,
+				author$project$Language$lit('o')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('u')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('ia'))
+			]));
+};
+var author$project$Languages$Halfling$coda = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(5, author$project$Languages$Halfling$v),
+				_Utils_Tuple2(
+				5,
+				author$project$Language$cat(
+					_List_fromArray(
+						[author$project$Languages$Halfling$v, author$project$Languages$Halfling$tc]))),
+				_Utils_Tuple2(
+				2,
+				author$project$Language$lit('y'))
+			]));
+};
+var author$project$Languages$Halfling$connector = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('rd')),
+				_Utils_Tuple2(
+				2,
+				author$project$Language$lit('rr')),
+				_Utils_Tuple2(
+				2,
+				author$project$Language$lit('gg')),
+				_Utils_Tuple2(
+				2,
+				author$project$Language$lit('pp')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('rt')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('tr')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('d')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('lb')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('lt')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('ln')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('lm')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('mm')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('nn')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('cl')),
+				_Utils_Tuple2(
+				2,
+				author$project$Language$lit('sh')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('sw')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('vl')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('lv')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('cr')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('sn')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('sp')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('pl')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('pr')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('fr')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('st')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('th')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('rl')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('fl')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('nd')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('ld')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('gl')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('ff')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('ll'))
+			]));
+};
+var author$project$Languages$Halfling$chunk = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('sam')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('wise')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('gam')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('gee')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('ben')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('drew')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('took')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('brook')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('hill')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('half')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('mill')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('wood')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('ton'))
+			]));
+};
+var author$project$Languages$Halfling$c = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('w')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('r')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('t')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('tr')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('th')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('y')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('p')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('pl')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('s')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('sh')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('st')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('sm')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('sn')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('sl')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('d')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('dr')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('f')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('fr')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('fl')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('g')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('gr')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('gl')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('h')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('j')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('k')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('l')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('c')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('cr')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('cl')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('v')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('b')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('br')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('bl')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('n')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('m'))
+			]));
+};
+var author$project$Languages$Halfling$syllable = author$project$Language$cat(
+	_List_fromArray(
+		[author$project$Languages$Halfling$c, author$project$Languages$Halfling$v, author$project$Languages$Halfling$tc]));
+var author$project$Languages$Halfling$end = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(
+				1,
+				author$project$Language$cat(
+					_List_fromArray(
+						[author$project$Languages$Halfling$v, author$project$Languages$Halfling$tc]))),
+				_Utils_Tuple2(1, author$project$Languages$Halfling$v),
+				_Utils_Tuple2(1, author$project$Languages$Halfling$syllable),
+				_Utils_Tuple2(1, author$project$Languages$Halfling$chunk)
+			]));
+};
+var author$project$Languages$Halfling$onset = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(1, author$project$Languages$Halfling$v),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$cat(
+					_List_fromArray(
+						[author$project$Languages$Halfling$c, author$project$Languages$Halfling$v])))
+			]));
+};
+var author$project$Languages$Halfling$start = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(
+				1,
+				author$project$Language$cat(
+					_List_fromArray(
+						[author$project$Languages$Halfling$v, author$project$Languages$Halfling$tc]))),
+				_Utils_Tuple2(1, author$project$Languages$Halfling$syllable),
+				_Utils_Tuple2(1, author$project$Languages$Halfling$chunk)
+			]));
+};
+var author$project$Languages$Halfling$root = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(
+				1,
+				author$project$Language$cat(
+					_List_fromArray(
+						[author$project$Languages$Halfling$start, author$project$Languages$Halfling$end]))),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$cat(
+					_List_fromArray(
+						[author$project$Languages$Halfling$onset, author$project$Languages$Halfling$connector, author$project$Languages$Halfling$coda])))
+			]));
+};
+var author$project$Languages$Halfling$halfling = {aq: author$project$Languages$Halfling$root, au: 'Halfling'};
+var author$project$Languages$Orcish$c = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(
+				2,
+				author$project$Language$lit('r')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('t')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('tr')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('th')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('y')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('s')),
+				_Utils_Tuple2(
+				2,
+				author$project$Language$lit('sh')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('sk')),
+				_Utils_Tuple2(
+				2,
+				author$project$Language$lit('sn')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('sm')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('st')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('sl')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('d')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('f')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('fr')),
+				_Utils_Tuple2(
+				3,
+				author$project$Language$lit('g')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('gl')),
+				_Utils_Tuple2(
+				2,
+				author$project$Language$lit('gr')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('h')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('k')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('kr')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('l')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('z')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('zh')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('v')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('vr')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('b')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('br')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('bl')),
+				_Utils_Tuple2(
+				2,
+				author$project$Language$lit('n')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('m'))
+			]));
+};
+var author$project$Languages$Orcish$tc = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(
+				5,
+				author$project$Language$lit('r')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('t')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('th')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('s')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('sh')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('sk')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('st')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('d')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('f')),
+				_Utils_Tuple2(
+				6,
+				author$project$Language$lit('g')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('h')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('k')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('l')),
+				_Utils_Tuple2(
+				2,
+				author$project$Language$lit('z')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('b')),
+				_Utils_Tuple2(
+				2,
+				author$project$Language$lit('n')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('m'))
+			]));
+};
+var author$project$Languages$Orcish$v = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(
+				4,
+				author$project$Language$lit('u')),
+				_Utils_Tuple2(
+				4,
+				author$project$Language$lit('o')),
+				_Utils_Tuple2(
+				2,
+				author$project$Language$lit('a')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('ia')),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('au'))
+			]));
+};
+var author$project$Languages$Orcish$v_name_1 = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(
+				1,
+				author$project$Language$cat(
+					_List_fromArray(
+						[author$project$Languages$Orcish$v, author$project$Languages$Orcish$tc])))
+			]));
+};
+var author$project$Languages$Orcish$name_1 = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(1, author$project$Languages$Orcish$v_name_1),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$cat(
+					_List_fromArray(
+						[author$project$Languages$Orcish$c, author$project$Languages$Orcish$v_name_1])))
+			]));
+};
+var author$project$Languages$Orcish$link = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(4, author$project$Languages$Orcish$tc),
+				_Utils_Tuple2(
+				2,
+				author$project$Language$cat(
+					_List_fromArray(
+						[author$project$Languages$Orcish$tc, author$project$Languages$Orcish$c]))),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$lit('\''))
+			]));
+};
+var author$project$Languages$Orcish$v_name_2 = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(
+				1,
+				author$project$Language$cat(
+					_List_fromArray(
+						[author$project$Languages$Orcish$v, author$project$Languages$Orcish$link, author$project$Languages$Orcish$v_name_1])))
+			]));
+};
+var author$project$Languages$Orcish$name_2 = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(1, author$project$Languages$Orcish$v_name_2),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$cat(
+					_List_fromArray(
+						[author$project$Languages$Orcish$c, author$project$Languages$Orcish$v_name_2])))
+			]));
+};
+var author$project$Languages$Orcish$v_name_3 = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(
+				1,
+				author$project$Language$cat(
+					_List_fromArray(
+						[author$project$Languages$Orcish$v, author$project$Languages$Orcish$link, author$project$Languages$Orcish$v_name_2])))
+			]));
+};
+var author$project$Languages$Orcish$name_3 = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(1, author$project$Languages$Orcish$v_name_3),
+				_Utils_Tuple2(
+				1,
+				author$project$Language$cat(
+					_List_fromArray(
+						[author$project$Languages$Orcish$c, author$project$Languages$Orcish$v_name_3])))
+			]));
+};
+var author$project$Languages$Orcish$name = function (_n0) {
+	return author$project$Language$pick(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(1, author$project$Languages$Orcish$name_3),
+				_Utils_Tuple2(3, author$project$Languages$Orcish$name_2),
+				_Utils_Tuple2(2, author$project$Languages$Orcish$name_1)
+			]));
+};
+var author$project$Languages$Orcish$orcish = {aq: author$project$Languages$Orcish$name, au: 'Orcish'};
+var author$project$Manifest$languages = _List_fromArray(
+	[author$project$Languages$Common$common, author$project$Languages$Elven$elven, author$project$Languages$Dwarven$dwarven, author$project$Languages$Halfling$halfling, author$project$Languages$Orcish$orcish]);
 var elm$core$Maybe$Just = function (a) {
 	return {$: 0, a: a};
 };
@@ -4883,10 +6614,10 @@ var elm$core$Maybe$withDefault = F2(
 			return _default;
 		}
 	});
-var author$project$Languages$default = A2(
+var author$project$Manifest$defaultLanguage = A2(
 	elm$core$Maybe$withDefault,
-	author$project$Languages$dummy,
-	elm$core$List$head(author$project$Languages$languages));
+	author$project$Manifest$dummyLanguage,
+	elm$core$List$head(author$project$Manifest$languages));
 var elm$core$Basics$False = 1;
 var elm$core$Basics$True = 0;
 var elm$core$Result$isOk = function (result) {
@@ -5239,13 +6970,37 @@ var elm$core$Platform$Cmd$batch = _Platform_batch;
 var elm$core$Platform$Cmd$none = elm$core$Platform$Cmd$batch(_List_Nil);
 var author$project$Main$init = function (_n0) {
 	return _Utils_Tuple2(
-		{au: '...', A: author$project$Languages$default},
+		{au: '...', A: author$project$Manifest$defaultLanguage},
 		elm$core$Platform$Cmd$none);
 };
 var elm$core$Platform$Sub$batch = _Platform_batch;
 var elm$core$Platform$Sub$none = elm$core$Platform$Sub$batch(_List_Nil);
 var author$project$Main$subscriptions = function (model) {
 	return elm$core$Platform$Sub$none;
+};
+var author$project$Main$NewName = function (a) {
+	return {$: 1, a: a};
+};
+var elm$core$String$length = _String_length;
+var elm$core$String$slice = _String_slice;
+var elm$core$String$dropLeft = F2(
+	function (n, string) {
+		return (n < 1) ? string : A3(
+			elm$core$String$slice,
+			n,
+			elm$core$String$length(string),
+			string);
+	});
+var elm$core$String$left = F2(
+	function (n, string) {
+		return (n < 1) ? '' : A3(elm$core$String$slice, 0, n, string);
+	});
+var elm$core$String$toUpper = _String_toUpper;
+var author$project$Main$capitalize = function (string) {
+	return _Utils_ap(
+		elm$core$String$toUpper(
+			A2(elm$core$String$left, 1, string)),
+		A2(elm$core$String$dropLeft, 1, string));
 };
 var elm$core$Dict$RBEmpty_elm_builtin = {$: -2};
 var elm$core$Dict$empty = elm$core$Dict$RBEmpty_elm_builtin;
@@ -5370,37 +7125,13 @@ var elm$core$Dict$fromList = function (assocs) {
 		elm$core$Dict$empty,
 		assocs);
 };
-var author$project$Languages$languagesByName = elm$core$Dict$fromList(
+var author$project$Manifest$languagesByName = elm$core$Dict$fromList(
 	A2(
 		elm$core$List$map,
 		function (language) {
 			return _Utils_Tuple2(language.au, language);
 		},
-		author$project$Languages$languages));
-var author$project$Main$NewName = function (a) {
-	return {$: 1, a: a};
-};
-var elm$core$String$length = _String_length;
-var elm$core$String$slice = _String_slice;
-var elm$core$String$dropLeft = F2(
-	function (n, string) {
-		return (n < 1) ? string : A3(
-			elm$core$String$slice,
-			n,
-			elm$core$String$length(string),
-			string);
-	});
-var elm$core$String$left = F2(
-	function (n, string) {
-		return (n < 1) ? '' : A3(elm$core$String$slice, 0, n, string);
-	});
-var elm$core$String$toUpper = _String_toUpper;
-var author$project$Main$capitalize = function (string) {
-	return _Utils_ap(
-		elm$core$String$toUpper(
-			A2(elm$core$String$left, 1, string)),
-		A2(elm$core$String$dropLeft, 1, string));
-};
+		author$project$Manifest$languages));
 var elm$core$Dict$get = F2(
 	function (targetKey, dict) {
 		get:
@@ -5547,14 +7278,14 @@ var author$project$Main$update = F2(
 				var languageName = msg.a;
 				return _Utils_Tuple2(
 					function () {
-						var _n1 = A2(elm$core$Dict$get, languageName, author$project$Languages$languagesByName);
+						var _n1 = A2(elm$core$Dict$get, languageName, author$project$Manifest$languagesByName);
 						if (_n1.$ === 1) {
 							return model;
 						} else {
 							var language = _n1.a;
 							return _Utils_update(
 								model,
-								{A: language});
+								{au: '...', A: language});
 						}
 					}(),
 					elm$core$Platform$Cmd$none);
@@ -5647,7 +7378,7 @@ var author$project$Main$viewLanguageSelector = function (activeLanguageName) {
 						elm$core$Basics$composeR,
 						elm$core$List$singleton,
 						elm$html$Html$option(_List_Nil)))),
-			author$project$Languages$languages));
+			author$project$Manifest$languages));
 };
 var elm$html$Html$button = _VirtualDom_node('button');
 var elm$html$Html$div = _VirtualDom_node('div');

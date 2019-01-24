@@ -1,4 +1,4 @@
-module Elven exposing (elven)
+module Languages.Elven exposing (elven)
 
 import Language exposing (Language, Form, lit, cat, pick, u, p)
 
