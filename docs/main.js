@@ -600,11 +600,11 @@ function _Debug_crash_UNUSED(identifier, fact1, fact2, fact3, fact4)
 
 function _Debug_regionToString(region)
 {
-	if (region.N.z === region.S.z)
+	if (region.O.A === region.T.A)
 	{
-		return 'on line ' + region.N.z;
+		return 'on line ' + region.O.A;
 	}
-	return 'on lines ' + region.N.z + ' through ' + region.S.z;
+	return 'on lines ' + region.O.A + ' through ' + region.T.A;
 }
 
 
@@ -1894,9 +1894,9 @@ var _Platform_worker = F4(function(impl, flagDecoder, debugMetadata, args)
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.av,
+		impl.ax,
+		impl.aG,
 		impl.aD,
-		impl.aB,
 		function() { return function() {} }
 	);
 });
@@ -2743,8 +2743,8 @@ var _VirtualDom_mapEventRecord = F2(function(func, record)
 {
 	return {
 		k: func(record.k),
-		O: record.O,
-		M: record.M
+		P: record.P,
+		N: record.N
 	}
 });
 
@@ -3013,10 +3013,10 @@ function _VirtualDom_makeCallback(eventNode, initialHandler)
 
 		var value = result.a;
 		var message = !tag ? value : tag < 3 ? value.a : value.k;
-		var stopPropagation = tag == 1 ? value.b : tag == 3 && value.O;
+		var stopPropagation = tag == 1 ? value.b : tag == 3 && value.P;
 		var currentEventNode = (
 			stopPropagation && event.stopPropagation(),
-			(tag == 2 ? value.b : tag == 3 && value.M) && event.preventDefault(),
+			(tag == 2 ? value.b : tag == 3 && value.N) && event.preventDefault(),
 			eventNode
 		);
 		var tagger;
@@ -3966,11 +3966,11 @@ var _Browser_element = _Debugger_element || F4(function(impl, flagDecoder, debug
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.av,
+		impl.ax,
+		impl.aG,
 		impl.aD,
-		impl.aB,
 		function(sendToApp, initialModel) {
-			var view = impl.aF;
+			var view = impl.aI;
 			/**/
 			var domNode = args['node'];
 			//*/
@@ -4002,12 +4002,12 @@ var _Browser_document = _Debugger_document || F4(function(impl, flagDecoder, deb
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.av,
+		impl.ax,
+		impl.aG,
 		impl.aD,
-		impl.aB,
 		function(sendToApp, initialModel) {
-			var divertHrefToApp = impl.C && impl.C(sendToApp)
-			var view = impl.aF;
+			var divertHrefToApp = impl.D && impl.D(sendToApp)
+			var view = impl.aI;
 			var title = _VirtualDom_doc.title;
 			var bodyNode = _VirtualDom_doc.body;
 			var currNode = _VirtualDom_virtualize(bodyNode);
@@ -4015,12 +4015,12 @@ var _Browser_document = _Debugger_document || F4(function(impl, flagDecoder, deb
 			{
 				_VirtualDom_divertHrefToApp = divertHrefToApp;
 				var doc = view(model);
-				var nextNode = _VirtualDom_node('body')(_List_Nil)(doc.an);
+				var nextNode = _VirtualDom_node('body')(_List_Nil)(doc.aq);
 				var patches = _VirtualDom_diff(currNode, nextNode);
 				bodyNode = _VirtualDom_applyPatches(bodyNode, currNode, patches, sendToApp);
 				currNode = nextNode;
 				_VirtualDom_divertHrefToApp = 0;
-				(title !== doc.aC) && (_VirtualDom_doc.title = title = doc.aC);
+				(title !== doc.aE) && (_VirtualDom_doc.title = title = doc.aE);
 			});
 		}
 	);
@@ -4076,12 +4076,12 @@ function _Browser_makeAnimator(model, draw)
 
 function _Browser_application(impl)
 {
-	var onUrlChange = impl.ax;
-	var onUrlRequest = impl.ay;
+	var onUrlChange = impl.ay;
+	var onUrlRequest = impl.az;
 	var key = function() { key.a(onUrlChange(_Browser_getUrl())); };
 
 	return _Browser_document({
-		C: function(sendToApp)
+		D: function(sendToApp)
 		{
 			key.a = sendToApp;
 			_Browser_window.addEventListener('popstate', key);
@@ -4097,9 +4097,9 @@ function _Browser_application(impl)
 					var next = elm$url$Url$fromString(href).a;
 					sendToApp(onUrlRequest(
 						(next
-							&& curr.ad === next.ad
-							&& curr.V === next.V
-							&& curr.aa.a === next.aa.a
+							&& curr.ag === next.ag
+							&& curr.X === next.X
+							&& curr.ad.a === next.ad.a
 						)
 							? elm$browser$Browser$Internal(next)
 							: elm$browser$Browser$External(href)
@@ -4107,13 +4107,13 @@ function _Browser_application(impl)
 				}
 			});
 		},
-		av: function(flags)
+		ax: function(flags)
 		{
-			return A3(impl.av, flags, _Browser_getUrl(), key);
+			return A3(impl.ax, flags, _Browser_getUrl(), key);
 		},
-		aF: impl.aF,
-		aD: impl.aD,
-		aB: impl.aB
+		aI: impl.aI,
+		aG: impl.aG,
+		aD: impl.aD
 	});
 }
 
@@ -4179,17 +4179,17 @@ var _Browser_decodeEvent = F2(function(decoder, event)
 function _Browser_visibilityInfo()
 {
 	return (typeof _VirtualDom_doc.hidden !== 'undefined')
-		? { at: 'hidden', ao: 'visibilitychange' }
+		? { av: 'hidden', ar: 'visibilitychange' }
 		:
 	(typeof _VirtualDom_doc.mozHidden !== 'undefined')
-		? { at: 'mozHidden', ao: 'mozvisibilitychange' }
+		? { av: 'mozHidden', ar: 'mozvisibilitychange' }
 		:
 	(typeof _VirtualDom_doc.msHidden !== 'undefined')
-		? { at: 'msHidden', ao: 'msvisibilitychange' }
+		? { av: 'msHidden', ar: 'msvisibilitychange' }
 		:
 	(typeof _VirtualDom_doc.webkitHidden !== 'undefined')
-		? { at: 'webkitHidden', ao: 'webkitvisibilitychange' }
-		: { at: 'hidden', ao: 'visibilitychange' };
+		? { av: 'webkitHidden', ar: 'webkitvisibilitychange' }
+		: { av: 'hidden', ar: 'visibilitychange' };
 }
 
 
@@ -4270,10 +4270,10 @@ var _Browser_call = F2(function(functionName, id)
 function _Browser_getViewport()
 {
 	return {
-		ah: _Browser_getScene(),
-		ak: {
-			I: _Browser_window.pageXOffset,
-			J: _Browser_window.pageYOffset,
+		ak: _Browser_getScene(),
+		an: {
+			J: _Browser_window.pageXOffset,
+			K: _Browser_window.pageYOffset,
 			x: _Browser_doc.documentElement.clientWidth,
 			s: _Browser_doc.documentElement.clientHeight
 		}
@@ -4309,13 +4309,13 @@ function _Browser_getViewportOf(id)
 	return _Browser_withNode(id, function(node)
 	{
 		return {
-			ah: {
+			ak: {
 				x: node.scrollWidth,
 				s: node.scrollHeight
 			},
-			ak: {
-				I: node.scrollLeft,
-				J: node.scrollTop,
+			an: {
+				J: node.scrollLeft,
+				K: node.scrollTop,
 				x: node.clientWidth,
 				s: node.clientHeight
 			}
@@ -4347,16 +4347,16 @@ function _Browser_getElement(id)
 		var x = _Browser_window.pageXOffset;
 		var y = _Browser_window.pageYOffset;
 		return {
-			ah: _Browser_getScene(),
-			ak: {
-				I: x,
-				J: y,
+			ak: _Browser_getScene(),
+			an: {
+				J: x,
+				K: y,
 				x: _Browser_doc.documentElement.clientWidth,
 				s: _Browser_doc.documentElement.clientHeight
 			},
-			ap: {
-				I: x + rect.left,
-				J: y + rect.top,
+			as: {
+				J: x + rect.left,
+				K: y + rect.top,
 				x: rect.width,
 				s: rect.height
 			}
@@ -4483,10 +4483,10 @@ var elm$random$Random$constant = function (value) {
 	};
 };
 var author$project$Manifest$dummyLanguage = {
-	as: function (_n0) {
+	W: function (_n0) {
 		return elm$random$Random$constant('...');
 	},
-	aw: '...'
+	_: '...'
 };
 var elm$core$Basics$apL = F2(
 	function (f, x) {
@@ -5579,7 +5579,7 @@ var author$project$Languages$Common$name = function (_n0) {
 				_Utils_Tuple2(4, author$project$Languages$Common$name_1)
 			]));
 };
-var author$project$Languages$Common$common = {as: author$project$Languages$Common$name, aw: 'Common'};
+var author$project$Languages$Common$common = {W: author$project$Languages$Common$name, _: 'Common'};
 var author$project$Languages$Dwarven$c = function (_n0) {
 	return author$project$Language$pick(
 		_List_fromArray(
@@ -5840,7 +5840,7 @@ var author$project$Languages$Dwarven$name = function (_n0) {
 				_Utils_Tuple2(2, author$project$Languages$Dwarven$name_1)
 			]));
 };
-var author$project$Languages$Dwarven$dwarven = {as: author$project$Languages$Dwarven$name, aw: 'Dwarven'};
+var author$project$Languages$Dwarven$dwarven = {W: author$project$Languages$Dwarven$name, _: 'Dwarven'};
 var author$project$Language$p = F2(
 	function (weight, value) {
 		return _Utils_Tuple2(
@@ -5935,7 +5935,7 @@ var author$project$Languages$Elven$start = function (_n0) {
 var author$project$Languages$Elven$root = author$project$Language$cat(
 	_List_fromArray(
 		[author$project$Languages$Elven$start, author$project$Languages$Elven$mid, author$project$Languages$Elven$end]));
-var author$project$Languages$Elven$elven = {as: author$project$Languages$Elven$root, aw: 'Elven'};
+var author$project$Languages$Elven$elven = {W: author$project$Languages$Elven$root, _: 'Elven'};
 var author$project$Languages$Halfling$tc = function (_n0) {
 	return author$project$Language$pick(
 		_List_fromArray(
@@ -6318,7 +6318,7 @@ var author$project$Languages$Halfling$root = function (_n0) {
 						[author$project$Languages$Halfling$onset, author$project$Languages$Halfling$connector, author$project$Languages$Halfling$coda])))
 			]));
 };
-var author$project$Languages$Halfling$halfling = {as: author$project$Languages$Halfling$root, aw: 'Halfling'};
+var author$project$Languages$Halfling$halfling = {W: author$project$Languages$Halfling$root, _: 'Halfling'};
 var author$project$Languages$Orcish$c = function (_n0) {
 	return author$project$Language$pick(
 		_List_fromArray(
@@ -6589,7 +6589,7 @@ var author$project$Languages$Orcish$name = function (_n0) {
 				_Utils_Tuple2(2, author$project$Languages$Orcish$name_1)
 			]));
 };
-var author$project$Languages$Orcish$orcish = {as: author$project$Languages$Orcish$name, aw: 'Orcish'};
+var author$project$Languages$Orcish$orcish = {W: author$project$Languages$Orcish$name, _: 'Orcish'};
 var author$project$Manifest$languages = _List_fromArray(
 	[author$project$Languages$Common$common, author$project$Languages$Elven$elven, author$project$Languages$Dwarven$dwarven, author$project$Languages$Halfling$halfling, author$project$Languages$Orcish$orcish]);
 var elm$core$Maybe$Just = function (a) {
@@ -6968,9 +6968,13 @@ var elm$json$Json$Decode$errorToStringHelp = F2(
 	});
 var elm$core$Platform$Cmd$batch = _Platform_batch;
 var elm$core$Platform$Cmd$none = elm$core$Platform$Cmd$batch(_List_Nil);
+var elm$core$Dict$RBEmpty_elm_builtin = {$: -2};
+var elm$core$Dict$empty = elm$core$Dict$RBEmpty_elm_builtin;
+var elm$core$Set$Set_elm_builtin = elm$core$Basics$identity;
+var elm$core$Set$empty = elm$core$Dict$empty;
 var author$project$Main$init = function (_n0) {
 	return _Utils_Tuple2(
-		{A: _List_Nil, B: author$project$Manifest$defaultLanguage, F: 10},
+		{y: elm$core$Set$empty, B: _List_Nil, C: author$project$Manifest$defaultLanguage, G: 10},
 		elm$core$Platform$Cmd$none);
 };
 var elm$core$Platform$Sub$batch = _Platform_batch;
@@ -6999,35 +7003,6 @@ var author$project$Generator$capitalize = function (string) {
 			A2(elm$core$String$left, 1, string)),
 		A2(elm$core$String$dropLeft, 1, string));
 };
-var elm$random$Random$listHelp = F4(
-	function (revList, n, gen, seed) {
-		listHelp:
-		while (true) {
-			if (n < 1) {
-				return _Utils_Tuple2(revList, seed);
-			} else {
-				var _n0 = gen(seed);
-				var value = _n0.a;
-				var newSeed = _n0.b;
-				var $temp$revList = A2(elm$core$List$cons, value, revList),
-					$temp$n = n - 1,
-					$temp$gen = gen,
-					$temp$seed = newSeed;
-				revList = $temp$revList;
-				n = $temp$n;
-				gen = $temp$gen;
-				seed = $temp$seed;
-				continue listHelp;
-			}
-		}
-	});
-var elm$random$Random$list = F2(
-	function (n, _n0) {
-		var gen = _n0;
-		return function (seed) {
-			return A4(elm$random$Random$listHelp, _List_Nil, n, gen, seed);
-		};
-	});
 var elm$random$Random$map = F2(
 	function (func, _n0) {
 		var genA = _n0;
@@ -7040,21 +7015,27 @@ var elm$random$Random$map = F2(
 				seed1);
 		};
 	});
-var author$project$Generator$nameList = F2(
-	function (amount, language) {
+var author$project$Generator$capitalizeForm = F2(
+	function (form, _n0) {
 		return A2(
-			elm$random$Random$list,
-			amount,
-			A2(
-				elm$random$Random$map,
-				author$project$Generator$capitalize,
-				language.as(0)));
+			elm$random$Random$map,
+			author$project$Generator$capitalize,
+			form(0));
+	});
+var author$project$Generator$applyTransforms = F2(
+	function (transforms, language) {
+		return A4(
+			elm$core$List$foldl,
+			function ($) {
+				return $.aF;
+			},
+			author$project$Generator$capitalizeForm(language.W),
+			transforms,
+			0);
 	});
 var author$project$Main$NewNames = function (a) {
 	return {$: 1, a: a};
 };
-var elm$core$Dict$RBEmpty_elm_builtin = {$: -2};
-var elm$core$Dict$empty = elm$core$Dict$RBEmpty_elm_builtin;
 var elm$core$Dict$Black = 1;
 var elm$core$Dict$RBNode_elm_builtin = F5(
 	function (a, b, c, d, e) {
@@ -7180,9 +7161,499 @@ var author$project$Manifest$languagesByName = elm$core$Dict$fromList(
 	A2(
 		elm$core$List$map,
 		function (language) {
-			return _Utils_Tuple2(language.aw, language);
+			return _Utils_Tuple2(language._, language);
 		},
 		author$project$Manifest$languages));
+var author$project$Transforms$Profession$transform = function (name) {
+	var specialist = function (_n5) {
+		return author$project$Language$pick(
+			_List_fromArray(
+				[
+					author$project$Language$u('surgeon'),
+					author$project$Language$u('priest'),
+					author$project$Language$u('hedge wizard'),
+					author$project$Language$u('hedge witch'),
+					author$project$Language$u('hedge knight'),
+					author$project$Language$u('grifter'),
+					author$project$Language$u('musician'),
+					author$project$Language$u('gladiator'),
+					author$project$Language$u('actor'),
+					author$project$Language$u('author'),
+					author$project$Language$u('trapper'),
+					author$project$Language$u('hunter'),
+					author$project$Language$u('magician\'s apprentice'),
+					author$project$Language$u('shaman'),
+					author$project$Language$u('oracle'),
+					author$project$Language$u('pickpocket'),
+					author$project$Language$u('burglar'),
+					author$project$Language$u('bounty hunter'),
+					author$project$Language$u('alchemist'),
+					author$project$Language$u('artificer')
+				]));
+	};
+	var peasant = function (_n4) {
+		return author$project$Language$pick(
+			_List_fromArray(
+				[
+					author$project$Language$u('laborer'),
+					author$project$Language$u('farmer'),
+					author$project$Language$u('shepherd'),
+					author$project$Language$u('thresher'),
+					author$project$Language$u('carter'),
+					author$project$Language$u('urchin'),
+					author$project$Language$u('beggar'),
+					author$project$Language$u('fisher')
+				]));
+	};
+	var level = function (_n3) {
+		return author$project$Language$pick(
+			_List_fromArray(
+				[
+					A2(author$project$Language$p, 5, '1'),
+					A2(author$project$Language$p, 4, '2'),
+					A2(author$project$Language$p, 3, '3'),
+					A2(author$project$Language$p, 2, '4'),
+					A2(author$project$Language$p, 1, '5')
+				]));
+	};
+	var comma = author$project$Language$lit(', ');
+	var _class = function (_n2) {
+		return author$project$Language$pick(
+			_List_fromArray(
+				[
+					author$project$Language$u('barbarian'),
+					author$project$Language$u('bard'),
+					author$project$Language$u('cleric'),
+					author$project$Language$u('druid'),
+					author$project$Language$u('fighter'),
+					author$project$Language$u('monk'),
+					author$project$Language$u('paladin'),
+					author$project$Language$u('ranger'),
+					author$project$Language$u('rogue'),
+					author$project$Language$u('sorcerer'),
+					author$project$Language$u('warlock'),
+					author$project$Language$u('wizard')
+				]));
+	};
+	var artisan = function (_n1) {
+		return author$project$Language$pick(
+			_List_fromArray(
+				[
+					author$project$Language$u('carpenter'),
+					author$project$Language$u('glazier'),
+					author$project$Language$u('baker'),
+					author$project$Language$u('apothecary'),
+					author$project$Language$u('barber'),
+					author$project$Language$u('blacksmith'),
+					author$project$Language$u('butcher'),
+					author$project$Language$u('chandler'),
+					author$project$Language$u('innkeeper'),
+					author$project$Language$u('jeweler'),
+					author$project$Language$u('locksmith'),
+					author$project$Language$u('stonemason'),
+					author$project$Language$u('tailor'),
+					author$project$Language$u('shoemaker'),
+					author$project$Language$u('tanner'),
+					author$project$Language$u('waiter'),
+					author$project$Language$u('weaver'),
+					author$project$Language$u('artisan\'s apprentice'),
+					author$project$Language$u('librarian'),
+					author$project$Language$u('shopkeeper')
+				]));
+	};
+	var adventurer = author$project$Language$cat(
+		_List_fromArray(
+			[
+				author$project$Language$lit('level '),
+				level,
+				author$project$Language$lit(' '),
+				_class
+			]));
+	var job = function (_n0) {
+		return author$project$Language$pick(
+			_List_fromArray(
+				[
+					_Utils_Tuple2(3, peasant),
+					_Utils_Tuple2(3, artisan),
+					_Utils_Tuple2(2, specialist),
+					_Utils_Tuple2(1, adventurer)
+				]));
+	};
+	return author$project$Language$cat(
+		_List_fromArray(
+			[name, comma, job]));
+};
+var author$project$Transforms$Profession$profession = {_: 'Profession', aB: 3, aF: author$project$Transforms$Profession$transform};
+var author$project$Transforms$Title$transform = function (name) {
+	var the = author$project$Language$lit(' the ');
+	var sp = author$project$Language$lit(' ');
+	var sigil = function (_n10) {
+		return author$project$Language$pick(
+			_List_fromArray(
+				[
+					author$project$Language$u('Bear'),
+					author$project$Language$u('Lion'),
+					author$project$Language$u('Boar'),
+					author$project$Language$u('Cat'),
+					author$project$Language$u('Toad'),
+					author$project$Language$u('Owl'),
+					author$project$Language$u('Bat'),
+					author$project$Language$u('Rat'),
+					author$project$Language$u('Diamond'),
+					author$project$Language$u('Crystal'),
+					author$project$Language$u('Stone'),
+					author$project$Language$u('Spear'),
+					author$project$Language$u('Blade'),
+					author$project$Language$u('Sword'),
+					author$project$Language$u('Bow'),
+					author$project$Language$u('Arrow'),
+					author$project$Language$u('Dagger'),
+					author$project$Language$u('Club'),
+					author$project$Language$u('Lance'),
+					author$project$Language$u('Shield'),
+					author$project$Language$u('Mantle'),
+					author$project$Language$u('Gauntlet'),
+					author$project$Language$u('Helm'),
+					author$project$Language$u('Crown'),
+					author$project$Language$u('Wand'),
+					author$project$Language$u('Orb'),
+					author$project$Language$u('Scroll'),
+					author$project$Language$u('Tome'),
+					author$project$Language$u('Gate'),
+					author$project$Language$u('Tower'),
+					author$project$Language$u('Door'),
+					author$project$Language$u('Pyramid'),
+					author$project$Language$u('Manse'),
+					author$project$Language$u('Tomb'),
+					author$project$Language$u('Spire'),
+					author$project$Language$u('River'),
+					author$project$Language$u('Grove'),
+					author$project$Language$u('Mountain'),
+					author$project$Language$u('Shore'),
+					author$project$Language$u('Tarn'),
+					author$project$Language$u('Desert'),
+					author$project$Language$u('Moon'),
+					author$project$Language$u('Sun'),
+					author$project$Language$u('Star'),
+					author$project$Language$u('Clover'),
+					author$project$Language$u('Rose'),
+					author$project$Language$u('Oak'),
+					author$project$Language$u('Elm'),
+					author$project$Language$u('Fist'),
+					author$project$Language$u('Heart'),
+					author$project$Language$u('Skull'),
+					author$project$Language$u('Bone'),
+					author$project$Language$u('Claw'),
+					author$project$Language$u('Talon'),
+					author$project$Language$u('Hand'),
+					author$project$Language$u('Eye')
+				]));
+	};
+	var of_the = author$project$Language$lit(' of the ');
+	var material = function (_n9) {
+		return author$project$Language$pick(
+			_List_fromArray(
+				[
+					author$project$Language$u('Stone'),
+					author$project$Language$u('Golden'),
+					author$project$Language$u('Iron'),
+					author$project$Language$u('Clay'),
+					author$project$Language$u('Crystalline')
+				]));
+	};
+	var digit_count = function (_n8) {
+		return author$project$Language$pick(
+			_List_fromArray(
+				[
+					author$project$Language$u('Four'),
+					A2(author$project$Language$p, 2, 'Six'),
+					A2(author$project$Language$p, 2, 'Seven'),
+					author$project$Language$u('Eight'),
+					A2(author$project$Language$p, 2, 'Nine'),
+					author$project$Language$u('Eleven')
+				]));
+	};
+	var digit_adj = function (_n7) {
+		return author$project$Language$pick(
+			_List_fromArray(
+				[
+					_Utils_Tuple2(
+					3,
+					author$project$Language$cat(
+						_List_fromArray(
+							[
+								digit_count,
+								author$project$Language$lit('-fingered')
+							]))),
+					_Utils_Tuple2(
+					1,
+					author$project$Language$cat(
+						_List_fromArray(
+							[
+								digit_count,
+								author$project$Language$lit('-toed')
+							])))
+				]));
+	};
+	var color = function (_n6) {
+		return author$project$Language$pick(
+			_List_fromArray(
+				[
+					author$project$Language$u('Golden'),
+					author$project$Language$u('Silver'),
+					author$project$Language$u('Argent'),
+					author$project$Language$u('Sable'),
+					author$project$Language$u('Red'),
+					author$project$Language$u('Blue'),
+					author$project$Language$u('Green'),
+					author$project$Language$u('White'),
+					author$project$Language$u('Orange'),
+					author$project$Language$u('Black'),
+					author$project$Language$u('Grey'),
+					author$project$Language$u('Yellow'),
+					author$project$Language$u('Purple'),
+					author$project$Language$u('Chartreuse'),
+					author$project$Language$u('Crimson'),
+					author$project$Language$u('Azure'),
+					author$project$Language$u('Violet'),
+					author$project$Language$u('Magenta'),
+					author$project$Language$u('Brown'),
+					author$project$Language$u('Beige'),
+					author$project$Language$u('Indigo'),
+					author$project$Language$u('Cyan')
+				]));
+	};
+	var sigil_mod_s = function (_n5) {
+		return author$project$Language$pick(
+			_List_fromArray(
+				[
+					_Utils_Tuple2(4, color),
+					_Utils_Tuple2(4, material),
+					author$project$Language$u('Majestic'),
+					author$project$Language$u('Great'),
+					author$project$Language$u('Noble'),
+					author$project$Language$u('Fallen'),
+					author$project$Language$u('Broken'),
+					author$project$Language$u('Cloven'),
+					author$project$Language$u('Lost'),
+					author$project$Language$u('Cursed'),
+					author$project$Language$u('Blessed'),
+					author$project$Language$u('Ancient')
+				]));
+	};
+	var sigil_mod_pl = function (_n4) {
+		return author$project$Language$pick(
+			_List_fromArray(
+				[
+					_Utils_Tuple2(4, sigil_mod_s),
+					_Utils_Tuple2(3, color),
+					author$project$Language$u('Two'),
+					author$project$Language$u('Twin'),
+					author$project$Language$u('Three'),
+					author$project$Language$u('Four'),
+					author$project$Language$u('Five'),
+					author$project$Language$u('Six'),
+					author$project$Language$u('Seven'),
+					author$project$Language$u('Nine'),
+					author$project$Language$u('Dozen'),
+					author$project$Language$u('Multitudinous')
+				]));
+	};
+	var sigil_phrase = function (_n3) {
+		return author$project$Language$pick(
+			_List_fromArray(
+				[
+					_Utils_Tuple2(
+					2,
+					author$project$Language$cat(
+						_List_fromArray(
+							[sigil_mod_s, sp, sigil]))),
+					_Utils_Tuple2(
+					2,
+					author$project$Language$cat(
+						_List_fromArray(
+							[
+								sigil_mod_pl,
+								sp,
+								sigil,
+								author$project$Language$lit('s')
+							]))),
+					_Utils_Tuple2(1, sigil),
+					_Utils_Tuple2(
+					1,
+					author$project$Language$cat(
+						_List_fromArray(
+							[
+								sigil,
+								author$project$Language$lit('s')
+							])))
+				]));
+	};
+	var title_ = function (_n2) {
+		return author$project$Language$pick(
+			_List_fromArray(
+				[
+					_Utils_Tuple2(12, color),
+					author$project$Language$u('Quick'),
+					author$project$Language$u('Nimble'),
+					author$project$Language$u('Feeble'),
+					author$project$Language$u('Strong'),
+					author$project$Language$u('Enduring'),
+					author$project$Language$u('Lean'),
+					author$project$Language$u('Stout'),
+					author$project$Language$u('Tall'),
+					author$project$Language$u('Fat'),
+					author$project$Language$u('Giant'),
+					author$project$Language$u('Incompetent'),
+					author$project$Language$u('Daft'),
+					author$project$Language$u('Half-Wit'),
+					author$project$Language$u('Silver-Tongued'),
+					author$project$Language$u('Clever'),
+					author$project$Language$u('Mad'),
+					author$project$Language$u('Great'),
+					author$project$Language$u('Wise'),
+					author$project$Language$u('Brave'),
+					author$project$Language$u('Honest'),
+					author$project$Language$u('Mighty'),
+					author$project$Language$u('Pious'),
+					author$project$Language$u('Noble'),
+					author$project$Language$u('Spineless'),
+					author$project$Language$u('Craven'),
+					author$project$Language$u('Fool'),
+					author$project$Language$u('Vague'),
+					author$project$Language$u('Cordial'),
+					author$project$Language$u('Crabby'),
+					author$project$Language$u('Incongruously Cheerful'),
+					author$project$Language$u('Reckless'),
+					author$project$Language$u('Unladylike'),
+					author$project$Language$u('Truculent'),
+					author$project$Language$u('Flirtatious'),
+					author$project$Language$u('Boorish'),
+					author$project$Language$u('Forthright'),
+					author$project$Language$u('Swanky'),
+					author$project$Language$u('Inconsistent'),
+					author$project$Language$u('Lunatic'),
+					author$project$Language$u('Quiet'),
+					author$project$Language$u('Merciful'),
+					author$project$Language$u('Vain'),
+					author$project$Language$u('Deathless'),
+					author$project$Language$u('Dragonslayer'),
+					author$project$Language$u('Titan-killer'),
+					author$project$Language$u('Magnificent'),
+					author$project$Language$u('Invisible'),
+					author$project$Language$u('Blind'),
+					author$project$Language$u('Deaf'),
+					author$project$Language$u('Wrinkled'),
+					author$project$Language$u('Smelly'),
+					author$project$Language$u('Toothless'),
+					author$project$Language$u('Unblinking'),
+					author$project$Language$u('Beautiful'),
+					author$project$Language$u('Fair'),
+					author$project$Language$u('Plain'),
+					author$project$Language$u('Gassy'),
+					author$project$Language$u('Hirsute'),
+					author$project$Language$u('Bald'),
+					author$project$Language$u('Fearsome'),
+					author$project$Language$u('Slightly Off'),
+					author$project$Language$u('Bizarre'),
+					author$project$Language$u('Irksome'),
+					author$project$Language$u('Stand-up Guy'),
+					author$project$Language$u('Cruel'),
+					author$project$Language$u('Butcher'),
+					author$project$Language$u('Planetouched'),
+					author$project$Language$u('Fey'),
+					author$project$Language$u('Blessed'),
+					author$project$Language$u('Lucky'),
+					author$project$Language$u('Thrice-cursed'),
+					author$project$Language$u('Rich'),
+					author$project$Language$u('Poor'),
+					author$project$Language$u('Miserly'),
+					author$project$Language$u('Drunkard'),
+					author$project$Language$u('Sober'),
+					author$project$Language$u('Northron'),
+					author$project$Language$u('Southron'),
+					author$project$Language$u('Westron'),
+					author$project$Language$u('Eastron'),
+					author$project$Language$u('Beyonder'),
+					author$project$Language$u('Barbarian'),
+					author$project$Language$u('Poet'),
+					author$project$Language$u('Bard'),
+					author$project$Language$u('Singer'),
+					author$project$Language$u('Thief'),
+					author$project$Language$u('Warrior'),
+					author$project$Language$u('Archer'),
+					author$project$Language$u('Magician'),
+					author$project$Language$u('Witch'),
+					author$project$Language$u('Trapper'),
+					author$project$Language$u('Enchanter'),
+					author$project$Language$u('Artificer'),
+					author$project$Language$u('Boar'),
+					author$project$Language$u('Leopard'),
+					author$project$Language$u('Eagle'),
+					author$project$Language$u('Cheetah'),
+					author$project$Language$u('Worm'),
+					author$project$Language$u('Toad'),
+					author$project$Language$u('Eel'),
+					author$project$Language$u('Rat'),
+					author$project$Language$u('Mouse'),
+					author$project$Language$u('Bear'),
+					author$project$Language$u('Snake'),
+					author$project$Language$u('Fox'),
+					author$project$Language$u('Myrmidon'),
+					author$project$Language$u('Zephyr')
+				]));
+	};
+	var adjective = function (_n1) {
+		return author$project$Language$pick(
+			_List_fromArray(
+				[
+					_Utils_Tuple2(5, color),
+					_Utils_Tuple2(5, digit_adj),
+					author$project$Language$u('Shark-toothed'),
+					author$project$Language$u('Half-dead'),
+					author$project$Language$u('One-eyed'),
+					author$project$Language$u('One-eared'),
+					author$project$Language$u('Fingerless'),
+					author$project$Language$u('Crooked')
+				]));
+	};
+	var titled_name = function (_n0) {
+		return author$project$Language$pick(
+			_List_fromArray(
+				[
+					_Utils_Tuple2(
+					10,
+					author$project$Language$cat(
+						_List_fromArray(
+							[name, the, title_]))),
+					_Utils_Tuple2(
+					5,
+					author$project$Language$cat(
+						_List_fromArray(
+							[name, of_the, sigil_phrase]))),
+					_Utils_Tuple2(
+					1,
+					author$project$Language$cat(
+						_List_fromArray(
+							[adjective, sp, name])))
+				]));
+	};
+	return titled_name;
+};
+var author$project$Transforms$Title$title = {_: 'Title', aB: 1, aF: author$project$Transforms$Title$transform};
+var elm$core$List$sortBy = _List_sortBy;
+var author$project$Manifest$transforms = A2(
+	elm$core$List$sortBy,
+	function ($) {
+		return $.aB;
+	},
+	_List_fromArray(
+		[author$project$Transforms$Title$title, author$project$Transforms$Profession$profession]));
+var elm$core$Basics$composeR = F3(
+	function (f, g, x) {
+		return g(
+			f(x));
+	});
 var elm$core$Dict$get = F2(
 	function (targetKey, dict) {
 		get:
@@ -7213,6 +7684,403 @@ var elm$core$Dict$get = F2(
 				}
 			}
 		}
+	});
+var elm$core$List$filter = F2(
+	function (isGood, list) {
+		return A3(
+			elm$core$List$foldr,
+			F2(
+				function (x, xs) {
+					return isGood(x) ? A2(elm$core$List$cons, x, xs) : xs;
+				}),
+			_List_Nil,
+			list);
+	});
+var elm$core$Set$insert = F2(
+	function (key, _n0) {
+		var dict = _n0;
+		return A3(elm$core$Dict$insert, key, 0, dict);
+	});
+var elm$core$Dict$member = F2(
+	function (key, dict) {
+		var _n0 = A2(elm$core$Dict$get, key, dict);
+		if (!_n0.$) {
+			return true;
+		} else {
+			return false;
+		}
+	});
+var elm$core$Set$member = F2(
+	function (key, _n0) {
+		var dict = _n0;
+		return A2(elm$core$Dict$member, key, dict);
+	});
+var elm$core$Dict$getMin = function (dict) {
+	getMin:
+	while (true) {
+		if ((dict.$ === -1) && (dict.d.$ === -1)) {
+			var left = dict.d;
+			var $temp$dict = left;
+			dict = $temp$dict;
+			continue getMin;
+		} else {
+			return dict;
+		}
+	}
+};
+var elm$core$Dict$moveRedLeft = function (dict) {
+	if (((dict.$ === -1) && (dict.d.$ === -1)) && (dict.e.$ === -1)) {
+		if ((dict.e.d.$ === -1) && (!dict.e.d.a)) {
+			var clr = dict.a;
+			var k = dict.b;
+			var v = dict.c;
+			var _n1 = dict.d;
+			var lClr = _n1.a;
+			var lK = _n1.b;
+			var lV = _n1.c;
+			var lLeft = _n1.d;
+			var lRight = _n1.e;
+			var _n2 = dict.e;
+			var rClr = _n2.a;
+			var rK = _n2.b;
+			var rV = _n2.c;
+			var rLeft = _n2.d;
+			var _n3 = rLeft.a;
+			var rlK = rLeft.b;
+			var rlV = rLeft.c;
+			var rlL = rLeft.d;
+			var rlR = rLeft.e;
+			var rRight = _n2.e;
+			return A5(
+				elm$core$Dict$RBNode_elm_builtin,
+				0,
+				rlK,
+				rlV,
+				A5(
+					elm$core$Dict$RBNode_elm_builtin,
+					1,
+					k,
+					v,
+					A5(elm$core$Dict$RBNode_elm_builtin, 0, lK, lV, lLeft, lRight),
+					rlL),
+				A5(elm$core$Dict$RBNode_elm_builtin, 1, rK, rV, rlR, rRight));
+		} else {
+			var clr = dict.a;
+			var k = dict.b;
+			var v = dict.c;
+			var _n4 = dict.d;
+			var lClr = _n4.a;
+			var lK = _n4.b;
+			var lV = _n4.c;
+			var lLeft = _n4.d;
+			var lRight = _n4.e;
+			var _n5 = dict.e;
+			var rClr = _n5.a;
+			var rK = _n5.b;
+			var rV = _n5.c;
+			var rLeft = _n5.d;
+			var rRight = _n5.e;
+			if (clr === 1) {
+				return A5(
+					elm$core$Dict$RBNode_elm_builtin,
+					1,
+					k,
+					v,
+					A5(elm$core$Dict$RBNode_elm_builtin, 0, lK, lV, lLeft, lRight),
+					A5(elm$core$Dict$RBNode_elm_builtin, 0, rK, rV, rLeft, rRight));
+			} else {
+				return A5(
+					elm$core$Dict$RBNode_elm_builtin,
+					1,
+					k,
+					v,
+					A5(elm$core$Dict$RBNode_elm_builtin, 0, lK, lV, lLeft, lRight),
+					A5(elm$core$Dict$RBNode_elm_builtin, 0, rK, rV, rLeft, rRight));
+			}
+		}
+	} else {
+		return dict;
+	}
+};
+var elm$core$Dict$moveRedRight = function (dict) {
+	if (((dict.$ === -1) && (dict.d.$ === -1)) && (dict.e.$ === -1)) {
+		if ((dict.d.d.$ === -1) && (!dict.d.d.a)) {
+			var clr = dict.a;
+			var k = dict.b;
+			var v = dict.c;
+			var _n1 = dict.d;
+			var lClr = _n1.a;
+			var lK = _n1.b;
+			var lV = _n1.c;
+			var _n2 = _n1.d;
+			var _n3 = _n2.a;
+			var llK = _n2.b;
+			var llV = _n2.c;
+			var llLeft = _n2.d;
+			var llRight = _n2.e;
+			var lRight = _n1.e;
+			var _n4 = dict.e;
+			var rClr = _n4.a;
+			var rK = _n4.b;
+			var rV = _n4.c;
+			var rLeft = _n4.d;
+			var rRight = _n4.e;
+			return A5(
+				elm$core$Dict$RBNode_elm_builtin,
+				0,
+				lK,
+				lV,
+				A5(elm$core$Dict$RBNode_elm_builtin, 1, llK, llV, llLeft, llRight),
+				A5(
+					elm$core$Dict$RBNode_elm_builtin,
+					1,
+					k,
+					v,
+					lRight,
+					A5(elm$core$Dict$RBNode_elm_builtin, 0, rK, rV, rLeft, rRight)));
+		} else {
+			var clr = dict.a;
+			var k = dict.b;
+			var v = dict.c;
+			var _n5 = dict.d;
+			var lClr = _n5.a;
+			var lK = _n5.b;
+			var lV = _n5.c;
+			var lLeft = _n5.d;
+			var lRight = _n5.e;
+			var _n6 = dict.e;
+			var rClr = _n6.a;
+			var rK = _n6.b;
+			var rV = _n6.c;
+			var rLeft = _n6.d;
+			var rRight = _n6.e;
+			if (clr === 1) {
+				return A5(
+					elm$core$Dict$RBNode_elm_builtin,
+					1,
+					k,
+					v,
+					A5(elm$core$Dict$RBNode_elm_builtin, 0, lK, lV, lLeft, lRight),
+					A5(elm$core$Dict$RBNode_elm_builtin, 0, rK, rV, rLeft, rRight));
+			} else {
+				return A5(
+					elm$core$Dict$RBNode_elm_builtin,
+					1,
+					k,
+					v,
+					A5(elm$core$Dict$RBNode_elm_builtin, 0, lK, lV, lLeft, lRight),
+					A5(elm$core$Dict$RBNode_elm_builtin, 0, rK, rV, rLeft, rRight));
+			}
+		}
+	} else {
+		return dict;
+	}
+};
+var elm$core$Dict$removeHelpPrepEQGT = F7(
+	function (targetKey, dict, color, key, value, left, right) {
+		if ((left.$ === -1) && (!left.a)) {
+			var _n1 = left.a;
+			var lK = left.b;
+			var lV = left.c;
+			var lLeft = left.d;
+			var lRight = left.e;
+			return A5(
+				elm$core$Dict$RBNode_elm_builtin,
+				color,
+				lK,
+				lV,
+				lLeft,
+				A5(elm$core$Dict$RBNode_elm_builtin, 0, key, value, lRight, right));
+		} else {
+			_n2$2:
+			while (true) {
+				if ((right.$ === -1) && (right.a === 1)) {
+					if (right.d.$ === -1) {
+						if (right.d.a === 1) {
+							var _n3 = right.a;
+							var _n4 = right.d;
+							var _n5 = _n4.a;
+							return elm$core$Dict$moveRedRight(dict);
+						} else {
+							break _n2$2;
+						}
+					} else {
+						var _n6 = right.a;
+						var _n7 = right.d;
+						return elm$core$Dict$moveRedRight(dict);
+					}
+				} else {
+					break _n2$2;
+				}
+			}
+			return dict;
+		}
+	});
+var elm$core$Dict$removeMin = function (dict) {
+	if ((dict.$ === -1) && (dict.d.$ === -1)) {
+		var color = dict.a;
+		var key = dict.b;
+		var value = dict.c;
+		var left = dict.d;
+		var lColor = left.a;
+		var lLeft = left.d;
+		var right = dict.e;
+		if (lColor === 1) {
+			if ((lLeft.$ === -1) && (!lLeft.a)) {
+				var _n3 = lLeft.a;
+				return A5(
+					elm$core$Dict$RBNode_elm_builtin,
+					color,
+					key,
+					value,
+					elm$core$Dict$removeMin(left),
+					right);
+			} else {
+				var _n4 = elm$core$Dict$moveRedLeft(dict);
+				if (_n4.$ === -1) {
+					var nColor = _n4.a;
+					var nKey = _n4.b;
+					var nValue = _n4.c;
+					var nLeft = _n4.d;
+					var nRight = _n4.e;
+					return A5(
+						elm$core$Dict$balance,
+						nColor,
+						nKey,
+						nValue,
+						elm$core$Dict$removeMin(nLeft),
+						nRight);
+				} else {
+					return elm$core$Dict$RBEmpty_elm_builtin;
+				}
+			}
+		} else {
+			return A5(
+				elm$core$Dict$RBNode_elm_builtin,
+				color,
+				key,
+				value,
+				elm$core$Dict$removeMin(left),
+				right);
+		}
+	} else {
+		return elm$core$Dict$RBEmpty_elm_builtin;
+	}
+};
+var elm$core$Dict$removeHelp = F2(
+	function (targetKey, dict) {
+		if (dict.$ === -2) {
+			return elm$core$Dict$RBEmpty_elm_builtin;
+		} else {
+			var color = dict.a;
+			var key = dict.b;
+			var value = dict.c;
+			var left = dict.d;
+			var right = dict.e;
+			if (_Utils_cmp(targetKey, key) < 0) {
+				if ((left.$ === -1) && (left.a === 1)) {
+					var _n4 = left.a;
+					var lLeft = left.d;
+					if ((lLeft.$ === -1) && (!lLeft.a)) {
+						var _n6 = lLeft.a;
+						return A5(
+							elm$core$Dict$RBNode_elm_builtin,
+							color,
+							key,
+							value,
+							A2(elm$core$Dict$removeHelp, targetKey, left),
+							right);
+					} else {
+						var _n7 = elm$core$Dict$moveRedLeft(dict);
+						if (_n7.$ === -1) {
+							var nColor = _n7.a;
+							var nKey = _n7.b;
+							var nValue = _n7.c;
+							var nLeft = _n7.d;
+							var nRight = _n7.e;
+							return A5(
+								elm$core$Dict$balance,
+								nColor,
+								nKey,
+								nValue,
+								A2(elm$core$Dict$removeHelp, targetKey, nLeft),
+								nRight);
+						} else {
+							return elm$core$Dict$RBEmpty_elm_builtin;
+						}
+					}
+				} else {
+					return A5(
+						elm$core$Dict$RBNode_elm_builtin,
+						color,
+						key,
+						value,
+						A2(elm$core$Dict$removeHelp, targetKey, left),
+						right);
+				}
+			} else {
+				return A2(
+					elm$core$Dict$removeHelpEQGT,
+					targetKey,
+					A7(elm$core$Dict$removeHelpPrepEQGT, targetKey, dict, color, key, value, left, right));
+			}
+		}
+	});
+var elm$core$Dict$removeHelpEQGT = F2(
+	function (targetKey, dict) {
+		if (dict.$ === -1) {
+			var color = dict.a;
+			var key = dict.b;
+			var value = dict.c;
+			var left = dict.d;
+			var right = dict.e;
+			if (_Utils_eq(targetKey, key)) {
+				var _n1 = elm$core$Dict$getMin(right);
+				if (_n1.$ === -1) {
+					var minKey = _n1.b;
+					var minValue = _n1.c;
+					return A5(
+						elm$core$Dict$balance,
+						color,
+						minKey,
+						minValue,
+						left,
+						elm$core$Dict$removeMin(right));
+				} else {
+					return elm$core$Dict$RBEmpty_elm_builtin;
+				}
+			} else {
+				return A5(
+					elm$core$Dict$balance,
+					color,
+					key,
+					value,
+					left,
+					A2(elm$core$Dict$removeHelp, targetKey, right));
+			}
+		} else {
+			return elm$core$Dict$RBEmpty_elm_builtin;
+		}
+	});
+var elm$core$Dict$remove = F2(
+	function (key, dict) {
+		var _n0 = A2(elm$core$Dict$removeHelp, key, dict);
+		if ((_n0.$ === -1) && (!_n0.a)) {
+			var _n1 = _n0.a;
+			var k = _n0.b;
+			var v = _n0.c;
+			var l = _n0.d;
+			var r = _n0.e;
+			return A5(elm$core$Dict$RBNode_elm_builtin, 1, k, v, l, r);
+		} else {
+			var x = _n0;
+			return x;
+		}
+	});
+var elm$core$Set$remove = F2(
+	function (key, _n0) {
+		var dict = _n0;
+		return A2(elm$core$Dict$remove, key, dict);
 	});
 var elm$random$Random$Generate = elm$core$Basics$identity;
 var elm$core$Task$andThen = _Scheduler_andThen;
@@ -7292,11 +8160,41 @@ var elm$random$Random$generate = F2(
 		return elm$random$Random$command(
 			A2(elm$random$Random$map, tagger, generator));
 	});
+var elm$random$Random$listHelp = F4(
+	function (revList, n, gen, seed) {
+		listHelp:
+		while (true) {
+			if (n < 1) {
+				return _Utils_Tuple2(revList, seed);
+			} else {
+				var _n0 = gen(seed);
+				var value = _n0.a;
+				var newSeed = _n0.b;
+				var $temp$revList = A2(elm$core$List$cons, value, revList),
+					$temp$n = n - 1,
+					$temp$gen = gen,
+					$temp$seed = newSeed;
+				revList = $temp$revList;
+				n = $temp$n;
+				gen = $temp$gen;
+				seed = $temp$seed;
+				continue listHelp;
+			}
+		}
+	});
+var elm$random$Random$list = F2(
+	function (n, _n0) {
+		var gen = _n0;
+		return function (seed) {
+			return A4(elm$random$Random$listHelp, _List_Nil, n, gen, seed);
+		};
+	});
 var author$project$Main$update = F2(
 	function (msg, model) {
-		var names = model.A;
-		var toGenerate = model.F;
-		var selectedLanguage = model.B;
+		var names = model.B;
+		var toGenerate = model.G;
+		var selectedLanguage = model.C;
+		var activeTransforms = model.y;
 		switch (msg.$) {
 			case 0:
 				return _Utils_Tuple2(
@@ -7304,13 +8202,29 @@ var author$project$Main$update = F2(
 					A2(
 						elm$random$Random$generate,
 						author$project$Main$NewNames,
-						A2(author$project$Generator$nameList, toGenerate, selectedLanguage)));
+						A2(
+							elm$random$Random$list,
+							toGenerate,
+							A2(
+								author$project$Generator$applyTransforms,
+								A2(
+									elm$core$List$filter,
+									A2(
+										elm$core$Basics$composeR,
+										function ($) {
+											return $._;
+										},
+										function (transformName) {
+											return A2(elm$core$Set$member, transformName, activeTransforms);
+										}),
+									author$project$Manifest$transforms),
+								selectedLanguage))));
 			case 1:
 				var newNames = msg.a;
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{A: newNames}),
+						{B: newNames}),
 					elm$core$Platform$Cmd$none);
 			case 2:
 				var languageName = msg.a;
@@ -7323,28 +8237,36 @@ var author$project$Main$update = F2(
 							var language = _n1.a;
 							return _Utils_update(
 								model,
-								{B: language});
+								{C: language});
 						}
 					}(),
 					elm$core$Platform$Cmd$none);
-			default:
+			case 4:
 				var newAmount = msg.a;
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{F: newAmount}),
+						{G: newAmount}),
+					elm$core$Platform$Cmd$none);
+			default:
+				var transformName = msg.a;
+				var active = msg.b;
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{
+							y: A2(
+								active ? elm$core$Set$insert : elm$core$Set$remove,
+								transformName,
+								activeTransforms)
+						}),
 					elm$core$Platform$Cmd$none);
 		}
 	});
 var author$project$Main$Generate = {$: 0};
 var author$project$Main$SetAmount = function (a) {
-	return {$: 3, a: a};
+	return {$: 4, a: a};
 };
-var elm$core$Basics$composeR = F3(
-	function (f, g, x) {
-		return g(
-			f(x));
-	});
 var elm$core$String$toInt = _String_toInt;
 var elm$json$Json$Decode$map = _Json_map1;
 var elm$json$Json$Decode$map2 = _Json_map2;
@@ -7442,19 +8364,21 @@ var elm$html$Html$option = _VirtualDom_node('option');
 var elm$html$Html$select = _VirtualDom_node('select');
 var elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var elm$html$Html$text = elm$virtual_dom$VirtualDom$text;
-var author$project$Main$viewLanguageSelector = function (activeLanguageName) {
+var elm$html$Html$Attributes$class = elm$html$Html$Attributes$stringProperty('className');
+var author$project$Main$languageSelector = function (activeLanguageName) {
 	return A2(
 		elm$html$Html$select,
 		_List_fromArray(
 			[
-				elm$html$Html$Events$onInput(author$project$Main$SelectLanguage)
+				elm$html$Html$Events$onInput(author$project$Main$SelectLanguage),
+				elm$html$Html$Attributes$class('language-selector')
 			]),
 		A2(
 			elm$core$List$map,
 			A2(
 				elm$core$Basics$composeR,
 				function ($) {
-					return $.aw;
+					return $._;
 				},
 				A2(
 					elm$core$Basics$composeR,
@@ -7466,9 +8390,13 @@ var author$project$Main$viewLanguageSelector = function (activeLanguageName) {
 			author$project$Manifest$languages));
 };
 var elm$html$Html$div = _VirtualDom_node('div');
-var author$project$Main$viewNames = A2(
+var author$project$Main$namesPanel = A2(
 	elm$core$Basics$composeL,
-	elm$html$Html$div(_List_Nil),
+	elm$html$Html$div(
+		_List_fromArray(
+			[
+				elm$html$Html$Attributes$class('names-panel')
+			])),
 	elm$core$List$map(
 		A2(
 			elm$core$Basics$composeL,
@@ -7477,7 +8405,20 @@ var author$project$Main$viewNames = A2(
 				elm$html$Html$div(_List_Nil),
 				elm$core$List$singleton),
 			elm$html$Html$text)));
-var elm$html$Html$button = _VirtualDom_node('button');
+var author$project$Main$ToggleTransformTo = F2(
+	function (a, b) {
+		return {$: 3, a: a, b: b};
+	});
+var elm$html$Html$label = _VirtualDom_node('label');
+var elm$json$Json$Encode$bool = _Json_wrap;
+var elm$html$Html$Attributes$boolProperty = F2(
+	function (key, bool) {
+		return A2(
+			_VirtualDom_property,
+			key,
+			elm$json$Json$Encode$bool(bool));
+	});
+var elm$html$Html$Attributes$checked = elm$html$Html$Attributes$boolProperty('checked');
 var elm$virtual_dom$VirtualDom$Normal = function (a) {
 	return {$: 0, a: a};
 };
@@ -7488,19 +8429,85 @@ var elm$html$Html$Events$on = F2(
 			event,
 			elm$virtual_dom$VirtualDom$Normal(decoder));
 	});
+var elm$json$Json$Decode$bool = _Json_decodeBool;
+var elm$html$Html$Events$targetChecked = A2(
+	elm$json$Json$Decode$at,
+	_List_fromArray(
+		['target', 'checked']),
+	elm$json$Json$Decode$bool);
+var elm$html$Html$Events$onCheck = function (tagger) {
+	return A2(
+		elm$html$Html$Events$on,
+		'change',
+		A2(elm$json$Json$Decode$map, tagger, elm$html$Html$Events$targetChecked));
+};
+var author$project$Main$transformEntry = function (_n0) {
+	var transformName = _n0.a;
+	var active = _n0.b;
+	return A2(
+		elm$html$Html$div,
+		_List_fromArray(
+			[
+				elm$html$Html$Attributes$class('transform-entry')
+			]),
+		_List_fromArray(
+			[
+				A2(
+				elm$html$Html$label,
+				_List_Nil,
+				_List_fromArray(
+					[
+						A2(
+						elm$html$Html$input,
+						_List_fromArray(
+							[
+								elm$html$Html$Attributes$type_('checkbox'),
+								elm$html$Html$Attributes$checked(active),
+								elm$html$Html$Events$onCheck(
+								author$project$Main$ToggleTransformTo(transformName))
+							]),
+						_List_Nil),
+						elm$html$Html$text(transformName)
+					]))
+			]));
+};
+var author$project$Main$transformSelector = function (transformState) {
+	return A2(
+		elm$html$Html$div,
+		_List_fromArray(
+			[
+				elm$html$Html$Attributes$class('transform-selector')
+			]),
+		A2(elm$core$List$map, author$project$Main$transformEntry, transformState));
+};
+var elm$html$Html$button = _VirtualDom_node('button');
+var elm$html$Html$h1 = _VirtualDom_node('h1');
 var elm$html$Html$Events$onClick = function (msg) {
 	return A2(
 		elm$html$Html$Events$on,
 		'click',
 		elm$json$Json$Decode$succeed(msg));
 };
-var author$project$Main$view = function (model) {
+var author$project$Main$view = function (_n0) {
+	var names = _n0.B;
+	var toGenerate = _n0.G;
+	var selectedLanguage = _n0.C;
+	var activeTransforms = _n0.y;
 	return A2(
 		elm$html$Html$div,
-		_List_Nil,
 		_List_fromArray(
 			[
-				author$project$Main$viewNames(model.A),
+				elm$html$Html$Attributes$class('container')
+			]),
+		_List_fromArray(
+			[
+				A2(
+				elm$html$Html$h1,
+				_List_Nil,
+				_List_fromArray(
+					[
+						elm$html$Html$text('Fantasy Name Generator by Iguanotron')
+					])),
 				A2(
 				elm$html$Html$button,
 				_List_fromArray(
@@ -7511,8 +8518,32 @@ var author$project$Main$view = function (model) {
 					[
 						elm$html$Html$text('Generate')
 					])),
-				author$project$Main$amountSelector(model.F),
-				author$project$Main$viewLanguageSelector(model.B.aw)
+				author$project$Main$namesPanel(names),
+				A2(
+				elm$html$Html$div,
+				_List_fromArray(
+					[
+						elm$html$Html$Attributes$class('settings-panel')
+					]),
+				_List_fromArray(
+					[
+						author$project$Main$amountSelector(toGenerate),
+						author$project$Main$languageSelector(selectedLanguage._),
+						author$project$Main$transformSelector(
+						A2(
+							elm$core$List$map,
+							A2(
+								elm$core$Basics$composeR,
+								function ($) {
+									return $._;
+								},
+								function (transformName) {
+									return _Utils_Tuple2(
+										transformName,
+										A2(elm$core$Set$member, transformName, activeTransforms));
+								}),
+							author$project$Manifest$transforms))
+					]))
 			]));
 };
 var elm$browser$Browser$External = function (a) {
@@ -7613,7 +8644,7 @@ var elm$core$String$isEmpty = function (string) {
 var elm$core$String$contains = _String_contains;
 var elm$url$Url$Url = F6(
 	function (protocol, host, port_, path, query, fragment) {
-		return {U: fragment, V: host, Z: path, aa: port_, ad: protocol, ae: query};
+		return {V: fragment, X: host, ab: path, ad: port_, ag: protocol, ah: query};
 	});
 var elm$url$Url$chompBeforePath = F5(
 	function (protocol, path, params, frag, str) {
@@ -7719,6 +8750,6 @@ var elm$url$Url$fromString = function (str) {
 };
 var elm$browser$Browser$element = _Browser_element;
 var author$project$Main$main = elm$browser$Browser$element(
-	{av: author$project$Main$init, aB: author$project$Main$subscriptions, aD: author$project$Main$update, aF: author$project$Main$view});
+	{ax: author$project$Main$init, aD: author$project$Main$subscriptions, aG: author$project$Main$update, aI: author$project$Main$view});
 _Platform_export({'Main':{'init':author$project$Main$main(
 	elm$json$Json$Decode$succeed(0))(0)}});}(this));

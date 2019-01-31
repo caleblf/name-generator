@@ -9,9 +9,18 @@ type alias Language =
   , generator : Form
   }
 
+type alias Transform =
+  { name : String
+  , priority : Int
+  , transform : Form -> Form
+  }
+
+
 -- Generator definition must be deferred to allow circular (lazy) references
 type alias Form = () -> Random.Generator String
 
+
+-- Constructors for Forms
 
 lit : String -> Form
 lit s _ = Random.constant s
