@@ -600,11 +600,11 @@ function _Debug_crash_UNUSED(identifier, fact1, fact2, fact3, fact4)
 
 function _Debug_regionToString(region)
 {
-	if (region.O.A === region.T.A)
+	if (region.P.B === region.U.B)
 	{
-		return 'on line ' + region.O.A;
+		return 'on line ' + region.P.B;
 	}
-	return 'on lines ' + region.O.A + ' through ' + region.T.A;
+	return 'on lines ' + region.P.B + ' through ' + region.U.B;
 }
 
 
@@ -1894,9 +1894,9 @@ var _Platform_worker = F4(function(impl, flagDecoder, debugMetadata, args)
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.ax,
-		impl.aG,
-		impl.aD,
+		impl.ay,
+		impl.aH,
+		impl.aE,
 		function() { return function() {} }
 	);
 });
@@ -2743,8 +2743,8 @@ var _VirtualDom_mapEventRecord = F2(function(func, record)
 {
 	return {
 		k: func(record.k),
-		P: record.P,
-		N: record.N
+		Q: record.Q,
+		O: record.O
 	}
 });
 
@@ -3013,10 +3013,10 @@ function _VirtualDom_makeCallback(eventNode, initialHandler)
 
 		var value = result.a;
 		var message = !tag ? value : tag < 3 ? value.a : value.k;
-		var stopPropagation = tag == 1 ? value.b : tag == 3 && value.P;
+		var stopPropagation = tag == 1 ? value.b : tag == 3 && value.Q;
 		var currentEventNode = (
 			stopPropagation && event.stopPropagation(),
-			(tag == 2 ? value.b : tag == 3 && value.N) && event.preventDefault(),
+			(tag == 2 ? value.b : tag == 3 && value.O) && event.preventDefault(),
 			eventNode
 		);
 		var tagger;
@@ -3966,11 +3966,11 @@ var _Browser_element = _Debugger_element || F4(function(impl, flagDecoder, debug
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.ax,
-		impl.aG,
-		impl.aD,
+		impl.ay,
+		impl.aH,
+		impl.aE,
 		function(sendToApp, initialModel) {
-			var view = impl.aI;
+			var view = impl.aJ;
 			/**/
 			var domNode = args['node'];
 			//*/
@@ -4002,12 +4002,12 @@ var _Browser_document = _Debugger_document || F4(function(impl, flagDecoder, deb
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.ax,
-		impl.aG,
-		impl.aD,
+		impl.ay,
+		impl.aH,
+		impl.aE,
 		function(sendToApp, initialModel) {
-			var divertHrefToApp = impl.D && impl.D(sendToApp)
-			var view = impl.aI;
+			var divertHrefToApp = impl.E && impl.E(sendToApp)
+			var view = impl.aJ;
 			var title = _VirtualDom_doc.title;
 			var bodyNode = _VirtualDom_doc.body;
 			var currNode = _VirtualDom_virtualize(bodyNode);
@@ -4015,12 +4015,12 @@ var _Browser_document = _Debugger_document || F4(function(impl, flagDecoder, deb
 			{
 				_VirtualDom_divertHrefToApp = divertHrefToApp;
 				var doc = view(model);
-				var nextNode = _VirtualDom_node('body')(_List_Nil)(doc.aq);
+				var nextNode = _VirtualDom_node('body')(_List_Nil)(doc.ar);
 				var patches = _VirtualDom_diff(currNode, nextNode);
 				bodyNode = _VirtualDom_applyPatches(bodyNode, currNode, patches, sendToApp);
 				currNode = nextNode;
 				_VirtualDom_divertHrefToApp = 0;
-				(title !== doc.aE) && (_VirtualDom_doc.title = title = doc.aE);
+				(title !== doc.aF) && (_VirtualDom_doc.title = title = doc.aF);
 			});
 		}
 	);
@@ -4076,12 +4076,12 @@ function _Browser_makeAnimator(model, draw)
 
 function _Browser_application(impl)
 {
-	var onUrlChange = impl.ay;
-	var onUrlRequest = impl.az;
+	var onUrlChange = impl.az;
+	var onUrlRequest = impl.aA;
 	var key = function() { key.a(onUrlChange(_Browser_getUrl())); };
 
 	return _Browser_document({
-		D: function(sendToApp)
+		E: function(sendToApp)
 		{
 			key.a = sendToApp;
 			_Browser_window.addEventListener('popstate', key);
@@ -4097,9 +4097,9 @@ function _Browser_application(impl)
 					var next = elm$url$Url$fromString(href).a;
 					sendToApp(onUrlRequest(
 						(next
-							&& curr.ag === next.ag
-							&& curr.X === next.X
-							&& curr.ad.a === next.ad.a
+							&& curr.ah === next.ah
+							&& curr.Y === next.Y
+							&& curr.ae.a === next.ae.a
 						)
 							? elm$browser$Browser$Internal(next)
 							: elm$browser$Browser$External(href)
@@ -4107,13 +4107,13 @@ function _Browser_application(impl)
 				}
 			});
 		},
-		ax: function(flags)
+		ay: function(flags)
 		{
-			return A3(impl.ax, flags, _Browser_getUrl(), key);
+			return A3(impl.ay, flags, _Browser_getUrl(), key);
 		},
-		aI: impl.aI,
-		aG: impl.aG,
-		aD: impl.aD
+		aJ: impl.aJ,
+		aH: impl.aH,
+		aE: impl.aE
 	});
 }
 
@@ -4179,17 +4179,17 @@ var _Browser_decodeEvent = F2(function(decoder, event)
 function _Browser_visibilityInfo()
 {
 	return (typeof _VirtualDom_doc.hidden !== 'undefined')
-		? { av: 'hidden', ar: 'visibilitychange' }
+		? { aw: 'hidden', as: 'visibilitychange' }
 		:
 	(typeof _VirtualDom_doc.mozHidden !== 'undefined')
-		? { av: 'mozHidden', ar: 'mozvisibilitychange' }
+		? { aw: 'mozHidden', as: 'mozvisibilitychange' }
 		:
 	(typeof _VirtualDom_doc.msHidden !== 'undefined')
-		? { av: 'msHidden', ar: 'msvisibilitychange' }
+		? { aw: 'msHidden', as: 'msvisibilitychange' }
 		:
 	(typeof _VirtualDom_doc.webkitHidden !== 'undefined')
-		? { av: 'webkitHidden', ar: 'webkitvisibilitychange' }
-		: { av: 'hidden', ar: 'visibilitychange' };
+		? { aw: 'webkitHidden', as: 'webkitvisibilitychange' }
+		: { aw: 'hidden', as: 'visibilitychange' };
 }
 
 
@@ -4270,11 +4270,11 @@ var _Browser_call = F2(function(functionName, id)
 function _Browser_getViewport()
 {
 	return {
-		ak: _Browser_getScene(),
-		an: {
-			J: _Browser_window.pageXOffset,
-			K: _Browser_window.pageYOffset,
-			x: _Browser_doc.documentElement.clientWidth,
+		al: _Browser_getScene(),
+		ao: {
+			K: _Browser_window.pageXOffset,
+			L: _Browser_window.pageYOffset,
+			y: _Browser_doc.documentElement.clientWidth,
 			s: _Browser_doc.documentElement.clientHeight
 		}
 	};
@@ -4285,7 +4285,7 @@ function _Browser_getScene()
 	var body = _Browser_doc.body;
 	var elem = _Browser_doc.documentElement;
 	return {
-		x: Math.max(body.scrollWidth, body.offsetWidth, elem.scrollWidth, elem.offsetWidth, elem.clientWidth),
+		y: Math.max(body.scrollWidth, body.offsetWidth, elem.scrollWidth, elem.offsetWidth, elem.clientWidth),
 		s: Math.max(body.scrollHeight, body.offsetHeight, elem.scrollHeight, elem.offsetHeight, elem.clientHeight)
 	};
 }
@@ -4309,14 +4309,14 @@ function _Browser_getViewportOf(id)
 	return _Browser_withNode(id, function(node)
 	{
 		return {
-			ak: {
-				x: node.scrollWidth,
+			al: {
+				y: node.scrollWidth,
 				s: node.scrollHeight
 			},
-			an: {
-				J: node.scrollLeft,
-				K: node.scrollTop,
-				x: node.clientWidth,
+			ao: {
+				K: node.scrollLeft,
+				L: node.scrollTop,
+				y: node.clientWidth,
 				s: node.clientHeight
 			}
 		};
@@ -4347,17 +4347,17 @@ function _Browser_getElement(id)
 		var x = _Browser_window.pageXOffset;
 		var y = _Browser_window.pageYOffset;
 		return {
-			ak: _Browser_getScene(),
-			an: {
-				J: x,
-				K: y,
-				x: _Browser_doc.documentElement.clientWidth,
+			al: _Browser_getScene(),
+			ao: {
+				K: x,
+				L: y,
+				y: _Browser_doc.documentElement.clientWidth,
 				s: _Browser_doc.documentElement.clientHeight
 			},
-			as: {
-				J: x + rect.left,
-				K: y + rect.top,
-				x: rect.width,
+			at: {
+				K: x + rect.left,
+				L: y + rect.top,
+				y: rect.width,
 				s: rect.height
 			}
 		};
@@ -4483,10 +4483,10 @@ var elm$random$Random$constant = function (value) {
 	};
 };
 var author$project$Manifest$dummyLanguage = {
-	W: function (_n0) {
+	X: function (_n0) {
 		return elm$random$Random$constant('...');
 	},
-	_: '...'
+	aa: '...'
 };
 var elm$core$Basics$apL = F2(
 	function (f, x) {
@@ -5579,7 +5579,7 @@ var author$project$Languages$Common$name = function (_n0) {
 				_Utils_Tuple2(4, author$project$Languages$Common$name_1)
 			]));
 };
-var author$project$Languages$Common$common = {W: author$project$Languages$Common$name, _: 'Common'};
+var author$project$Languages$Common$common = {X: author$project$Languages$Common$name, aa: 'Common'};
 var author$project$Languages$Dwarven$c = function (_n0) {
 	return author$project$Language$pick(
 		_List_fromArray(
@@ -5840,7 +5840,7 @@ var author$project$Languages$Dwarven$name = function (_n0) {
 				_Utils_Tuple2(2, author$project$Languages$Dwarven$name_1)
 			]));
 };
-var author$project$Languages$Dwarven$dwarven = {W: author$project$Languages$Dwarven$name, _: 'Dwarven'};
+var author$project$Languages$Dwarven$dwarven = {X: author$project$Languages$Dwarven$name, aa: 'Dwarven'};
 var author$project$Language$p = F2(
 	function (weight, value) {
 		return _Utils_Tuple2(
@@ -5935,7 +5935,7 @@ var author$project$Languages$Elven$start = function (_n0) {
 var author$project$Languages$Elven$root = author$project$Language$cat(
 	_List_fromArray(
 		[author$project$Languages$Elven$start, author$project$Languages$Elven$mid, author$project$Languages$Elven$end]));
-var author$project$Languages$Elven$elven = {W: author$project$Languages$Elven$root, _: 'Elven'};
+var author$project$Languages$Elven$elven = {X: author$project$Languages$Elven$root, aa: 'Elven'};
 var author$project$Languages$Halfling$tc = function (_n0) {
 	return author$project$Language$pick(
 		_List_fromArray(
@@ -6318,7 +6318,7 @@ var author$project$Languages$Halfling$root = function (_n0) {
 						[author$project$Languages$Halfling$onset, author$project$Languages$Halfling$connector, author$project$Languages$Halfling$coda])))
 			]));
 };
-var author$project$Languages$Halfling$halfling = {W: author$project$Languages$Halfling$root, _: 'Halfling'};
+var author$project$Languages$Halfling$halfling = {X: author$project$Languages$Halfling$root, aa: 'Halfling'};
 var author$project$Languages$Orcish$c = function (_n0) {
 	return author$project$Language$pick(
 		_List_fromArray(
@@ -6589,7 +6589,7 @@ var author$project$Languages$Orcish$name = function (_n0) {
 				_Utils_Tuple2(2, author$project$Languages$Orcish$name_1)
 			]));
 };
-var author$project$Languages$Orcish$orcish = {W: author$project$Languages$Orcish$name, _: 'Orcish'};
+var author$project$Languages$Orcish$orcish = {X: author$project$Languages$Orcish$name, aa: 'Orcish'};
 var author$project$Manifest$languages = _List_fromArray(
 	[author$project$Languages$Common$common, author$project$Languages$Elven$elven, author$project$Languages$Dwarven$dwarven, author$project$Languages$Halfling$halfling, author$project$Languages$Orcish$orcish]);
 var elm$core$Maybe$Just = function (a) {
@@ -6974,7 +6974,7 @@ var elm$core$Set$Set_elm_builtin = elm$core$Basics$identity;
 var elm$core$Set$empty = elm$core$Dict$empty;
 var author$project$Main$init = function (_n0) {
 	return _Utils_Tuple2(
-		{y: elm$core$Set$empty, B: _List_Nil, C: author$project$Manifest$defaultLanguage, G: 10},
+		{z: elm$core$Set$empty, C: _List_Nil, v: _List_Nil, D: author$project$Manifest$defaultLanguage, H: 10},
 		elm$core$Platform$Cmd$none);
 };
 var elm$core$Platform$Sub$batch = _Platform_batch;
@@ -7027,15 +7027,28 @@ var author$project$Generator$applyTransforms = F2(
 		return A4(
 			elm$core$List$foldl,
 			function ($) {
-				return $.aF;
+				return $.aG;
 			},
-			author$project$Generator$capitalizeForm(language.W),
+			author$project$Generator$capitalizeForm(language.X),
 			transforms,
 			0);
 	});
 var author$project$Main$NewNames = function (a) {
 	return {$: 1, a: a};
 };
+var author$project$Main$removeAt = F2(
+	function (index, xs) {
+		if (!xs.b) {
+			return _List_Nil;
+		} else {
+			var y = xs.a;
+			var ys = xs.b;
+			return (index > 0) ? A2(
+				elm$core$List$cons,
+				y,
+				A2(author$project$Main$removeAt, index - 1, ys)) : ys;
+		}
+	});
 var elm$core$Dict$Black = 1;
 var elm$core$Dict$RBNode_elm_builtin = F5(
 	function (a, b, c, d, e) {
@@ -7161,7 +7174,7 @@ var author$project$Manifest$languagesByName = elm$core$Dict$fromList(
 	A2(
 		elm$core$List$map,
 		function (language) {
-			return _Utils_Tuple2(language._, language);
+			return _Utils_Tuple2(language.aa, language);
 		},
 		author$project$Manifest$languages));
 var author$project$Transforms$Profession$transform = function (name) {
@@ -7283,7 +7296,7 @@ var author$project$Transforms$Profession$transform = function (name) {
 		_List_fromArray(
 			[name, comma, job]));
 };
-var author$project$Transforms$Profession$profession = {_: 'Profession', aB: 3, aF: author$project$Transforms$Profession$transform};
+var author$project$Transforms$Profession$profession = {aa: 'Profession', aC: 3, aG: author$project$Transforms$Profession$transform};
 var author$project$Transforms$Title$transform = function (name) {
 	var the = author$project$Language$lit(' the ');
 	var sp = author$project$Language$lit(' ');
@@ -7640,12 +7653,12 @@ var author$project$Transforms$Title$transform = function (name) {
 	};
 	return titled_name;
 };
-var author$project$Transforms$Title$title = {_: 'Title', aB: 1, aF: author$project$Transforms$Title$transform};
+var author$project$Transforms$Title$title = {aa: 'Title', aC: 1, aG: author$project$Transforms$Title$transform};
 var elm$core$List$sortBy = _List_sortBy;
 var author$project$Manifest$transforms = A2(
 	elm$core$List$sortBy,
 	function ($) {
-		return $.aB;
+		return $.aC;
 	},
 	_List_fromArray(
 		[author$project$Transforms$Title$title, author$project$Transforms$Profession$profession]));
@@ -8191,10 +8204,11 @@ var elm$random$Random$list = F2(
 	});
 var author$project$Main$update = F2(
 	function (msg, model) {
-		var names = model.B;
-		var toGenerate = model.G;
-		var selectedLanguage = model.C;
-		var activeTransforms = model.y;
+		var names = model.C;
+		var toGenerate = model.H;
+		var selectedLanguage = model.D;
+		var activeTransforms = model.z;
+		var savedNames = model.v;
 		switch (msg.$) {
 			case 0:
 				return _Utils_Tuple2(
@@ -8212,7 +8226,7 @@ var author$project$Main$update = F2(
 									A2(
 										elm$core$Basics$composeR,
 										function ($) {
-											return $._;
+											return $.aa;
 										},
 										function (transformName) {
 											return A2(elm$core$Set$member, transformName, activeTransforms);
@@ -8224,7 +8238,7 @@ var author$project$Main$update = F2(
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{B: newNames}),
+						{C: newNames}),
 					elm$core$Platform$Cmd$none);
 			case 2:
 				var languageName = msg.a;
@@ -8237,28 +8251,46 @@ var author$project$Main$update = F2(
 							var language = _n1.a;
 							return _Utils_update(
 								model,
-								{C: language});
+								{D: language});
 						}
 					}(),
 					elm$core$Platform$Cmd$none);
-			case 4:
-				var newAmount = msg.a;
-				return _Utils_Tuple2(
-					_Utils_update(
-						model,
-						{G: newAmount}),
-					elm$core$Platform$Cmd$none);
-			default:
+			case 3:
 				var transformName = msg.a;
 				var active = msg.b;
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
 						{
-							y: A2(
+							z: A2(
 								active ? elm$core$Set$insert : elm$core$Set$remove,
 								transformName,
 								activeTransforms)
+						}),
+					elm$core$Platform$Cmd$none);
+			case 4:
+				var newAmount = msg.a;
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{H: newAmount}),
+					elm$core$Platform$Cmd$none);
+			case 5:
+				var name = msg.a;
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{
+							v: A2(elm$core$List$cons, name, savedNames)
+						}),
+					elm$core$Platform$Cmd$none);
+			default:
+				var nameIndex = msg.a;
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{
+							v: A2(author$project$Main$removeAt, nameIndex, savedNames)
 						}),
 					elm$core$Platform$Cmd$none);
 		}
@@ -8378,7 +8410,7 @@ var author$project$Main$languageSelector = function (activeLanguageName) {
 			A2(
 				elm$core$Basics$composeR,
 				function ($) {
-					return $._;
+					return $.aa;
 				},
 				A2(
 					elm$core$Basics$composeR,
@@ -8389,7 +8421,28 @@ var author$project$Main$languageSelector = function (activeLanguageName) {
 						elm$html$Html$option(_List_Nil)))),
 			author$project$Manifest$languages));
 };
+var author$project$Main$SaveName = function (a) {
+	return {$: 5, a: a};
+};
 var elm$html$Html$div = _VirtualDom_node('div');
+var elm$html$Html$p = _VirtualDom_node('p');
+var elm$html$Html$span = _VirtualDom_node('span');
+var elm$virtual_dom$VirtualDom$Normal = function (a) {
+	return {$: 0, a: a};
+};
+var elm$html$Html$Events$on = F2(
+	function (event, decoder) {
+		return A2(
+			elm$virtual_dom$VirtualDom$on,
+			event,
+			elm$virtual_dom$VirtualDom$Normal(decoder));
+	});
+var elm$html$Html$Events$onClick = function (msg) {
+	return A2(
+		elm$html$Html$Events$on,
+		'click',
+		elm$json$Json$Decode$succeed(msg));
+};
 var author$project$Main$namesPanel = A2(
 	elm$core$Basics$composeL,
 	elm$html$Html$div(
@@ -8402,9 +8455,59 @@ var author$project$Main$namesPanel = A2(
 			elm$core$Basics$composeL,
 			A2(
 				elm$core$Basics$composeL,
-				elm$html$Html$div(_List_Nil),
+				elm$html$Html$p(_List_Nil),
 				elm$core$List$singleton),
-			elm$html$Html$text)));
+			function (name) {
+				return A2(
+					elm$html$Html$span,
+					_List_fromArray(
+						[
+							elm$html$Html$Attributes$class('generated-name'),
+							elm$html$Html$Events$onClick(
+							author$project$Main$SaveName(name))
+						]),
+					_List_fromArray(
+						[
+							elm$html$Html$text(name)
+						]));
+			})));
+var author$project$Main$ForgetNameIndex = function (a) {
+	return {$: 6, a: a};
+};
+var elm$html$Html$button = _VirtualDom_node('button');
+var author$project$Main$savedNamesPanel = A2(
+	elm$core$Basics$composeL,
+	elm$html$Html$div(
+		_List_fromArray(
+			[
+				elm$html$Html$Attributes$class('saved-names-panel')
+			])),
+	elm$core$List$indexedMap(
+		F2(
+			function (index, name) {
+				return A2(
+					elm$html$Html$div,
+					_List_fromArray(
+						[
+							elm$html$Html$Attributes$class('saved-name')
+						]),
+					_List_fromArray(
+						[
+							A2(
+							elm$html$Html$button,
+							_List_fromArray(
+								[
+									elm$html$Html$Attributes$class('forget-name-button'),
+									elm$html$Html$Events$onClick(
+									author$project$Main$ForgetNameIndex(index))
+								]),
+							_List_fromArray(
+								[
+									elm$html$Html$text('X')
+								])),
+							elm$html$Html$text(name)
+						]));
+			})));
 var author$project$Main$ToggleTransformTo = F2(
 	function (a, b) {
 		return {$: 3, a: a, b: b};
@@ -8419,16 +8522,6 @@ var elm$html$Html$Attributes$boolProperty = F2(
 			elm$json$Json$Encode$bool(bool));
 	});
 var elm$html$Html$Attributes$checked = elm$html$Html$Attributes$boolProperty('checked');
-var elm$virtual_dom$VirtualDom$Normal = function (a) {
-	return {$: 0, a: a};
-};
-var elm$html$Html$Events$on = F2(
-	function (event, decoder) {
-		return A2(
-			elm$virtual_dom$VirtualDom$on,
-			event,
-			elm$virtual_dom$VirtualDom$Normal(decoder));
-	});
 var elm$json$Json$Decode$bool = _Json_decodeBool;
 var elm$html$Html$Events$targetChecked = A2(
 	elm$json$Json$Decode$at,
@@ -8480,19 +8573,13 @@ var author$project$Main$transformSelector = function (transformState) {
 			]),
 		A2(elm$core$List$map, author$project$Main$transformEntry, transformState));
 };
-var elm$html$Html$button = _VirtualDom_node('button');
 var elm$html$Html$h1 = _VirtualDom_node('h1');
-var elm$html$Html$Events$onClick = function (msg) {
-	return A2(
-		elm$html$Html$Events$on,
-		'click',
-		elm$json$Json$Decode$succeed(msg));
-};
 var author$project$Main$view = function (_n0) {
-	var names = _n0.B;
-	var toGenerate = _n0.G;
-	var selectedLanguage = _n0.C;
-	var activeTransforms = _n0.y;
+	var names = _n0.C;
+	var toGenerate = _n0.H;
+	var selectedLanguage = _n0.D;
+	var activeTransforms = _n0.z;
+	var savedNames = _n0.v;
 	return A2(
 		elm$html$Html$div,
 		_List_fromArray(
@@ -8543,14 +8630,14 @@ var author$project$Main$view = function (_n0) {
 								_List_fromArray(
 									[
 										author$project$Main$amountSelector(toGenerate),
-										author$project$Main$languageSelector(selectedLanguage._),
+										author$project$Main$languageSelector(selectedLanguage.aa),
 										author$project$Main$transformSelector(
 										A2(
 											elm$core$List$map,
 											A2(
 												elm$core$Basics$composeR,
 												function ($) {
-													return $._;
+													return $.aa;
 												},
 												function (transformName) {
 													return _Utils_Tuple2(
@@ -8558,7 +8645,8 @@ var author$project$Main$view = function (_n0) {
 														A2(elm$core$Set$member, transformName, activeTransforms));
 												}),
 											author$project$Manifest$transforms))
-									]))
+									])),
+								author$project$Main$savedNamesPanel(savedNames)
 							])),
 						A2(
 						elm$html$Html$div,
@@ -8671,7 +8759,7 @@ var elm$core$String$isEmpty = function (string) {
 var elm$core$String$contains = _String_contains;
 var elm$url$Url$Url = F6(
 	function (protocol, host, port_, path, query, fragment) {
-		return {V: fragment, X: host, ab: path, ad: port_, ag: protocol, ah: query};
+		return {W: fragment, Y: host, ac: path, ae: port_, ah: protocol, ai: query};
 	});
 var elm$url$Url$chompBeforePath = F5(
 	function (protocol, path, params, frag, str) {
@@ -8777,6 +8865,6 @@ var elm$url$Url$fromString = function (str) {
 };
 var elm$browser$Browser$element = _Browser_element;
 var author$project$Main$main = elm$browser$Browser$element(
-	{ax: author$project$Main$init, aD: author$project$Main$subscriptions, aG: author$project$Main$update, aI: author$project$Main$view});
+	{ay: author$project$Main$init, aE: author$project$Main$subscriptions, aH: author$project$Main$update, aJ: author$project$Main$view});
 _Platform_export({'Main':{'init':author$project$Main$main(
 	elm$json$Json$Decode$succeed(0))(0)}});}(this));

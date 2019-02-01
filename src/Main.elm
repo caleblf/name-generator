@@ -32,6 +32,7 @@ type alias Model =
   , toGenerate : Int
   , selectedLanguage : Language.Language
   , activeTransforms : Set String
+  , savedNames : List String
   }
 
 
@@ -41,6 +42,7 @@ init _ =
     , toGenerate = 10
     , selectedLanguage = Manifest.defaultLanguage
     , activeTransforms = Set.empty
+    , savedNames = []
     }
   , Cmd.none
   )
@@ -56,10 +58,12 @@ type Msg
   | SelectLanguage String
   | ToggleTransformTo String Bool
   | SetAmount Int
+  | SaveName String
+  | ForgetNameIndex Int
 
 
 update : Msg -> Model -> (Model, Cmd Msg)
-update msg ({ names, toGenerate, selectedLanguage, activeTransforms } as model) =
+update msg ({ names, toGenerate, selectedLanguage, activeTransforms, savedNames } as model) =
   case msg of
     Generate ->
       ( model
@@ -83,10 +87,6 @@ update msg ({ names, toGenerate, selectedLanguage, activeTransforms } as model) 
           Just language -> { model | selectedLanguage = language }
       , Cmd.none
       )
-    SetAmount newAmount ->
-      ( { model | toGenerate = newAmount }
-      , Cmd.none
-      )
     ToggleTransformTo transformName active ->
       ( { model
         | activeTransforms =
@@ -96,6 +96,29 @@ update msg ({ names, toGenerate, selectedLanguage, activeTransforms } as model) 
         }
       , Cmd.none
       )
+    SetAmount newAmount ->
+      ( { model | toGenerate = newAmount }
+      , Cmd.none
+      )
+    SaveName name ->
+      ( { model | savedNames = name::savedNames }
+      , Cmd.none
+      )
+    ForgetNameIndex nameIndex ->
+      ( { model | savedNames = removeAt nameIndex savedNames }
+      , Cmd.none
+      )
+
+
+removeAt : Int -> List a -> List a
+removeAt index xs =
+  case xs of
+    [] -> []
+    y::ys ->
+      if index > 0
+      then (::) y <| removeAt (index - 1) ys
+      else ys
+
 
 
 -- SUBSCRIPTIONS
@@ -111,7 +134,7 @@ subscriptions model =
 
 
 view : Model -> Html Msg
-view { names, toGenerate, selectedLanguage, activeTransforms } =
+view { names, toGenerate, selectedLanguage, activeTransforms, savedNames } =
   Html.div [ Html.Attributes.class "container" ]
     [ Html.h1 [] [ Html.text "Fantasy Name Generator by Iguanotron" ]
     , Html.button [ Html.Events.onClick Generate ] [ Html.text "Generate" ]
@@ -129,6 +152,7 @@ view { names, toGenerate, selectedLanguage, activeTransforms } =
                         )))
                     Manifest.transforms
               ]
+            , savedNamesPanel savedNames
             ]
         , Html.div [ Html.Attributes.class "column" ]
             [ namesPanel names
@@ -137,10 +161,34 @@ view { names, toGenerate, selectedLanguage, activeTransforms } =
     ]
 
 
+savedNamesPanel : List String -> Html Msg
+savedNamesPanel =
+  Html.div [ Html.Attributes.class "saved-names-panel" ]
+    << List.indexedMap
+        (\index name ->
+          Html.div
+            [ Html.Attributes.class "saved-name" ]
+            [ Html.button
+                [ Html.Attributes.class "forget-name-button"
+                , Html.Events.onClick <| ForgetNameIndex index
+                ]
+                [ Html.text "X" ]
+            , Html.text name
+            ])
+
+
 namesPanel : List String -> Html Msg
 namesPanel =
   Html.div [ Html.Attributes.class "names-panel" ]
-    << List.map (Html.div [] << List.singleton << Html.text)
+    << List.map
+        (Html.div [ Html.Attributes.class "generated-name-entry" ]
+          << List.singleton
+          << (\name ->
+              Html.span
+                [ Html.Attributes.class "generated-name"
+                , Html.Events.onClick <| SaveName name
+                ]
+                [ Html.text name ]))
 
 
 amountSelector : Int -> Html Msg
