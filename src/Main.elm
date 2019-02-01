@@ -115,18 +115,24 @@ view { names, toGenerate, selectedLanguage, activeTransforms } =
   Html.div [ Html.Attributes.class "container" ]
     [ Html.h1 [] [ Html.text "Fantasy Name Generator by Iguanotron" ]
     , Html.button [ Html.Events.onClick Generate ] [ Html.text "Generate" ]
-    , namesPanel names
-    , Html.div [ Html.Attributes.class "settings-panel" ]
-        [ amountSelector toGenerate
-        , languageSelector selectedLanguage.name
-        , transformSelector
-            <| List.map
-              (.name >>
-                (\transformName ->
-                  ( transformName
-                  , Set.member transformName activeTransforms
-                  )))
-              Manifest.transforms
+    , Html.div [ Html.Attributes.class "column-container" ]
+        [ Html.div [ Html.Attributes.class "column" ]
+            [ Html.div [ Html.Attributes.class "settings-panel" ]
+              [ amountSelector toGenerate
+              , languageSelector selectedLanguage.name
+              , transformSelector
+                  <| List.map
+                    (.name >>
+                      (\transformName ->
+                        ( transformName
+                          , Set.member transformName activeTransforms
+                        )))
+                    Manifest.transforms
+              ]
+            ]
+        , Html.div [ Html.Attributes.class "column" ]
+            [ namesPanel names
+            ]
         ]
     ]
 

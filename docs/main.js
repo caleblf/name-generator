@@ -8518,31 +8518,58 @@ var author$project$Main$view = function (_n0) {
 					[
 						elm$html$Html$text('Generate')
 					])),
-				author$project$Main$namesPanel(names),
 				A2(
 				elm$html$Html$div,
 				_List_fromArray(
 					[
-						elm$html$Html$Attributes$class('settings-panel')
+						elm$html$Html$Attributes$class('column-container')
 					]),
 				_List_fromArray(
 					[
-						author$project$Main$amountSelector(toGenerate),
-						author$project$Main$languageSelector(selectedLanguage._),
-						author$project$Main$transformSelector(
 						A2(
-							elm$core$List$map,
-							A2(
-								elm$core$Basics$composeR,
-								function ($) {
-									return $._;
-								},
-								function (transformName) {
-									return _Utils_Tuple2(
-										transformName,
-										A2(elm$core$Set$member, transformName, activeTransforms));
-								}),
-							author$project$Manifest$transforms))
+						elm$html$Html$div,
+						_List_fromArray(
+							[
+								elm$html$Html$Attributes$class('column')
+							]),
+						_List_fromArray(
+							[
+								A2(
+								elm$html$Html$div,
+								_List_fromArray(
+									[
+										elm$html$Html$Attributes$class('settings-panel')
+									]),
+								_List_fromArray(
+									[
+										author$project$Main$amountSelector(toGenerate),
+										author$project$Main$languageSelector(selectedLanguage._),
+										author$project$Main$transformSelector(
+										A2(
+											elm$core$List$map,
+											A2(
+												elm$core$Basics$composeR,
+												function ($) {
+													return $._;
+												},
+												function (transformName) {
+													return _Utils_Tuple2(
+														transformName,
+														A2(elm$core$Set$member, transformName, activeTransforms));
+												}),
+											author$project$Manifest$transforms))
+									]))
+							])),
+						A2(
+						elm$html$Html$div,
+						_List_fromArray(
+							[
+								elm$html$Html$Attributes$class('column')
+							]),
+						_List_fromArray(
+							[
+								author$project$Main$namesPanel(names)
+							]))
 					]))
 			]));
 };
