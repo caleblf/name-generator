@@ -69,6 +69,8 @@ button {
     cursor: pointer;
     font-size: initial;
     font-family: Arial, Helvetica, sans-serif;
+    /* generate button only */
+    flex-skrink 0;
 }
 button:hover {
     background-color: turquoise;
@@ -95,6 +97,10 @@ select {
 .forget-name-button {
     margin: 0.2em;
     padding: 0.2em;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 .forget-name-button:hover {
     background-color: salmon;
