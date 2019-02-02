@@ -70,7 +70,7 @@ button {
     font-size: initial;
     font-family: Arial, Helvetica, sans-serif;
     /* generate button only */
-    flex-skrink 0;
+    flex-shrink 0;
 }
 button:hover {
     background-color: turquoise;
