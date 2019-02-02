@@ -85,7 +85,6 @@ input[type=number] {
 select {
     min-width: 7em;
     color: black;
-    cursor: pointer;
     font-size: initial;
     font-family: Arial, Helvetica, sans-serif;
 }
