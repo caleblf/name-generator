@@ -1,6 +1,6 @@
-module Transforms.Profession exposing (profession)
+module Profession exposing (profession)
 
-import Language exposing (Transform, lit, cat, pick, u, p)
+import Language exposing (Language, Form, lit, cat, pick, u, p)
 
 
 profession : Transform
@@ -12,95 +12,98 @@ profession =
 
 
 transform name =
-  let comma = lit ", "
-      
+  let output = cat [name, comma, job]
+
+      comma = lit ", "
+
       job _ = pick
-        [ (3, peasant)
-        , (3, artisan)
-        , (2, specialist)
-        , (1, adventurer)
+        [ (3.0, peasant)
+        , (3.0, artisan)
+        , (2.0, specialist)
+        , (1.0, adventurer)
         ]
 
       peasant _ = pick
-        [ u "laborer"
-        , u "farmer"
-        , u "shepherd"
-        , u "thresher"
-        , u "carter"
-        , u "urchin"
-        , u "beggar"
-        , u "fisher"
+        [ (1.0, lit "laborer")
+        , (1.0, lit "farmer")
+        , (1.0, lit "shepherd")
+        , (1.0, lit "thresher")
+        , (1.0, lit "carter")
+        , (1.0, lit "urchin")
+        , (1.0, lit "beggar")
+        , (1.0, lit "fisher")
         ]
 
       artisan _ = pick
-        [ u "carpenter"
-        , u "glazier"
-        , u "baker"
-        , u "apothecary"
-        , u "barber"
-        , u "blacksmith"
-        , u "butcher"
-        , u "chandler"
-        , u "innkeeper"
-        , u "jeweler"
-        , u "locksmith"
-        , u "stonemason"
-        , u "tailor"
-        , u "shoemaker"
-        , u "tanner"
-        , u "waiter"
-        , u "weaver"
-        , u "artisan's apprentice"
-        , u "librarian"
-        , u "shopkeeper"
+        [ (1.0, lit "carpenter")
+        , (1.0, lit "glazier")
+        , (1.0, lit "baker")
+        , (1.0, lit "apothecary")
+        , (1.0, lit "barber")
+        , (1.0, lit "blacksmith")
+        , (1.0, lit "butcher")
+        , (1.0, lit "chandler")
+        , (1.0, lit "innkeeper")
+        , (1.0, lit "jeweler")
+        , (1.0, lit "locksmith")
+        , (1.0, lit "stonemason")
+        , (1.0, lit "tailor")
+        , (1.0, lit "shoemaker")
+        , (1.0, lit "tanner")
+        , (1.0, lit "waiter")
+        , (1.0, lit "weaver")
+        , (1.0, lit "artisan's apprentice")
+        , (1.0, lit "librarian")
+        , (1.0, lit "shopkeeper")
         ]
 
       specialist _ = pick
-        [ u "surgeon"
-        , u "priest"
-        , u "hedge wizard"
-        , u "hedge witch"
-        , u "hedge knight"
-        , u "grifter"
-        , u "musician"
-        , u "gladiator"
-        , u "actor"
-        , u "author"
-        , u "trapper"
-        , u "hunter"
-        , u "magician's apprentice"
-        , u "shaman"
-        , u "oracle"
-        , u "pickpocket"
-        , u "burglar"
-        , u "bounty hunter"
-        , u "alchemist"
-        , u "artificer"
+        [ (1.0, lit "surgeon")
+        , (1.0, lit "priest")
+        , (1.0, lit "hedge wizard")
+        , (1.0, lit "hedge witch")
+        , (1.0, lit "hedge knight")
+        , (1.0, lit "grifter")
+        , (1.0, lit "musician")
+        , (1.0, lit "gladiator")
+        , (1.0, lit "actor")
+        , (1.0, lit "author")
+        , (1.0, lit "trapper")
+        , (1.0, lit "hunter")
+        , (1.0, lit "magician's apprentice")
+        , (1.0, lit "shaman")
+        , (1.0, lit "oracle")
+        , (1.0, lit "pickpocket")
+        , (1.0, lit "burglar")
+        , (1.0, lit "bounty hunter")
+        , (1.0, lit "alchemist")
+        , (1.0, lit "artificer")
         ]
 
-      adventurer = cat [ lit "level ", level, lit " ", class ]
+      adventurer = cat [lit "level", sp, level, sp, class]
+
+      sp = lit " "
 
       level _ = pick
-        [ p 5 "1"
-        , p 4 "2"
-        , p 3 "3"
-        , p 2 "4"
-        , p 1 "5"
+        [ (5.0, lit "1")
+        , (4.0, lit "2")
+        , (3.0, lit "3")
+        , (2.0, lit "4")
+        , (1.0, lit "5")
         ]
 
       class _ = pick
-        [ u "barbarian"
-        , u "bard"
-        , u "cleric"
-        , u "druid"
-        , u "fighter"
-        , u "monk"
-        , u "paladin"
-        , u "ranger"
-        , u "rogue"
-        , u "sorcerer"
-        , u "warlock"
-        , u "wizard"
+        [ (1.0, lit "barbarian")
+        , (1.0, lit "bard")
+        , (1.0, lit "cleric")
+        , (1.0, lit "druid")
+        , (1.0, lit "fighter")
+        , (1.0, lit "monk")
+        , (1.0, lit "paladin")
+        , (1.0, lit "ranger")
+        , (1.0, lit "rogue")
+        , (1.0, lit "sorcerer")
+        , (1.0, lit "warlock")
+        , (1.0, lit "wizard")
         ]
-
-  in cat [ name, comma, job ]
+  in output

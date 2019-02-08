@@ -5,29 +5,18 @@ import sys
 import argparse
 import pathlib
 import itertools
+import textwrap
 
 from generator import pcfgparse
 
 
-def elmify_language(module_name, data):
-    """Elmify a language from YAML data. Outputs a string file body"""
-    header = data.header
-    forms = data.forms
-
-    try:
-        name = header['name']
-        root = header['root']
-    except KeyError as e:
-        raise ValueError(f'Missing required header field: {e.args[0]}')
-
-    if not name.isidentifier():
-        raise ValueError('Invalid language name')
+def elmify_definitions(module_name, forms):
 
     def canonize_tag(tag):
         """Return a canonized version of the given tag.
         The result is a valid Elm identifier.
         """
-        if tag in {module_name, 'lit', 'cat', 'u', 'p', 'pick'}:
+        if tag in {module_name, 'transform', 'lit', 'cat', 'u', 'p', 'pick'}:
             raise ValueError(f'Invalid tag: {tag}')
         return tag.replace('-', '_')
 
@@ -66,8 +55,81 @@ def elmify_language(module_name, data):
                     )) +
                     '\n  ]')
 
-    elm_definitions = [elmify_form(canonize_tag(tag), v)
-                       for tag, v in forms.items()]
+    return [elmify_form(canonize_tag(tag), v)
+            for tag, v in forms.items() if v is not None]
+
+
+def elmify_transform(module_name, data):
+    """Elmify a language trasnform from PCFG data. Outputs a string file body"""
+    header = data.header
+
+    try:
+        name = header['name']
+        input_tag = header['input']
+        output_tag = header['output']
+        priority = int(header['priority'])
+    except KeyError as e:
+        raise ValueError(f'Missing required header field: {e.args[0]}')
+    except ValueError:
+        raise ValueError(f'Non-integer priority: {priority}')
+
+    if not name.isidentifier():
+        raise ValueError('Invalid language name')
+
+    data.forms[input_tag] = None
+
+    elm_definitions = elmify_definitions(module_name, data.forms)
+
+    def canonize_tag(tag):
+        """Return a canonized version of the given tag.
+        The result is a valid Elm identifier.
+        """
+        if tag in {module_name, 'transform', 'lit', 'cat', 'u', 'p', 'pick'}:
+            raise ValueError(f'Invalid tag: {tag}')
+        return tag.replace('-', '_')
+
+    line_sep = '\n\n'
+    return f'''module {module_name.capitalize()} exposing ({module_name})
+
+import Language exposing (Language, Form, lit, cat, pick, u, p)
+
+
+{module_name} : Transform
+{module_name} =
+  {{ name = "{name}"
+  , priority = {priority}
+  , transform = transform
+  }}
+
+
+transform {canonize_tag(input_tag)} =
+  let {textwrap.indent(line_sep.join(elm_definitions), '      ')[6:]}
+  in {canonize_tag(output_tag)}
+'''
+
+
+def elmify_language(module_name, data):
+    """Elmify a language from PCFG data. Outputs a string file body"""
+    header = data.header
+
+    try:
+        name = header['name']
+        root_tag = header['root']
+    except KeyError as e:
+        raise ValueError(f'Missing required header field: {e.args[0]}')
+
+    if not name.isidentifier():
+        raise ValueError('Invalid language name')
+
+    elm_definitions = elmify_definitions(module_name, data.forms)
+
+    def canonize_tag(tag):
+        """Return a canonized version of the given tag.
+        The result is a valid Elm identifier.
+        """
+        if tag in {module_name, 'transform', 'lit', 'cat', 'u', 'p', 'pick'}:
+            raise ValueError(f'Invalid tag: {tag}')
+        return tag.replace('-', '_')
 
     line_sep = '\n\n'
     return f'''module {module_name.capitalize()} exposing ({module_name})
@@ -78,7 +140,7 @@ import Language exposing (Language, Form, lit, cat, pick, u, p)
 {module_name} : Language
 {module_name} =
   {{ name = "{name}"
-  , generator = {root}
+  , generator = {canonize_tag(root_tag)}
   }}
 
 
@@ -123,7 +185,10 @@ if __name__ == '__main__':
         print(f'Cannot construct Elm name from filename: {module_name}', file=sys.stderr)
         exit(1)
 
-    elm_text = elmify_language(module_name, data)
+    if 'root' in data.header:
+        elm_text = elmify_language(module_name, data)
+    else:
+        elm_text = elmify_transform(module_name, data)
 
     outfile = outdir / (module_name.capitalize() + '.elm')
 
