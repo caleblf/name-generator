@@ -91,7 +91,7 @@ def elmify_transform(module_name, data):
     line_sep = '\n\n'
     return f'''module Transforms.{module_name.capitalize()} exposing ({module_name})
 
-import Language exposing (Language, Form, lit, cat, pick, u, p)
+import Language exposing (Transform, Form, lit, cat, pick, u, p)
 
 
 {module_name} : Transform
