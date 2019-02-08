@@ -62,9 +62,9 @@ class NameGeneratorSession:
         except OSError:
             self.error(f'Could not read from file or folder: {path}')
             return
-        # except ValueError as e:
-        #     self.error(f'Error parsing language file: {e.args[0]}')
-        #     return
+        except ValueError as e:
+            self.error(f'Error parsing language file: {e.args[0]}')
+            return
 
         # Don't allow name collisions, even between languages and metalanguages
         if loaded.name.casefold() in self.languages:
