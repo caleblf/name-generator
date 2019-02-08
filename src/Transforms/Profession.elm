@@ -1,4 +1,4 @@
-module Profession exposing (profession)
+module Transforms.Profession exposing (profession)
 
 import Language exposing (Language, Form, lit, cat, pick, u, p)
 

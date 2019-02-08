@@ -1,4 +1,4 @@
-module Halfling exposing (halfling)
+module Languages.Halfling exposing (halfling)
 
 import Language exposing (Language, Form, lit, cat, pick, u, p)
 

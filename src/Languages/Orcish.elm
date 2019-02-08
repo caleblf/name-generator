@@ -1,4 +1,4 @@
-module Orcish exposing (orcish)
+module Languages.Orcish exposing (orcish)
 
 import Language exposing (Language, Form, lit, cat, pick, u, p)
 

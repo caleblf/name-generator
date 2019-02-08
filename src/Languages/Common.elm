@@ -1,4 +1,4 @@
-module Common exposing (common)
+module Languages.Common exposing (common)
 
 import Language exposing (Language, Form, lit, cat, pick, u, p)
 

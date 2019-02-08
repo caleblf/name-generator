@@ -1,4 +1,4 @@
-module Dwarven exposing (dwarven)
+module Languages.Dwarven exposing (dwarven)
 
 import Language exposing (Language, Form, lit, cat, pick, u, p)
 

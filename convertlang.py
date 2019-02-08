@@ -89,7 +89,7 @@ def elmify_transform(module_name, data):
         return tag.replace('-', '_')
 
     line_sep = '\n\n'
-    return f'''module {module_name.capitalize()} exposing ({module_name})
+    return f'''module Transforms.{module_name.capitalize()} exposing ({module_name})
 
 import Language exposing (Language, Form, lit, cat, pick, u, p)
 
@@ -132,7 +132,7 @@ def elmify_language(module_name, data):
         return tag.replace('-', '_')
 
     line_sep = '\n\n'
-    return f'''module {module_name.capitalize()} exposing ({module_name})
+    return f'''module Languages.{module_name.capitalize()} exposing ({module_name})
 
 import Language exposing (Language, Form, lit, cat, pick, u, p)
 
