@@ -24,14 +24,14 @@ help_blurb = """Commands:
   quit
   \tExit session
   list
-  \tList the currently loaded languages and metalanguages
+  \tList the currently loaded languages and transforms
   load <filename>
   open <filename>
   \tLoad the specified file or folder of files
   activate <name>
-  \tActivate the specified language or metalanguage for future builds
+  \tActivate the specified language or transform for future builds
   deactivate <name>
-  \tDeactivate the specified language or metalanguage for future builds
+  \tDeactivate the specified language or transform for future builds
   build [amount]
   \tGenerate names from the active language"""
 

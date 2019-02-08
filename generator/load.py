@@ -54,7 +54,7 @@ def load_language(data):
     return language.Language(name, forms[root_tag])
 
 
-def load_metalanguage(data):
+def load_transform(data):
     header = data.header
     form_data = data.forms
 
@@ -77,7 +77,7 @@ def load_metalanguage(data):
 
     forms[input_tag] = in_form
 
-    return language.Metalanguage(name, out_form, priority, in_form)
+    return language.LanguageTransform(name, out_form, priority, in_form)
 
 
 def load_file(path):
@@ -85,8 +85,8 @@ def load_file(path):
     header = data.header
 
     if 'input' in header and 'output' in header and 'priority' in header:
-        # metalanguage
-        return load_metalanguage(data)
+        # transform
+        return load_transform(data)
     elif 'root' in header:
         # language
         return load_language(data)

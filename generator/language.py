@@ -112,11 +112,11 @@ class Language:
         return capitalize_words(self.grammar.express())
 
 
-class Metalanguage:
+class LanguageTransform:
     """A grammar including variable forms.
 
     Has the following properties:
-        name : str, the name of the metalanguage
+        name : str, the name of the transform
         grammar : Form
         priority : int, the priority that this language should be generated at
         variable_form : VariableForm, the variable form which may be modified
