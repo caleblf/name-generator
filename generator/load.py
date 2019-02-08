@@ -27,7 +27,9 @@ def load_forms(form_data):
         )
 
     for tag, cases in form_data.items():
-        if len(cases) == 1:
+        if not cases:
+            pass  # should not happen unless a placeholder is added
+        elif len(cases) == 1:
             forms[tag] = convert(cases[0][1])
         else:
             forms[tag] = language.ProbabilisticForm(*unzip(

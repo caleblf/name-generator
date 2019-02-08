@@ -1,0 +1,90 @@
+!encoding: utf-8
+!name: Orcish
+!author: Iguanotron
+!description: Orcish-sounding language
+!root: name
+
+name:
+  1 $name-3
+  3 $name-2
+  2 $name-1
+
+name-3: # full 3-syllable name
+  $v-name-3
+  [$c $v-name-3]
+name-2: # full 2-syllable name
+  $v-name-2
+  [$c $v-name-2]
+name-1: # full 1-syllable name
+  $v-name-1
+  [$c $v-name-1]
+
+# names starting with vowel-syllables
+v-name-3:
+  [$v $link $v-name-2]
+v-name-2:
+  [$v $link $v-name-1]
+v-name-1: # note no single vowels or ames ending in vowels
+  [$v $tc] # end
+
+link: # connectors between vowels
+  4 $tc
+  2 [$tc $c]
+  1 '
+
+tc:
+  5 r
+  t
+  th
+  s
+  sh
+  sk
+  st
+  d
+  f
+  6 g
+  h
+  k
+  l
+  2 z
+  b
+  2 n
+  m
+c:
+  2 r
+  t
+  tr
+  th
+  y
+  s
+  2 sh
+  sk
+  2 sn
+  sm
+  st
+  sl
+  d
+  f
+  fr
+  3 g
+  gl
+  2 gr
+  h
+  k
+  kr
+  l
+  z
+  zh
+  v
+  vr
+  b
+  br
+  bl
+  2 n
+  m
+v:
+  4 u
+  4 o
+  2 a
+  ia
+  au

@@ -1,0 +1,56 @@
+!encoding: utf-8
+!name: Elven
+!author: Iguanotron
+!description: Elven-sounding language
+!root: root
+
+root:
+  [$start $mid $end]
+
+start:
+  [$v $tc]
+  $syllable
+
+mid:
+  1 $empty
+  2 $syllable
+  4 [$v $tc]
+
+syllable:
+  [$c $v $tc]
+
+end:
+  3 [$v $tc]
+  2 $v
+
+empty:
+  " "
+
+tc: # repeatable syllable-terminating consonants
+  l
+  r
+  n
+  m
+c: # all consonants
+  l
+  r
+  n
+  m
+  v
+  p
+  c
+  s
+  d
+  f
+  g
+  z
+  b
+v: # all vowels
+  3 a
+  3 i
+  3 e
+  2 ia
+  2 io
+  1 ai
+  1 o
+  1 u
