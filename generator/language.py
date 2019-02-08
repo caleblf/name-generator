@@ -10,6 +10,9 @@ def capitalize_words(s):
 class Form:
     """Abstract base class for grammatical forms."""
 
+    def __repr__(self):
+        return f'{self.__class__.__name__}()'
+
     def express(self):
         """Return a string expression of the form."""
         raise NotImplemented
@@ -20,6 +23,9 @@ class LiteralForm(Form):
 
     def __init__(self, value):
         self.value = value
+
+    def __repr__(self):
+        return f'{self.__class__.__name__}({self.value!r})'
 
     def express(self):
         return self.value
@@ -34,11 +40,28 @@ class VariableForm(LiteralForm):
         self.value = data
 
 
+class TagForm(Form):
+    """A form whose value is that of a form at a certain key in a table."""
+
+    def __init__(self, tag, forms):
+        self.tag = tag
+        self.forms = forms
+
+    def __repr__(self):
+        return f'{self.__class__.__name__}({self.tag!r}, {self.forms!r})'
+
+    def express(self):
+        return self.forms[self.tag].express()
+
+
 class ConcatenativeForm(Form):
     """Form which expresses as a concatenation of subforms."""
 
     def __init__(self, forms):
         self.set_forms(forms)
+
+    def __repr__(self):
+        return f'{self.__class__.__name__}({self.forms!r})'
 
     def set_forms(self, forms):
         self.forms = forms
@@ -59,6 +82,9 @@ class ProbabilisticForm(Form):
 
     def __init__(self, forms, weights):
         self.set_forms(forms, weights)
+
+    def __repr__(self):
+        return f'{self.__class__.__name__}({self.forms!r}, ...)'
 
     def set_forms(self, forms, weights):
         if len(forms) != len(weights):

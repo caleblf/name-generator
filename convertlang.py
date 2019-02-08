@@ -2,104 +2,71 @@
 """Conversion script for language files."""
 
 import sys
-
-if (sys.version_info.major, sys.version_info.minor) < (3, 6):
-    print('Python version not supported (3.6 or later required)', file=sys.stderr)
-    sys.exit(1)
-
-try:
-    import yaml
-except ImportError:
-    print('Missing third party dependency: `pyyaml`', file=sys.stderr)
-    sys.exit(1)
-
-import os
 import argparse
 import pathlib
+import itertools
 
-
-def get_yaml_data(file):
-    try:
-        with open(file, 'r') as f:
-            return yaml.load(f)
-    except yaml.error.YAMLError as e:
-        raise ValueError('Improperly formatted YAML file') from e
-    except OSError as e:
-        raise ValueError('File not found or unreadable') from e
+from generator import pcfgparse
 
 
 def elmify_language(module_name, data):
     """Elmify a language from YAML data. Outputs a string file body"""
-    try:
-        name = data['name']
-        kind = data['kind']
-        root = data['root']
-        forms = data.get('forms', {})
-    except KeyError as e:
-        raise ValueError(f'Missing required field: {e.args[0]}')
+    header = data.header
+    forms = data.forms
 
-    if not kind == 'language':
-        raise ValueError('Not a language')
-    if not isinstance(name, str):
-        raise ValueError('Non-string language name')
+    try:
+        name = header['name']
+        root = header['root']
+    except KeyError as e:
+        raise ValueError(f'Missing required header field: {e.args[0]}')
+
     if not name.isidentifier():
         raise ValueError('Invalid language name')
-    if not isinstance(forms, dict):
-        raise ValueError('Tagged forms table not a dictionary')
 
     def canonize_tag(tag):
         """Return a canonized version of the given tag.
         The result is a valid Elm identifier.
         """
-        if '_' in tag:
-            raise ValueError(f'Invalid tag: {tag}')
-        tag = tag.replace('-', '_')
         if tag in {module_name, 'lit', 'cat', 'u', 'p', 'pick'}:
             raise ValueError(f'Invalid tag: {tag}')
-        if tag[0].isupper() or not tag[0].isalpha() or not tag.isidentifier():
-            raise ValueError(f'Invalid tag: {tag}')
-        return tag
+        return tag.replace('-', '_')
+
+    def elmify_literal(content):
+        return f'lit "{content}"'
+
+    def elmify_concatenation(elements):
+        return f'cat [{", ".join(map(elmify_exp, elements))}]'
+
+    def elmify_form_tag(tag):
+        if tag not in forms:
+            raise ValueError(f'Unknown tag in form expression: {tag}')
+        return canonize_tag(tag)
 
     def elmify_exp(exp):
-        if exp.startswith('('):  # concatenation
-            if not exp.endswith(')'):
-                raise ValueError(f'Unmatched parenthesis in form expression: {exp}')
-            return f'cat [{", ".join(map(elmify_exp, exp[1:-1].split()))}]'
-        if exp.startswith('$'):  # tag
-            if exp[1:] not in forms:
-                raise ValueError(f'Unknown tag in form expression: {exp}')
-            return canonize_tag(exp[1:])
-        return f'lit "{exp}"'
+        return exp.express_as(
+            literal=elmify_literal,
+            concatenation=elmify_concatenation,
+            tag=elmify_form_tag,
+        )
 
-    def elmify_probabilistic_form_clause(s):
-        if s is None:
-            raise ValueError('Empty form clause')
-        if not isinstance(s, str):
-            raise ValueError('Non-string form clause')
-        elements = s.split(maxsplit=1)
-        try:
-            odds = int(elements[0])
-            subexp = elements[1]
-        except (ValueError, IndexError):
-            odds = 1
-            subexp = s.strip()
-        return f'({odds}, {elmify_exp(subexp)})'
+    def elmify_probabilistic_form_entry(weight, value):
+        return f'({weight}, {elmify_exp(value)})'
 
-    def elmify_tagged_probabilistic(tag, clauses):
-        line_sep = "\n  , "
-        return (f'{tag} _ = pick\n  [ '
-                f'{line_sep.join(map(elmify_probabilistic_form_clause, clauses))}\n  ]')
+    def elmify_form(tag, entries):
+        if len(entries) == 1:
+            return f'{tag} = {elmify_exp(entries[0][1])}'
+        elif not entries:
+            raise ValueError(f'No options for form tag: {tag}')
+        else:
+            line_sep = "\n  , "
+            return (f'{tag} _ = pick\n  [ ' +
+                    line_sep.join(itertools.starmap(
+                        elmify_probabilistic_form_entry,
+                        entries
+                    )) +
+                    '\n  ]')
 
-    def elmify_tagged(tag, v):
-        if isinstance(v, list):
-            return elmify_tagged_probabilistic(tag, v)
-        if not isinstance(v, str):
-            raise ValueError('Non-string form expression in tag')
-        if v.startswith('$'):  # tag
-            raise ValueError(f'Tag at top level in tagged form expression: {v}')
-        return f'{tag} = {elmify_exp(v)}'
-
-    elm_definitions = [elmify_tagged(canonize_tag(tag), v)
+    elm_definitions = [elmify_form(canonize_tag(tag), v)
                        for tag, v in forms.items()]
 
     line_sep = '\n\n'
@@ -111,7 +78,7 @@ import Language exposing (Language, Form, lit, cat, pick, u, p)
 {module_name} : Language
 {module_name} =
   {{ name = "{name}"
-  , generator = {elmify_exp(root)}
+  , generator = {root}
   }}
 
 
@@ -141,7 +108,14 @@ if __name__ == '__main__':
         exit(1)
 
     print(f'Reading YAML language file: {infile}')
-    yaml_data = get_yaml_data(infile)
+    try:
+        data = pcfgparse.read(infile)
+    except ValueError as e:
+        print(f'Could not parse language file: {e}')
+        exit(1)
+    except OSError as e:
+        print(f'Could not read language file: {e}')
+        exit(1)
 
     print(f'Converting to Elm...')
     module_name = infile.stem
@@ -149,7 +123,7 @@ if __name__ == '__main__':
         print(f'Cannot construct Elm name from filename: {module_name}', file=sys.stderr)
         exit(1)
 
-    elm_text = elmify_language(module_name, yaml_data)
+    elm_text = elmify_language(module_name, data)
 
     outfile = outdir / (module_name.capitalize() + '.elm')
 

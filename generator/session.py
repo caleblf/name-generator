@@ -4,7 +4,7 @@ import sys
 import operator
 import pathlib
 
-from generator import language, parsing
+from generator import language, load
 
 
 get_metalanguage_priority = operator.attrgetter('priority')
@@ -48,7 +48,7 @@ class NameGeneratorSession:
             if path.is_dir():
                 # Load all YAML files in this directory
                 for p in path.iterdir():
-                    if p.suffix == '.yaml':
+                    if p.suffix == '.pcfg':
                         self._load_file(p)
             else:
                 self._load_file(path)
@@ -58,13 +58,13 @@ class NameGeneratorSession:
     def _load_file(self, path):
         """Load a language or metalanguage from a file."""
         try:
-            loaded = parsing.load_file(path)
+            loaded = load.load_file(path)
         except OSError:
             self.error(f'Could not read from file or folder: {path}')
             return
-        except ValueError as e:
-            self.error(f'Error parsing language file: {e.args[0]}')
-            return
+        # except ValueError as e:
+        #     self.error(f'Error parsing language file: {e.args[0]}')
+        #     return
 
         # Don't allow name collisions, even between languages and metalanguages
         if loaded.name.casefold() in self.languages:
