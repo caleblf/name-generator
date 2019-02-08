@@ -77,19 +77,19 @@ If a form tag has one expansion, that expansion cannot be a form tag.
 
 A form expansion may be any of the following:
 
- 1. A bare literal: `literal text`
+ 1. A bare literal: `literal text`.
     Spaces are trimmed from the edges of the string. The string must be
     nonempty, and cannot contain any of the following characters:
     `$`, `:`, `[`, `]`, `!`, `"`, tabs, and numerals.
 
- 2. A quoted literal: `"literal text"`
+ 2. A quoted literal: `"literal text"`.
     The content may not contain backslashes or double-quotes.
 
- 3. A concatenation of form expansions: `[form1 form2 form3]`
+ 3. A concatenation of form expansions: `[form1 form2 form3]`.
     The forms to concatenate may be bare literals, quoted literals,
     or form tags. Forms are delimited by spaces.
 
- 4. A form tag: `$form-tag`
+ 4. A form tag: `$form-tag`.
     The form tag must refer to a form listed in the file, or to an input
     tag defined in the header.
 
