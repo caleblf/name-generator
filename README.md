@@ -1,10 +1,19 @@
 # name-generator
 A random character name generator for sci-fi/fantasy settings.
 
-### Usage
+## Web app usage
+The name generator is accessible online at <https://iguanotron.github.io/name-generator/>.
+
+## Command-line app usage
+The command-line app is useful for generating machine-readable names,
+or for compiling long lists of names.
+
 This application requires Python 3.6 or later.
 
-It is recommended to run the name generator with ANSI colors enabled, if supported, and to load the included basic initialization file. The `colorama` package is used for cross-platform ANSI support, but it isn't required on platforms where ANSI codes are natively supported.
+It is recommended to run the name generator with ANSI colors enabled,
+if supported, and to load the included basic initialization file. The
+`colorama` package is used for cross-platform ANSI support, but it
+isn't required on platforms where ANSI codes are natively supported.
 
 On Unix platforms: `./namegen.py -ciw init.txt`
 
@@ -28,7 +37,8 @@ letter.
 
 
 At the start of the file are any number of lines beginning with `!`.
-These comprise the header. Each line of the header looks like the following:
+These comprise the header. Each line of the header looks like
+the following:
 
 ```
 !field: value
@@ -69,8 +79,8 @@ lines following the form tag, each indented by any amount of spaces
 
 An expansion entry defines a weight and the form expansion itself. If the
 entry begins with a number (integer or decimal numeral), that is used as
-the weight, and the rest of the line (spaces trimmed) is the form expansion.
-If no explicit weight is given, the weight for the line defaults to 1.
+the weight, and the rest of the line (spaces trimmed) is the
+form expansion. If no explicit weight is given, the weight for the line defaults to 1.
 
 If a form tag has one expansion, that expansion cannot be a form tag.
 
@@ -94,5 +104,11 @@ A form expansion may be any of the following:
     tag defined in the header.
 
 
-Anywhere in the file, a `#` character is accepted. The `#` and all following
-characters on the line are ignored by the parser.
+Anywhere in the file, a `#` character is accepted. The `#` and
+all following characters on the line are ignored by the parser.
+
+## Building the web app
+Building the web app requires:
+
+* UglifyJS 3
+* Elm 0.19

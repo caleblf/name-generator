@@ -1,6 +1,6 @@
 
 site:
-	elm make src/Main.elm --optimize --output=docs/main.js
+	./build.sh && cp build/main.min.js docs
 
 dev:
 	elm make src/Main.elm --output=docs/main.js
