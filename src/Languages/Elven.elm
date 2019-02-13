@@ -30,7 +30,7 @@ end _ = pick
   , (2.0, v)
   ]
 
-empty = lit " "
+empty = lit ""
 
 tc _ = pick
   [ (1.0, lit "l")
