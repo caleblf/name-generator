@@ -5863,7 +5863,7 @@ var author$project$Languages$Elven$end = function (_n0) {
 				_Utils_Tuple2(2.0, author$project$Languages$Elven$v)
 			]));
 };
-var author$project$Languages$Elven$empty = author$project$Language$lit(' ');
+var author$project$Languages$Elven$empty = author$project$Language$lit('');
 var author$project$Languages$Elven$c = function (_n0) {
 	return author$project$Language$pick(
 		_List_fromArray(
