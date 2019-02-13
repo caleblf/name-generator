@@ -42,7 +42,7 @@ body {
 
 
 .generated-name-entry {
-    max-width: 100%;
+    padding: 0.2em;
 }
 .generated-name {
     padding: 0.2em;
