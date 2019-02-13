@@ -24,7 +24,7 @@ end:
   2 $v
 
 empty:
-  " "
+  ""
 
 tc: # repeatable syllable-terminating consonants
   l
