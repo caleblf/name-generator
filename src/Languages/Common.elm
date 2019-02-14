@@ -11,9 +11,8 @@ common =
 
 
 name _ = pick
-  [ (1.0, name_4)
-  , (3.0, name_3)
-  , (6.0, name_2)
+  [ (3.0, name_3)
+  , (7.0, name_2)
   , (4.0, name_1)
   ]
 
@@ -212,7 +211,6 @@ c_end _ = pick
   , (1.0, lit "nn")
   , (1.0, lit "pp")
   , (1.0, lit "nt")
-  , (1.0, lit "nth")
   , (1.0, lit "rn")
   , (1.0, lit "st")
   , (1.0, lit "th")
@@ -226,55 +224,54 @@ c_end _ = pick
   ]
 
 tc _ = pick
-  [ (1.0, lit "r")
-  , (1.0, lit "t")
-  , (1.0, lit "th")
+  [ (2.0, lit "r")
+  , (2.0, lit "t")
+  , (2.0, lit "s")
+  , (2.0, lit "d")
+  , (2.0, lit "l")
+  , (2.0, lit "b")
+  , (2.0, lit "n")
+  , (2.0, lit "m")
   , (1.0, lit "p")
-  , (1.0, lit "s")
-  , (1.0, lit "sh")
-  , (1.0, lit "d")
-  , (1.0, lit "f")
   , (1.0, lit "g")
-  , (1.0, lit "l")
-  , (1.0, lit "b")
-  , (1.0, lit "n")
-  , (1.0, lit "m")
+  , (1.0, lit "th")
+  , (1.0, lit "sh")
   ]
 
 c _ = pick
-  [ (1.0, lit "w")
-  , (1.0, lit "r")
-  , (1.0, lit "t")
+  [ (2.0, lit "d")
+  , (2.0, lit "r")
+  , (2.0, lit "t")
+  , (2.0, lit "p")
+  , (2.0, lit "s")
+  , (2.0, lit "f")
+  , (2.0, lit "j")
+  , (2.0, lit "k")
+  , (2.0, lit "l")
+  , (2.0, lit "c")
+  , (2.0, lit "v")
+  , (2.0, lit "b")
+  , (2.0, lit "n")
+  , (2.0, lit "m")
+  , (2.0, lit "g")
+  , (1.0, lit "w")
   , (1.0, lit "tr")
   , (1.0, lit "th")
   , (1.0, lit "y")
-  , (1.0, lit "p")
-  , (1.0, lit "s")
   , (1.0, lit "sh")
   , (1.0, lit "st")
   , (1.0, lit "sl")
   , (1.0, lit "sp")
   , (1.0, lit "sc")
-  , (1.0, lit "d")
   , (1.0, lit "dr")
-  , (1.0, lit "f")
   , (1.0, lit "fr")
-  , (1.0, lit "g")
   , (1.0, lit "gr")
   , (1.0, lit "h")
-  , (1.0, lit "j")
-  , (1.0, lit "k")
-  , (1.0, lit "l")
   , (1.0, lit "z")
-  , (1.0, lit "c")
   , (1.0, lit "ch")
   , (1.0, lit "cl")
-  , (1.0, lit "v")
-  , (1.0, lit "b")
   , (1.0, lit "br")
   , (1.0, lit "bl")
-  , (1.0, lit "n")
-  , (1.0, lit "m")
   ]
 
 c_long _ = pick
@@ -287,6 +284,7 @@ c_long _ = pick
   , (1.0, lit "hr")
   , (1.0, lit "cr")
   , (1.0, lit "pr")
+  , (1.0, lit "thr")
   ]
 
 v _ = pick
@@ -298,6 +296,4 @@ v _ = pick
   , (2.0, lit "y")
   , (1.0, lit "ia")
   , (1.0, lit "io")
-  , (1.0, lit "ae")
-  , (1.0, lit "ee")
   ]

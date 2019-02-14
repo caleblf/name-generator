@@ -5,9 +5,8 @@
 !root: name
 
 name:
-  1 $name-4
   3 $name-3
-  6 $name-2
+  7 $name-2
   4 $name-1
 
 # There are two types of syllables used here: vowel-syllables and chunks
@@ -184,7 +183,6 @@ c-end: # consonant clusters for the ends of names
   nn
   pp
   nt
-  nth
   rn
   st
   th
@@ -196,53 +194,52 @@ c-end: # consonant clusters for the ends of names
   ck
   x
 tc: # consonant clusters for the ends of syllables
-  r
-  t
-  th
+  2 r
+  2 t
+  2 s
+  2 d
+  2 l
+  2 b
+  2 n
+  2 m
   p
-  s
-  sh
-  d
-  f
   g
-  l
-  b
-  n
-  m
+  th
+  sh
 c:
+  2 d
+  2 r
+  2 t
+  2 p
+  2 s
+  2 f
+  2 j
+  2 k
+  2 l
+  2 c
+  2 v
+  2 b
+  2 n
+  2 m
+  2 g
   w
-  r
-  t
   tr
   th
   y
-  p
-  s
   sh
   st
   sl
   sp
   sc
-  d
   dr
-  f
   fr
-  g
   gr
   h
-  j
-  k
-  l
   z
-  c
   ch
   cl
-  v
-  b
   br
   bl
-  n
-  m
 c-long: # consonants for the starts of names only
   29 $c # likelihood = number of basic consonants
   sm
@@ -253,6 +250,7 @@ c-long: # consonants for the starts of names only
   hr
   cr
   pr
+  thr
 v:
   2 e
   2 u
@@ -262,5 +260,3 @@ v:
   2 y
   ia
   io
-  ae
-  ee
