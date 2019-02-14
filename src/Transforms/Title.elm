@@ -1,6 +1,6 @@
 module Transforms.Title exposing (title)
 
-import Language exposing (Transform, lit, cat, pick, u, p)
+import Language exposing (Transform, Form, lit, cat, pick, u, p)
 
 
 title : Transform
@@ -13,305 +13,279 @@ title =
 
 transform name =
   let titled_name _ = pick
-        [ (10, cat [ name, the, title_ ])
-        , (5, cat [ name, of_the, sigil_phrase])
-        , (1, cat [ adjective, sp, name])
+        [ (10.0, cat [name, the, description])
+        , (5.0, cat [name, of_the, sigil_phrase])
+        , (1.0, cat [adjective, sp, name])
         ]
 
       the = lit " the "
+
       of_the = lit " of the "
+
       sp = lit " "
 
       color _ = pick
-        [ u "Golden"
-        , u "Silver"
-        , u "Argent"
-        , u "Sable"
-        , u "Red"
-        , u "Blue"
-        , u "Green"
-        , u "White"
-        , u "Orange"
-        , u "Black"
-        , u "Grey"
-        , u "Yellow"
-        , u "Purple"
-        , u "Chartreuse"
-        , u "Crimson"
-        , u "Azure"
-        , u "Violet"
-        , u "Magenta"
-        , u "Brown"
-        , u "Beige"
-        , u "Indigo"
-        , u "Cyan"
+        [ (1.0, lit "Golden")
+        , (1.0, lit "Silver")
+        , (1.0, lit "Argent")
+        , (1.0, lit "Sable")
+        , (1.0, lit "Red")
+        , (1.0, lit "Blue")
+        , (1.0, lit "Green")
+        , (1.0, lit "White")
+        , (1.0, lit "Orange")
+        , (1.0, lit "Black")
+        , (1.0, lit "Grey")
+        , (1.0, lit "Yellow")
+        , (1.0, lit "Purple")
+        , (1.0, lit "Chartreuse")
+        , (1.0, lit "Crimson")
+        , (1.0, lit "Azure")
+        , (1.0, lit "Violet")
+        , (1.0, lit "Magenta")
+        , (1.0, lit "Brown")
+        , (1.0, lit "Beige")
+        , (1.0, lit "Indigo")
+        , (1.0, lit "Cyan")
         ]
 
       material _ = pick
-        [ u "Stone"
-        , u "Golden"
-        , u "Iron"
-        , u "Clay"
-        , u "Crystalline"
+        [ (1.0, lit "Stone")
+        , (1.0, lit "Golden")
+        , (1.0, lit "Iron")
+        , (1.0, lit "Clay")
+        , (1.0, lit "Crystalline")
         ]
 
       sigil_phrase _ = pick
-        [ (2, cat [ sigil_mod_s, sp, sigil ])
-        , (2, cat [ sigil_mod_pl, sp, sigil, lit "s" ])
-        , (1, sigil)
-        , (1, cat [ sigil, lit "s" ])
+        [ (2.0, cat [sigil_mod_s, sp, sigil])
+        , (2.0, cat [sigil_mod_pl, sp, sigil, lit "s"])
+        , (1.0, sigil)
+        , (1.0, cat [sigil, lit "s"])
         ]
 
       sigil_mod_s _ = pick
-        [ (4, color)
-        , (4, material)
-        , u "Majestic"
-        , u "Great"
-        , u "Noble"
-        , u "Fallen"
-        , u "Broken"
-        , u "Cloven"
-        , u "Lost"
-        , u "Cursed"
-        , u "Blessed"
-        , u "Ancient"
+        [ (4.0, color)
+        , (4.0, material)
+        , (1.0, lit "Majestic")
+        , (1.0, lit "Great")
+        , (1.0, lit "Noble")
+        , (1.0, lit "Fallen")
+        , (1.0, lit "Broken")
+        , (1.0, lit "Cloven")
+        , (1.0, lit "Lost")
+        , (1.0, lit "Cursed")
+        , (1.0, lit "Blessed")
+        , (1.0, lit "Ancient")
         ]
 
       sigil_mod_pl _ = pick
-        [ (4, sigil_mod_s)
-        , (3, color)
-        , u "Two"
-        , u "Twin"
-        , u "Three"
-        , u "Four"
-        , u "Five"
-        , u "Six"
-        , u "Seven"
-        , u "Nine"
-        , u "Dozen"
-        , u "Multitudinous"
+        [ (3.0, sigil_mod_s)
+        , (3.0, color)
+        , (1.0, lit "Two")
+        , (1.0, lit "Twin")
+        , (1.0, lit "Three")
+        , (1.0, lit "Four")
+        , (1.0, lit "Five")
+        , (1.0, lit "Six")
+        , (1.0, lit "Seven")
+        , (1.0, lit "Nine")
+        , (1.0, lit "Dozen")
+        , (1.0, lit "Multitudinous")
         ]
 
-      sigil _ = pick -- must pluralize with -s suffix
-        -- Animals
-        [ u "Bear"
-        , u "Lion"
-        , u "Boar"
-        , u "Cat"
-        , u "Toad"
-        , u "Owl"
-        , u "Bat"
-        , u "Rat"
-        -- Rocks
-        , u "Diamond"
-        , u "Crystal"
-        , u "Stone"
-        -- Weapons
-        , u "Spear"
-        , u "Blade"
-        , u "Sword"
-        , u "Bow"
-        , u "Arrow"
-        , u "Dagger"
-        , u "Club"
-        , u "Lance"
-        -- Armor
-        , u "Shield"
-        , u "Mantle"
-        , u "Gauntlet"
-        , u "Helm"
-        , u "Crown"
-        -- Magical foci
-        , u "Wand"
-        , u "Orb"
-        -- Books
-        , u "Scroll"
-        , u "Tome"
-        -- Structures
-        , u "Gate"
-        , u "Tower"
-        , u "Door"
-        , u "Pyramid"
-        , u "Manse"
-        , u "Tomb"
-        , u "Spire"
-        -- Natural places
-        , u "River"
-        , u "Grove"
-        , u "Mountain"
-        , u "Shore"
-        , u "Tarn"
-        , u "Desert"
-        -- Astronomical bodies
-        , u "Moon"
-        , u "Sun"
-        , u "Star"
-        -- Plants
-        , u "Clover"
-        , u "Rose"
-        , u "Oak"
-        , u "Elm"
-        -- Body parts
-        , u "Fist"
-        , u "Heart"
-        , u "Skull"
-        , u "Bone"
-        , u "Claw"
-        , u "Talon"
-        , u "Hand"
-        , u "Eye"
+      sigil _ = pick
+        [ (1.0, lit "Bear")
+        , (1.0, lit "Lion")
+        , (1.0, lit "Boar")
+        , (1.0, lit "Cat")
+        , (1.0, lit "Toad")
+        , (1.0, lit "Owl")
+        , (1.0, lit "Bat")
+        , (1.0, lit "Rat")
+        , (1.0, lit "Diamond")
+        , (1.0, lit "Crystal")
+        , (1.0, lit "Stone")
+        , (1.0, lit "Spear")
+        , (1.0, lit "Blade")
+        , (1.0, lit "Sword")
+        , (1.0, lit "Bow")
+        , (1.0, lit "Arrow")
+        , (1.0, lit "Dagger")
+        , (1.0, lit "Club")
+        , (1.0, lit "Lance")
+        , (1.0, lit "Shield")
+        , (1.0, lit "Mantle")
+        , (1.0, lit "Gauntlet")
+        , (1.0, lit "Helm")
+        , (1.0, lit "Crown")
+        , (1.0, lit "Wand")
+        , (1.0, lit "Orb")
+        , (1.0, lit "Scroll")
+        , (1.0, lit "Tome")
+        , (1.0, lit "Gate")
+        , (1.0, lit "Tower")
+        , (1.0, lit "Door")
+        , (1.0, lit "Pyramid")
+        , (1.0, lit "Manse")
+        , (1.0, lit "Tomb")
+        , (1.0, lit "Spire")
+        , (1.0, lit "River")
+        , (1.0, lit "Grove")
+        , (1.0, lit "Mountain")
+        , (1.0, lit "Shore")
+        , (1.0, lit "Tarn")
+        , (1.0, lit "Desert")
+        , (1.0, lit "Moon")
+        , (1.0, lit "Sun")
+        , (1.0, lit "Star")
+        , (1.0, lit "Clover")
+        , (1.0, lit "Rose")
+        , (1.0, lit "Oak")
+        , (1.0, lit "Elm")
+        , (1.0, lit "Fist")
+        , (1.0, lit "Heart")
+        , (1.0, lit "Skull")
+        , (1.0, lit "Bone")
+        , (1.0, lit "Claw")
+        , (1.0, lit "Talon")
+        , (1.0, lit "Hand")
+        , (1.0, lit "Eye")
         ]
 
       adjective _ = pick
-        [ (5, color)
-        , (5, digit_adj)
-        , u "Shark-toothed"
-        , u "Half-dead"
-        , u "One-eyed"
-        , u "One-eared"
-        , u "Fingerless"
-        , u "Crooked"
+        [ (5.0, color)
+        , (5.0, digit_adj)
+        , (1.0, lit "Shark-toothed")
+        , (1.0, lit "Half-dead")
+        , (1.0, lit "One-eyed")
+        , (1.0, lit "One-eared")
+        , (1.0, lit "Fingerless")
+        , (1.0, lit "Crooked")
         ]
 
       digit_adj _ = pick
-        [ (3, cat [ digit_count, lit "-fingered" ])
-        , (1, cat [ digit_count, lit "-toed" ])
+        [ (3.0, cat [digit_count, lit "-fingered"])
+        , (1.0, cat [digit_count, lit "-toed"])
         ]
 
       digit_count _ = pick
-        [ u "Four"
-        , p 2 "Six"
-        , p 2 "Seven"
-        , u "Eight"
-        , p 2 "Nine"
-        , u "Eleven"
+        [ (1.0, lit "Four")
+        , (2.0, lit "Six")
+        , (2.0, lit "Seven")
+        , (1.0, lit "Eight")
+        , (2.0, lit "Nine")
+        , (1.0, lit "Eleven")
         ]
 
-      title_ _ = pick
-        [ (12, color)
-        -- Physical ability
-        , u "Quick"
-        , u "Nimble"
-        , u "Feeble"
-        , u "Strong"
-        , u "Enduring"
-        -- Statue
-        , u "Lean"
-        , u "Stout"
-        , u "Tall"
-        , u "Fat"
-        , u "Giant"
-        -- Mental ability
-        , u "Incompetent"
-        , u "Daft"
-        , u "Half-Wit"
-        , u "Silver-Tongued"
-        , u "Clever"
-        , u "Mad"
-        -- Virtue
-        , u "Great"
-        , u "Wise"
-        , u "Brave"
-        , u "Honest"
-        , u "Mighty"
-        , u "Pious"
-        , u "Noble"
-        -- Vice
-        , u "Spineless"
-        , u "Craven"
-        , u "Fool"
-        -- Personality
-        , u "Vague"
-        , u "Cordial"
-        , u "Crabby"
-        , u "Incongruously Cheerful"
-        , u "Reckless"
-        , u "Unladylike"
-        , u "Truculent"
-        , u "Flirtatious"
-        , u "Boorish"
-        , u "Forthright"
-        , u "Swanky"
-        , u "Inconsistent"
-        , u "Lunatic"
-        , u "Quiet"
-        , u "Merciful"
-        , u "Vain"
-        -- Feat
-        , u "Deathless"
-        , u "Dragonslayer"
-        , u "Titan-killer"
-        , u "Magnificent"
-        -- Physical trait
-        , u "Invisible"
-        , u "Blind"
-        , u "Deaf"
-        , u "Wrinkled"
-        , u "Smelly"
-        , u "Toothless"
-        , u "Unblinking"
-        , u "Beautiful"
-        , u "Fair"
-        , u "Plain"
-        , u "Gassy"
-        , u "Hirsute"
-        , u "Bald"
-        -- Perception
-        , u "Fearsome"
-        , u "Slightly Off"
-        , u "Bizarre"
-        , u "Irksome"
-        , u "Stand-up Guy"
-        , u "Cruel"
-        , u "Butcher"
-        -- Higher power
-        , u "Planetouched"
-        , u "Fey"
-        , u "Blessed"
-        , u "Lucky"
-        , u "Thrice-cursed"
-        -- Class
-        , u "Rich"
-        , u "Poor"
-        , u "Miserly"
-        -- State
-        , u "Drunkard"
-        , u "Sober"
-        -- Region of origin
-        , u "Northron"
-        , u "Southron"
-        , u "Westron"
-        , u "Eastron"
-        , u "Beyonder"
-        , u "Barbarian"
-        -- Profession
-        , u "Poet"
-        , u "Bard"
-        , u "Singer"
-        , u "Thief"
-        , u "Warrior"
-        , u "Archer"
-        , u "Magician"
-        , u "Witch"
-        , u "Trapper"
-        , u "Enchanter"
-        , u "Artificer"
-        -- Animal
-        , u "Boar"
-        , u "Leopard"
-        , u "Eagle"
-        , u "Cheetah"
-        , u "Worm"
-        , u "Toad"
-        , u "Eel"
-        , u "Rat"
-        , u "Mouse"
-        , u "Bear"
-        , u "Snake"
-        , u "Fox"
-        -- Fanciful titles
-        , u "Myrmidon"
-        , u "Zephyr"
+      description _ = pick
+        [ (12.0, color)
+        , (1.0, lit "Quick")
+        , (1.0, lit "Nimble")
+        , (1.0, lit "Feeble")
+        , (1.0, lit "Strong")
+        , (1.0, lit "Enduring")
+        , (1.0, lit "Lean")
+        , (1.0, lit "Stout")
+        , (1.0, lit "Tall")
+        , (1.0, lit "Fat")
+        , (1.0, lit "Giant")
+        , (1.0, lit "Incompetent")
+        , (1.0, lit "Daft")
+        , (1.0, lit "Half-Wit")
+        , (1.0, lit "Silver-Tongued")
+        , (1.0, lit "Clever")
+        , (1.0, lit "Mad")
+        , (1.0, lit "Great")
+        , (1.0, lit "Wise")
+        , (1.0, lit "Brave")
+        , (1.0, lit "Honest")
+        , (1.0, lit "Mighty")
+        , (1.0, lit "Pious")
+        , (1.0, lit "Noble")
+        , (1.0, lit "Spineless")
+        , (1.0, lit "Craven")
+        , (1.0, lit "Fool")
+        , (1.0, lit "Vague")
+        , (1.0, lit "Cordial")
+        , (1.0, lit "Crabby")
+        , (1.0, lit "Incongruously Cheerful")
+        , (1.0, lit "Reckless")
+        , (1.0, lit "Unladylike")
+        , (1.0, lit "Truculent")
+        , (1.0, lit "Flirtatious")
+        , (1.0, lit "Boorish")
+        , (1.0, lit "Forthright")
+        , (1.0, lit "Swanky")
+        , (1.0, lit "Inconsistent")
+        , (1.0, lit "Lunatic")
+        , (1.0, lit "Quiet")
+        , (1.0, lit "Merciful")
+        , (1.0, lit "Vain")
+        , (1.0, lit "Deathless")
+        , (1.0, lit "Dragonslayer")
+        , (1.0, lit "Titan-killer")
+        , (1.0, lit "Magnificent")
+        , (1.0, lit "Invisible")
+        , (1.0, lit "Blind")
+        , (1.0, lit "Deaf")
+        , (1.0, lit "Wrinkled")
+        , (1.0, lit "Smelly")
+        , (1.0, lit "Toothless")
+        , (1.0, lit "Unblinking")
+        , (1.0, lit "Beautiful")
+        , (1.0, lit "Fair")
+        , (1.0, lit "Plain")
+        , (1.0, lit "Gassy")
+        , (1.0, lit "Hirsute")
+        , (1.0, lit "Bald")
+        , (1.0, lit "Fearsome")
+        , (1.0, lit "Slightly Off")
+        , (1.0, lit "Bizarre")
+        , (1.0, lit "Irksome")
+        , (1.0, lit "Stand-up Guy")
+        , (1.0, lit "Cruel")
+        , (1.0, lit "Butcher")
+        , (1.0, lit "Planetouched")
+        , (1.0, lit "Fey")
+        , (1.0, lit "Blessed")
+        , (1.0, lit "Lucky")
+        , (1.0, lit "Thrice-cursed")
+        , (1.0, lit "Rich")
+        , (1.0, lit "Poor")
+        , (1.0, lit "Miserly")
+        , (1.0, lit "Drunkard")
+        , (1.0, lit "Sober")
+        , (1.0, lit "Northron")
+        , (1.0, lit "Southron")
+        , (1.0, lit "Westron")
+        , (1.0, lit "Eastron")
+        , (1.0, lit "Beyonder")
+        , (1.0, lit "Barbarian")
+        , (1.0, lit "Poet")
+        , (1.0, lit "Bard")
+        , (1.0, lit "Singer")
+        , (1.0, lit "Thief")
+        , (1.0, lit "Warrior")
+        , (1.0, lit "Archer")
+        , (1.0, lit "Magician")
+        , (1.0, lit "Witch")
+        , (1.0, lit "Trapper")
+        , (1.0, lit "Enchanter")
+        , (1.0, lit "Artificer")
+        , (1.0, lit "Boar")
+        , (1.0, lit "Leopard")
+        , (1.0, lit "Eagle")
+        , (1.0, lit "Cheetah")
+        , (1.0, lit "Worm")
+        , (1.0, lit "Toad")
+        , (1.0, lit "Eel")
+        , (1.0, lit "Rat")
+        , (1.0, lit "Mouse")
+        , (1.0, lit "Bear")
+        , (1.0, lit "Snake")
+        , (1.0, lit "Fox")
+        , (1.0, lit "Myrmidon")
+        , (1.0, lit "Zephyr")
         ]
-
   in titled_name

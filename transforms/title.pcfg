@@ -7,7 +7,7 @@
 !output: titled-name
 
 titled-name:
-  10 [$name $the $title]
+  10 [$name $the $description]
   5 [$name $of-the $sigil-phrase]
   1 [$adjective $sp $name]
 
@@ -170,7 +170,7 @@ digit-count:
   2 Nine
   Eleven
 
-title:
+description:
   12 $color
   # Physical ability
   Quick
