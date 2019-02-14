@@ -51,7 +51,6 @@ v _ = pick
   , (2.0, lit "i")
   , (2.0, lit "o")
   , (3.0, lit "u")
-  , (1.0, lit "ei")
   , (1.0, lit "ai")
   , (1.0, lit "ia")
   , (1.0, lit "oi")
