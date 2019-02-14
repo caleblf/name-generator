@@ -93,7 +93,6 @@ ch_ch = lit ""
 
 chunk _ = pick
   [ (1.0, lit "jax")
-  , (1.0, lit "fred")
   , (1.0, lit "ald")
   , (1.0, lit "art")
   , (1.0, lit "ulf")
@@ -117,6 +116,7 @@ chunk _ = pick
   , (1.0, lit "ian")
   , (1.0, lit "ray")
   , (1.0, lit "ing")
+  , (1.0, lit "elt")
   ]
 
 end_chunk _ = pick
@@ -137,7 +137,6 @@ end_chunk_f _ = pick
   , (1.0, lit "een")
   , (1.0, lit "ita")
   , (1.0, lit "ina")
-  , (1.0, lit "ice")
   , (1.0, lit "ra")
   , (1.0, lit "na")
   , (1.0, lit "ene")
@@ -210,7 +209,6 @@ c_end _ = pick
   , (1.0, lit "rr")
   , (1.0, lit "nn")
   , (1.0, lit "pp")
-  , (1.0, lit "nt")
   , (1.0, lit "rn")
   , (1.0, lit "st")
   , (1.0, lit "th")

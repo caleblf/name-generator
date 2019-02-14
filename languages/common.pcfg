@@ -75,7 +75,6 @@ ch-ch:
 
 chunk:
   jax
-  fred
   ald
   art
   ulf
@@ -99,6 +98,7 @@ chunk:
   ian
   ray
   ing
+  elt
 end-chunk:
   $end-chunk-f
   $end-chunk-m
@@ -115,7 +115,6 @@ end-chunk-f: # endings that will usually result in feminine-sounding names
   een
   ita
   ina
-  ice
   ra
   na
   ene
@@ -182,7 +181,6 @@ c-end: # consonant clusters for the ends of names
   rr
   nn
   pp
-  nt
   rn
   st
   th
