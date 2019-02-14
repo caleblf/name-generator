@@ -152,11 +152,12 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('file',
                         type=str,
-                        help='YAML language file to convert')
+                        help='PCFG language file to convert')
     parser.add_argument('-o', '--outdir',
                         type=str,
                         required=True,
-                        help='location to place Elm output')
+                        help='Elm source directory in which to place output'
+                             '(output is placed in subdirectories)')
     parser.add_argument('-q', '--quiet',
                         action='store_true',
                         help='suppress success confirmation messages')
@@ -169,7 +170,7 @@ if __name__ == '__main__':
         print(f'Not a directory: {outdir}', file=sys.stderr)
         exit(1)
 
-    print(f'Reading YAML language file: {infile}')
+    print(f'Reading PCFG language file: {infile}')
     try:
         data = pcfgparse.read(infile)
     except ValueError as e:
@@ -187,11 +188,11 @@ if __name__ == '__main__':
 
     if 'root' in data.header:
         elm_text = elmify_language(module_name, data)
+        outfile = outdir / "Languages" / (module_name.capitalize() + '.elm')
     else:
         elm_text = elmify_transform(module_name, data)
+        outfile = outdir / "Transforms" / (module_name.capitalize() + '.elm')
 
-    outfile = outdir / (module_name.capitalize() + '.elm')
-
-    print(f'Writing Elm language file: {outfile}')
+    print(f'Writing Elm PCFG file: {outfile}')
     with open(outfile, 'w') as f:
         f.write(elm_text)

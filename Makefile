@@ -1,6 +1,17 @@
+build_dir = build
+elm_dir = src
+static_dir = docs
+langs_dir = languages
+tforms_dir = transforms
+
+build = ./build.sh
+
 
 site:
-	./build.sh && cp build/main.min.js docs
+	$(build) -O -b $(build_dir) -o $(static_dir)
 
-dev:
-	elm make src/Main.elm --output=docs/main.js
+js:
+	$(build) -b $(build_dir) -o $(static_dir)
+
+all:
+	$(build) -O -b $(build_dir) -o $(static_dir) -l $(langs_dir) -t $(tforms_dir)
