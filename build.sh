@@ -43,7 +43,7 @@ while getopts ":l:t:o:b:s:O" opt; do
 done
 
 
-convert="./convertlang.py"
+convert="./convert.py"
 
 if ! [ -z $languages_dir ]
 then
