@@ -52,9 +52,12 @@ feature-suffix:
   hair
   hand
   foot
-  tooth
-  eye
-  finger
+  0.7 tooth
+  0.3 teeth
+  0.7 eye
+  0.3 eyes
+  0.5 finger
+  0.5 fingers
 
 quality:
   Slick
@@ -446,6 +449,10 @@ force:
   Shadow
   Earth
   Sky
+  World
+  God
+  Death
+  Fire
 
 action:
   Eater
@@ -455,3 +462,4 @@ action:
   Killer
   Stealer
   Tamer
+  Walker

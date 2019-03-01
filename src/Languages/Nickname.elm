@@ -63,9 +63,12 @@ feature_suffix _ = pick
   , (1.0, lit "hair")
   , (1.0, lit "hand")
   , (1.0, lit "foot")
-  , (1.0, lit "tooth")
-  , (1.0, lit "eye")
-  , (1.0, lit "finger")
+  , (0.7, lit "tooth")
+  , (0.3, lit "teeth")
+  , (0.7, lit "eye")
+  , (0.3, lit "eyes")
+  , (0.5, lit "finger")
+  , (0.5, lit "fingers")
   ]
 
 quality _ = pick
@@ -462,6 +465,10 @@ force _ = pick
   , (1.0, lit "Shadow")
   , (1.0, lit "Earth")
   , (1.0, lit "Sky")
+  , (1.0, lit "World")
+  , (1.0, lit "God")
+  , (1.0, lit "Death")
+  , (1.0, lit "Fire")
   ]
 
 action _ = pick
@@ -472,4 +479,5 @@ action _ = pick
   , (1.0, lit "Killer")
   , (1.0, lit "Stealer")
   , (1.0, lit "Tamer")
+  , (1.0, lit "Walker")
   ]
