@@ -63,35 +63,40 @@ def is_name(s):
             all(c.isalnum() or c == '-' for c in s))
 
 
-def read_form_expression(s):
-    """Read a form expression as part of a concatenation expression.concatenation
-
-    s is assmed to have whitespace trimmed from both sides.
+def read_form_concatenation_contents(s):
+    """Return a list of forms from a concatenation body str (not including either bracket)
     """
-    if not s:
-        raise ValueError('Empty form expression')
-    elif s.startswith('"'):
-        # quoted literal
-        content, quote, rest = s[1:].partition('"')
-        if not quote:
-            raise ValueError('Mismatched quote')
-        if rest:
-            raise ValueError('Invalid form expression')
-        return Literal(content)
-    elif s.startswith('$'):
-        # form tag
-        tag = s[1:]
-        if not is_name(tag):
-            raise ValueError('Invalid tag')
-        return FormTag(tag)
-    elif s.startswith('['):
-        # concatenation
-        raise ValueError('Nested concatenation')
-    else:
-        # bare literal
-        if any(c in s for c in '#$:[]!"\t') or any(c.isdigit() for c in s):
-            raise ValueError('Invalid form expression')
-        return Literal(s)
+    forms = []
+
+    while s:
+        if s.startswith('$'):
+            # form tag
+            tag, space, rest = s[1:].partition(' ')
+            if not is_name(tag):
+                raise ValueError('Invalid tag')
+            s = rest.lstrip(' ')
+            forms.append(FormTag(tag))
+        elif s.startswith('"'):
+            # quoted literal. Read until next quote
+            content, quote, rest = s[1:].partition('"')
+            if not quote:
+                raise ValueError('Mismatched quote')
+            s = rest.lstrip(' ')
+            forms.append(Literal(content))
+        elif s.startswith('['):
+            # concatenation
+            raise ValueError('Nested concatenation')
+        else:
+            # bare literal
+            content, space, rest = s.partition(' ')
+            if (
+                any(c in content for c in '#$:[]!"\t') or
+                any(c.isdigit() for c in content)
+            ):
+                raise ValueError('Invalid bare string literal content')
+            s = rest.lstrip(' ')
+            forms.append(Literal(content))
+    return forms
 
 
 def read_form_case(s):
@@ -128,7 +133,8 @@ def read_form_case(s):
             raise ValueError('Mismatched concatenation bracket')
         if rest.partition('#')[0].strip(' '):
             raise ValueError('Invalid form expansion')
-        return weight, Concatenation(map(read_form_expression, content.split(' ')))
+        return (weight,
+                Concatenation(read_form_concatenation_contents(content.strip(' '))))
     elif s.startswith(' '):
         # syntax error
         raise ValueError('Improperly indented form expansion')
@@ -136,7 +142,7 @@ def read_form_case(s):
         # bare string literal
         content = s.partition('#')[0].rstrip(' ')
         if (any(c in content for c in '$:[]!"\t') or any(c.isdigit() for c in content)):
-            raise ValueError('Invalid form expression')
+            raise ValueError('Invalid bare string literal content')
         return weight, Literal(content)
 
 

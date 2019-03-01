@@ -17,6 +17,7 @@ import Languages.Dwarven exposing (dwarven)
 import Languages.Halfling exposing (halfling)
 import Languages.Orcish exposing (orcish)
 import Languages.Fiendish exposing (fiendish)
+import Languages.Nickname exposing (nickname)
 
 import Transforms.Title exposing (title)
 import Transforms.Profession exposing (profession)
@@ -40,6 +41,7 @@ languages =
   , halfling
   , orcish
   , fiendish
+  , nickname
   ]
 
 transforms : List Transform

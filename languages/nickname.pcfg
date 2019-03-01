@@ -1,0 +1,324 @@
+!encoding: utf-8
+!name: Nickname
+!author: Iguanotron
+!description: Nickname based on English words
+!root: moniker
+
+moniker:
+  10 $animal
+  7 ["The " $animal]
+  1 $quality
+  10 $object
+  7 [$object-pluralizable s]
+  0.5 [$count "-" $object-pluralizable s]
+  1 [$adjective " " $object]
+  3 [$quality-prefix $feature-suffix]
+  10 $profession
+  4 ["The " $profession]
+  2 [$item " " $action]
+
+quality-prefix:
+  Blue
+  Red
+  Black
+  Silver
+  Golden
+  Iron
+  Yellow
+  Copper
+  Green
+  Grey
+  White
+
+feature-suffix:
+  beard
+  hair
+  hand
+  foot
+  tooth
+  eye
+
+quality:
+  Slick
+  Nimble
+  Red
+  Blue
+  Iron
+  Stout
+  Quick
+  Silent
+  Sleepy
+  Blank
+  Giant
+  Stinky
+  Jolly
+  Shaggy
+  Noble
+  
+
+adjective:
+  2 Big
+  Little
+
+count:
+  Two
+
+object:
+  $object-pluralizable
+  $object-nonpluralizable
+
+object-pluralizable:
+  Candle
+  Blade
+  Shadow
+  Nail
+  Chain
+  Flower
+  Bucket
+  Flag
+  Helmet
+  Shield
+  Hook
+  Dagger
+  Mask
+  Hat
+  Club
+  Heart
+  Diamond
+  Stone
+  Crystal
+  Pumpkin
+  Biscuit
+  Dart
+  Arrow
+  Javelin
+  Boot
+  Spoon
+  Fork
+  Spork # lol
+  Cheese
+  Coin
+  Zephyr
+  Ladle
+  Scoop
+  Lantern
+  Stick
+  Twig
+  Brook
+  River
+  Glove
+  Swamp
+  Boulder
+  Copper
+  Silver
+  Riddle
+  Feather
+  Whisper
+  Trinket
+  Whisker
+  Grave
+  Bridge
+  Grove
+  Sand
+  Spark
+  Screw
+
+object-nonpluralizable:
+  Vines
+  Boots
+  Pots
+  Marsh
+  Abacus
+  Gold
+  Knuckles
+  Coral
+  Ash
+  Ashes
+  Church
+  Churches
+  Lily
+  Snow
+  Rain
+  Fog
+  Bog
+  Summer
+  Winter
+  Thistle
+  Flint
+  Steel
+  Love
+  Storm
+  Scimitar
+  Burns
+  Teeth
+  Grin
+  Grimace
+  Smirk
+
+animal:
+  Flea
+  Owl
+  Moth
+  Whale
+  Gnat
+  Dog
+  Raven
+  Toad
+  Frog
+  Cat
+  Eel
+  Squid
+  Rat
+  Fish
+  Spider
+  Scorpion
+  Squirrel
+  Pigeon
+  Eagle
+  Falcon
+  Hawk
+  Crow
+  Mongoose
+  Elk
+  Moose
+  Goose
+  Mouse
+  Ox
+  Bull
+  Pig
+  Gecko
+  Chameleon
+  Snake
+  Shrew
+  Dingo
+  Hyena
+  Wolf
+  Panther
+  Leopard
+  Cheetah
+  Jaguar
+  Lion
+  Tiger
+  Ocelot
+  Hart
+  Bear
+  Shark
+  Salamander
+  Newt
+  Lemur
+  Monkey
+  Gorilla
+  Duck
+  Jay
+  Crane
+  Dove
+  Finch
+  Nightingale
+  Partridge
+  Peacock
+  Rook
+  Sparrow
+  Sparrowhawk
+  Swan
+  Wren
+  Drake
+  Fox
+  Hare
+  Hog
+  Boar
+  Woodpecker
+  Magpie
+  Serpent
+  Aurochs
+  Panda
+  Raccoon
+  Crane
+  Mantis
+  Turtle
+  Tortoise
+  Armadillo
+  Porcupine
+  Kangaroo
+  Parrot
+  # mythical
+  Goblin
+  Dragon
+  Gorgon
+  Jackalope
+  Siren
+  Ogre
+  Titan
+  Leprechaun
+  Satyr
+
+profession:
+  Judge
+  Keeper
+  Reader
+  Painter
+  Dancer
+  Strider
+  Spitter
+  Limper
+  Croaker
+  Liar
+  King
+  Queen
+  Jack
+  Ace
+  Knight
+  Pharaoh
+  Templar
+  Preacher
+  Teacher
+  Sleeper
+  Runner
+  Leaper
+  Seer
+  Hunter
+  Archer
+  Whiner
+  Satrap
+  Raja
+  Chief
+  Digger
+  Counter
+  Tracer
+  Tracker
+  Chef
+  Cook
+  Captain
+  Guardian
+  Howler
+  Creeper
+  Freak
+  Fixer
+  Namer
+  Dreamer
+  Whisperer
+  Chaplain
+  Smith
+  Fisher
+  Champion
+  Barker
+  Angel
+  Baron
+  Bishop
+  Earl
+  Lord
+  Prior
+  Pilgrim
+  Deadeye
+
+item:
+  Bone
+  Moon
+  Star
+  Rock
+  Devil
+
+action:
+  Eater
+  Dancer
+  Caller
+  Whisperer
