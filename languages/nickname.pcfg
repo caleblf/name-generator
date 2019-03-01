@@ -11,6 +11,7 @@ moniker:
   1 $two-part-moniker
   1 $celestial-force-moniker
   1 $quality
+  0.6 $verb
 
 animal-moniker:
   10 $animal
@@ -82,6 +83,41 @@ quality:
   Jet
   Slimy
   Vicious
+  Dusty
+  Dizzy
+  Small
+  Smiley
+  Ginger
+  Sweet
+  Slim
+  Rusty
+  Lucky
+
+verb:
+  Slash
+  Crash
+  Ruin
+  Zip
+  Slip
+  Yank
+  Jump
+  Pounce
+  Dazzle
+  Twitch
+  Flutter
+  Skate
+  Twirl
+  Crunch
+  Flip
+  Skip
+  Hurl
+  Zap
+  Stab
+  Skewer
+  Dash
+  Lisp
+  Croak
+  Scratch
 
 adjective:
   2 Big
@@ -96,6 +132,10 @@ object:
   3 $object-nonpluralizable
 
 object-pluralizable:
+  Chip
+  Bean
+  Dimple
+  Spud
   Scroll
   Rose
   Candle
@@ -110,7 +150,6 @@ object-pluralizable:
   Shield
   Hook
   Dagger
-  Mask
   Hat
   Club
   Heart
@@ -168,8 +207,27 @@ object-pluralizable:
   Square
   Flame
   String
+  Apple
+  Grapefruit
+  Hammer
+  Skin
+  Cloud
+  Flake
 
 object-nonpluralizable:
+  Dice
+  Mask
+  Cannonball
+  Cyclone
+  Wheels
+  Jade
+  Daydream
+  Dream
+  Tank
+  Zero
+  Dust
+  0.5 Peach
+  0.5 Peaches
   Glaive
   Lantern
   Clay
@@ -182,6 +240,7 @@ object-nonpluralizable:
   Vines
   Boots
   Pots
+  Ice
   Talon
   Marsh
   Abacus
@@ -195,7 +254,10 @@ object-nonpluralizable:
   Lily
   Snow
   Rain
+  Thunder
   Fog
+  Acid
+  Trouble
   Bog
   Summer
   Winter
@@ -221,10 +283,17 @@ object-nonpluralizable:
   Prickles
   Frown
   Quip
+  Bullet
   Story
   Song
+  Blackjack
+  Truncheon
+  0.5 Torch
+  0.5 Torches
+  Sugar
 
 animal:
+  Cobra
   Worm
   Flea
   Owl
@@ -268,7 +337,9 @@ animal:
   Cheetah
   Jaguar
   Lion
+  Lioness
   Tiger
+  Tigress
   Ocelot
   Hart
   Bear
@@ -350,6 +421,7 @@ animal:
   Wasp
   Weasel
   Zebra
+  Viper
   # mythical
   Goblin
   Dragon
@@ -377,15 +449,22 @@ animal:
   Sphinx
   Troll
   Giant
+  Demon
   # D&D
   Quipper
 
 profession:
+  Jester
+  Machine
+  Joker
   Judge
+  Prince
   Keeper
   Reader
+  Reaper
   Painter
   Dancer
+  Doc
   Strider
   Spitter
   Limper
@@ -398,6 +477,7 @@ profession:
   Knight
   Pharaoh
   Templar
+  Sage
   Preacher
   Teacher
   Sleeper
@@ -413,6 +493,7 @@ profession:
   Tracker
   Chef
   Cook
+  Duke
   Captain
   Guardian
   Howler
@@ -440,6 +521,7 @@ profession:
   Doctor
   Surgeon
   Cutter
+  Maniac
 
 force:
   Bone
