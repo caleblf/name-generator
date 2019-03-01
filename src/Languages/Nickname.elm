@@ -11,18 +11,34 @@ nickname =
 
 
 moniker _ = pick
+  [ (7.0, animal_moniker)
+  , (6.0, object_moniker)
+  , (4.0, profession_moniker)
+  , (1.0, two_part_moniker)
+  , (1.0, celestial_force_moniker)
+  , (1.0, quality)
+  ]
+
+animal_moniker _ = pick
   [ (10.0, animal)
   , (7.0, cat [lit "The ", animal])
-  , (1.0, quality)
-  , (10.0, object)
+  ]
+
+object_moniker _ = pick
+  [ (10.0, object)
   , (7.0, cat [object_pluralizable, lit "s"])
   , (0.5, cat [count, lit "-", object_pluralizable, lit "s"])
   , (1.0, cat [adjective, lit " ", object])
-  , (3.0, cat [quality_prefix, feature_suffix])
-  , (10.0, profession)
-  , (4.0, cat [lit "The ", profession])
-  , (2.0, cat [item, lit " ", action])
   ]
+
+two_part_moniker = cat [quality_prefix, feature_suffix]
+
+profession_moniker _ = pick
+  [ (2.0, profession)
+  , (1.0, cat [lit "The ", profession])
+  ]
+
+celestial_force_moniker = cat [force, lit " ", action]
 
 quality_prefix _ = pick
   [ (1.0, lit "Blue")
@@ -36,6 +52,10 @@ quality_prefix _ = pick
   , (1.0, lit "Green")
   , (1.0, lit "Grey")
   , (1.0, lit "White")
+  , (1.0, lit "Long")
+  , (1.0, lit "Crimson")
+  , (1.0, lit "Metal")
+  , (1.0, lit "No-")
   ]
 
 feature_suffix _ = pick
@@ -45,6 +65,7 @@ feature_suffix _ = pick
   , (1.0, lit "foot")
   , (1.0, lit "tooth")
   , (1.0, lit "eye")
+  , (1.0, lit "finger")
   ]
 
 quality _ = pick
@@ -58,16 +79,22 @@ quality _ = pick
   , (1.0, lit "Silent")
   , (1.0, lit "Sleepy")
   , (1.0, lit "Blank")
-  , (1.0, lit "Giant")
   , (1.0, lit "Stinky")
   , (1.0, lit "Jolly")
   , (1.0, lit "Shaggy")
   , (1.0, lit "Noble")
+  , (1.0, lit "Sable")
+  , (1.0, lit "Orange")
+  , (1.0, lit "Violet")
+  , (1.0, lit "Crimson")
+  , (1.0, lit "Indigo")
+  , (1.0, lit "Jet")
   ]
 
 adjective _ = pick
   [ (2.0, lit "Big")
   , (1.0, lit "Little")
+  , (1.0, lit "Old")
   ]
 
 count = lit "Two"
@@ -78,7 +105,9 @@ object _ = pick
   ]
 
 object_pluralizable _ = pick
-  [ (1.0, lit "Candle")
+  [ (1.0, lit "Scroll")
+  , (1.0, lit "Rose")
+  , (1.0, lit "Candle")
   , (1.0, lit "Blade")
   , (1.0, lit "Shadow")
   , (1.0, lit "Nail")
@@ -95,6 +124,7 @@ object_pluralizable _ = pick
   , (1.0, lit "Club")
   , (1.0, lit "Heart")
   , (1.0, lit "Diamond")
+  , (1.0, lit "Gem")
   , (1.0, lit "Stone")
   , (1.0, lit "Crystal")
   , (1.0, lit "Pumpkin")
@@ -106,12 +136,10 @@ object_pluralizable _ = pick
   , (1.0, lit "Spoon")
   , (1.0, lit "Fork")
   , (1.0, lit "Spork")
-  , (1.0, lit "Cheese")
   , (1.0, lit "Coin")
   , (1.0, lit "Zephyr")
   , (1.0, lit "Ladle")
   , (1.0, lit "Scoop")
-  , (1.0, lit "Lantern")
   , (1.0, lit "Stick")
   , (1.0, lit "Twig")
   , (1.0, lit "Brook")
@@ -132,12 +160,40 @@ object_pluralizable _ = pick
   , (1.0, lit "Sand")
   , (1.0, lit "Spark")
   , (1.0, lit "Screw")
+  , (1.0, lit "Claw")
+  , (1.0, lit "Clover")
+  , (1.0, lit "Puppet")
+  , (1.0, lit "Book")
+  , (1.0, lit "Star")
+  , (1.0, lit "Castle")
+  , (1.0, lit "Brick")
+  , (1.0, lit "Cobblestone")
+  , (1.0, lit "Flagstone")
+  , (1.0, lit "Sickle")
+  , (1.0, lit "Gauntlet")
+  , (1.0, lit "Lace")
+  , (1.0, lit "Glaive")
+  , (1.0, lit "Spike")
+  , (1.0, lit "Crown")
+  , (1.0, lit "Square")
   ]
 
 object_nonpluralizable _ = pick
-  [ (1.0, lit "Vines")
+  [ (1.0, lit "Lantern")
+  , (1.0, lit "Clay")
+  , (1.0, lit "Pyramid")
+  , (1.0, lit "Beach")
+  , (1.0, lit "Beaches")
+  , (1.0, lit "Kayak")
+  , (1.0, lit "Guns")
+  , (1.0, lit "Codex")
+  , (1.0, lit "Mountain")
+  , (1.0, lit "Strings")
+  , (1.0, lit "Lance")
+  , (1.0, lit "Vines")
   , (1.0, lit "Boots")
   , (1.0, lit "Pots")
+  , (1.0, lit "Talon")
   , (1.0, lit "Marsh")
   , (1.0, lit "Abacus")
   , (1.0, lit "Gold")
@@ -165,10 +221,22 @@ object_nonpluralizable _ = pick
   , (1.0, lit "Grin")
   , (1.0, lit "Grimace")
   , (1.0, lit "Smirk")
+  , (1.0, lit "Oak")
+  , (1.0, lit "Bones")
+  , (1.0, lit "Elm")
+  , (1.0, lit "Knife")
+  , (1.0, lit "Knives")
+  , (1.0, lit "Pike")
+  , (1.0, lit "Halberd")
+  , (1.0, lit "Naginata")
+  , (1.0, lit "Prickles")
+  , (1.0, lit "Frown")
+  , (1.0, lit "Quip")
   ]
 
 animal _ = pick
-  [ (1.0, lit "Flea")
+  [ (1.0, lit "Worm")
+  , (1.0, lit "Flea")
   , (1.0, lit "Owl")
   , (1.0, lit "Moth")
   , (1.0, lit "Whale")
@@ -252,6 +320,46 @@ animal _ = pick
   , (1.0, lit "Porcupine")
   , (1.0, lit "Kangaroo")
   , (1.0, lit "Parrot")
+  , (1.0, lit "Crab")
+  , (1.0, lit "Lobster")
+  , (1.0, lit "Dragonfly")
+  , (1.0, lit "Millipede")
+  , (1.0, lit "Elephant")
+  , (1.0, lit "Walrus")
+  , (1.0, lit "Baboon")
+  , (1.0, lit "Alligator")
+  , (1.0, lit "Beetle")
+  , (1.0, lit "Butterfly")
+  , (1.0, lit "Camel")
+  , (1.0, lit "Deer")
+  , (1.0, lit "Catfish")
+  , (1.0, lit "Dolphin")
+  , (1.0, lit "Cockroach")
+  , (1.0, lit "Cow")
+  , (1.0, lit "Coyote")
+  , (1.0, lit "Ferret")
+  , (1.0, lit "Flamingo")
+  , (1.0, lit "Goat")
+  , (1.0, lit "Iguana")
+  , (1.0, lit "Jackal")
+  , (1.0, lit "Jellyfish")
+  , (1.0, lit "Starfish")
+  , (1.0, lit "Kingfisher")
+  , (1.0, lit "Pelican")
+  , (1.0, lit "Lynx")
+  , (1.0, lit "Mole")
+  , (1.0, lit "Mule")
+  , (1.0, lit "Octopus")
+  , (1.0, lit "Ostrich")
+  , (1.0, lit "Otter")
+  , (1.0, lit "Penguin")
+  , (1.0, lit "Piranha")
+  , (1.0, lit "Rattlesnake")
+  , (1.0, lit "Robin")
+  , (1.0, lit "Vulture")
+  , (1.0, lit "Wasp")
+  , (1.0, lit "Weasel")
+  , (1.0, lit "Zebra")
   , (1.0, lit "Goblin")
   , (1.0, lit "Dragon")
   , (1.0, lit "Gorgon")
@@ -261,6 +369,24 @@ animal _ = pick
   , (1.0, lit "Titan")
   , (1.0, lit "Leprechaun")
   , (1.0, lit "Satyr")
+  , (1.0, lit "Banshee")
+  , (1.0, lit "Brownie")
+  , (1.0, lit "Gargoyle")
+  , (1.0, lit "Jotun")
+  , (1.0, lit "Ghoul")
+  , (1.0, lit "Golem")
+  , (1.0, lit "Griffin")
+  , (1.0, lit "Harpy")
+  , (1.0, lit "Imp")
+  , (1.0, lit "Hellhound")
+  , (1.0, lit "Manticore")
+  , (1.0, lit "Phoenix")
+  , (1.0, lit "Roc")
+  , (1.0, lit "Faun")
+  , (1.0, lit "Sphinx")
+  , (1.0, lit "Troll")
+  , (1.0, lit "Giant")
+  , (1.0, lit "Quipper")
   ]
 
 profession _ = pick
@@ -290,12 +416,9 @@ profession _ = pick
   , (1.0, lit "Hunter")
   , (1.0, lit "Archer")
   , (1.0, lit "Whiner")
-  , (1.0, lit "Satrap")
-  , (1.0, lit "Raja")
   , (1.0, lit "Chief")
   , (1.0, lit "Digger")
   , (1.0, lit "Counter")
-  , (1.0, lit "Tracer")
   , (1.0, lit "Tracker")
   , (1.0, lit "Chef")
   , (1.0, lit "Cook")
@@ -309,26 +432,36 @@ profession _ = pick
   , (1.0, lit "Dreamer")
   , (1.0, lit "Whisperer")
   , (1.0, lit "Chaplain")
-  , (1.0, lit "Smith")
-  , (1.0, lit "Fisher")
   , (1.0, lit "Champion")
   , (1.0, lit "Barker")
   , (1.0, lit "Angel")
   , (1.0, lit "Baron")
   , (1.0, lit "Bishop")
   , (1.0, lit "Earl")
-  , (1.0, lit "Lord")
   , (1.0, lit "Prior")
   , (1.0, lit "Pilgrim")
   , (1.0, lit "Deadeye")
+  , (1.0, lit "Butcher")
+  , (1.0, lit "Poet")
+  , (1.0, lit "Griot")
+  , (1.0, lit "Medicine Man")
+  , (1.0, lit "Witch Doctor")
+  , (1.0, lit "Doctor")
+  , (1.0, lit "Surgeon")
+  , (1.0, lit "Cutter")
   ]
 
-item _ = pick
+force _ = pick
   [ (1.0, lit "Bone")
   , (1.0, lit "Moon")
   , (1.0, lit "Star")
   , (1.0, lit "Rock")
   , (1.0, lit "Devil")
+  , (1.0, lit "Sun")
+  , (1.0, lit "Light")
+  , (1.0, lit "Shadow")
+  , (1.0, lit "Earth")
+  , (1.0, lit "Sky")
   ]
 
 action _ = pick
@@ -336,4 +469,7 @@ action _ = pick
   , (1.0, lit "Dancer")
   , (1.0, lit "Caller")
   , (1.0, lit "Whisperer")
+  , (1.0, lit "Killer")
+  , (1.0, lit "Stealer")
+  , (1.0, lit "Tamer")
   ]

@@ -5,17 +5,30 @@
 !root: moniker
 
 moniker:
+  7 $animal-moniker
+  6 $object-moniker
+  4 $profession-moniker
+  1 $two-part-moniker
+  1 $celestial-force-moniker
+  1 $quality
+
+animal-moniker:
   10 $animal
   7 ["The " $animal]
-  1 $quality
+
+object-moniker:
   10 $object
   7 [$object-pluralizable s]
   0.5 [$count "-" $object-pluralizable s]
   1 [$adjective " " $object]
-  3 [$quality-prefix $feature-suffix]
-  10 $profession
-  4 ["The " $profession]
-  2 [$item " " $action]
+
+two-part-moniker: [$quality-prefix $feature-suffix]
+
+profession-moniker:
+  2 $profession
+  1 ["The " $profession]
+
+celestial-force-moniker: [$force " " $action]
 
 quality-prefix:
   Blue
@@ -29,6 +42,10 @@ quality-prefix:
   Green
   Grey
   White
+  Long
+  Crimson
+  Metal
+  No-
 
 feature-suffix:
   beard
@@ -37,6 +54,7 @@ feature-suffix:
   foot
   tooth
   eye
+  finger
 
 quality:
   Slick
@@ -49,16 +67,21 @@ quality:
   Silent
   Sleepy
   Blank
-  Giant
   Stinky
   Jolly
   Shaggy
   Noble
-  
+  Sable
+  Orange
+  Violet
+  Crimson
+  Indigo
+  Jet
 
 adjective:
   2 Big
   Little
+  Old
 
 count:
   Two
@@ -68,6 +91,8 @@ object:
   $object-nonpluralizable
 
 object-pluralizable:
+  Scroll
+  Rose
   Candle
   Blade
   Shadow
@@ -85,6 +110,7 @@ object-pluralizable:
   Club
   Heart
   Diamond
+  Gem
   Stone
   Crystal
   Pumpkin
@@ -95,13 +121,11 @@ object-pluralizable:
   Boot
   Spoon
   Fork
-  Spork # lol
-  Cheese
+  Spork
   Coin
   Zephyr
   Ladle
   Scoop
-  Lantern
   Stick
   Twig
   Brook
@@ -122,11 +146,39 @@ object-pluralizable:
   Sand
   Spark
   Screw
+  Claw
+  Clover
+  Puppet
+  Book
+  Star
+  Castle
+  Brick
+  Cobblestone
+  Flagstone
+  Sickle
+  Gauntlet
+  Lace
+  Glaive
+  Spike
+  Crown
+  Square
 
 object-nonpluralizable:
+  Lantern
+  Clay
+  Pyramid
+  Beach
+  Beaches
+  Kayak
+  Guns
+  Codex
+  Mountain
+  Strings
+  Lance
   Vines
   Boots
   Pots
+  Talon
   Marsh
   Abacus
   Gold
@@ -154,8 +206,20 @@ object-nonpluralizable:
   Grin
   Grimace
   Smirk
+  Oak
+  Bones
+  Elm
+  Knife
+  Knives
+  Pike
+  Halberd
+  Naginata
+  Prickles
+  Frown
+  Quip
 
 animal:
+  Worm
   Flea
   Owl
   Moth
@@ -240,6 +304,46 @@ animal:
   Porcupine
   Kangaroo
   Parrot
+  Crab
+  Lobster
+  Dragonfly
+  Millipede
+  Elephant
+  Walrus
+  Baboon
+  Alligator
+  Beetle
+  Butterfly
+  Camel
+  Deer
+  Catfish
+  Dolphin
+  Cockroach
+  Cow
+  Coyote
+  Ferret
+  Flamingo
+  Goat
+  Iguana
+  Jackal
+  Jellyfish
+  Starfish
+  Kingfisher
+  Pelican
+  Lynx
+  Mole
+  Mule
+  Octopus
+  Ostrich
+  Otter
+  Penguin
+  Piranha
+  Rattlesnake
+  Robin
+  Vulture
+  Wasp
+  Weasel
+  Zebra
   # mythical
   Goblin
   Dragon
@@ -250,6 +354,25 @@ animal:
   Titan
   Leprechaun
   Satyr
+  Banshee
+  Brownie
+  Gargoyle
+  Jotun
+  Ghoul
+  Golem
+  Griffin
+  Harpy
+  Imp
+  Hellhound
+  Manticore
+  Phoenix
+  Roc
+  Faun
+  Sphinx
+  Troll
+  Giant
+  # D&D
+  Quipper
 
 profession:
   Judge
@@ -278,12 +401,9 @@ profession:
   Hunter
   Archer
   Whiner
-  Satrap
-  Raja
   Chief
   Digger
   Counter
-  Tracer
   Tracker
   Chef
   Cook
@@ -297,28 +417,41 @@ profession:
   Dreamer
   Whisperer
   Chaplain
-  Smith
-  Fisher
   Champion
   Barker
   Angel
   Baron
   Bishop
   Earl
-  Lord
   Prior
   Pilgrim
   Deadeye
+  Butcher
+  Poet
+  Griot
+  Medicine Man
+  Witch Doctor
+  Doctor
+  Surgeon
+  Cutter
 
-item:
+force:
   Bone
   Moon
   Star
   Rock
   Devil
+  Sun
+  Light
+  Shadow
+  Earth
+  Sky
 
 action:
   Eater
   Dancer
   Caller
   Whisperer
+  Killer
+  Stealer
+  Tamer
