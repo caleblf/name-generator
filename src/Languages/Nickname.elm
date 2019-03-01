@@ -27,8 +27,8 @@ animal_moniker _ = pick
 object_moniker _ = pick
   [ (10.0, object)
   , (7.0, cat [object_pluralizable, lit "s"])
-  , (0.5, cat [count, lit "-", object_pluralizable, lit "s"])
   , (1.0, cat [adjective, lit " ", object])
+  , (0.5, cat [count, lit " ", object_pluralizable, lit "s"])
   ]
 
 two_part_moniker = cat [quality_prefix, feature_suffix]
@@ -92,6 +92,8 @@ quality _ = pick
   , (1.0, lit "Crimson")
   , (1.0, lit "Indigo")
   , (1.0, lit "Jet")
+  , (1.0, lit "Slimy")
+  , (1.0, lit "Vicious")
   ]
 
 adjective _ = pick
@@ -103,8 +105,8 @@ adjective _ = pick
 count = lit "Two"
 
 object _ = pick
-  [ (1.0, object_pluralizable)
-  , (1.0, object_nonpluralizable)
+  [ (4.0, object_pluralizable)
+  , (3.0, object_nonpluralizable)
   ]
 
 object_pluralizable _ = pick
@@ -175,23 +177,22 @@ object_pluralizable _ = pick
   , (1.0, lit "Sickle")
   , (1.0, lit "Gauntlet")
   , (1.0, lit "Lace")
-  , (1.0, lit "Glaive")
   , (1.0, lit "Spike")
   , (1.0, lit "Crown")
   , (1.0, lit "Square")
+  , (1.0, lit "Flame")
+  , (1.0, lit "String")
   ]
 
 object_nonpluralizable _ = pick
-  [ (1.0, lit "Lantern")
+  [ (1.0, lit "Glaive")
+  , (1.0, lit "Lantern")
   , (1.0, lit "Clay")
   , (1.0, lit "Pyramid")
-  , (1.0, lit "Beach")
-  , (1.0, lit "Beaches")
   , (1.0, lit "Kayak")
   , (1.0, lit "Guns")
   , (1.0, lit "Codex")
   , (1.0, lit "Mountain")
-  , (1.0, lit "Strings")
   , (1.0, lit "Lance")
   , (1.0, lit "Vines")
   , (1.0, lit "Boots")
@@ -204,8 +205,8 @@ object_nonpluralizable _ = pick
   , (1.0, lit "Coral")
   , (1.0, lit "Ash")
   , (1.0, lit "Ashes")
-  , (1.0, lit "Church")
-  , (1.0, lit "Churches")
+  , (0.5, lit "Church")
+  , (0.5, lit "Churches")
   , (1.0, lit "Lily")
   , (1.0, lit "Snow")
   , (1.0, lit "Rain")
@@ -235,6 +236,8 @@ object_nonpluralizable _ = pick
   , (1.0, lit "Prickles")
   , (1.0, lit "Frown")
   , (1.0, lit "Quip")
+  , (1.0, lit "Story")
+  , (1.0, lit "Song")
   ]
 
 animal _ = pick
@@ -469,6 +472,9 @@ force _ = pick
   , (1.0, lit "God")
   , (1.0, lit "Death")
   , (1.0, lit "Fire")
+  , (1.0, lit "Sand")
+  , (1.0, lit "Wave")
+  , (1.0, lit "Stone")
   ]
 
 action _ = pick
@@ -480,4 +486,5 @@ action _ = pick
   , (1.0, lit "Stealer")
   , (1.0, lit "Tamer")
   , (1.0, lit "Walker")
+  , (1.0, lit "Stalker")
   ]
