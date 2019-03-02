@@ -3,11 +3,12 @@ import Html exposing (Html)
 import Html.Lazy as Lazy
 import Html.Events as Events
 import Html.Attributes as Attr
+import File.Download as Download
 import Random
 import Dict
 import Set exposing (Set)
 
-import Language
+import Language exposing (Language)
 import Generator
 import Manifest
 
@@ -31,7 +32,7 @@ main =
 type alias Model =
   { names : List String
   , toGenerate : Int
-  , selectedLanguage : Language.Language
+  , selectedLanguage : Language
   , activeTransforms : Set String
   , savedNames : List String
   }
@@ -61,8 +62,8 @@ type Msg
   | SetAmount Int
   | SaveName String
   | ForgetNameIndex Int
-  --| ClearSaved
-  --| ExportSaved
+  | ClearSaved
+  | ExportSaved
 
 
 update : Msg -> Model -> (Model, Cmd Msg)
@@ -111,6 +112,14 @@ update msg ({ names, toGenerate, selectedLanguage, activeTransforms, savedNames 
       ( { model | savedNames = removeAt nameIndex savedNames }
       , Cmd.none
       )
+    ClearSaved ->
+      ( { model | savedNames = [] }
+      , Cmd.none
+      )
+    ExportSaved ->
+      ( model
+      , Download.string "names.txt" "text/plain" <| String.join "\n" savedNames
+      )
 
 
 removeAt : Int -> List a -> List a
@@ -139,22 +148,11 @@ subscriptions model =
 view : Model -> Html Msg
 view { names, toGenerate, selectedLanguage, activeTransforms, savedNames } =
   Html.div [ Attr.class "container" ]
-    [ Html.h1 [] [ Html.text "Fantasy Name Generator by Iguanotron" ]
-    , Html.button [ Events.onClick Generate ] [ Html.text "Generate" ]
+    [ header
+    , generateButton
     , Html.div [ Attr.class "column-container" ]
         [ Html.div [ Attr.class "column" ]
-            [ Html.div [ Attr.class "settings-panel" ]
-              [ Lazy.lazy amountSelector toGenerate
-              , Lazy.lazy languageSelector selectedLanguage.name
-              , Lazy.lazy transformSelector
-                  <| List.map
-                    (.name >>
-                      (\transformName ->
-                        ( transformName
-                          , Set.member transformName activeTransforms
-                        )))
-                    Manifest.transforms
-              ]
+            [ Lazy.lazy3 settingsPanel toGenerate selectedLanguage activeTransforms
             , Lazy.lazy savedNamesPanel savedNames
             ]
         , Html.div [ Attr.class "column" ]
@@ -163,21 +161,81 @@ view { names, toGenerate, selectedLanguage, activeTransforms, savedNames } =
         ]
     ]
 
+header : Html Msg
+header =
+  Html.h1 [] [ Html.text "Fantasy Name Generator by Iguanotron" ]
+
+generateButton : Html Msg
+generateButton =
+  Html.button
+    [ Events.onClick Generate
+    , Attr.class "generate-button"
+    ]
+    [ Html.text "Generate" ]
+
+
+settingsPanel : Int -> Language -> Set String -> Html Msg
+settingsPanel toGenerate selectedLanguage activeTransforms =
+  Html.div [ Attr.class "settings-panel" ]
+    [ Lazy.lazy amountSelector toGenerate
+    , Lazy.lazy languageSelector selectedLanguage.name
+    , Lazy.lazy transformSelector
+        <| List.map
+          (.name >>
+            (\transformName ->
+              ( transformName
+              , Set.member transformName activeTransforms
+              )))
+          Manifest.transforms
+    ]
+
 
 savedNamesPanel : List String -> Html Msg
-savedNamesPanel =
+savedNamesPanel names =
   Html.div [ Attr.class "saved-names-panel" ]
+    (if List.isEmpty names
+    then []
+    else
+      [ Lazy.lazy savedNamesList names
+      , clearButton
+      , exportButton
+      ])
+
+clearButton : Html Msg
+clearButton =
+  Html.button
+    [ Events.onClick ClearSaved
+    , Attr.class "widget-button"
+    ]
+    [ Html.text "Clear" ]
+
+exportButton : Html Msg
+exportButton =
+  Html.button
+    [ Events.onClick ExportSaved
+    , Attr.class "widget-button"
+    ]
+    [ Html.text "Download" ]
+
+
+savedNamesList : List String -> Html Msg
+savedNamesList =
+  Html.div [ Attr.class "saved-names-list" ]
     << List.indexedMap
         (\index name ->
           Html.div
             [ Attr.class "saved-name" ]
-            [ Html.button
-                [ Attr.class "forget-name-button"
-                , Events.onClick <| ForgetNameIndex index
-                ]
-                [ Html.text "X" ]
+            [ forgetNameButton index
             , Html.text name
-            ])
+            ])  
+
+forgetNameButton : Int -> Html Msg
+forgetNameButton index =
+  Html.button
+    [ Events.onClick <| ForgetNameIndex index
+    , Attr.class "forget-name-button"
+    ]
+    [ Html.text "X" ]
 
 
 namesPanel : List String -> Html Msg
@@ -197,7 +255,8 @@ namesPanel =
 amountSelector : Int -> Html Msg
 amountSelector amount =
   Html.input
-    [ Attr.type_ "number"
+    [ Attr.class "amount-selector"
+    , Attr.type_ "number"
     , Attr.min "1"
     , Attr.max "512"
     , Attr.placeholder "1"
@@ -218,7 +277,7 @@ languageSelector activeLanguageName =
         (.name >> Html.text >> List.singleton >> Html.option [])
         Manifest.languages
 
-languageOption : Language.Language -> Html Msg
+languageOption : Language -> Html Msg
 languageOption language =
   Html.option
     [ Attr.value language.name ]

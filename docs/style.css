@@ -2,7 +2,7 @@
     box-sizing: border-box;
 }
 
-html, body, .container {
+html, body {
     height: 100%;
     margin: 0;
     padding: 0;
@@ -12,6 +12,43 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     padding: 1em;
 }
+
+/* Form elements */
+
+button {
+    padding: 0.4em;
+    border: none;
+    background-color: #eee;
+    color: black;
+    cursor: pointer;
+    font-size: initial;
+    font-family: Arial, Helvetica, sans-serif;
+}
+button:hover {
+    background-color: turquoise;
+}
+
+input[type=number] {
+    width: 7em;
+    padding: 0.4em;
+    border: 1px solid #ccc;
+    font-size: initial;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+select {
+    min-width: 7em;
+    padding-top: 0.4em;
+    padding-left: 0.4em;
+    padding-bottom: 0.4em;
+    border: none;
+    background-color: #eee;
+    color: black;
+    font-size: initial;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Layout */
 
 .container {
     margin: 0 auto;
@@ -37,9 +74,14 @@ body {
 
 .settings-panel, .names-panel, .saved-names-panel {
     margin: 1em;
-    width: 100%;
 }
 
+.saved-names-list {
+    max-height: 12em;
+    border: solid 1px #ccc;
+    overflow-y: auto;
+    margin-bottom: 0.4em;
+}
 
 .generated-name-entry {
     padding: 0.2em;
@@ -58,41 +100,29 @@ body {
     font-weight: bold;
 }
 
-
-/* Form elements */
-
-button {
-    border: none;
-    background-color: #eee;
-    color: black;
-    padding: 0.8em;
-    cursor: pointer;
-    font-size: initial;
-    font-family: Arial, Helvetica, sans-serif;
-    /* generate button only */
-    flex-shrink: 0;
-}
-button:hover {
-    background-color: turquoise;
-}
-
-input[type=number] {
-    width: 7em;
-    font-size: initial;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-select {
-    min-width: 7em;
-    color: black;
-    font-size: initial;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-
 .saved-name {
     padding: 0.2em;
 }
+
+.transform-selector {
+    margin-top: 0.4em;
+}
+
+/* Widgets */
+
+.generate-button {
+    flex-shrink: 0;
+    padding: 0.8em;
+}
+
+.amount-selector, .language-selector, .widget-button {
+    margin-right: 0.4em;
+}
+
+.transform-entry {
+    padding: 0.2em 0;
+}
+
 .forget-name-button {
     margin: 0.2em;
     padding: 0.2em;
