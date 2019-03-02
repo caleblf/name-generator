@@ -74,9 +74,11 @@ feature_suffix _ = pick
 
 quality _ = pick
   [ (1.0, lit "Slick")
+  , (1.0, lit "Keen")
   , (1.0, lit "Nimble")
   , (1.0, lit "Red")
   , (1.0, lit "Blue")
+  , (1.0, lit "Green")
   , (1.0, lit "Iron")
   , (1.0, lit "Stout")
   , (1.0, lit "Quick")
@@ -87,6 +89,8 @@ quality _ = pick
   , (1.0, lit "Jolly")
   , (1.0, lit "Shaggy")
   , (1.0, lit "Noble")
+  , (1.0, lit "Sly")
+  , (1.0, lit "Merry")
   , (1.0, lit "Sable")
   , (1.0, lit "Orange")
   , (1.0, lit "Violet")
@@ -103,6 +107,7 @@ quality _ = pick
   , (1.0, lit "Sweet")
   , (1.0, lit "Slim")
   , (1.0, lit "Rusty")
+  , (1.0, lit "Granite")
   , (1.0, lit "Lucky")
   ]
 
@@ -135,8 +140,8 @@ verb _ = pick
 
 adjective _ = pick
   [ (2.0, lit "Big")
+  , (2.0, lit "Old")
   , (1.0, lit "Little")
-  , (1.0, lit "Old")
   ]
 
 count = lit "Two"
@@ -234,6 +239,7 @@ object_nonpluralizable _ = pick
   [ (1.0, lit "Dice")
   , (1.0, lit "Mask")
   , (1.0, lit "Cannonball")
+  , (1.0, lit "Leaf")
   , (1.0, lit "Cyclone")
   , (1.0, lit "Wheels")
   , (1.0, lit "Jade")
@@ -253,6 +259,7 @@ object_nonpluralizable _ = pick
   , (1.0, lit "Codex")
   , (1.0, lit "Mountain")
   , (1.0, lit "Lance")
+  , (1.0, lit "Checkers")
   , (1.0, lit "Vines")
   , (1.0, lit "Boots")
   , (1.0, lit "Pots")
@@ -297,6 +304,7 @@ object_nonpluralizable _ = pick
   , (1.0, lit "Halberd")
   , (1.0, lit "Naginata")
   , (1.0, lit "Prickles")
+  , (1.0, lit "Machete")
   , (1.0, lit "Frown")
   , (1.0, lit "Quip")
   , (1.0, lit "Bullet")
@@ -502,6 +510,7 @@ profession _ = pick
   , (1.0, lit "Seer")
   , (1.0, lit "Hunter")
   , (1.0, lit "Archer")
+  , (1.0, lit "Beast")
   , (1.0, lit "Whiner")
   , (1.0, lit "Chief")
   , (1.0, lit "Digger")
@@ -558,6 +567,7 @@ force _ = pick
   , (1.0, lit "Sand")
   , (1.0, lit "Wave")
   , (1.0, lit "Stone")
+  , (1.0, lit "Wind")
   ]
 
 action _ = pick

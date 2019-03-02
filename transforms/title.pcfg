@@ -89,6 +89,12 @@ sigil: # must pluralize with -s suffix
   Owl
   Bat
   Rat
+  Raven
+  Dove
+  Scorpion
+  Snake
+  Swan
+  Dragon
   # Rocks
   Diamond
   Crystal
@@ -102,12 +108,14 @@ sigil: # must pluralize with -s suffix
   Dagger
   Club
   Lance
+  Hammer
   # Armor
   Shield
   Mantle
   Gauntlet
   Helm
   Crown
+  Mask
   # Magical foci
   Wand
   Orb
@@ -129,6 +137,7 @@ sigil: # must pluralize with -s suffix
   Shore
   Tarn
   Desert
+  Glen
   # Astronomical bodies
   Moon
   Sun
@@ -138,6 +147,7 @@ sigil: # must pluralize with -s suffix
   Rose
   Oak
   Elm
+  Bean
   # Body parts
   Fist
   Heart
@@ -147,6 +157,17 @@ sigil: # must pluralize with -s suffix
   Talon
   Hand
   Eye
+  Horn
+  # Reactions
+  Flame
+  Wave
+  Cloud
+  Snowflake
+  # Objects
+  Candle
+  Chain
+  Coin
+  Lantern
 
 adjective:
   5 $color
@@ -203,6 +224,7 @@ description:
   Spineless
   Craven
   Fool
+  Liar
   # Personality
   Vague
   Cordial
@@ -219,7 +241,7 @@ description:
   Lunatic
   Quiet
   Merciful
-  Vain
+  Maniac
   # Feat
   Deathless
   Dragonslayer
@@ -247,6 +269,8 @@ description:
   Stand-up Guy
   Cruel
   Butcher
+  Liar
+  Freak
   # Higher power
   Planetouched
   Fey
@@ -279,6 +303,11 @@ description:
   Trapper
   Enchanter
   Artificer
+  Sage
+  Seer
+  # Monster
+  Dragon
+  Banshee
   # Animal
   Boar
   Leopard
@@ -292,6 +321,15 @@ description:
   Bear
   Snake
   Fox
+  Cobra
+  Flea
+  Squid
+  Spider
+  Hawk
+  Salamander
+  Fish
+  Weasel
+  Tortoise
   # Fanciful titles
   Myrmidon
   Zephyr

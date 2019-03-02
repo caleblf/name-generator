@@ -62,9 +62,11 @@ feature-suffix:
 
 quality:
   Slick
+  Keen
   Nimble
   Red
   Blue
+  Green
   Iron
   Stout
   Quick
@@ -75,6 +77,8 @@ quality:
   Jolly
   Shaggy
   Noble
+  Sly
+  Merry
   Sable
   Orange
   Violet
@@ -91,6 +95,7 @@ quality:
   Sweet
   Slim
   Rusty
+  Granite
   Lucky
 
 verb:
@@ -121,8 +126,8 @@ verb:
 
 adjective:
   2 Big
+  2 Old
   Little
-  Old
 
 count:
   Two
@@ -218,6 +223,7 @@ object-nonpluralizable:
   Dice
   Mask
   Cannonball
+  Leaf
   Cyclone
   Wheels
   Jade
@@ -237,6 +243,7 @@ object-nonpluralizable:
   Codex
   Mountain
   Lance
+  Checkers
   Vines
   Boots
   Pots
@@ -281,6 +288,7 @@ object-nonpluralizable:
   Halberd
   Naginata
   Prickles
+  Machete
   Frown
   Quip
   Bullet
@@ -486,6 +494,7 @@ profession:
   Seer
   Hunter
   Archer
+  Beast
   Whiner
   Chief
   Digger
@@ -541,6 +550,7 @@ force:
   Sand
   Wave
   Stone
+  Wind
 
 action:
   Eater
