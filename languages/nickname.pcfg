@@ -53,6 +53,8 @@ feature-suffix:
   hair
   hand
   foot
+  fist
+  tongue
   0.7 tooth
   0.3 teeth
   0.7 eye
@@ -61,6 +63,8 @@ feature-suffix:
   0.5 fingers
 
 quality:
+  Grey
+  Gloomy
   Slick
   Keen
   Nimble
@@ -137,6 +141,7 @@ object:
   3 $object-nonpluralizable
 
 object-pluralizable:
+  Silk
   Chip
   Bean
   Dimple
@@ -238,6 +243,8 @@ object-nonpluralizable:
   Lantern
   Clay
   Pyramid
+  Shells
+  Fiddle
   Kayak
   Guns
   Codex
@@ -458,10 +465,13 @@ animal:
   Troll
   Giant
   Demon
+  Wraith
+  Kraken
   # D&D
   Quipper
 
 profession:
+  Weaver
   Jester
   Machine
   Joker
@@ -531,6 +541,7 @@ profession:
   Surgeon
   Cutter
   Maniac
+  Shepherd
 
 force:
   Bone
@@ -551,6 +562,8 @@ force:
   Wave
   Stone
   Wind
+  Soul
+  Mind
 
 action:
   Eater

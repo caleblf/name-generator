@@ -64,6 +64,8 @@ feature_suffix _ = pick
   , (1.0, lit "hair")
   , (1.0, lit "hand")
   , (1.0, lit "foot")
+  , (1.0, lit "fist")
+  , (1.0, lit "tongue")
   , (0.7, lit "tooth")
   , (0.3, lit "teeth")
   , (0.7, lit "eye")
@@ -73,7 +75,9 @@ feature_suffix _ = pick
   ]
 
 quality _ = pick
-  [ (1.0, lit "Slick")
+  [ (1.0, lit "Grey")
+  , (1.0, lit "Gloomy")
+  , (1.0, lit "Slick")
   , (1.0, lit "Keen")
   , (1.0, lit "Nimble")
   , (1.0, lit "Red")
@@ -152,7 +156,8 @@ object _ = pick
   ]
 
 object_pluralizable _ = pick
-  [ (1.0, lit "Chip")
+  [ (1.0, lit "Silk")
+  , (1.0, lit "Chip")
   , (1.0, lit "Bean")
   , (1.0, lit "Dimple")
   , (1.0, lit "Spud")
@@ -254,6 +259,8 @@ object_nonpluralizable _ = pick
   , (1.0, lit "Lantern")
   , (1.0, lit "Clay")
   , (1.0, lit "Pyramid")
+  , (1.0, lit "Shells")
+  , (1.0, lit "Fiddle")
   , (1.0, lit "Kayak")
   , (1.0, lit "Guns")
   , (1.0, lit "Codex")
@@ -474,11 +481,14 @@ animal _ = pick
   , (1.0, lit "Troll")
   , (1.0, lit "Giant")
   , (1.0, lit "Demon")
+  , (1.0, lit "Wraith")
+  , (1.0, lit "Kraken")
   , (1.0, lit "Quipper")
   ]
 
 profession _ = pick
-  [ (1.0, lit "Jester")
+  [ (1.0, lit "Weaver")
+  , (1.0, lit "Jester")
   , (1.0, lit "Machine")
   , (1.0, lit "Joker")
   , (1.0, lit "Judge")
@@ -547,6 +557,7 @@ profession _ = pick
   , (1.0, lit "Surgeon")
   , (1.0, lit "Cutter")
   , (1.0, lit "Maniac")
+  , (1.0, lit "Shepherd")
   ]
 
 force _ = pick
@@ -568,6 +579,8 @@ force _ = pick
   , (1.0, lit "Wave")
   , (1.0, lit "Stone")
   , (1.0, lit "Wind")
+  , (1.0, lit "Soul")
+  , (1.0, lit "Mind")
   ]
 
 action _ = pick
