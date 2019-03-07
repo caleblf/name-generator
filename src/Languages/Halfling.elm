@@ -1,150 +1,151 @@
 module Languages.Halfling exposing (halfling)
 
-import Language exposing (Language, Form, lit, cat, pick, u, p)
+import Pcfg exposing (Language, literalForm, concatForms, pickWeightedForm)
 
 
 halfling : Language
 halfling =
   { name = "Halfling"
+  , description = "Hobbit names"
   , generator = root
   }
 
 
-root _ = pick
-  [ (1.0, cat [start, end])
-  , (1.0, cat [onset, connector, coda])
+root _ = pickWeightedForm
+  [ (1.0, concatForms [start, end])
+  , (1.0, concatForms [onset, connector, coda])
   ]
 
-start _ = pick
-  [ (1.0, cat [v, tc])
+start _ = pickWeightedForm
+  [ (1.0, concatForms [v, tc])
   , (1.0, syllable)
   , (1.0, chunk)
   ]
 
-end _ = pick
-  [ (1.0, cat [v, tc])
+end _ = pickWeightedForm
+  [ (1.0, concatForms [v, tc])
   , (1.0, v)
   , (1.0, syllable)
   , (1.0, chunk)
   ]
 
-syllable = cat [c, v, tc]
+syllable = concatForms [c, v, tc]
 
-onset _ = pick
+onset _ = pickWeightedForm
   [ (1.0, v)
-  , (1.0, cat [c, v])
+  , (1.0, concatForms [c, v])
   ]
 
-coda _ = pick
+coda _ = pickWeightedForm
   [ (5.0, v)
-  , (5.0, cat [v, tc])
-  , (2.0, lit "y")
+  , (5.0, concatForms [v, tc])
+  , (2.0, literalForm "y")
   ]
 
-chunk _ = pick
-  [ (1.0, lit "sam")
-  , (1.0, lit "wise")
-  , (1.0, lit "gam")
-  , (1.0, lit "gee")
-  , (1.0, lit "ben")
-  , (1.0, lit "drew")
-  , (1.0, lit "took")
-  , (1.0, lit "brook")
-  , (1.0, lit "hill")
-  , (1.0, lit "half")
-  , (1.0, lit "mill")
-  , (1.0, lit "wood")
-  , (1.0, lit "ton")
+chunk _ = pickWeightedForm
+  [ (1.0, literalForm "sam")
+  , (1.0, literalForm "wise")
+  , (1.0, literalForm "gam")
+  , (1.0, literalForm "gee")
+  , (1.0, literalForm "ben")
+  , (1.0, literalForm "drew")
+  , (1.0, literalForm "took")
+  , (1.0, literalForm "brook")
+  , (1.0, literalForm "hill")
+  , (1.0, literalForm "half")
+  , (1.0, literalForm "mill")
+  , (1.0, literalForm "wood")
+  , (1.0, literalForm "ton")
   ]
 
-connector _ = pick
-  [ (1.0, lit "rd")
-  , (2.0, lit "rr")
-  , (2.0, lit "gg")
-  , (2.0, lit "pp")
-  , (1.0, lit "rt")
-  , (1.0, lit "tr")
-  , (1.0, lit "d")
-  , (1.0, lit "lb")
-  , (1.0, lit "lt")
-  , (1.0, lit "ln")
-  , (1.0, lit "lm")
-  , (1.0, lit "mm")
-  , (1.0, lit "nn")
-  , (1.0, lit "cl")
-  , (2.0, lit "sh")
-  , (1.0, lit "sw")
-  , (1.0, lit "vl")
-  , (1.0, lit "lv")
-  , (1.0, lit "cr")
-  , (1.0, lit "sn")
-  , (1.0, lit "sp")
-  , (1.0, lit "pl")
-  , (1.0, lit "pr")
-  , (1.0, lit "fr")
-  , (1.0, lit "st")
-  , (1.0, lit "th")
-  , (1.0, lit "rl")
-  , (1.0, lit "fl")
-  , (1.0, lit "nd")
-  , (1.0, lit "ld")
-  , (1.0, lit "gl")
-  , (1.0, lit "ff")
-  , (1.0, lit "ll")
+connector _ = pickWeightedForm
+  [ (1.0, literalForm "rd")
+  , (2.0, literalForm "rr")
+  , (2.0, literalForm "gg")
+  , (2.0, literalForm "pp")
+  , (1.0, literalForm "rt")
+  , (1.0, literalForm "tr")
+  , (1.0, literalForm "d")
+  , (1.0, literalForm "lb")
+  , (1.0, literalForm "lt")
+  , (1.0, literalForm "ln")
+  , (1.0, literalForm "lm")
+  , (1.0, literalForm "mm")
+  , (1.0, literalForm "nn")
+  , (1.0, literalForm "cl")
+  , (2.0, literalForm "sh")
+  , (1.0, literalForm "sw")
+  , (1.0, literalForm "vl")
+  , (1.0, literalForm "lv")
+  , (1.0, literalForm "cr")
+  , (1.0, literalForm "sn")
+  , (1.0, literalForm "sp")
+  , (1.0, literalForm "pl")
+  , (1.0, literalForm "pr")
+  , (1.0, literalForm "fr")
+  , (1.0, literalForm "st")
+  , (1.0, literalForm "th")
+  , (1.0, literalForm "rl")
+  , (1.0, literalForm "fl")
+  , (1.0, literalForm "nd")
+  , (1.0, literalForm "ld")
+  , (1.0, literalForm "gl")
+  , (1.0, literalForm "ff")
+  , (1.0, literalForm "ll")
   ]
 
-tc _ = pick
-  [ (1.0, lit "r")
-  , (1.0, lit "s")
-  , (1.0, lit "d")
-  , (1.0, lit "g")
-  , (1.0, lit "l")
-  , (3.0, lit "n")
-  , (3.0, lit "m")
+tc _ = pickWeightedForm
+  [ (1.0, literalForm "r")
+  , (1.0, literalForm "s")
+  , (1.0, literalForm "d")
+  , (1.0, literalForm "g")
+  , (1.0, literalForm "l")
+  , (3.0, literalForm "n")
+  , (3.0, literalForm "m")
   ]
 
-c _ = pick
-  [ (1.0, lit "w")
-  , (1.0, lit "r")
-  , (1.0, lit "t")
-  , (1.0, lit "tr")
-  , (1.0, lit "th")
-  , (1.0, lit "y")
-  , (1.0, lit "p")
-  , (1.0, lit "pl")
-  , (1.0, lit "s")
-  , (1.0, lit "sh")
-  , (1.0, lit "st")
-  , (1.0, lit "sm")
-  , (1.0, lit "sn")
-  , (1.0, lit "sl")
-  , (1.0, lit "d")
-  , (1.0, lit "dr")
-  , (1.0, lit "f")
-  , (1.0, lit "fr")
-  , (1.0, lit "fl")
-  , (1.0, lit "g")
-  , (1.0, lit "gr")
-  , (1.0, lit "gl")
-  , (1.0, lit "h")
-  , (1.0, lit "j")
-  , (1.0, lit "k")
-  , (1.0, lit "l")
-  , (1.0, lit "c")
-  , (1.0, lit "cr")
-  , (1.0, lit "cl")
-  , (1.0, lit "v")
-  , (1.0, lit "b")
-  , (1.0, lit "br")
-  , (1.0, lit "bl")
-  , (1.0, lit "n")
-  , (1.0, lit "m")
+c _ = pickWeightedForm
+  [ (1.0, literalForm "w")
+  , (1.0, literalForm "r")
+  , (1.0, literalForm "t")
+  , (1.0, literalForm "tr")
+  , (1.0, literalForm "th")
+  , (1.0, literalForm "y")
+  , (1.0, literalForm "p")
+  , (1.0, literalForm "pl")
+  , (1.0, literalForm "s")
+  , (1.0, literalForm "sh")
+  , (1.0, literalForm "st")
+  , (1.0, literalForm "sm")
+  , (1.0, literalForm "sn")
+  , (1.0, literalForm "sl")
+  , (1.0, literalForm "d")
+  , (1.0, literalForm "dr")
+  , (1.0, literalForm "f")
+  , (1.0, literalForm "fr")
+  , (1.0, literalForm "fl")
+  , (1.0, literalForm "g")
+  , (1.0, literalForm "gr")
+  , (1.0, literalForm "gl")
+  , (1.0, literalForm "h")
+  , (1.0, literalForm "j")
+  , (1.0, literalForm "k")
+  , (1.0, literalForm "l")
+  , (1.0, literalForm "c")
+  , (1.0, literalForm "cr")
+  , (1.0, literalForm "cl")
+  , (1.0, literalForm "v")
+  , (1.0, literalForm "b")
+  , (1.0, literalForm "br")
+  , (1.0, literalForm "bl")
+  , (1.0, literalForm "n")
+  , (1.0, literalForm "m")
   ]
 
-v _ = pick
-  [ (3.0, lit "a")
-  , (3.0, lit "i")
-  , (3.0, lit "o")
-  , (1.0, lit "u")
-  , (1.0, lit "ia")
+v _ = pickWeightedForm
+  [ (3.0, literalForm "a")
+  , (3.0, literalForm "i")
+  , (3.0, literalForm "o")
+  , (1.0, literalForm "u")
+  , (1.0, literalForm "ia")
   ]

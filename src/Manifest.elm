@@ -9,7 +9,7 @@ module Manifest exposing ( languages
 import Dict exposing (Dict)
 import Random
 
-import Language exposing (Language, Transform)
+import Pcfg exposing (Language, Transform)
 
 import Languages.Common exposing (common)
 import Languages.Elven exposing (elven)
@@ -26,6 +26,7 @@ import Transforms.Profession exposing (profession)
 dummyLanguage : Language
 dummyLanguage =
   { name = "..."
+  , description = ""
   , generator = (\_ -> Random.constant "...")
   }
 

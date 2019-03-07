@@ -1,7 +1,7 @@
 !encoding: utf-8
 !name: Title
 !author: Iguanotron
-!description: Heroic title
+!description: Heroic titles
 !priority: 1  # low priority = acts earlier
 !input: name
 !output: titled-name

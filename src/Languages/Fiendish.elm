@@ -1,93 +1,94 @@
 module Languages.Fiendish exposing (fiendish)
 
-import Language exposing (Language, Form, lit, cat, pick, u, p)
+import Pcfg exposing (Language, literalForm, concatForms, pickWeightedForm)
 
 
 fiendish : Language
 fiendish =
   { name = "Fiendish"
+  , description = "Strange names"
   , generator = name
   }
 
 
-name _ = pick
+name _ = pickWeightedForm
   [ (1.0, name_3)
   , (3.0, name_2)
   , (2.0, name_1)
   ]
 
-name_3 _ = pick
+name_3 _ = pickWeightedForm
   [ (1.0, v_name_3)
-  , (1.0, cat [c, v_name_3])
+  , (1.0, concatForms [c, v_name_3])
   ]
 
-name_2 _ = pick
+name_2 _ = pickWeightedForm
   [ (1.0, v_name_2)
-  , (1.0, cat [c, v_name_2])
+  , (1.0, concatForms [c, v_name_2])
   ]
 
-name_1 _ = pick
-  [ (1.0, cat [v, tc])
-  , (1.0, cat [c, v, tc])
+name_1 _ = pickWeightedForm
+  [ (1.0, concatForms [v, tc])
+  , (1.0, concatForms [c, v, tc])
   ]
 
-v_name_3 = cat [v, link, v_name_2]
+v_name_3 = concatForms [v, link, v_name_2]
 
-v_name_2 = cat [v, link, v_name_1]
+v_name_2 = concatForms [v, link, v_name_1]
 
-v_name_1 _ = pick
-  [ (3.0, cat [v, tc])
+v_name_1 _ = pickWeightedForm
+  [ (3.0, concatForms [v, tc])
   , (1.0, v)
   ]
 
-link _ = pick
+link _ = pickWeightedForm
   [ (3.0, tc)
-  , (2.0, cat [tc, c])
-  , (2.0, lit "'")
+  , (2.0, concatForms [tc, c])
+  , (2.0, literalForm "'")
   ]
 
-v _ = pick
-  [ (3.0, lit "a")
-  , (3.0, lit "i")
-  , (3.0, lit "e")
-  , (3.0, lit "o")
-  , (3.0, lit "u")
-  , (1.0, lit "aa")
-  , (1.0, lit "uu")
+v _ = pickWeightedForm
+  [ (3.0, literalForm "a")
+  , (3.0, literalForm "i")
+  , (3.0, literalForm "e")
+  , (3.0, literalForm "o")
+  , (3.0, literalForm "u")
+  , (1.0, literalForm "aa")
+  , (1.0, literalForm "uu")
   ]
 
-tc _ = pick
-  [ (2.0, lit "k")
-  , (2.0, lit "r")
-  , (2.0, lit "t")
-  , (2.0, lit "n")
-  , (2.0, lit "g")
-  , (2.0, lit "l")
-  , (2.0, lit "x")
-  , (2.0, lit "th")
-  , (1.0, lit "rg")
-  , (1.0, lit "h")
-  , (1.0, lit "f")
-  , (1.0, lit "m")
-  , (1.0, lit "tch")
-  , (1.0, lit "ss")
-  , (1.0, lit "z")
+tc _ = pickWeightedForm
+  [ (2.0, literalForm "k")
+  , (2.0, literalForm "r")
+  , (2.0, literalForm "t")
+  , (2.0, literalForm "n")
+  , (2.0, literalForm "g")
+  , (2.0, literalForm "l")
+  , (2.0, literalForm "x")
+  , (2.0, literalForm "th")
+  , (1.0, literalForm "rg")
+  , (1.0, literalForm "h")
+  , (1.0, literalForm "f")
+  , (1.0, literalForm "m")
+  , (1.0, literalForm "tch")
+  , (1.0, literalForm "ss")
+  , (1.0, literalForm "z")
   ]
 
-c _ = pick
-  [ (2.0, lit "g")
-  , (2.0, lit "n")
-  , (2.0, lit "l")
-  , (2.0, lit "f")
-  , (2.0, lit "p")
-  , (2.0, lit "y")
-  , (2.0, lit "v")
-  , (2.0, lit "z")
-  , (2.0, lit "b")
-  , (2.0, lit "k")
-  , (2.0, lit "t")
-  , (2.0, lit "d")
-  , (1.0, lit "w")
-  , (1.0, lit "th")
-  , (1.0, lit "tch")
+c _ = pickWeightedForm
+  [ (2.0, literalForm "g")
+  , (2.0, literalForm "n")
+  , (2.0, literalForm "l")
+  , (2.0, literalForm "f")
+  , (2.0, literalForm "p")
+  , (2.0, literalForm "y")
+  , (2.0, literalForm "v")
+  , (2.0, literalForm "z")
+  , (2.0, literalForm "b")
+  , (2.0, literalForm "k")
+  , (2.0, literalForm "t")
+  , (2.0, literalForm "d")
+  , (1.0, literalForm "w")
+  , (1.0, literalForm "th")
+  , (1.0, literalForm "tch")
   ]

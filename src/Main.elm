@@ -8,7 +8,7 @@ import Random
 import Dict
 import Set exposing (Set)
 
-import Language exposing (Language)
+import Pcfg exposing (Language, Transform)
 import Generator
 import Manifest
 
@@ -149,14 +149,14 @@ view : Model -> Html Msg
 view { names, toGenerate, selectedLanguage, activeTransforms, savedNames } =
   Html.div [ Attr.class "container" ]
     [ header
-    , generateButton
     , Html.div [ Attr.class "column-container" ]
         [ Html.div [ Attr.class "column" ]
             [ Lazy.lazy3 settingsPanel toGenerate selectedLanguage activeTransforms
             , Lazy.lazy savedNamesPanel savedNames
             ]
         , Html.div [ Attr.class "column" ]
-            [ Lazy.lazy namesPanel names
+            [ generateButton
+            , Lazy.lazy namesPanel names
             ]
         ]
     ]
@@ -178,14 +178,13 @@ settingsPanel : Int -> Language -> Set String -> Html Msg
 settingsPanel toGenerate selectedLanguage activeTransforms =
   Html.div [ Attr.class "settings-panel" ]
     [ Lazy.lazy amountSelector toGenerate
-    , Lazy.lazy languageSelector selectedLanguage.name
+    , Lazy.lazy languageSelector selectedLanguage
     , Lazy.lazy transformSelector
         <| List.map
-          (.name >>
-            (\transformName ->
-              ( transformName
-              , Set.member transformName activeTransforms
-              )))
+          (\transform ->
+            ( transform
+            , Set.member transform.name activeTransforms
+            ))
           Manifest.transforms
     ]
 
@@ -267,11 +266,12 @@ amountSelector amount =
     []
 
 
-languageSelector : String -> Html Msg
-languageSelector activeLanguageName =
+languageSelector : Language -> Html Msg
+languageSelector activeLanguage =
   Html.select
     [ Events.onInput SelectLanguage
     , Attr.class "language-selector"
+    , Attr.title activeLanguage.description
     ]
     <| List.map
         (.name >> Html.text >> List.singleton >> Html.option [])
@@ -284,22 +284,24 @@ languageOption language =
     [ Html.text language.name ]
 
 
-transformSelector : List (String, Bool) -> Html Msg
+transformSelector : List (Transform, Bool) -> Html Msg
 transformSelector transformState =
   Html.div [ Attr.class "transform-selector" ]
     <| List.map transformEntry transformState
 
-transformEntry : (String, Bool) -> Html Msg
-transformEntry (transformName, active) =
-  Html.div [ Attr.class "transform-entry" ]
+transformEntry : (Transform, Bool) -> Html Msg
+transformEntry (transform, active) =
+  Html.div
+    [ Attr.class "transform-entry"
+    , Attr.title transform.description
+    ]
     [ Html.label []
         [ Html.input
             [ Attr.type_ "checkbox"
             , Attr.checked active
-            , Events.onCheck <| ToggleTransformTo transformName
+            , Events.onCheck <| ToggleTransformTo transform.name
             ]
             []
-        , Html.text transformName
+        , Html.text transform.name
         ]
     ]
-

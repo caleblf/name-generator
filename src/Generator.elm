@@ -2,7 +2,7 @@ module Generator exposing (..)
 
 import Random
 
-import Language exposing (Language, Transform, Form)
+import Pcfg exposing (Language, Transform, Form)
 
 
 nameList : Int -> Language -> Random.Generator (List String)

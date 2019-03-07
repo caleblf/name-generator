@@ -16,15 +16,15 @@ def elmify_definitions(module_name, forms):
         """Return a canonized version of the given tag.
         The result is a valid Elm identifier.
         """
-        if tag in {module_name, 'transform', 'lit', 'cat', 'u', 'p', 'pick'}:
+        if tag == module_name:
             raise ValueError(f'Invalid tag: {tag}')
         return tag.replace('-', '_')
 
     def elmify_literal(content):
-        return f'lit "{content}"'
+        return f'literalForm "{content}"'
 
     def elmify_concatenation(elements):
-        return f'cat [{", ".join(map(elmify_exp, elements))}]'
+        return f'concatForms [{", ".join(map(elmify_exp, elements))}]'
 
     def elmify_form_tag(tag):
         if tag not in forms:
@@ -48,7 +48,7 @@ def elmify_definitions(module_name, forms):
             raise ValueError(f'No options for form tag: {tag}')
         else:
             line_sep = "\n  , "
-            return (f'{tag} _ = pick\n  [ ' +
+            return (f'{tag} _ = pickWeightedForm\n  [ ' +
                     line_sep.join(itertools.starmap(
                         elmify_probabilistic_form_entry,
                         entries
@@ -65,6 +65,7 @@ def elmify_transform(module_name, data):
 
     try:
         name = header['name']
+        description = header['description'].replace('"', r'\"')
         input_tag = header['input']
         output_tag = header['output']
         priority = int(header['priority'])
@@ -84,25 +85,26 @@ def elmify_transform(module_name, data):
         """Return a canonized version of the given tag.
         The result is a valid Elm identifier.
         """
-        if tag in {module_name, 'transform', 'lit', 'cat', 'u', 'p', 'pick'}:
+        if tag == module_name:
             raise ValueError(f'Invalid tag: {tag}')
         return tag.replace('-', '_')
 
     line_sep = '\n\n'
     return f'''module Transforms.{module_name.capitalize()} exposing ({module_name})
 
-import Language exposing (Transform, Form, lit, cat, pick, u, p)
+import Pcfg exposing (Transform, literalForm, concatForms, pickWeightedForm)
 
 
 {module_name} : Transform
 {module_name} =
   {{ name = "{name}"
+  , description = "{description}"
   , priority = {priority}
-  , transform = transform
+  , transform = transformName
   }}
 
 
-transform {canonize_tag(input_tag)} =
+transformName {canonize_tag(input_tag)} =
   let {textwrap.indent(line_sep.join(elm_definitions), '      ')[6:]}
   in {canonize_tag(output_tag)}
 '''
@@ -114,6 +116,7 @@ def elmify_language(module_name, data):
 
     try:
         name = header['name']
+        description = header['description'].replace('"', r'\"')
         root_tag = header['root']
     except KeyError as e:
         raise ValueError(f'Missing required header field: {e.args[0]}')
@@ -127,19 +130,20 @@ def elmify_language(module_name, data):
         """Return a canonized version of the given tag.
         The result is a valid Elm identifier.
         """
-        if tag in {module_name, 'transform', 'lit', 'cat', 'u', 'p', 'pick'}:
+        if tag == module_name:
             raise ValueError(f'Invalid tag: {tag}')
         return tag.replace('-', '_')
 
     line_sep = '\n\n'
     return f'''module Languages.{module_name.capitalize()} exposing ({module_name})
 
-import Language exposing (Language, Form, lit, cat, pick, u, p)
+import Pcfg exposing (Language, literalForm, concatForms, pickWeightedForm)
 
 
 {module_name} : Language
 {module_name} =
   {{ name = "{name}"
+  , description = "{description}"
   , generator = {canonize_tag(root_tag)}
   }}
 

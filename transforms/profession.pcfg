@@ -1,7 +1,7 @@
 !encoding: utf-8
 !name: Profession
 !author: Iguanotron
-!description: Medieval profession
+!description: Medieval professions
 !priority: 3  # low priority = acts earlier
 !input: name
 !output: output

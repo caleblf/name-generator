@@ -1,4 +1,4 @@
-module Language exposing (..)
+module Pcfg exposing (..)
 
 import Random
 import Random.Extra
@@ -6,11 +6,13 @@ import Random.Extra
 
 type alias Language =
   { name : String
+  , description : String
   , generator : Form
   }
 
 type alias Transform =
   { name : String
+  , description : String
   , priority : Int
   , transform : Form -> Form
   }
@@ -22,31 +24,26 @@ type alias Form = () -> Random.Generator String
 
 -- Constructors for Forms
 
-lit : String -> Form
-lit s _ = Random.constant s
+literalForm : String -> Form
+literalForm s _ = Random.constant s
 
-cat : List Form -> Form
-cat forms _ =
+concatForms : List Form -> Form
+concatForms forms _ =
   List.foldr
     (Random.map2 (++))
     (Random.constant "")
     <| List.map ((|>) ()) forms
 
-pick : List (Float, Form) -> Random.Generator String
-pick weightedForms =
+pickWeightedForm : List (Float, Form) -> Random.Generator String
+pickWeightedForm weightedForms =
   case weightedForms of
     (firstWeight, firstForm)::rest ->
       Random.Extra.frequency (firstWeight, Random.lazy firstForm)
         <| List.map (Tuple.mapSecond Random.lazy) rest
     _ -> Random.constant "" -- Should never occur
 
+-- aliases
 
--- Helpers for building pick trees
-
--- something to avoid parens
-p : Float -> String -> (Float, Form)
-p weight value = (weight, lit value)
-
--- something to avoid writing prob when is 1
-u : String -> (Float, Form)
-u = p 1
+lit = literalForm
+cat = concatForms
+pick = pickWeightedForm

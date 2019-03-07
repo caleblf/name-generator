@@ -1,7 +1,7 @@
 !encoding: utf-8
 !name: Nickname
 !author: Iguanotron
-!description: Cool nickname based on English words
+!description: Melodramatic nicknames
 !root: moniker
 
 moniker:
@@ -22,6 +22,10 @@ object-moniker:
   7 [$object-pluralizable s]
   1 [$adjective " " $object]
   0.5 [$count " " $object-pluralizable s]
+
+object:
+  4 $object-pluralizable
+  3 $object-nonpluralizable
 
 two-part-moniker: [$quality-prefix $feature-suffix]
 
@@ -136,11 +140,8 @@ adjective:
 count:
   Two
 
-object:
-  4 $object-pluralizable
-  3 $object-nonpluralizable
-
 object-pluralizable:
+  Opal
   Silk
   Chip
   Bean
@@ -226,6 +227,9 @@ object-pluralizable:
 
 object-nonpluralizable:
   Dice
+  0.5 Ruby
+  0.5 Rubies
+  Quartz
   Mask
   Cannonball
   Leaf
@@ -261,8 +265,8 @@ object-nonpluralizable:
   Gold
   Knuckles
   Coral
-  Ash
-  Ashes
+  0.5 Ash
+  0.5 Ashes
   0.5 Church
   0.5 Churches
   Lily

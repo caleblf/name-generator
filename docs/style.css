@@ -73,11 +73,12 @@ select:active {
 .column {
     min-width: 50%;
     flex-grow: 1;
+    padding: 1em;
 }
 
 
-.settings-panel, .names-panel, .saved-names-panel {
-    margin: 1em;
+.names-panel, .saved-names-panel {
+    margin-top: 1em;
 }
 
 .saved-names-list {
