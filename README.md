@@ -54,8 +54,7 @@ forms.
 
 The fields usually defined include: encoding (`utf-8` if not specified),
 name, author, description, root (the name of the tag of the root form),
-and input (the name of a tag to insert into a transform, optional).
-
+and priority (the display priority; lower priorities are shown first).
 
 After the header lines, the file is comprised of form entries which
 look something like:
