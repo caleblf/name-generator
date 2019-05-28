@@ -1,0 +1,275 @@
+!encoding: utf-8
+!name: Common
+!author: Iguanotron
+!description: Generic fantasy European human names
+!root: name
+
+name:
+  1 $name-single
+  1 $name-double
+
+name-single:
+  4 $element
+  1 [$onset-initial $v-chunk-final]
+
+name-double:
+  2 [$element-c $element]
+  2 [$chunk-initial $element]
+  1 [$element $c-chunk-final]
+  1 [$element-c $v-chunk-final]
+
+element-c: # element ending in a consonant
+  1 [$syllable-initial $syllable $syllable $coda-final]
+  2 [$syllable-initial $syllable $coda-final]
+  2 [$syllable-initial $coda-final]
+
+element:
+  1 [$syllable-initial $syllable $syllable-final]
+  2 [$syllable-initial $syllable-final]
+  2 [$syllable-only]
+
+syllable:
+  [$onset $nucleus]
+
+syllable-initial:
+  3 [$onset-initial $nucleus]
+  2 $nucleus-initial
+
+syllable-final:
+  [$onset $nucleus $coda-final]
+  [$onset $nucleus-final]
+
+syllable-only:
+  3 [$onset-initial $nucleus $coda-final]
+  [$onset-initial $nucleus-final]
+  [$nucleus-initial $coda-final]
+
+# Chunks
+
+chunk-initial: # All initial chunks must end in consonants to avoid consecutive vowels
+  mad
+  jax
+  ald
+  art
+  ulf
+  walt
+  hild
+  os
+  thur
+  gwin
+  gwid
+  al
+  wil
+  bil
+  win
+  don
+  quen
+  quin
+  ash
+  mir
+  orn
+  ild
+  ray
+  ing
+  ol
+
+c-chunk-final:
+  $c-chunk-final-f
+  $c-chunk-final-m
+v-chunk-final:
+  $v-chunk-final-f
+  $v-chunk-final-m
+
+c-chunk-final-f: # endings that will usually result in feminine-sounding names
+  sdottir
+  sha
+  ra
+  na
+  va
+  ma
+  di
+  li
+  rine
+  lene
+  grid
+  quith
+  frith
+  wen
+v-chunk-final-f:
+  4 ia
+  3 a
+  2 illa
+  2 ie
+  2 iel
+  2 ara
+  issa
+  een
+  ita
+  ina
+  ene
+  ula
+  yssa
+  ima
+  essa
+  ythe
+  y
+
+c-chunk-final-m: # endings that will usually result in masculine-sounding names
+  sson
+  son
+  ton
+  drew
+  wild
+  mund
+  wulf
+  noth
+  ric
+  thur
+  win
+  don
+  nulf
+  ray
+  fred
+  orne
+  gold
+  gar
+  der
+v-chunk-final-m:
+  on
+  er
+  art
+  ic
+  us
+  ius
+  ulf
+  ald
+  or
+  ar
+  ax
+  orn
+  ild
+  ian
+  awn
+  ed
+  an
+
+# element components
+
+onset: # start of a non-initial syllable
+  6 $tc
+  6 $c
+  # ll
+  # rr
+  # rg
+  # ng
+  # ld
+  # x
+coda: # consonant clusters for the ends of elements
+  15 $tc
+  ll
+  rn
+  st
+  th
+  sk
+  ld
+  lf
+  ng
+  rk
+  ck
+  x
+coda-final: # consonant clusters for the ends of names
+  15 $tc
+  ll
+  rn
+  st
+  th
+  sk
+  ld
+  lf
+  ng
+  rk
+  ck
+  x
+tc: # consonant clusters for the ends of syllables
+  2 r
+  2 t
+  2 s
+  2 d
+  2 l
+  2 b
+  2 n
+  2 m
+  p
+  g
+  th
+  sh
+c:
+  2 d
+  2 r
+  2 t
+  2 p
+  2 s
+  2 f
+  2 j
+  2 k
+  2 l
+  2 c
+  2 v
+  2 b
+  2 n
+  2 m
+  2 g
+  w
+  tr
+  th
+  y
+  sh
+  st
+  sl
+  sp
+  sc
+  dr
+  fr
+  gr
+  h
+  z
+  ch
+  cl
+  br
+  bl
+onset-initial: # consonants for the starts of names only
+  29 $c # likelihood = number of basic consonants
+  sm
+  sn
+  # scr
+  # spr
+  gl
+  # hr
+  cr
+  pr
+  thr
+
+nucleus:
+  5 e
+  5 u
+  5 i
+  5 o
+  7 a
+  ee
+  ai
+nucleus-initial:
+  3 a
+  3 e
+  3 i
+  3 o
+  2 u
+  ae
+nucleus-final:
+  5 a
+  2 e
+  4 i
+  5 o
+  3 ia
+  2 io
+  oa
+  ie

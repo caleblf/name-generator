@@ -10,7 +10,7 @@ import Set exposing (Set)
 
 import Pcfg exposing (Language, Transform)
 import Generator
-import Manifest
+import Grammars
 
 
 -- MAIN
@@ -42,7 +42,7 @@ init : () -> (Model, Cmd Msg)
 init _ =
   ( { names = []
     , toGenerate = 10
-    , selectedLanguage = Manifest.defaultLanguage
+    , selectedLanguage = Grammars.defaultLanguage
     , activeTransforms = Set.empty
     , savedNames = []
     }
@@ -78,7 +78,7 @@ update msg ({ names, toGenerate, selectedLanguage, activeTransforms, savedNames 
                 (.name >>
                   (\transformName ->
                     Set.member transformName activeTransforms))
-                Manifest.transforms)
+                Grammars.transforms)
               selectedLanguage
       )
     NewNames newNames ->
@@ -86,7 +86,7 @@ update msg ({ names, toGenerate, selectedLanguage, activeTransforms, savedNames 
       , Cmd.none
       )
     SelectLanguage languageName ->
-      ( case Dict.get languageName Manifest.languagesByName of
+      ( case Dict.get languageName Grammars.languagesByName of
           Nothing -> model
           Just language -> { model | selectedLanguage = language }
       , Cmd.none
@@ -185,7 +185,7 @@ settingsPanel toGenerate selectedLanguage activeTransforms =
             ( transform
             , Set.member transform.name activeTransforms
             ))
-          Manifest.transforms
+          Grammars.transforms
     ]
 
 
@@ -275,7 +275,7 @@ languageSelector activeLanguage =
     ]
     <| List.map
         (.name >> Html.text >> List.singleton >> Html.option [])
-        Manifest.languages
+        Grammars.languages
 
 languageOption : Language -> Html Msg
 languageOption language =
