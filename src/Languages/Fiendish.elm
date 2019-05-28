@@ -7,6 +7,7 @@ fiendish : Language
 fiendish =
   { name = "Fiendish"
   , description = "Strange names"
+  , priority = 3
   , generator = name
   }
 

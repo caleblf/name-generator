@@ -7,6 +7,7 @@ dwarven : Language
 dwarven =
   { name = "Dwarven"
   , description = "Dwarf language"
+  , priority = 2
   , generator = name
   }
 

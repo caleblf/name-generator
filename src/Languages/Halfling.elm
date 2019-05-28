@@ -7,6 +7,7 @@ halfling : Language
 halfling =
   { name = "Halfling"
   , description = "Hobbit names"
+  , priority = 2
   , generator = root
   }
 

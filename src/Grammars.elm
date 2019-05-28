@@ -20,6 +20,7 @@ dummyLanguage : Language
 dummyLanguage =
   { name = "..."
   , description = ""
+  , priority = -1
   , generator = (\_ -> Random.constant "...")
   }
 

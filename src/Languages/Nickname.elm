@@ -7,6 +7,7 @@ nickname : Language
 nickname =
   { name = "Nickname"
   , description = "Melodramatic nicknames"
+  , priority = 1
   , generator = moniker
   }
 

@@ -74,8 +74,9 @@ import Pcfg exposing (Language, Transform)
 
 languages : List Language
 languages =
-  [ {textwrap.indent(newline.join(map(str.lower, lang_names)), '  , ')[4:]}
-  ]
+  List.sortBy .priority
+    [ {textwrap.indent(newline.join(map(str.lower, lang_names)), '    , ')[6:]}
+    ]
 
 transforms : List Transform
 transforms =

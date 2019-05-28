@@ -2,6 +2,7 @@
 !name: Nickname
 !author: Iguanotron
 !description: Melodramatic nicknames
+!priority: 1 # low priority = earlier in display
 !root: moniker
 
 moniker:

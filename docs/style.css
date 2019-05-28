@@ -47,9 +47,6 @@ select {
     font-size: initial;
     font-family: Arial, Helvetica, sans-serif;
 }
-select:active {
-    background-color: turquoise;
-}
 
 /* Layout */
 

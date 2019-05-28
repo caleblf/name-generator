@@ -7,6 +7,7 @@ import Random.Extra
 type alias Language =
   { name : String
   , description : String
+  , priority : Int
   , generator : Form
   }
 

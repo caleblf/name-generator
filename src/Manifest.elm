@@ -15,14 +15,15 @@ import Transforms.Profession exposing (profession)
 
 languages : List Language
 languages =
-  [ nickname
-  , elven
-  , halfling
-  , dwarven
-  , common
-  , orcish
-  , fiendish
-  ]
+  List.sortBy .priority
+    [ nickname
+    , elven
+    , halfling
+    , dwarven
+    , common
+    , orcish
+    , fiendish
+    ]
 
 transforms : List Transform
 transforms =

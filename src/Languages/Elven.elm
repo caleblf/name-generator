@@ -7,6 +7,7 @@ elven : Language
 elven =
   { name = "Elven"
   , description = "Elf names"
+  , priority = 2
   , generator = root
   }
 

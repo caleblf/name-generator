@@ -1,79 +1,54 @@
 !encoding: utf-8
 !name: Common
 !author: Iguanotron
-!description: Fantasy European human names
+!description: Generic fantasy European human names
+!priority: 0 # low priority = earlier in display
 !root: name
 
 name:
-  3 $name-3
-  7 $name-2
-  4 $name-1
+  1 $name-single
+  1 $name-double
 
-# There are two types of syllables used here: vowel-syllables and chunks
-# Vowel-syllables are built directly from phonetic segments
-# Chunks are premade syllables taken from a list
+name-single:
+  4 $element
+  1 [$onset-initial $v-chunk-final]
 
-name-4: # full 4-syllable name
-  $v-name-4
-  [$c-long $v-name-4]
-  $ch-name-4
-name-3: # full 3-syllable name
-  $v-name-3
-  2 [$c-long $v-name-3]
-  2 $ch-name-3
-name-2: # full 2-syllable name
-  $v-name-2
-  2 [$c-long $v-name-2]
-  2 $ch-name-2
-name-1: # full 1-syllable name; note not using single end-chunks
-  [$c-long $v]
-  [$v $c-end]
-  3 [$c-long $v $c-end]
+name-double:
+  2 [$element-c $element]
+  2 [$chunk-initial $element]
+  1 [$element $c-chunk-final]
+  1 [$element-c $v-chunk-final]
 
-# names starting with vowel-syllables
-v-name-4:
-  [$v $v-v $v-name-3]
-  [$v $v-ch $ch-name-3]
-v-name-3:
-  [$v $v-v $v-name-2]
-  [$v $v-ch $ch-name-2]
-v-name-2:
-  [$v $v-v $v-name-1]
-  [$v $v-ch $ch-name-1]
-v-name-1:
-  [$v $c-end]
-  $v
+element-c: # element ending in a consonant
+  1 [$syllable-initial $syllable $syllable $coda-final]
+  2 [$syllable-initial $syllable $coda-final]
+  2 [$syllable-initial $coda-final]
 
-# names starting with chunks
-ch-name-4:
-  [$chunk $ch-v $v-name-3]
-  [$chunk $ch-ch $ch-name-3]
-ch-name-3:
-  [$chunk $ch-v $v-name-2]
-  [$chunk $ch-ch $ch-name-2]
-ch-name-2:
-  [$chunk $ch-v $v-name-1]
-  [$chunk $ch-ch $ch-name-1]
-ch-name-1:
-  [$end-chunk] # end
+element:
+  1 [$syllable-initial $syllable $syllable-final]
+  2 [$syllable-initial $syllable-final]
+  2 [$syllable-only]
 
-# connectors between syllable types
-v-v:
-  $link
-v-ch:
-  $tc
-  ""
-ch-v:
-  $c
-  ""
-ch-ch:
-  ""
+syllable:
+  [$onset $nucleus]
 
-# ---------------
-# Boilerplate End
-# ---------------
+syllable-initial:
+  3 [$onset-initial $nucleus]
+  2 $nucleus-initial
 
-chunk:
+syllable-final:
+  [$onset $nucleus $coda-final]
+  [$onset $nucleus-final]
+
+syllable-only:
+  3 [$onset-initial $nucleus $coda-final]
+  [$onset-initial $nucleus-final]
+  [$nucleus-initial $coda-final]
+
+# Chunks
+
+chunk-initial: # All initial chunks must end in consonants to avoid consecutive vowels
+  mad
   jax
   ald
   art
@@ -95,18 +70,35 @@ chunk:
   mir
   orn
   ild
-  ian
   ray
   ing
-  elt
-end-chunk:
-  $end-chunk-f
-  $end-chunk-m
-end-chunk-f: # endings that will usually result in feminine-sounding names
+  ol
+
+c-chunk-final:
+  $c-chunk-final-f
+  $c-chunk-final-m
+v-chunk-final:
+  $v-chunk-final-f
+  $v-chunk-final-m
+
+c-chunk-final-f: # endings that will usually result in feminine-sounding names
   sdottir
+  sha
+  ra
+  na
+  va
+  ma
+  di
+  li
+  rine
+  lene
+  grid
+  quith
+  frith
+  wen
+v-chunk-final-f:
   4 ia
   3 a
-  2 sha
   2 illa
   2 ie
   2 iel
@@ -115,25 +107,17 @@ end-chunk-f: # endings that will usually result in feminine-sounding names
   een
   ita
   ina
-  ra
-  na
   ene
-  rine
-  lene
   ula
   yssa
   ima
   essa
-  grid
   ythe
-  quith
-  frith
-  wen
-end-chunk-m: # endings that will usually result in masculine-sounding names
+  y
+
+c-chunk-final-m: # endings that will usually result in masculine-sounding names
   sson
   son
-  "on"
-  art
   ton
   drew
   wild
@@ -141,46 +125,62 @@ end-chunk-m: # endings that will usually result in masculine-sounding names
   wulf
   noth
   ric
+  thur
+  win
+  don
+  nulf
+  ray
+  fred
+  orne
+  gold
+  gar
+  der
+v-chunk-final-m:
+  on
+  er
+  art
   ic
   us
   ius
   ulf
   ald
-  thur
   or
   ar
-  win
-  don
-  nulf
   ax
   orn
   ild
   ian
-  ray
   awn
   ed
-  fred
-  orne
-  gold
-  gar
-link:
+  an
+
+# element components
+
+onset: # start of a non-initial syllable
   6 $tc
   6 $c
-  4 [$tc $c]
-  ll
-  rr
-  rg
-  ng
-  ck
-  ld
-  x
-  "'"
-c-end: # consonant clusters for the ends of names
+  # ll
+  # rr
+  # rg
+  # ng
+  # ld
+  # x
+coda: # consonant clusters for the ends of elements
   15 $tc
   ll
-  rr
-  nn
-  pp
+  rn
+  st
+  th
+  sk
+  ld
+  lf
+  ng
+  rk
+  ck
+  x
+coda-final: # consonant clusters for the ends of names
+  15 $tc
+  ll
   rn
   st
   th
@@ -238,23 +238,39 @@ c:
   cl
   br
   bl
-c-long: # consonants for the starts of names only
+onset-initial: # consonants for the starts of names only
   29 $c # likelihood = number of basic consonants
   sm
   sn
-  scr
-  spr
+  # scr
+  # spr
   gl
-  hr
+  # hr
   cr
   pr
   thr
-v:
-  2 e
+
+nucleus:
+  5 e
+  5 u
+  5 i
+  5 o
+  7 a
+  ee
+  ai
+nucleus-initial:
+  3 a
+  3 e
+  3 i
+  3 o
   2 u
-  2 i
-  2 o
-  2 a
-  2 y
-  ia
-  io
+  ae
+nucleus-final:
+  5 a
+  2 e
+  4 i
+  5 o
+  3 ia
+  2 io
+  oa
+  ie

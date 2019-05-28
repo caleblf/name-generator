@@ -2,6 +2,7 @@
 !name: Dwarven
 !author: Iguanotron
 !description: Dwarf language
+!priority: 2 # low priority = earlier in display
 !root: name
 
 name:

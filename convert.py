@@ -68,7 +68,8 @@ def elmify_transform(module_name, data):
         description = header['description'].replace('"', r'\"')
         input_tag = header['input']
         output_tag = header['output']
-        priority = int(header['priority'])
+        priority = header['priority']
+        priority = int(priority)
     except KeyError as e:
         raise ValueError(f'Missing required header field: {e.args[0]}')
     except ValueError:
@@ -118,8 +119,12 @@ def elmify_language(module_name, data):
         name = header['name']
         description = header['description'].replace('"', r'\"')
         root_tag = header['root']
+        priority = header['priority']
+        priority = int(priority)
     except KeyError as e:
         raise ValueError(f'Missing required header field: {e.args[0]}')
+    except ValueError:
+        raise ValueError(f'Non-integer priority: {priority}')
 
     if not name.isidentifier():
         raise ValueError('Invalid language name')
@@ -144,6 +149,7 @@ import Pcfg exposing (Language, literalForm, concatForms, pickWeightedForm)
 {module_name} =
   {{ name = "{name}"
   , description = "{description}"
+  , priority = {priority}
   , generator = {canonize_tag(root_tag)}
   }}
 

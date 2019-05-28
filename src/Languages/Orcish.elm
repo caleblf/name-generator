@@ -7,6 +7,7 @@ orcish : Language
 orcish =
   { name = "Orcish"
   , description = "Orc names"
+  , priority = 3
   , generator = name
   }
 
