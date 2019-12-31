@@ -12,6 +12,7 @@ import Languages.Fiendish exposing (fiendish)
 
 import Transforms.Title exposing (title)
 import Transforms.Profession exposing (profession)
+import Transforms.Domains exposing (domains)
 
 languages : List Language
 languages =
@@ -30,4 +31,5 @@ transforms =
   List.sortBy .priority
     [ title
     , profession
+    , domains
     ]

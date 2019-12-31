@@ -75,9 +75,6 @@ def elmify_transform(module_name, data):
     except ValueError:
         raise ValueError(f'Non-integer priority: {priority}')
 
-    if not name.isidentifier():
-        raise ValueError('Invalid language name')
-
     data.forms[input_tag] = None
 
     elm_definitions = elmify_definitions(module_name, data.forms)

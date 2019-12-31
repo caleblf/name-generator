@@ -1,0 +1,122 @@
+!encoding: utf-8
+!name: Divine Domains
+!author: Iguanotron
+!description: Divine domains
+!priority: 2  # low priority = acts earlier
+!input: name
+!output: output
+
+
+output: [$name $comma $epithet]
+
+comma: ", "
+
+epithet:
+  3 [$title " of " $domain]
+  4 [$title " of " $domain " and " $domain]
+  1 [$title " of " $domain $comma $domain ", and " $domain]
+
+title:
+  # male (total=20)
+  12 God
+  3 Lord
+  3 Master
+  2 King
+  # female (total=20)
+  14 Goddess
+  6 Queen
+  # neutral
+  6 Spirit
+  1 Warden
+  1 Protector
+  1 Guardian
+
+domain:
+  # mystical
+  Dreams
+  Secrets
+  Death
+  Fate
+  Chance
+  Sleep
+  Prophecy
+  Chaos
+  # virtues
+  Valor
+  Honor
+  Love
+  Fertility
+  Justice
+  # vices
+  Treachery
+  Trickery
+  # evils
+  Madness
+  Plague
+  Famine
+  # society
+  War
+  Trade
+  "the Crossroads"
+  "the Hearth"
+  "the Hunt"
+  # art
+  Poetry
+  Song
+  Dance
+  Riddles
+  # magic
+  Witchcraft
+  Monsters
+  Names
+  # professions
+  Magicians
+  Craftsmen
+  Farmers
+  Merchants
+  Travelers
+  Wanderers
+  Sailors
+  Miners
+  Shepherds
+  Warriors
+  Mothers
+  Fathers
+  Shipwrights
+  Thieves
+  Hunters
+  # nature
+  Clouds
+  Lightning
+  Thunder
+  "the Sea"
+  "Wild Places"
+  Volcanoes
+  Fire
+  "the Wind"
+  Mountains
+  Snow
+  Rain
+  # seasons
+  Springtime
+  Summertime
+  "the Winter"
+  "the Harvest"
+  "Planting Season"
+  # astrological
+  "the Sun"
+  "the Moon"
+  "the Stars"
+  "the Sky"
+  # important animals
+  Cows
+  Cats
+  Horses
+  Dragons
+  Crocodiles
+  Snakes
+  # minerals
+  Iron
+  Gold
+  Gemstones
+  Sand

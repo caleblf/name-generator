@@ -110,4 +110,4 @@ all following characters on the line are ignored by the parser.
 Building the web app requires:
 
 * UglifyJS 3
-* Elm 0.19
+* Elm 0.19.1
