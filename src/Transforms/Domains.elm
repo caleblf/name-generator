@@ -97,7 +97,7 @@ transformName name =
         , (1.0, literalForm "Summertime")
         , (1.0, literalForm "the Winter")
         , (1.0, literalForm "the Harvest")
-        , (1.0, literalForm "Planting Season")
+        , (1.0, literalForm "the Planting Season")
         , (1.0, literalForm "the Sun")
         , (1.0, literalForm "the Moon")
         , (1.0, literalForm "the Stars")
