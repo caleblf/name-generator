@@ -52,7 +52,7 @@ domain:
   Trickery
   # evils
   Madness
-  Plague
+  Plagues
   Famine
   # society
   War
@@ -80,8 +80,6 @@ domain:
   Miners
   Shepherds
   Warriors
-  Mothers
-  Fathers
   Shipwrights
   Thieves
   Hunters
@@ -96,7 +94,7 @@ domain:
   "the Wind"
   Mountains
   Snow
-  Rain
+  "the Rain"
   # seasons
   Springtime
   Summertime
@@ -115,6 +113,10 @@ domain:
   Dragons
   Crocodiles
   Snakes
+  Beetles
+  Ants
+  Fish
+  Whales
   # minerals
   Iron
   Gold
