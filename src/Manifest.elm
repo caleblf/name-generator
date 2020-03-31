@@ -52,16 +52,16 @@ markovLanguages =
   [ { name = "Roman"
     , description = "Roman-sounding names"
     , priority = 2
-    , filePath = "/examples/roman.txt"
+    , filePath = "examples/roman.txt"
     }
   , { name = "Arthurian"
     , description = "Names with an Arthurian vibe"
     , priority = 3
-    , filePath = "/examples/arthurian.txt"
+    , filePath = "examples/arthurian.txt"
     }
   , { name = "Common"
     , description = "Fantasy common-tongue names. Good for humans"
     , priority = 0
-    , filePath = "/examples/common.txt"
+    , filePath = "examples/common.txt"
     }
   ]
