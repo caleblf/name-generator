@@ -1,21 +1,24 @@
-module Manifest exposing (languages, transforms)
+module Manifest exposing (pcfgLanguages, pcfgTransforms,
+                          markovLanguages, MarkovLanguageSpec)
 
-import Pcfg exposing (Language, Transform)
+import Pcfg
 
-import Languages.Nickname exposing (nickname)
-import Languages.Elven exposing (elven)
-import Languages.Halfling exposing (halfling)
-import Languages.Dwarven exposing (dwarven)
-import Languages.Common exposing (common)
-import Languages.Orcish exposing (orcish)
-import Languages.Fiendish exposing (fiendish)
+import PcfgLanguages.Nickname exposing (nickname)
+import PcfgLanguages.Elven exposing (elven)
+import PcfgLanguages.Halfling exposing (halfling)
+import PcfgLanguages.Dwarven exposing (dwarven)
+import PcfgLanguages.Common exposing (common)
+import PcfgLanguages.Orcish exposing (orcish)
+import PcfgLanguages.Fiendish exposing (fiendish)
+import PcfgLanguages.Town exposing (town)
 
-import Transforms.Title exposing (title)
-import Transforms.Profession exposing (profession)
-import Transforms.Domains exposing (domains)
+import PcfgTransforms.Title exposing (title)
+import PcfgTransforms.Profession exposing (profession)
+import PcfgTransforms.Domains exposing (domains)
 
-languages : List Language
-languages =
+
+pcfgLanguages : List Pcfg.Language
+pcfgLanguages =
   List.sortBy .priority
     [ nickname
     , elven
@@ -24,12 +27,41 @@ languages =
     , common
     , orcish
     , fiendish
+    , town
     ]
 
-transforms : List Transform
-transforms =
+pcfgTransforms : List Pcfg.Transform
+pcfgTransforms =
   List.sortBy .priority
     [ title
     , profession
     , domains
     ]
+
+
+type alias MarkovLanguageSpec =
+  { name : String
+  , description : String
+  , priority : Int
+  , filePath : String
+  }
+
+
+markovLanguages : List MarkovLanguageSpec
+markovLanguages =
+  [ { name = "Roman"
+    , description = "Roman-sounding names"
+    , priority = 2
+    , filePath = "/examples/roman.txt"
+    }
+  , { name = "Arthurian"
+    , description = "Names with an Arthurian vibe"
+    , priority = 3
+    , filePath = "/examples/arthurian.txt"
+    }
+  , { name = "Common"
+    , description = "Fantasy common-tongue names. Good for humans"
+    , priority = 0
+    , filePath = "/examples/common.txt"
+    }
+  ]

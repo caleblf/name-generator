@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Conversion script for language files."""
+"""Conversion script for PCFG language files."""
 
 import sys
 import argparse
@@ -88,7 +88,7 @@ def elmify_transform(module_name, data):
         return tag.replace('-', '_')
 
     line_sep = '\n\n'
-    return f'''module Transforms.{module_name.capitalize()} exposing ({module_name})
+    return f'''module PcfgTransforms.{module_name.capitalize()} exposing ({module_name})
 
 import Pcfg exposing (Transform, literalForm, concatForms, pickWeightedForm)
 
@@ -137,7 +137,7 @@ def elmify_language(module_name, data):
         return tag.replace('-', '_')
 
     line_sep = '\n\n'
-    return f'''module Languages.{module_name.capitalize()} exposing ({module_name})
+    return f'''module PcfgLanguages.{module_name.capitalize()} exposing ({module_name})
 
 import Pcfg exposing (Language, literalForm, concatForms, pickWeightedForm)
 
@@ -195,10 +195,10 @@ if __name__ == '__main__':
 
     if 'root' in data.header:
         elm_text = elmify_language(module_name, data)
-        outfile = outdir / "Languages" / (module_name.capitalize() + '.elm')
+        outfile = outdir / "PcfgLanguages" / (module_name.capitalize() + '.elm')
     else:
         elm_text = elmify_transform(module_name, data)
-        outfile = outdir / "Transforms" / (module_name.capitalize() + '.elm')
+        outfile = outdir / "PcfgTransforms" / (module_name.capitalize() + '.elm')
 
     print(f'Writing Elm PCFG file: {outfile}')
     with open(outfile, 'w') as f:

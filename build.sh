@@ -44,7 +44,6 @@ done
 
 
 convert="./convert.py"
-makemanifest="./makemanifest.py"
 
 if ! [ -z $languages_dir ]
 then
@@ -62,12 +61,6 @@ then
     do
         $convert ${transforms_dir}/$f -o ${elm_dir}
     done
-fi
-
-if ! [ -z $languages_dir ] || ! [ -z $transforms_dir ]
-then
-    echo "Making manifest"
-    $makemanifest $elm_dir
 fi
 
 # Adapted from optimize.sh in the Elm tutorial

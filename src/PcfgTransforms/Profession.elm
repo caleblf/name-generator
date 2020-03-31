@@ -1,4 +1,4 @@
-module Transforms.Profession exposing (profession)
+module PcfgTransforms.Profession exposing (profession)
 
 import Pcfg exposing (Transform, literalForm, concatForms, pickWeightedForm)
 

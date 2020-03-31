@@ -1,4 +1,4 @@
-module Languages.Elven exposing (elven)
+module PcfgLanguages.Elven exposing (elven)
 
 import Pcfg exposing (Language, literalForm, concatForms, pickWeightedForm)
 

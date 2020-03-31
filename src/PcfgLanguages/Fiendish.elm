@@ -1,4 +1,4 @@
-module Languages.Fiendish exposing (fiendish)
+module PcfgLanguages.Fiendish exposing (fiendish)
 
 import Pcfg exposing (Language, literalForm, concatForms, pickWeightedForm)
 

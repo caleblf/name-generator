@@ -1,4 +1,4 @@
-module Transforms.Title exposing (title)
+module PcfgTransforms.Title exposing (title)
 
 import Pcfg exposing (Transform, literalForm, concatForms, pickWeightedForm)
 

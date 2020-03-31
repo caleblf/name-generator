@@ -1,4 +1,4 @@
-module Languages.Dwarven exposing (dwarven)
+module PcfgLanguages.Dwarven exposing (dwarven)
 
 import Pcfg exposing (Language, literalForm, concatForms, pickWeightedForm)
 

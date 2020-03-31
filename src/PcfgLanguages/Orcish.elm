@@ -1,4 +1,4 @@
-module Languages.Orcish exposing (orcish)
+module PcfgLanguages.Orcish exposing (orcish)
 
 import Pcfg exposing (Language, literalForm, concatForms, pickWeightedForm)
 

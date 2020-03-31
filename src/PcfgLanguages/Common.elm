@@ -1,4 +1,4 @@
-module Languages.Common exposing (common)
+module PcfgLanguages.Common exposing (common)
 
 import Pcfg exposing (Language, literalForm, concatForms, pickWeightedForm)
 
@@ -7,7 +7,7 @@ common : Language
 common =
   { name = "Common"
   , description = "Generic fantasy European human names"
-  , priority = 0
+  , priority = 1
   , generator = name
   }
 

@@ -2,7 +2,7 @@
 !name: Common
 !author: Iguanotron
 !description: Generic fantasy European human names
-!priority: 0 # low priority = earlier in display
+!priority: 1 # low priority = earlier in display
 !root: name
 
 name:

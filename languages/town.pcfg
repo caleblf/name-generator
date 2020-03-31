@@ -1,0 +1,93 @@
+!encoding: utf-8
+!name: Towns
+!author: Iguanotron
+!description: Generic city/town names
+!priority: 10 # low priority = earlier in display
+!root: root
+
+root:
+  [$adjective $feature]
+
+adjective:
+  Blessed
+  Great
+  Iron
+  Gilded
+  Gleaming
+  Storm
+  Thunder
+  Blue
+  Green
+  Red
+  Black
+  Dun
+  Gray
+  Silver
+  Golden
+  Winter
+  Summer
+  Spring
+  Azure
+  Bleak
+  Dead
+  New
+  Old
+  Fox
+  Bear
+  Wolf
+  Dogs
+  Lions
+  Dragon
+  Eagle
+  Raven
+  Crow
+  Elk
+  Snake
+  Leopard
+  Grim
+  Grave
+  High
+  Low
+  Bronze
+
+feature:
+  helm
+  deep
+  ford
+  tree
+  brook
+  " Warren"
+  river
+  hill
+  " Mountain"
+  " Valley"
+  lake
+  run
+  fall
+  falls
+  wood
+  nest
+  water
+  well
+  hall
+  haven
+  wall
+  crest
+  field
+  fort
+  bridge
+  tower
+  spire
+  keep
+  town
+  downs
+  " Circle"
+  " Pasture"
+  " Crossing"
+  " Moon"
+  march
+  moot
+  hollow
+  rest
+  " Bastion"
+  moor

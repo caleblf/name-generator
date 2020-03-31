@@ -1,4 +1,4 @@
-module Languages.Halfling exposing (halfling)
+module PcfgLanguages.Halfling exposing (halfling)
 
 import Pcfg exposing (Language, literalForm, concatForms, pickWeightedForm)
 

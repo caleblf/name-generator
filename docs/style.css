@@ -29,20 +29,13 @@ button:hover {
 }
 
 input[type=number] {
-    width: 7em;
-    padding: 0.4em;
-    border: 1px solid #ccc;
+    width: 6em;
     font-size: initial;
     font-family: Arial, Helvetica, sans-serif;
 }
 
 select {
     min-width: 7em;
-    padding-top: 0.4em;
-    padding-left: 0.4em;
-    padding-bottom: 0.4em;
-    border: none;
-    background-color: #eee;
     color: black;
     font-size: initial;
     font-family: Arial, Helvetica, sans-serif;
@@ -69,6 +62,7 @@ select {
 
 .column {
     min-width: 50%;
+    max-width: 25em;
     flex-grow: 1;
     padding: 1em;
 }
@@ -117,7 +111,7 @@ select {
     padding: 0.8em;
 }
 
-.amount-selector, .language-selector, .widget-button {
+.amount-selector, .language-selector, .generate-button {
     margin-right: 0.4em;
 }
 

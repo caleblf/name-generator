@@ -1,4 +1,4 @@
-module Languages.Nickname exposing (nickname)
+module PcfgLanguages.Nickname exposing (nickname)
 
 import Pcfg exposing (Language, literalForm, concatForms, pickWeightedForm)
 
