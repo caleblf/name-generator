@@ -98,8 +98,21 @@ modifier:
   Cinder
   Ember
   Ash
+  Brick
+  Gold
+  Fish
+  Reed
+  Deer
+  Broken
+  Moss
+  Fern
+  Cold
+  Pink
+  Brown
+  Hollow
 
 feature:
+  berg
   gate
   garden
   stone
@@ -107,12 +120,10 @@ feature:
   pool
   mouth
   vale
-  ton
   thorn
   port
   " Cove"
   barrow
-  hollow
   harbor
   helm
   hold
@@ -126,7 +137,7 @@ feature:
   dock
   tree
   brook
-  " Warren"
+  warren
   river
   hill
   " Mountain"

@@ -106,7 +106,7 @@ select {
 
 /* Widgets */
 
-.generate-button {
+.generate-button, .widget-button {
     flex-shrink: 0;
     padding: 0.8em;
 }

@@ -8,21 +8,29 @@ import List.Extra
 type alias Cluster = String
 
 
-vowels : Set Char
-vowels = Set.fromList <| String.toList "aeiouy"  -- include y? for now, yes
+categorize : List (Set comparable) -> comparable -> Int
+categorize groups item =
+  Maybe.withDefault -1
+    <| List.Extra.findIndex (Set.member item) groups
 
-punctuation : Set Char
-punctuation = Set.fromList <| String.toList "-'/*"
 
+charsIn : String -> Set Char
+charsIn = String.toList >> Set.fromList
 
-categorize : Char -> Int
-categorize char =
-  if Set.member char vowels then 0
-  else if Set.member char punctuation then 1
-  else 2
+categorizeLetter : Char -> Int
+categorizeLetter =
+  categorize
+    <| List.map charsIn
+      [ "aeiou"
+      , "bcdfghjklmnpqrstvqxz"
+      , "y"
+      , " "
+      ] -- All other characters are "punctuation"
+
 
 clusterTogether : Char -> Char -> Bool
-clusterTogether char1 char2 = categorize char1 == categorize char2
+clusterTogether char1 char2 =
+  categorizeLetter char1 == categorizeLetter char2
 
 
 toClusters : String -> List Cluster
