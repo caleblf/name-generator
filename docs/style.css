@@ -9,20 +9,28 @@ html, body {
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Lato", Calibri, Candara, Segoe, Segoe UI, Optima, Arial, sans-serif;
     padding: 1em;
 }
 
+h1 {
+    font-family: "Vollkorn", Georgia, serif;
+    font-weight: normal;
+}
+
 /* Form elements */
+
+button, input, select {
+    color: black;
+    font-size: initial;
+    font-family: "Lato", Calibri, Candara, Segoe, Segoe UI, Optima, Arial, sans-serif;
+}
 
 button {
     padding: 0.4em;
     border: none;
     background-color: #eee;
-    color: black;
     cursor: pointer;
-    font-size: initial;
-    font-family: Arial, Helvetica, sans-serif;
 }
 button:hover {
     background-color: turquoise;
@@ -30,15 +38,10 @@ button:hover {
 
 input[type=number] {
     width: 6em;
-    font-size: initial;
-    font-family: Arial, Helvetica, sans-serif;
 }
 
 select {
     min-width: 7em;
-    color: black;
-    font-size: initial;
-    font-family: Arial, Helvetica, sans-serif;
 }
 
 /* Layout */
@@ -84,6 +87,8 @@ select {
 }
 .generated-name {
     padding: 0.2em;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
     cursor: pointer;
 }
 
@@ -96,8 +101,14 @@ select {
     font-weight: bold;
 }
 
+.saved-name-entry {
+    margin: 0.4em;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: flex-start;
+}
 .saved-name {
-    padding: 0.2em;
+    margin-top: 0.2em;
 }
 
 .transform-selector {
@@ -108,10 +119,11 @@ select {
 
 .generate-button, .widget-button {
     flex-shrink: 0;
+    margin-right: 0.4em;
     padding: 0.8em;
 }
 
-.amount-selector, .language-selector, .generate-button {
+.amount-selector, .language-selector {
     margin-right: 0.4em;
 }
 
@@ -120,7 +132,7 @@ select {
 }
 
 .forget-name-button {
-    margin: 0.2em;
+    margin-right: 0.2em;
     padding: 0.2em;
     -webkit-user-select: none;
     -moz-user-select: none;

@@ -107,10 +107,9 @@ viewSettings { transformStates } =
 transformToggle : Int -> (Transform, Bool) -> Html Msg
 transformToggle index (transform, active) =
   Html.div
-    [ Attr.class "transform-entry"
-    , Attr.title transform.metadata.description
-    ]
-    [ Html.label []
+    [ Attr.class "transform-entry" ]
+    [ Html.label
+        [ Attr.title transform.metadata.description ]
         [ Html.input
             [ Attr.type_ "checkbox"
             , Attr.checked active

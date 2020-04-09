@@ -161,9 +161,11 @@ savedNamesList =
     << List.indexedMap
         (\index name ->
           Html.div
-            [ Attr.class "saved-name" ]
+            [ Attr.class "saved-name-entry" ]
             [ forgetNameButton index
-            , Html.text name
+            , Html.div
+                [ Attr.class "saved-name" ]
+                [ Html.text name ]
             ])  
 
 forgetNameButton : Int -> Html Msg
