@@ -116,6 +116,8 @@ modifier _ = pickWeightedForm
   , (1.0, literalForm "Pink")
   , (1.0, literalForm "Brown")
   , (1.0, literalForm "Hollow")
+  , (1.0, literalForm "Lost")
+  , (1.0, literalForm "Bright")
   ]
 
 feature _ = pickWeightedForm

@@ -11,6 +11,7 @@ import PcfgLanguages.Common exposing (common)
 import PcfgLanguages.Orcish exposing (orcish)
 import PcfgLanguages.Fiendish exposing (fiendish)
 import PcfgLanguages.Town exposing (town)
+import PcfgLanguages.Organization exposing (organization)
 
 import PcfgTransforms.Title exposing (title)
 import PcfgTransforms.Profession exposing (profession)
@@ -28,6 +29,7 @@ pcfgLanguages =
     , orcish
     , fiendish
     , town
+    , organization
     ]
 
 pcfgTransforms : List Pcfg.Transform
@@ -55,12 +57,12 @@ markovLanguages =
     , filePath = "examples/roman.txt"
     }
   , { name = "Arthurian"
-    , description = "Names with an Arthurian vibe"
+    , description = "Names reminiscent of Arthurian legend"
     , priority = 3
     , filePath = "examples/arthurian.txt"
     }
   , { name = "Common"
-    , description = "Fantasy common-tongue names. Good for humans"
+    , description = "Fantasy common-tongue names"
     , priority = 0
     , filePath = "examples/common.txt"
     }

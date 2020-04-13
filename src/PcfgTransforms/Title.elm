@@ -56,6 +56,9 @@ transformName name =
         , (1.0, literalForm "Iron")
         , (1.0, literalForm "Clay")
         , (1.0, literalForm "Crystalline")
+        , (1.0, literalForm "Jade")
+        , (1.0, literalForm "Amber")
+        , (1.0, literalForm "Glass")
         ]
 
       sigil_phrase _ = pickWeightedForm
@@ -247,6 +250,7 @@ transformName name =
         , (1.0, literalForm "Dragonslayer")
         , (1.0, literalForm "Titan-killer")
         , (1.0, literalForm "Magnificent")
+        , (1.0, literalForm "Revenant")
         , (1.0, literalForm "Invisible")
         , (1.0, literalForm "Blind")
         , (1.0, literalForm "Deaf")
@@ -298,6 +302,8 @@ transformName name =
         , (1.0, literalForm "Artificer")
         , (1.0, literalForm "Sage")
         , (1.0, literalForm "Seer")
+        , (1.0, literalForm "Pilgrim")
+        , (1.0, literalForm "Wanderer")
         , (1.0, literalForm "Dragon")
         , (1.0, literalForm "Banshee")
         , (1.0, literalForm "Boar")

@@ -45,6 +45,10 @@ material:
   Iron
   Clay
   Crystalline
+  Jade
+  Amber
+  Glass
+
 
 sigil-phrase:
   2 [$sigil-mod-s $sp $sigil]
@@ -247,6 +251,7 @@ description:
   Dragonslayer
   Titan-killer
   Magnificent
+  Revenant
   # Physical trait
   Invisible
   Blind
@@ -305,6 +310,8 @@ description:
   Artificer
   Sage
   Seer
+  Pilgrim
+  Wanderer
   # Monster
   Dragon
   Banshee

@@ -7,4 +7,4 @@ import Markov.Chain
 
 generatorFromExamples : List String -> Random.Generator String
 generatorFromExamples =
-  Markov.Chain.buildProcess >> Markov.Chain.express
+  List.map String.toLower >> Markov.Chain.buildProcess >> Markov.Chain.express
