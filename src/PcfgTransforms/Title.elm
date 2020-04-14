@@ -125,6 +125,7 @@ transformName name =
         , (1.0, literalForm "Club")
         , (1.0, literalForm "Lance")
         , (1.0, literalForm "Hammer")
+        , (1.0, literalForm "Axe")
         , (1.0, literalForm "Shield")
         , (1.0, literalForm "Mantle")
         , (1.0, literalForm "Gauntlet")

@@ -6,18 +6,19 @@
 !root: root
 
 root:
-  [$the $adjective $sp $object]
-  [$the $adjective $sp $object-pl]
+  2 [$the $adjective $sp $object]
+  2 [$the $adjective $sp $object-pl]
   [$the $adjective $sp $people]
   [$the $adjective $sp $group]
   [$the $count $sp $object-pl]
   [$the $count $sp $people]
   [$the $group $ofthe $object]
-  [$the $group $ofthe $object-pl]
-  [$the $group $of- $object-pl]
-  [$the $group $of- $adjective $sp $people]
+  0.5 [$the $group $ofthe $object-pl]
   [$the $group $ofthe $adjective $sp $object]
   [$the $group $ofthe $adjective $sp $object-pl]
+  [$the $group $of- $object-pl]
+  [$the $group $of- $adjective $sp $people]
+  0.5 [$the $group $of- $count]
   [$the $people $ofthe $object]
   [$the $people $ofthe $object-pl]
   [$the $people $ofthe $adjective $sp $object]
@@ -30,6 +31,7 @@ the: "The "
 of-: " of "
 ofthe: " of the "
 sp: " "
+
 
 object-pl: [$object "s"]
 
@@ -73,7 +75,9 @@ adjective:
   # Possessive
   King's
   Queen's
+  Emperor's
   # Miscellaneous
+  Royal
   Lost
   Dark
   Blessed
@@ -82,7 +86,7 @@ adjective:
   Shining
   Dead
   New
-  Old
+  Ancient
   Grim
   High
   Tall
@@ -93,6 +97,9 @@ adjective:
   Holy
   Ardent
   Silent
+  Forsaken
+  Chosen
+  Fey
 
 
 count:
@@ -107,7 +114,7 @@ count:
   Nine
   Ten
   Eleven
-  Dozen
+  Twelve
   Many
 
 
@@ -144,12 +151,12 @@ object: # must be pluralizable with -s suffix
   Spear
   Blade
   Sword
-  Bow
   Arrow
   Dagger
-  Club
+  Truncheon
   Lance
   Hammer
+  Axe
   # Armor
   Shield
   Mantle
@@ -163,22 +170,19 @@ object: # must be pluralizable with -s suffix
   # Books
   Scroll
   Tome
+  Tablet
   # Structures
   Gate
   Tower
   Door
   Pyramid
-  Manse
   Tomb
   Spire
   # Natural places
   River
   Grove
   Mountain
-  Shore
-  Tarn
   Desert
-  Glen
   # Astronomical bodies
   Moon
   Sun
@@ -219,7 +223,6 @@ people:
   Geometers
   Pilgrims
   Followers
-  People
   Soldiers
   Guards
   Protectors
@@ -242,7 +245,13 @@ people:
   Scholars
   Druids
   Philosophers
-
+  Alchemists
+  Wardens
+  Ghosts
+  Dragons
+  Lions
+  Hunters
+  Revenants
 
 
 group:
@@ -264,6 +273,14 @@ group:
   Parliament
   Brotherhood
   Sisterhood
+  League
+  Alliance
+  Pact
+  Cabal
+  Fellowship
+  Compact
+  Coalition
+  People
 
 
 vibe:
@@ -291,3 +308,11 @@ vibe:
   Glass
   Time
   Ice
+  Mercy
+  Honor
+  Law
+  Chaos
+  Freedom
+  Abnegation
+  Atonement
+  Fate
