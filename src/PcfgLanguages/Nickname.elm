@@ -12,7 +12,7 @@ nickname =
   }
 
 
-moniker _ = pickWeightedForm
+moniker = pickWeightedForm
   [ (7.0, animal_moniker)
   , (6.0, object_moniker)
   , (4.0, profession_moniker)
@@ -22,33 +22,33 @@ moniker _ = pickWeightedForm
   , (0.6, verb)
   ]
 
-animal_moniker _ = pickWeightedForm
+animal_moniker = pickWeightedForm
   [ (10.0, animal)
   , (7.0, concatForms [literalForm "The ", animal])
   ]
 
-object_moniker _ = pickWeightedForm
+object_moniker = pickWeightedForm
   [ (10.0, object)
   , (7.0, concatForms [object_pluralizable, literalForm "s"])
   , (1.0, concatForms [adjective, literalForm " ", object])
   , (0.5, concatForms [count, literalForm " ", object_pluralizable, literalForm "s"])
   ]
 
-object _ = pickWeightedForm
+object = pickWeightedForm
   [ (4.0, object_pluralizable)
   , (3.0, object_nonpluralizable)
   ]
 
 two_part_moniker = concatForms [quality_prefix, feature_suffix]
 
-profession_moniker _ = pickWeightedForm
+profession_moniker = pickWeightedForm
   [ (2.0, profession)
   , (1.0, concatForms [literalForm "The ", profession])
   ]
 
 celestial_force_moniker = concatForms [force, literalForm " ", action]
 
-quality_prefix _ = pickWeightedForm
+quality_prefix = pickWeightedForm
   [ (1.0, literalForm "Blue")
   , (1.0, literalForm "Red")
   , (1.0, literalForm "Black")
@@ -66,7 +66,7 @@ quality_prefix _ = pickWeightedForm
   , (1.0, literalForm "No-")
   ]
 
-feature_suffix _ = pickWeightedForm
+feature_suffix = pickWeightedForm
   [ (1.0, literalForm "beard")
   , (1.0, literalForm "hair")
   , (1.0, literalForm "hand")
@@ -81,7 +81,7 @@ feature_suffix _ = pickWeightedForm
   , (0.5, literalForm "fingers")
   ]
 
-quality _ = pickWeightedForm
+quality = pickWeightedForm
   [ (1.0, literalForm "Grey")
   , (1.0, literalForm "Gloomy")
   , (1.0, literalForm "Slick")
@@ -122,7 +122,7 @@ quality _ = pickWeightedForm
   , (1.0, literalForm "Lucky")
   ]
 
-verb _ = pickWeightedForm
+verb = pickWeightedForm
   [ (1.0, literalForm "Slash")
   , (1.0, literalForm "Crash")
   , (1.0, literalForm "Ruin")
@@ -149,7 +149,7 @@ verb _ = pickWeightedForm
   , (1.0, literalForm "Scratch")
   ]
 
-adjective _ = pickWeightedForm
+adjective = pickWeightedForm
   [ (2.0, literalForm "Big")
   , (2.0, literalForm "Old")
   , (1.0, literalForm "Little")
@@ -157,7 +157,7 @@ adjective _ = pickWeightedForm
 
 count = literalForm "Two"
 
-object_pluralizable _ = pickWeightedForm
+object_pluralizable = pickWeightedForm
   [ (1.0, literalForm "Opal")
   , (1.0, literalForm "Silk")
   , (1.0, literalForm "Chip")
@@ -243,7 +243,7 @@ object_pluralizable _ = pickWeightedForm
   , (1.0, literalForm "Flake")
   ]
 
-object_nonpluralizable _ = pickWeightedForm
+object_nonpluralizable = pickWeightedForm
   [ (1.0, literalForm "Dice")
   , (0.5, literalForm "Ruby")
   , (0.5, literalForm "Rubies")
@@ -330,7 +330,7 @@ object_nonpluralizable _ = pickWeightedForm
   , (1.0, literalForm "Sugar")
   ]
 
-animal _ = pickWeightedForm
+animal = pickWeightedForm
   [ (1.0, literalForm "Cobra")
   , (1.0, literalForm "Worm")
   , (1.0, literalForm "Flea")
@@ -492,7 +492,7 @@ animal _ = pickWeightedForm
   , (1.0, literalForm "Quipper")
   ]
 
-profession _ = pickWeightedForm
+profession = pickWeightedForm
   [ (1.0, literalForm "Weaver")
   , (1.0, literalForm "Jester")
   , (1.0, literalForm "Machine")
@@ -566,7 +566,7 @@ profession _ = pickWeightedForm
   , (1.0, literalForm "Shepherd")
   ]
 
-force _ = pickWeightedForm
+force = pickWeightedForm
   [ (1.0, literalForm "Bone")
   , (1.0, literalForm "Moon")
   , (1.0, literalForm "Star")
@@ -589,7 +589,7 @@ force _ = pickWeightedForm
   , (1.0, literalForm "Mind")
   ]
 
-action _ = pickWeightedForm
+action = pickWeightedForm
   [ (1.0, literalForm "Eater")
   , (1.0, literalForm "Dancer")
   , (1.0, literalForm "Caller")

@@ -17,13 +17,13 @@ transformName name =
 
       comma = literalForm ", "
 
-      epithet _ = pickWeightedForm
+      epithet = pickWeightedForm
         [ (3.0, concatForms [title, literalForm " of ", domain])
         , (4.0, concatForms [title, literalForm " of ", domain, literalForm " and ", domain])
         , (1.0, concatForms [title, literalForm " of ", domain, comma, domain, literalForm ", and ", domain])
         ]
 
-      title _ = pickWeightedForm
+      title = pickWeightedForm
         [ (12.0, literalForm "God")
         , (3.0, literalForm "Lord")
         , (3.0, literalForm "Master")
@@ -36,7 +36,7 @@ transformName name =
         , (1.0, literalForm "Guardian")
         ]
 
-      domain _ = pickWeightedForm
+      domain = pickWeightedForm
         [ (1.0, literalForm "Dreams")
         , (1.0, literalForm "Secrets")
         , (1.0, literalForm "Death")

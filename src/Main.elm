@@ -8,7 +8,7 @@ import Random
 
 import NameGeneratorApp
 import Language
-import Transforms
+import Transform
 
 
 
@@ -31,7 +31,7 @@ main =
 type alias Model =
   { generatorModel : NameGeneratorApp.Model  -- app/generation state
   , languageModel : Language.Model  -- either a PCFG or Markov model
-  , transformsModel : Transforms.Model  -- a PCFG model, separate
+  , transformsModel : Transform.Model  -- a PCFG model, separate
   }
 
 
@@ -39,7 +39,7 @@ init : () -> (Model, Cmd Msg)
 init _ =
   let
     (languageModel, languageCmd) = Language.init
-    (transformsModel, transformsCmd) = Transforms.init
+    (transformsModel, transformsCmd) = Transform.init
     (generatorModel, generatorCmd) = NameGeneratorApp.init
   in
     ( { generatorModel = generatorModel
@@ -49,7 +49,7 @@ init _ =
     , Cmd.batch
         [ Cmd.map GeneratorMsg generatorCmd
         , Cmd.map LanguageMsg languageCmd
-        , Cmd.map TransformsMsg transformsCmd
+        , Cmd.map TransformMsg transformsCmd
         ]
     )
 
@@ -61,7 +61,7 @@ init _ =
 type Msg
   = GeneratorMsg NameGeneratorApp.Msg
   | LanguageMsg Language.Msg
-  | TransformsMsg Transforms.Msg
+  | TransformMsg Transform.Msg
 
 
 update : Msg -> Model -> (Model, Cmd Msg)
@@ -71,7 +71,7 @@ update msg ({ generatorModel, languageModel, transformsModel } as model) =
       let
         generator : Random.Generator String
         generator =
-          Transforms.applyTransforms transformsModel
+          Transform.applyTransforms transformsModel
           <| Random.map capitalize
           <| Language.languageGenerator languageModel
         (newGeneratorModel, generatorCmd) =
@@ -88,13 +88,13 @@ update msg ({ generatorModel, languageModel, transformsModel } as model) =
         ( { model | languageModel = newLanguageModel }
         , Cmd.map LanguageMsg languageCmd
         )
-    TransformsMsg transformsMsg ->
+    TransformMsg transformsMsg ->
       let
-        (newTransformsModel, transformsCmd) =
-          Transforms.update transformsMsg transformsModel
+        (newTransformModel, transformsCmd) =
+          Transform.update transformsMsg transformsModel
       in
-        ( { model | transformsModel = newTransformsModel }
-        , Cmd.map TransformsMsg transformsCmd
+        ( { model | transformsModel = newTransformModel }
+        , Cmd.map TransformMsg transformsCmd
         )
 
 
@@ -122,7 +122,7 @@ view { generatorModel, languageModel, transformsModel } =
     , NameGeneratorApp.viewApp GeneratorMsg
         generatorModel
         [ Html.map LanguageMsg <| Lazy.lazy Language.viewSettings languageModel
-        , Html.map TransformsMsg <| Lazy.lazy Transforms.viewSettings transformsModel
+        , Html.map TransformMsg <| Lazy.lazy Transform.viewSettings transformsModel
         ]
     ]
 

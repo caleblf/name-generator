@@ -12,7 +12,7 @@ organization =
   }
 
 
-root _ = pickWeightedForm
+root = pickWeightedForm
   [ (2.0, concatForms [the, adjective, sp, object])
   , (2.0, concatForms [the, adjective, sp, object_pl])
   , (1.0, concatForms [the, adjective, sp, people])
@@ -32,6 +32,7 @@ root _ = pickWeightedForm
   , (1.0, concatForms [the, people, ofthe, adjective, sp, object_pl])
   , (1.0, concatForms [the, people, of_, vibe])
   , (0.5, concatForms [the, people])
+  , (1.0, concatForms [the, object_pl])
   ]
 
 the = literalForm "The "
@@ -44,7 +45,7 @@ sp = literalForm " "
 
 object_pl = concatForms [object, literalForm "s"]
 
-adjective _ = pickWeightedForm
+adjective = pickWeightedForm
   [ (1.0, literalForm "Rainbow")
   , (1.0, literalForm "Prismatic")
   , (1.0, literalForm "Chromatic")
@@ -104,9 +105,10 @@ adjective _ = pickWeightedForm
   , (1.0, literalForm "Forsaken")
   , (1.0, literalForm "Chosen")
   , (1.0, literalForm "Fey")
+  , (1.0, literalForm "Shattered")
   ]
 
-count _ = pickWeightedForm
+count = pickWeightedForm
   [ (1.0, literalForm "Two")
   , (1.0, literalForm "Twin")
   , (1.0, literalForm "Three")
@@ -122,7 +124,7 @@ count _ = pickWeightedForm
   , (1.0, literalForm "Many")
   ]
 
-object _ = pickWeightedForm
+object = pickWeightedForm
   [ (1.0, literalForm "Storm")
   , (1.0, literalForm "Plague")
   , (1.0, literalForm "Boar")
@@ -163,6 +165,9 @@ object _ = pickWeightedForm
   , (1.0, literalForm "Helm")
   , (1.0, literalForm "Crown")
   , (1.0, literalForm "Mask")
+  , (1.0, literalForm "Coat")
+  , (1.0, literalForm "Hat")
+  , (1.0, literalForm "Boot")
   , (1.0, literalForm "Wand")
   , (1.0, literalForm "Orb")
   , (1.0, literalForm "Scroll")
@@ -205,9 +210,10 @@ object _ = pickWeightedForm
   , (1.0, literalForm "Coin")
   , (1.0, literalForm "Lantern")
   , (1.0, literalForm "Cog")
+  , (1.0, literalForm "Mirror")
   ]
 
-people _ = pickWeightedForm
+people = pickWeightedForm
   [ (1.0, literalForm "Mourners")
   , (1.0, literalForm "Keepers")
   , (1.0, literalForm "Geometers")
@@ -242,11 +248,12 @@ people _ = pickWeightedForm
   , (1.0, literalForm "Lions")
   , (1.0, literalForm "Hunters")
   , (1.0, literalForm "Revenants")
+  , (1.0, literalForm "Companions")
+  , (1.0, literalForm "Knights")
   ]
 
-group _ = pickWeightedForm
+group = pickWeightedForm
   [ (1.0, literalForm "Order")
-  , (1.0, literalForm "Creed")
   , (1.0, literalForm "Clan")
   , (1.0, literalForm "Council")
   , (1.0, literalForm "Band")
@@ -271,9 +278,10 @@ group _ = pickWeightedForm
   , (1.0, literalForm "Compact")
   , (1.0, literalForm "Coalition")
   , (1.0, literalForm "People")
+  , (1.0, literalForm "Legion")
   ]
 
-vibe _ = pickWeightedForm
+vibe = pickWeightedForm
   [ (1.0, literalForm "Death")
   , (1.0, literalForm "Fear")
   , (1.0, literalForm "Blood")
@@ -306,4 +314,7 @@ vibe _ = pickWeightedForm
   , (1.0, literalForm "Abnegation")
   , (1.0, literalForm "Atonement")
   , (1.0, literalForm "Fate")
+  , (1.0, literalForm "Justice")
+  , (1.0, literalForm "Balance")
+  , (1.0, literalForm "Order")
   ]

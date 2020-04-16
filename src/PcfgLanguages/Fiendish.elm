@@ -12,23 +12,23 @@ fiendish =
   }
 
 
-name _ = pickWeightedForm
+name = pickWeightedForm
   [ (1.0, name_3)
   , (3.0, name_2)
   , (2.0, name_1)
   ]
 
-name_3 _ = pickWeightedForm
+name_3 = pickWeightedForm
   [ (1.0, v_name_3)
   , (1.0, concatForms [c, v_name_3])
   ]
 
-name_2 _ = pickWeightedForm
+name_2 = pickWeightedForm
   [ (1.0, v_name_2)
   , (1.0, concatForms [c, v_name_2])
   ]
 
-name_1 _ = pickWeightedForm
+name_1 = pickWeightedForm
   [ (1.0, concatForms [v, tc])
   , (1.0, concatForms [c, v, tc])
   ]
@@ -37,18 +37,18 @@ v_name_3 = concatForms [v, link, v_name_2]
 
 v_name_2 = concatForms [v, link, v_name_1]
 
-v_name_1 _ = pickWeightedForm
+v_name_1 = pickWeightedForm
   [ (3.0, concatForms [v, tc])
   , (1.0, v)
   ]
 
-link _ = pickWeightedForm
+link = pickWeightedForm
   [ (3.0, tc)
   , (2.0, concatForms [tc, c])
   , (2.0, literalForm "'")
   ]
 
-v _ = pickWeightedForm
+v = pickWeightedForm
   [ (3.0, literalForm "a")
   , (3.0, literalForm "i")
   , (3.0, literalForm "e")
@@ -58,7 +58,7 @@ v _ = pickWeightedForm
   , (1.0, literalForm "uu")
   ]
 
-tc _ = pickWeightedForm
+tc = pickWeightedForm
   [ (2.0, literalForm "k")
   , (2.0, literalForm "r")
   , (2.0, literalForm "t")
@@ -76,7 +76,7 @@ tc _ = pickWeightedForm
   , (1.0, literalForm "z")
   ]
 
-c _ = pickWeightedForm
+c = pickWeightedForm
   [ (2.0, literalForm "g")
   , (2.0, literalForm "n")
   , (2.0, literalForm "l")

@@ -17,14 +17,14 @@ transformName name =
 
       comma = literalForm ", "
 
-      job _ = pickWeightedForm
+      job = pickWeightedForm
         [ (3.0, peasant)
         , (3.0, artisan)
         , (2.0, specialist)
         , (1.0, adventurer)
         ]
 
-      peasant _ = pickWeightedForm
+      peasant = pickWeightedForm
         [ (1.0, literalForm "laborer")
         , (1.0, literalForm "farmer")
         , (1.0, literalForm "shepherd")
@@ -35,7 +35,7 @@ transformName name =
         , (1.0, literalForm "fisher")
         ]
 
-      artisan _ = pickWeightedForm
+      artisan = pickWeightedForm
         [ (1.0, literalForm "carpenter")
         , (1.0, literalForm "glazier")
         , (1.0, literalForm "baker")
@@ -58,7 +58,7 @@ transformName name =
         , (1.0, literalForm "shopkeeper")
         ]
 
-      specialist _ = pickWeightedForm
+      specialist = pickWeightedForm
         [ (1.0, literalForm "surgeon")
         , (1.0, literalForm "priest")
         , (1.0, literalForm "hedge wizard")
@@ -85,7 +85,7 @@ transformName name =
 
       sp = literalForm " "
 
-      level _ = pickWeightedForm
+      level = pickWeightedForm
         [ (5.0, literalForm "1")
         , (4.0, literalForm "2")
         , (3.0, literalForm "3")
@@ -93,7 +93,7 @@ transformName name =
         , (1.0, literalForm "5")
         ]
 
-      class _ = pickWeightedForm
+      class = pickWeightedForm
         [ (1.0, literalForm "barbarian")
         , (1.0, literalForm "bard")
         , (1.0, literalForm "cleric")

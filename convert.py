@@ -48,7 +48,7 @@ def elmify_definitions(module_name, forms):
             raise ValueError(f'No options for form tag: {tag}')
         else:
             line_sep = "\n  , "
-            return (f'{tag} _ = pickWeightedForm\n  [ ' +
+            return (f'{tag} = pickWeightedForm\n  [ ' +
                     line_sep.join(itertools.starmap(
                         elmify_probabilistic_form_entry,
                         entries

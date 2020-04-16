@@ -13,7 +13,7 @@ title =
 
 
 transformName name =
-  let titled_name _ = pickWeightedForm
+  let titled_name = pickWeightedForm
         [ (10.0, concatForms [name, the, description])
         , (5.0, concatForms [name, of_the, sigil_phrase])
         , (1.0, concatForms [adjective, sp, name])
@@ -25,7 +25,7 @@ transformName name =
 
       sp = literalForm " "
 
-      color _ = pickWeightedForm
+      color = pickWeightedForm
         [ (1.0, literalForm "Golden")
         , (1.0, literalForm "Silver")
         , (1.0, literalForm "Argent")
@@ -50,7 +50,7 @@ transformName name =
         , (1.0, literalForm "Cyan")
         ]
 
-      material _ = pickWeightedForm
+      material = pickWeightedForm
         [ (1.0, literalForm "Stone")
         , (1.0, literalForm "Golden")
         , (1.0, literalForm "Iron")
@@ -61,14 +61,14 @@ transformName name =
         , (1.0, literalForm "Glass")
         ]
 
-      sigil_phrase _ = pickWeightedForm
+      sigil_phrase = pickWeightedForm
         [ (2.0, concatForms [sigil_mod_s, sp, sigil])
         , (2.0, concatForms [sigil_mod_pl, sp, sigil, literalForm "s"])
         , (1.0, sigil)
         , (1.0, concatForms [sigil, literalForm "s"])
         ]
 
-      sigil_mod_s _ = pickWeightedForm
+      sigil_mod_s = pickWeightedForm
         [ (4.0, color)
         , (4.0, material)
         , (1.0, literalForm "Majestic")
@@ -83,7 +83,7 @@ transformName name =
         , (1.0, literalForm "Ancient")
         ]
 
-      sigil_mod_pl _ = pickWeightedForm
+      sigil_mod_pl = pickWeightedForm
         [ (3.0, sigil_mod_s)
         , (3.0, color)
         , (1.0, literalForm "Two")
@@ -98,7 +98,7 @@ transformName name =
         , (1.0, literalForm "Multitudinous")
         ]
 
-      sigil _ = pickWeightedForm
+      sigil = pickWeightedForm
         [ (1.0, literalForm "Bear")
         , (1.0, literalForm "Lion")
         , (1.0, literalForm "Boar")
@@ -177,7 +177,7 @@ transformName name =
         , (1.0, literalForm "Lantern")
         ]
 
-      adjective _ = pickWeightedForm
+      adjective = pickWeightedForm
         [ (5.0, color)
         , (5.0, digit_adj)
         , (1.0, literalForm "Shark-toothed")
@@ -188,12 +188,12 @@ transformName name =
         , (1.0, literalForm "Crooked")
         ]
 
-      digit_adj _ = pickWeightedForm
+      digit_adj = pickWeightedForm
         [ (3.0, concatForms [digit_count, literalForm "-fingered"])
         , (1.0, concatForms [digit_count, literalForm "-toed"])
         ]
 
-      digit_count _ = pickWeightedForm
+      digit_count = pickWeightedForm
         [ (1.0, literalForm "Four")
         , (2.0, literalForm "Six")
         , (2.0, literalForm "Seven")
@@ -202,7 +202,7 @@ transformName name =
         , (1.0, literalForm "Eleven")
         ]
 
-      description _ = pickWeightedForm
+      description = pickWeightedForm
         [ (12.0, color)
         , (1.0, literalForm "Quick")
         , (1.0, literalForm "Nimble")

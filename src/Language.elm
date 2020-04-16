@@ -146,7 +146,7 @@ fromPcfgSpec pcfgLanguage =
       , description = pcfgLanguage.description
       , priority = pcfgLanguage.priority
       }
-  , setupData = PcfgLanguageSetup { generator = pcfgLanguage.generator () }
+  , setupData = PcfgLanguageSetup { generator = pcfgLanguage.generator }
   }
 
 fromMarkovSpec : Manifest.MarkovLanguageSpec -> LanguageSpec

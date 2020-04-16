@@ -14,7 +14,7 @@ town =
 
 root = concatForms [modifier, feature]
 
-modifier _ = pickWeightedForm
+modifier = pickWeightedForm
   [ (1.0, literalForm "Blessed")
   , (1.0, literalForm "Great")
   , (1.0, literalForm "Iron")
@@ -120,7 +120,7 @@ modifier _ = pickWeightedForm
   , (1.0, literalForm "Bright")
   ]
 
-feature _ = pickWeightedForm
+feature = pickWeightedForm
   [ (1.0, literalForm "berg")
   , (1.0, literalForm "gate")
   , (1.0, literalForm "garden")

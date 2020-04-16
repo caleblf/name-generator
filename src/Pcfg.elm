@@ -19,28 +19,27 @@ type alias Transform =
   }
 
 
--- Generator definition must be deferred to allow circular (lazy) references
-type alias Form = () -> Random.Generator String
+type alias Form = Random.Generator String
 
 
 -- Constructors for Forms
 
 literalForm : String -> Form
-literalForm s _ = Random.constant s
+literalForm s = Random.constant s
 
 concatForms : List Form -> Form
-concatForms forms _ =
+concatForms forms =
   List.foldr
     (Random.map2 (++))
     (Random.constant "")
-    <| List.map ((|>) ()) forms
+    forms
 
 pickWeightedForm : List (Float, Form) -> Random.Generator String
 pickWeightedForm weightedForms =
   case weightedForms of
     (firstWeight, firstForm)::rest ->
-      Random.Extra.frequency (firstWeight, Random.lazy firstForm)
-        <| List.map (Tuple.mapSecond Random.lazy) rest
+      Random.Extra.frequency (firstWeight, Random.lazy <| always firstForm)
+        <| List.map (Tuple.mapSecond (always >> Random.lazy)) rest
     _ -> Random.constant "" -- Should never occur
 
 -- aliases

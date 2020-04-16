@@ -25,6 +25,7 @@ root:
   [$the $people $ofthe $adjective $sp $object-pl]
   [$the $people $of- $vibe]
   0.5 [$the $people]
+  [$the $object-pl]
 
 
 the: "The "
@@ -100,6 +101,7 @@ adjective:
   Forsaken
   Chosen
   Fey
+  Shattered
 
 
 count:
@@ -157,13 +159,16 @@ object: # must be pluralizable with -s suffix
   Lance
   Hammer
   Axe
-  # Armor
+  # Armor/Clothes
   Shield
   Mantle
   Gauntlet
   Helm
   Crown
   Mask
+  Coat
+  Hat
+  Boot
   # Magical foci
   Wand
   Orb
@@ -215,6 +220,7 @@ object: # must be pluralizable with -s suffix
   Coin
   Lantern
   Cog
+  Mirror
 
 
 people:
@@ -252,11 +258,12 @@ people:
   Lions
   Hunters
   Revenants
+  Companions
+  Knights
 
 
 group:
   Order
-  Creed
   Clan
   Council
   Band
@@ -281,6 +288,7 @@ group:
   Compact
   Coalition
   People
+  Legion
 
 
 vibe:
@@ -316,3 +324,6 @@ vibe:
   Abnegation
   Atonement
   Fate
+  Justice
+  Balance
+  Order

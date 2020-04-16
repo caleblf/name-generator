@@ -12,18 +12,18 @@ halfling =
   }
 
 
-root _ = pickWeightedForm
+root = pickWeightedForm
   [ (1.0, concatForms [start, end])
   , (1.0, concatForms [onset, connector, coda])
   ]
 
-start _ = pickWeightedForm
+start = pickWeightedForm
   [ (1.0, concatForms [v, tc])
   , (1.0, syllable)
   , (1.0, chunk)
   ]
 
-end _ = pickWeightedForm
+end = pickWeightedForm
   [ (1.0, concatForms [v, tc])
   , (1.0, v)
   , (1.0, syllable)
@@ -32,18 +32,18 @@ end _ = pickWeightedForm
 
 syllable = concatForms [c, v, tc]
 
-onset _ = pickWeightedForm
+onset = pickWeightedForm
   [ (1.0, v)
   , (1.0, concatForms [c, v])
   ]
 
-coda _ = pickWeightedForm
+coda = pickWeightedForm
   [ (5.0, v)
   , (5.0, concatForms [v, tc])
   , (2.0, literalForm "y")
   ]
 
-chunk _ = pickWeightedForm
+chunk = pickWeightedForm
   [ (1.0, literalForm "sam")
   , (1.0, literalForm "wise")
   , (1.0, literalForm "gam")
@@ -59,7 +59,7 @@ chunk _ = pickWeightedForm
   , (1.0, literalForm "ton")
   ]
 
-connector _ = pickWeightedForm
+connector = pickWeightedForm
   [ (1.0, literalForm "rd")
   , (2.0, literalForm "rr")
   , (2.0, literalForm "gg")
@@ -95,7 +95,7 @@ connector _ = pickWeightedForm
   , (1.0, literalForm "ll")
   ]
 
-tc _ = pickWeightedForm
+tc = pickWeightedForm
   [ (1.0, literalForm "r")
   , (1.0, literalForm "s")
   , (1.0, literalForm "d")
@@ -105,7 +105,7 @@ tc _ = pickWeightedForm
   , (3.0, literalForm "m")
   ]
 
-c _ = pickWeightedForm
+c = pickWeightedForm
   [ (1.0, literalForm "w")
   , (1.0, literalForm "r")
   , (1.0, literalForm "t")
@@ -143,7 +143,7 @@ c _ = pickWeightedForm
   , (1.0, literalForm "m")
   ]
 
-v _ = pickWeightedForm
+v = pickWeightedForm
   [ (3.0, literalForm "a")
   , (3.0, literalForm "i")
   , (3.0, literalForm "o")

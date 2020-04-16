@@ -12,23 +12,23 @@ orcish =
   }
 
 
-name _ = pickWeightedForm
+name = pickWeightedForm
   [ (1.0, name_3)
   , (3.0, name_2)
   , (2.0, name_1)
   ]
 
-name_3 _ = pickWeightedForm
+name_3 = pickWeightedForm
   [ (1.0, v_name_3)
   , (1.0, concatForms [c, v_name_3])
   ]
 
-name_2 _ = pickWeightedForm
+name_2 = pickWeightedForm
   [ (1.0, v_name_2)
   , (1.0, concatForms [c, v_name_2])
   ]
 
-name_1 _ = pickWeightedForm
+name_1 = pickWeightedForm
   [ (1.0, v_name_1)
   , (1.0, concatForms [c, v_name_1])
   ]
@@ -39,13 +39,13 @@ v_name_2 = concatForms [v, link, v_name_1]
 
 v_name_1 = concatForms [v, tc]
 
-link _ = pickWeightedForm
+link = pickWeightedForm
   [ (4.0, tc)
   , (2.0, concatForms [tc, c])
   , (1.0, literalForm "'")
   ]
 
-tc _ = pickWeightedForm
+tc = pickWeightedForm
   [ (5.0, literalForm "r")
   , (1.0, literalForm "t")
   , (1.0, literalForm "th")
@@ -65,7 +65,7 @@ tc _ = pickWeightedForm
   , (1.0, literalForm "m")
   ]
 
-c _ = pickWeightedForm
+c = pickWeightedForm
   [ (2.0, literalForm "r")
   , (1.0, literalForm "t")
   , (1.0, literalForm "tr")
@@ -99,7 +99,7 @@ c _ = pickWeightedForm
   , (1.0, literalForm "m")
   ]
 
-v _ = pickWeightedForm
+v = pickWeightedForm
   [ (4.0, literalForm "u")
   , (4.0, literalForm "o")
   , (2.0, literalForm "a")

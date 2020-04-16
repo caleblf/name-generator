@@ -12,30 +12,30 @@ common =
   }
 
 
-name _ = pickWeightedForm
+name = pickWeightedForm
   [ (1.0, name_single)
   , (1.0, name_double)
   ]
 
-name_single _ = pickWeightedForm
+name_single = pickWeightedForm
   [ (4.0, element)
   , (1.0, concatForms [onset_initial, v_chunk_final])
   ]
 
-name_double _ = pickWeightedForm
+name_double = pickWeightedForm
   [ (2.0, concatForms [element_c, element])
   , (2.0, concatForms [chunk_initial, element])
   , (1.0, concatForms [element, c_chunk_final])
   , (1.0, concatForms [element_c, v_chunk_final])
   ]
 
-element_c _ = pickWeightedForm
+element_c = pickWeightedForm
   [ (1.0, concatForms [syllable_initial, syllable, syllable, coda_final])
   , (2.0, concatForms [syllable_initial, syllable, coda_final])
   , (2.0, concatForms [syllable_initial, coda_final])
   ]
 
-element _ = pickWeightedForm
+element = pickWeightedForm
   [ (1.0, concatForms [syllable_initial, syllable, syllable_final])
   , (2.0, concatForms [syllable_initial, syllable_final])
   , (2.0, concatForms [syllable_only])
@@ -43,23 +43,23 @@ element _ = pickWeightedForm
 
 syllable = concatForms [onset, nucleus]
 
-syllable_initial _ = pickWeightedForm
+syllable_initial = pickWeightedForm
   [ (3.0, concatForms [onset_initial, nucleus])
   , (2.0, nucleus_initial)
   ]
 
-syllable_final _ = pickWeightedForm
+syllable_final = pickWeightedForm
   [ (1.0, concatForms [onset, nucleus, coda_final])
   , (1.0, concatForms [onset, nucleus_final])
   ]
 
-syllable_only _ = pickWeightedForm
+syllable_only = pickWeightedForm
   [ (3.0, concatForms [onset_initial, nucleus, coda_final])
   , (1.0, concatForms [onset_initial, nucleus_final])
   , (1.0, concatForms [nucleus_initial, coda_final])
   ]
 
-chunk_initial _ = pickWeightedForm
+chunk_initial = pickWeightedForm
   [ (1.0, literalForm "mad")
   , (1.0, literalForm "jax")
   , (1.0, literalForm "ald")
@@ -87,17 +87,17 @@ chunk_initial _ = pickWeightedForm
   , (1.0, literalForm "ol")
   ]
 
-c_chunk_final _ = pickWeightedForm
+c_chunk_final = pickWeightedForm
   [ (1.0, c_chunk_final_f)
   , (1.0, c_chunk_final_m)
   ]
 
-v_chunk_final _ = pickWeightedForm
+v_chunk_final = pickWeightedForm
   [ (1.0, v_chunk_final_f)
   , (1.0, v_chunk_final_m)
   ]
 
-c_chunk_final_f _ = pickWeightedForm
+c_chunk_final_f = pickWeightedForm
   [ (1.0, literalForm "sdottir")
   , (1.0, literalForm "sha")
   , (1.0, literalForm "ra")
@@ -114,7 +114,7 @@ c_chunk_final_f _ = pickWeightedForm
   , (1.0, literalForm "wen")
   ]
 
-v_chunk_final_f _ = pickWeightedForm
+v_chunk_final_f = pickWeightedForm
   [ (4.0, literalForm "ia")
   , (3.0, literalForm "a")
   , (2.0, literalForm "illa")
@@ -134,7 +134,7 @@ v_chunk_final_f _ = pickWeightedForm
   , (1.0, literalForm "y")
   ]
 
-c_chunk_final_m _ = pickWeightedForm
+c_chunk_final_m = pickWeightedForm
   [ (1.0, literalForm "sson")
   , (1.0, literalForm "son")
   , (1.0, literalForm "ton")
@@ -156,7 +156,7 @@ c_chunk_final_m _ = pickWeightedForm
   , (1.0, literalForm "der")
   ]
 
-v_chunk_final_m _ = pickWeightedForm
+v_chunk_final_m = pickWeightedForm
   [ (1.0, literalForm "on")
   , (1.0, literalForm "er")
   , (1.0, literalForm "art")
@@ -176,12 +176,12 @@ v_chunk_final_m _ = pickWeightedForm
   , (1.0, literalForm "an")
   ]
 
-onset _ = pickWeightedForm
+onset = pickWeightedForm
   [ (6.0, tc)
   , (6.0, c)
   ]
 
-coda _ = pickWeightedForm
+coda = pickWeightedForm
   [ (15.0, tc)
   , (1.0, literalForm "ll")
   , (1.0, literalForm "rn")
@@ -196,7 +196,7 @@ coda _ = pickWeightedForm
   , (1.0, literalForm "x")
   ]
 
-coda_final _ = pickWeightedForm
+coda_final = pickWeightedForm
   [ (15.0, tc)
   , (1.0, literalForm "ll")
   , (1.0, literalForm "rn")
@@ -211,7 +211,7 @@ coda_final _ = pickWeightedForm
   , (1.0, literalForm "x")
   ]
 
-tc _ = pickWeightedForm
+tc = pickWeightedForm
   [ (2.0, literalForm "r")
   , (2.0, literalForm "t")
   , (2.0, literalForm "s")
@@ -226,7 +226,7 @@ tc _ = pickWeightedForm
   , (1.0, literalForm "sh")
   ]
 
-c _ = pickWeightedForm
+c = pickWeightedForm
   [ (2.0, literalForm "d")
   , (2.0, literalForm "r")
   , (2.0, literalForm "t")
@@ -262,7 +262,7 @@ c _ = pickWeightedForm
   , (1.0, literalForm "bl")
   ]
 
-onset_initial _ = pickWeightedForm
+onset_initial = pickWeightedForm
   [ (29.0, c)
   , (1.0, literalForm "sm")
   , (1.0, literalForm "sn")
@@ -272,7 +272,7 @@ onset_initial _ = pickWeightedForm
   , (1.0, literalForm "thr")
   ]
 
-nucleus _ = pickWeightedForm
+nucleus = pickWeightedForm
   [ (5.0, literalForm "e")
   , (5.0, literalForm "u")
   , (5.0, literalForm "i")
@@ -282,7 +282,7 @@ nucleus _ = pickWeightedForm
   , (1.0, literalForm "ai")
   ]
 
-nucleus_initial _ = pickWeightedForm
+nucleus_initial = pickWeightedForm
   [ (3.0, literalForm "a")
   , (3.0, literalForm "e")
   , (3.0, literalForm "i")
@@ -291,7 +291,7 @@ nucleus_initial _ = pickWeightedForm
   , (1.0, literalForm "ae")
   ]
 
-nucleus_final _ = pickWeightedForm
+nucleus_final = pickWeightedForm
   [ (5.0, literalForm "a")
   , (2.0, literalForm "e")
   , (4.0, literalForm "i")

@@ -14,12 +14,12 @@ elven =
 
 root = concatForms [start, mid, end]
 
-start _ = pickWeightedForm
+start = pickWeightedForm
   [ (1.0, concatForms [v, tc])
   , (1.0, syllable)
   ]
 
-mid _ = pickWeightedForm
+mid = pickWeightedForm
   [ (1.0, empty)
   , (2.0, syllable)
   , (4.0, concatForms [v, tc])
@@ -27,21 +27,21 @@ mid _ = pickWeightedForm
 
 syllable = concatForms [c, v, tc]
 
-end _ = pickWeightedForm
+end = pickWeightedForm
   [ (3.0, concatForms [v, tc])
   , (2.0, v)
   ]
 
 empty = literalForm ""
 
-tc _ = pickWeightedForm
+tc = pickWeightedForm
   [ (1.0, literalForm "l")
   , (1.0, literalForm "r")
   , (1.0, literalForm "n")
   , (1.0, literalForm "m")
   ]
 
-c _ = pickWeightedForm
+c = pickWeightedForm
   [ (1.0, literalForm "l")
   , (1.0, literalForm "r")
   , (1.0, literalForm "n")
@@ -57,7 +57,7 @@ c _ = pickWeightedForm
   , (1.0, literalForm "b")
   ]
 
-v _ = pickWeightedForm
+v = pickWeightedForm
   [ (3.0, literalForm "a")
   , (3.0, literalForm "i")
   , (3.0, literalForm "e")

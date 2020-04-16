@@ -1,4 +1,4 @@
-module Transforms exposing (Model, Msg, init, update, viewSettings, applyTransforms)
+module Transform exposing (Model, Msg, init, update, viewSettings, applyTransforms)
 
 import List
 import List.Extra
@@ -88,10 +88,7 @@ fromPcfgTransform pcfgTransform =
       , description = pcfgTransform.description
       , priority = pcfgTransform.priority
       }
-  , generatorTransform =
-      (\generator ->
-        pcfgTransform.transform (\() -> generator) ()
-      )
+  , generatorTransform = pcfgTransform.transform
   }
 
 
