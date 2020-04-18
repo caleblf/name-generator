@@ -22,7 +22,7 @@ categorizeLetter =
   categorize
     <| List.map charsIn
       [ "aeiou"
-      , "bcdfghjklmnpqrstvqxz"
+      , "bcdfghjklmnpqrstvwxz"
       , "y"
       , " "
       ] -- All other characters are "punctuation"

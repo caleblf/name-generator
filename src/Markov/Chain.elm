@@ -1,6 +1,7 @@
 module Markov.Chain exposing (Process, buildProcess, express)
 
 import Dict exposing (Dict)
+import Set exposing (Set)
 import Random
 
 import List.Extra
@@ -18,7 +19,7 @@ type alias Process =
   { firstClusters : Distribution Cluster  -- distribution of initial clusters
   , clusterCounts : Distribution Int  -- distribution of cluster count
   , transitions : TransitionFunction Cluster  -- distributions of next cluster by previous cluster
-  , lastClusters : TransitionFunction Cluster  -- distributions of last cluster by previous sluster
+  , finalTransitions : TransitionFunction Cluster  -- distributions of last cluster by previous cluster
   }
 
 
@@ -35,6 +36,36 @@ observeTable transitions =
   Dict.Extra.filterGroupBy (Just << Tuple.first) transitions
     |> Dict.map (always (observeDistribution << List.map Tuple.second))
 
+
+filterTable :
+  (comparable -> comparable -> Bool)
+  -> TransitionFunction comparable
+  -> TransitionFunction comparable
+filterTable predicate =
+  Dict.map
+    (\previous distribution ->
+      List.filter (\(_, next) -> predicate previous next) distribution)
+  >> Dict.filter (always (not << List.isEmpty))
+
+
+-- Sampling from distributions
+
+sampleDistribution : Distribution a -> Maybe (Random.Generator a)
+sampleDistribution distribution =
+  case distribution of
+    [] -> Nothing
+    first :: rest -> Just <| Random.weighted first rest
+
+sampleTransitionDistribution :
+  TransitionFunction comparable
+  -> comparable
+  -> Maybe (Random.Generator comparable)
+sampleTransitionDistribution transitions previousItem =
+  Maybe.andThen sampleDistribution
+    <| Dict.get previousItem transitions
+
+
+-- String Markov process
 
 buildProcess : List String -> Process
 buildProcess examples =
@@ -58,8 +89,9 @@ buildProcess examples =
       in
         observeTable clusterTransitions
 
-    lastClusters : TransitionFunction Cluster
-    lastClusters =
+    -- Transitions from second-last cluster to final cluster
+    finalTransitions : TransitionFunction Cluster
+    finalTransitions =
       observeTable
         <| List.concatMap
             (\clusters ->
@@ -72,34 +104,40 @@ buildProcess examples =
     { firstClusters = firstClusters
     , clusterCounts = clusterCounts
     , transitions = transitions
-    , lastClusters = lastClusters
+    , finalTransitions = finalTransitions
     }
 
 
 express : Process -> Random.Generator String
-express { firstClusters, clusterCounts, transitions, lastClusters } =
+express { firstClusters, clusterCounts, transitions, finalTransitions } =
   let
     expressFrom : Int -> Cluster -> Random.Generator String
-    expressFrom clusterCount previousCluster =
-      if clusterCount <= 1
-      then
-        Random.weighted (0.0, "")
-          <| Maybe.withDefault []
-          <| Dict.get previousCluster lastClusters
-      else
-        case Maybe.withDefault [] <| Dict.get previousCluster transitions of
-          [] ->  -- No transitions
-            Random.constant ""
-          nextClusterDistribution ->
-            Random.weighted (0.0, "") nextClusterDistribution
-              |> Random.andThen
-                  (\nextCluster ->
-                    expressFrom (clusterCount - 1) nextCluster
-                        |> (Random.map <| (++) nextCluster))
+    expressFrom clustersLeft previousCluster =
+      let
+        expressMore : () -> Random.Generator String
+        expressMore () =
+          case sampleTransitionDistribution transitions previousCluster of
+            Nothing ->  -- No transitions
+              Random.constant ""  -- previousCluster must be a viable last cluster
+            Just nextClusterGenerator ->
+              nextClusterGenerator
+                |> Random.andThen
+                    (\nextCluster ->
+                      (Random.map <| (++) nextCluster)
+                        <| expressFrom (clustersLeft - 1) nextCluster)
+      in
+        if clustersLeft <= 1
+        then
+          case sampleTransitionDistribution finalTransitions previousCluster of
+            Nothing ->  -- previousCluster is not a viable second-last cluster
+              expressMore ()  -- generate extra clusters until we can stop
+            Just lastClusterGenerator -> lastClusterGenerator
+        else
+          expressMore ()
   in
     Random.Extra.andThen2
       (\clusterCount firstCluster ->
-        expressFrom clusterCount firstCluster
-          |> (Random.map <| (++) firstCluster))
+        (Random.map <| (++) firstCluster)
+          <| expressFrom (clusterCount - 1) firstCluster)
       (Random.weighted (0.0, 2) clusterCounts)
       (Random.weighted (0.0, "") firstClusters)
