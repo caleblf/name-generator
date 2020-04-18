@@ -95,10 +95,13 @@ select {
 .generated-name:hover {
     background-color: turquoise;
 }
-.generated-name:hover:after {
-    content: " +";
-    color: white;
+.generated-name:after {
+    content: "\00a0+";
+    color: transparent;
     font-weight: bold;
+}
+.generated-name:after {
+    color: white;
 }
 
 .saved-name-entry {
