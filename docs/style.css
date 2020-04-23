@@ -20,9 +20,13 @@ h1 {
 
 /* Form elements */
 
-button, input, select {
+button, input, select, textarea {
     color: black;
     font-size: initial;
+    font-family: "Lato", Calibri, Candara, Segoe, Segoe UI, Optima, Arial, sans-serif;
+}
+
+optgroup, option {
     font-family: "Lato", Calibri, Candara, Segoe, Segoe UI, Optima, Arial, sans-serif;
 }
 
@@ -42,6 +46,10 @@ input[type=number] {
 
 select {
     min-width: 7em;
+}
+
+textarea {
+    padding: 0.4em;
 }
 
 /* Layout */
@@ -114,6 +122,12 @@ select {
     margin-top: 0.2em;
 }
 
+.language-settings {
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
+}
+
 .transform-selector {
     margin-top: 0.4em;
 }
@@ -132,6 +146,13 @@ select {
 
 .transform-entry {
     padding: 0.2em 0;
+}
+
+.examples-area {
+    width: 100%;
+    height: 10em;
+    max-width: 100%;
+    margin-top: 0.4em;
 }
 
 .forget-name-button {

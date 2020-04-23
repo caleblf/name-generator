@@ -8,7 +8,10 @@ import Html.Attributes as Attr
 import Html.Events as Events
 
 import Pcfg
-import Manifest
+
+import PcfgTransforms.Title
+import PcfgTransforms.Profession
+import PcfgTransforms.Domains
 
 
 
@@ -78,7 +81,7 @@ update msg ({ transformStates } as model) =
 allTransforms : List Transform
 allTransforms =
   List.sortBy (\transform -> transform.metadata.priority)
-    <| List.map fromPcfgTransform Manifest.pcfgTransforms
+    <| List.map fromPcfgTransform pcfgTransforms
 
 
 fromPcfgTransform : Pcfg.Transform -> Transform
@@ -90,6 +93,14 @@ fromPcfgTransform pcfgTransform =
       }
   , generatorTransform = pcfgTransform.transform
   }
+
+pcfgTransforms : List Pcfg.Transform
+pcfgTransforms =
+  List.sortBy .priority
+    [ PcfgTransforms.Title.title
+    , PcfgTransforms.Profession.profession
+    , PcfgTransforms.Domains.domains
+    ]
 
 
 -- VIEW
