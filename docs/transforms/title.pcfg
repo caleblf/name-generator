@@ -203,7 +203,7 @@ description:
   Feeble
   Strong
   Enduring
-  # Statue
+  # Stature
   Lean
   Stout
   Tall
@@ -246,6 +246,7 @@ description:
   Quiet
   Merciful
   Maniac
+  Radical
   # Feat
   Deathless
   Dragonslayer
@@ -266,7 +267,8 @@ description:
   Gassy
   Hirsute
   Bald
-  # Perception
+  Pulchritudinous
+  # Perception/Reputation
   Fearsome
   "Slightly Off"
   Bizarre
@@ -276,6 +278,12 @@ description:
   Butcher
   Liar
   Freak
+  Distinguished
+  Calamitous
+  Esteemed
+  Illustrious
+  Splendid
+  Suspicious
   # Higher power
   Planetouched
   Fey
@@ -296,6 +304,7 @@ description:
   Eastron
   Beyonder
   Barbarian
+  Lost
   # Profession
   Poet
   Bard

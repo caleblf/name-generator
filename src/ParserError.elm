@@ -1,4 +1,4 @@
-module ParserDebug exposing (deadEndsToString)
+module ParserError exposing (deadEndsToString)
 
 import Parser exposing (Parser, Problem(..), DeadEnd)
 

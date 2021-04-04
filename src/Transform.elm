@@ -11,7 +11,7 @@ import Http
 import Parser
 
 import Pcfg
-import ParserDebug
+import ParserError
 
 
 
@@ -181,7 +181,7 @@ loadTransformFromUrl url =
                           [ "Error parsing "
                           , url
                           , ": "
-                          , ParserDebug.deadEndsToString deadEnds
+                          , ParserError.deadEndsToString deadEnds
                           ])
             Err httpError ->
               (\_ -> Random.constant <| "Error accessing " ++ url)

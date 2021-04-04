@@ -29,7 +29,9 @@ consecutivePairs xs = List.Extra.zip xs <| Maybe.withDefault [] <| List.tail xs
 
 observeDistribution : List comparable -> Distribution comparable
 observeDistribution =
-  List.map (\(x, count) -> (toFloat count, x)) << Dict.toList << Dict.Extra.frequencies
+  List.map
+    (\( x, count ) ->
+      ( toFloat count, x )) << Dict.toList << Dict.Extra.frequencies
 
 observeTable : List ( comparable, comparable ) -> TransitionFunction comparable
 observeTable transitions =
@@ -65,21 +67,43 @@ sampleTransitionDistribution transitions previousItem =
     <| Dict.get previousItem transitions
 
 
+-- Terminal superclusters
+
+combineFinalClusters : Int -> List Cluster -> List Cluster
+combineFinalClusters endingLength clusters =
+  let
+    length = List.length clusters
+    ( headClusters, tailClusters ) =
+      List.Extra.splitAt (length - endingLength) clusters
+  in
+    List.append headClusters [ String.concat tailClusters ]
+
+
 -- String Markov process
 
-buildProcess : List String -> Process
-buildProcess examples =
+{-| Construct a Markov process
+
+    endingLength -
+      Number of clusters at the end ofthe word to combine into superclusters
+    examples - Examples on which to base the process
+
+-}
+buildProcess : Int -> List String -> Process
+buildProcess endingLength examples =
   let
     clusteredExamples : List (List Cluster)
     clusteredExamples =
       List.filter (\clusters -> List.length clusters >= 2)
+        <| List.map (combineFinalClusters endingLength)
         <| List.map Markov.Cluster.toClusters examples
 
     firstClusters : Distribution Cluster
-    firstClusters = observeDistribution <| List.filterMap List.head clusteredExamples
+    firstClusters =
+      observeDistribution <| List.filterMap List.head clusteredExamples
 
     clusterCounts : Distribution Int
-    clusterCounts = observeDistribution <| List.map List.length clusteredExamples
+    clusterCounts =
+      observeDistribution <| List.map List.length clusteredExamples
 
     transitions : TransitionFunction Cluster
     transitions =
@@ -118,7 +142,8 @@ express { firstClusters, clusterCounts, transitions, finalTransitions } =
         expressMore () =
           case sampleTransitionDistribution transitions previousCluster of
             Nothing ->  -- No transitions
-              Random.constant ""  -- previousCluster must be a viable last cluster
+              -- previousCluster must be a viable last cluster
+              Random.constant ""
             Just nextClusterGenerator ->
               nextClusterGenerator
                 |> Random.andThen

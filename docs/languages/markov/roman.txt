@@ -1,3 +1,5 @@
+!ending-length: 2
+
 Appius
 Aulus
 Caeso
@@ -938,7 +940,6 @@ Crassa
 Cretica
 Crispina
 Crispa
-Cra
 Decia
 Delmatica
 Dentata
@@ -1008,7 +1009,6 @@ Megella
 Messallina
 Metella
 Muciana
-Ma
 Nerullina
 Nigrina
 Nona
@@ -1034,7 +1034,6 @@ Penna
 Persica
 Philippa
 Phila
-Pia
 Planca
 Plauta
 Pontia

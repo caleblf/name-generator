@@ -12,7 +12,7 @@ import Parser exposing (Parser)
 
 import Pcfg
 import Markov
-import ParserDebug
+import ParserError
 
 
 -- INTERFACE
@@ -23,7 +23,7 @@ languageGenerator model =
   case model.activeLanguage.generator of
     StaticGenerator generator -> generator
     FromCustomExamples ->
-      Markov.generatorFromExamples <| String.words <| model.customExamples
+      Markov.generatorFromExamples 1 <| String.words <| model.customExamples
 
 
 
@@ -318,7 +318,7 @@ loadGeneratorFromUrl url parser =
                         [ "Error parsing "
                         , url
                         , ": "
-                        , ParserDebug.deadEndsToString deadEnds
+                        , ParserError.deadEndsToString deadEnds
                         ]
             Err httpError ->
               StaticGenerator
