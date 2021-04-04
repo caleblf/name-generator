@@ -1,0 +1,342 @@
+!encoding: utf-8
+!name: Title
+!author: Iguanotron
+!description: Heroic titles
+!input: name
+!output: titled-name
+
+titled-name:
+  10 [$name $the $description]
+  5 [$name $of-the $sigil-phrase]
+  1 [$adjective $sp $name]
+
+the: " the "
+of-the: " of the "
+sp: " "
+
+color:
+  Golden
+  Silver
+  Argent
+  Sable
+  Red
+  Blue
+  Green
+  White
+  Orange
+  Black
+  Grey
+  Yellow
+  Purple
+  Chartreuse
+  Crimson
+  Azure
+  Violet
+  Magenta
+  Brown
+  Beige
+  Indigo
+  Cyan
+
+material:
+  Stone
+  Golden
+  Iron
+  Clay
+  Crystalline
+  Jade
+  Amber
+  Glass
+
+
+sigil-phrase:
+  2 [$sigil-mod-s $sp $sigil]
+  2 [$sigil-mod-pl $sp $sigil s]
+  $sigil
+  [$sigil s]
+
+sigil-mod-s:
+  4 $color
+  4 $material
+  Majestic
+  Great
+  Noble
+  Fallen
+  Broken
+  Cloven
+  Lost
+  Cursed
+  Blessed
+  Ancient
+sigil-mod-pl:
+  3 $sigil-mod-s
+  3 $color
+  Two
+  Twin
+  Three
+  Four
+  Five
+  Six
+  Seven
+  Nine
+  Dozen
+  Multitudinous
+
+sigil: # must pluralize with -s suffix
+  # Animals
+  Bear
+  Lion
+  Boar
+  Cat
+  Toad
+  Owl
+  Bat
+  Rat
+  Raven
+  Dove
+  Scorpion
+  Snake
+  Swan
+  Dragon
+  # Rocks
+  Diamond
+  Crystal
+  Stone
+  # Weapons
+  Spear
+  Blade
+  Sword
+  Bow
+  Arrow
+  Dagger
+  Club
+  Lance
+  Hammer
+  Axe
+  # Armor
+  Shield
+  Mantle
+  Gauntlet
+  Helm
+  Crown
+  Mask
+  # Magical foci
+  Wand
+  Orb
+  # Books
+  Scroll
+  Tome
+  # Structures
+  Gate
+  Tower
+  Door
+  Pyramid
+  Manse
+  Tomb
+  Spire
+  # Natural places
+  River
+  Grove
+  Mountain
+  Shore
+  Tarn
+  Desert
+  Glen
+  # Astronomical bodies
+  Moon
+  Sun
+  Star
+  # Plants
+  Clover
+  Rose
+  Oak
+  Elm
+  Bean
+  # Body parts
+  Fist
+  Heart
+  Skull
+  Bone
+  Claw
+  Talon
+  Hand
+  Eye
+  Horn
+  # Reactions
+  Flame
+  Wave
+  Cloud
+  Snowflake
+  # Objects
+  Candle
+  Chain
+  Coin
+  Lantern
+
+adjective:
+  5 $color
+  5 $digit-adj
+  Shark-toothed
+  Half-dead
+  One-eyed
+  One-eared
+  Fingerless
+  Crooked
+
+digit-adj:
+  3 [$digit-count -fingered]
+  1 [$digit-count -toed]
+
+digit-count:
+  Four
+  2 Six
+  2 Seven
+  Eight
+  2 Nine
+  Eleven
+
+description:
+  12 $color
+  # Physical ability
+  Quick
+  Nimble
+  Feeble
+  Strong
+  Enduring
+  # Statue
+  Lean
+  Stout
+  Tall
+  Fat
+  Giant
+  # Mental ability
+  Incompetent
+  Daft
+  Half-Wit
+  Silver-Tongued
+  Clever
+  Mad
+  # Virtue
+  Great
+  Wise
+  Brave
+  Honest
+  Mighty
+  Pious
+  Noble
+  # Vice
+  Spineless
+  Craven
+  Fool
+  Liar
+  # Personality
+  Vague
+  Cordial
+  Crabby
+  "Incongruously Cheerful"
+  Reckless
+  Unladylike
+  Truculent
+  Flirtatious
+  Boorish
+  Forthright
+  Swanky
+  Inconsistent
+  Lunatic
+  Quiet
+  Merciful
+  Maniac
+  # Feat
+  Deathless
+  Dragonslayer
+  Titan-killer
+  Magnificent
+  Revenant
+  # Physical trait
+  Invisible
+  Blind
+  Deaf
+  Wrinkled
+  Smelly
+  Toothless
+  Unblinking
+  Beautiful
+  Fair
+  Plain
+  Gassy
+  Hirsute
+  Bald
+  # Perception
+  Fearsome
+  "Slightly Off"
+  Bizarre
+  Irksome
+  "Stand-up Guy"
+  Cruel
+  Butcher
+  Liar
+  Freak
+  # Higher power
+  Planetouched
+  Fey
+  Blessed
+  Lucky
+  Thrice-cursed
+  # Class
+  Rich
+  Poor
+  Miserly
+  # State
+  Drunkard
+  Sober
+  # Region of origin
+  Northron
+  Southron
+  Westron
+  Eastron
+  Beyonder
+  Barbarian
+  # Profession
+  Poet
+  Bard
+  Singer
+  Thief
+  Warrior
+  Archer
+  Magician
+  Witch
+  Trapper
+  Enchanter
+  Artificer
+  Sage
+  Seer
+  Pilgrim
+  Wanderer
+  # Monster
+  Dragon
+  Banshee
+  # Animal
+  Boar
+  Leopard
+  Eagle
+  Cheetah
+  Worm
+  Toad
+  Eel
+  Rat
+  Mouse
+  Bear
+  Snake
+  Fox
+  Cobra
+  Flea
+  Squid
+  Spider
+  Hawk
+  Salamander
+  Fish
+  Weasel
+  Tortoise
+  # Fanciful titles
+  Myrmidon
+  Zephyr

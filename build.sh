@@ -15,14 +15,8 @@ elm_dir="src"
 optimize=false
 
 
-while getopts ":l:t:o:b:s:O" opt; do
+while getopts ":o:b:s:O" opt; do
     case $opt in
-        l)
-            languages_dir=$OPTARG
-            ;;
-        t)
-            transforms_dir=$OPTARG
-            ;;
         o)
             static_dir=$OPTARG
             ;;
@@ -43,26 +37,6 @@ while getopts ":l:t:o:b:s:O" opt; do
 done
 
 
-convert="./convert.py"
-
-if ! [ -z $languages_dir ]
-then
-    echo "Compiling languages"
-    for f in $(ls $languages_dir)
-    do
-        $convert ${languages_dir}/$f -o ${elm_dir}
-    done
-fi
-
-if ! [ -z $transforms_dir ]
-then
-    echo "Compiling transforms"
-    for f in $(ls $transforms_dir)
-    do
-        $convert ${transforms_dir}/$f -o ${elm_dir}
-    done
-fi
-
 # Adapted from optimize.sh in the Elm tutorial
 # (https://guide.elm-lang.org/optimization/asset_size.html)
 
@@ -73,11 +47,10 @@ min="${static_dir}/main.min.js"
 
 echo "Compiling Elm to JS"
 
-elm make --optimize --output=$js $elm
-
-
 if [ $optimize = true ]
 then
+    elm make --optimize --output=$js $elm || { exit 1; }
+
     echo "Optimizing JS"
     
     echo "Compiled size: $(cat $js | wc -c) bytes  ($js)"
@@ -87,5 +60,6 @@ then
     echo "Minified size: $(cat $min | wc -c) bytes  ($min)"
     echo "Gzipped size:  $(cat $min | gzip -c | wc -c) bytes"
 else
+    elm make --output=$js $elm || { exit 1; }
     cp $js $min
 fi

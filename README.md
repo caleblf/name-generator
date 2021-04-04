@@ -4,21 +4,6 @@ A random character name generator for sci-fi/fantasy settings.
 ## Web app usage
 The name generator is accessible online at <https://iguanotron.github.io/name-generator/>.
 
-## Command-line app usage
-The command-line app is useful for generating machine-readable names,
-or for compiling long lists of names.
-
-This application requires Python 3.6 or later.
-
-It is recommended to run the name generator with ANSI colors enabled,
-if supported, and to load the included basic initialization file. The
-`colorama` package is used for cross-platform ANSI support, but it
-isn't required on platforms where ANSI codes are natively supported.
-
-On Unix platforms: `./namegen.py -ciw init.txt`
-
-On MS Windows: `python3 ./namegen.py -ci init.txt`
-
 ## Languages
 Language files specify the generation of names using a probabilistic
 context-free grammar.
@@ -89,7 +74,7 @@ A form expansion may be any of the following:
  1. A bare literal: `literal text`.
     Spaces are trimmed from the edges of the string. The string must be
     nonempty, and cannot contain any of the following characters:
-    `$`, `:`, `[`, `]`, `!`, `"`, tabs, and numerals.
+    `$`, `:`, `[`, `]`, `!`, `"`, tabs, spaces, and numerals.
 
  2. A quoted literal: `"literal text"`.
     The content may not contain backslashes or double-quotes.

@@ -1,0 +1,96 @@
+!encoding: utf-8
+!name: Profession
+!author: Iguanotron
+!description: Medieval professions
+!input: name
+!output: output
+
+
+output: [$name $comma $job]
+
+comma: ", "
+
+job:
+  3 $peasant
+  3 $artisan
+  2 $specialist
+  1 $adventurer
+
+peasant:
+  laborer
+  farmer
+  shepherd
+  thresher
+  carter
+  urchin
+  beggar
+  fisher
+
+artisan:
+  carpenter
+  glazier
+  baker
+  apothecary
+  barber
+  blacksmith
+  butcher
+  chandler
+  innkeeper
+  jeweler
+  locksmith
+  stonemason
+  tailor
+  shoemaker
+  tanner
+  waiter
+  weaver
+  "artisan's apprentice"
+  librarian
+  shopkeeper
+
+specialist:
+  surgeon
+  priest
+  "hedge wizard"
+  "hedge witch"
+  "hedge knight"
+  grifter
+  musician
+  gladiator
+  actor
+  author
+  trapper
+  hunter
+  "magician's apprentice"
+  shaman
+  oracle
+  pickpocket
+  burglar
+  "bounty hunter"
+  alchemist
+  artificer
+
+adventurer: [level $sp $level $sp $class]
+
+sp: " "
+
+level:
+  5 "1"
+  4 "2"
+  3 "3"
+  2 "4"
+  1 "5"
+
+class:
+  barbarian
+  bard
+  cleric
+  druid
+  fighter
+  monk
+  paladin
+  ranger
+  rogue
+  sorcerer
+  warlock
+  wizard

@@ -1,5 +1,0 @@
-load languages
-load transforms
-activate common
-activate title
-list

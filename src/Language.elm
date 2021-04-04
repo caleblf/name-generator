@@ -8,20 +8,11 @@ import Html exposing (Html)
 import Html.Attributes as Attr
 import Html.Events as Events
 import Json.Encode as Enc
+import Parser exposing (Parser)
 
 import Pcfg
 import Markov
-
-import PcfgLanguages.Nickname
-import PcfgLanguages.Elven
-import PcfgLanguages.Halfling
-import PcfgLanguages.Dwarven
-import PcfgLanguages.Common
-import PcfgLanguages.Orcish
-import PcfgLanguages.Fiendish
-import PcfgLanguages.Town
-import PcfgLanguages.Organization
-
+import ParserDebug
 
 
 -- INTERFACE
@@ -158,20 +149,21 @@ type alias LanguageGroup =
 
 type alias LanguageSpec =
   { metadata : LanguageMetadata
-  , setupData : LanguageSetup
+  , setupSpec : LanguageSetup
   }
 
 type LanguageSetup
   = PcfgLanguageSetup
-      { generator : Random.Generator String }
+      { url : String }
   | MarkovLanguageSetup
-      { filePath : String }
+      { url : String }
   | CustomMarkovLanguageSetup
+  | DummyLanguageSetup
 
 emptyLanguageSpec : LanguageSpec
 emptyLanguageSpec =
   { metadata = emptyLanguage.metadata
-  , setupData = PcfgLanguageSetup { generator = Random.constant "" }
+  , setupSpec = DummyLanguageSetup
   }
 
 
@@ -180,40 +172,79 @@ allLanguageGroups =
   [ { name = "Fantasy"
     , languages =
         [ { metadata =
-              { name = "Common" ++ " (Markov)"
+              { name = "Common"
               , description = "Generic fantasy names"
               }
-            , setupData = MarkovLanguageSetup { filePath = "examples/common.txt" }
-            }
-          , fromPcfgSpec PcfgLanguages.Nickname.nickname
-          , fromPcfgSpec PcfgLanguages.Elven.elven
-          , fromPcfgSpec PcfgLanguages.Halfling.halfling
-          , fromPcfgSpec PcfgLanguages.Dwarven.dwarven
-          --, fromPcfgSpec PcfgLanguages.Common.common
-          , fromPcfgSpec PcfgLanguages.Orcish.orcish
-          , fromPcfgSpec PcfgLanguages.Fiendish.fiendish
-          ]
+          , setupSpec = MarkovLanguageSetup { url = "languages/markov/common.txt" }
+          }
+        , { metadata =
+              { name = "Nickname"
+              , description = "Melodramatic nicknames"
+              }
+          , setupSpec = PcfgLanguageSetup { url = "languages/pcfg/nickname.pcfg" }
+          }
+        , { metadata =
+              { name = "Elven"
+              , description = "Fantasy elf names"
+              }
+          , setupSpec = PcfgLanguageSetup { url = "languages/pcfg/elven.pcfg" }
+          }
+        , { metadata =
+              { name = "Halfling"
+              , description = "Fantasy halfling/hobbit names"
+              }
+          , setupSpec = PcfgLanguageSetup { url = "languages/pcfg/halfling.pcfg" }
+          }
+        , { metadata =
+              { name = "Dwarven"
+              , description = "Fantasy dwarf names"
+              }
+          , setupSpec = PcfgLanguageSetup { url = "languages/pcfg/dwarven.pcfg" }
+          }
+        , { metadata =
+              { name = "Orcish"
+              , description = "Fantasy orc names"
+              }
+          , setupSpec = PcfgLanguageSetup { url = "languages/pcfg/orcish.pcfg" }
+          }
+        , { metadata =
+              { name = "Fiendish"
+              , description = "Demonic-sounding names"
+              }
+          , setupSpec = PcfgLanguageSetup { url = "languages/pcfg/fiendish.pcfg" }
+          }
+        ]
     }
   , { name = "History and Literature"
     , languages =
         [ { metadata =
-              { name = "Roman" ++ " (Markov)"
+              { name = "Roman"
               , description = "Ancient Roman names"
               }
-          , setupData = MarkovLanguageSetup { filePath = "examples/roman.txt" }
+          , setupSpec = MarkovLanguageSetup { url = "languages/markov/roman.txt" }
           }
         , { metadata =
-              { name = "Arthurian" ++ " (Markov)"
+              { name = "Arthurian"
               , description = "Names reminiscent of Arthurian legend"
               }
-          , setupData = MarkovLanguageSetup { filePath = "examples/arthurian.txt" }
+          , setupSpec = MarkovLanguageSetup { url = "languages/markov/arthurian.txt" }
           }
         ]
     }
   , { name = "Places and Organizations"
     , languages =
-        [ fromPcfgSpec PcfgLanguages.Town.town
-        , fromPcfgSpec PcfgLanguages.Organization.organization
+        [ { metadata =
+              { name = "Town"
+              , description = "Generic city/town names"
+              }
+          , setupSpec = PcfgLanguageSetup { url = "languages/pcfg/town.pcfg" }
+          }
+        , { metadata =
+              { name = "Organization"
+              , description = "Names for organizations and orders"
+              }
+          , setupSpec = PcfgLanguageSetup { url = "languages/pcfg/organization.pcfg" }
+          }
         ]
     }
   , { name = "Configurable"
@@ -223,49 +254,37 @@ allLanguageGroups =
   ]
 
 
-fromPcfgSpec : Pcfg.Language -> LanguageSpec
-fromPcfgSpec pcfgLanguage =
-  { metadata =
-      { name = pcfgLanguage.name ++ " (PCFG)"
-      , description = pcfgLanguage.description
-      }
-  , setupData = PcfgLanguageSetup { generator = pcfgLanguage.generator }
-  }
-
 customMarkovLanguageSpec : LanguageSpec
 customMarkovLanguageSpec =
   { metadata =
       { name = "Custom Markov Input"
       , description = "Customizable Markov name generator"
       }
-  , setupData = CustomMarkovLanguageSetup
+  , setupSpec = CustomMarkovLanguageSetup
   }
 
 loadLangauge : LanguageIndex -> LanguageSpec -> (Language, Cmd Msg)
-loadLangauge index { metadata, setupData } =
-  case setupData of
-    PcfgLanguageSetup { generator } ->
-      ( { metadata = metadata
-        , generator = StaticGenerator generator
-        }
-      , Cmd.none
-      )
-    MarkovLanguageSetup { filePath } ->
+loadLangauge index { metadata, setupSpec } =
+  case setupSpec of
+    PcfgLanguageSetup { url } ->
       ( loadingLanguage
-      , Http.get
-          { url = filePath
-          , expect =
-              Http.expectString
-              (\spaceSeparatedExamples ->
+      , loadGeneratorFromUrl url (Parser.map .generator Pcfg.language)
+          |> Cmd.map
+              (\generator ->
                 LoadedLanguage index
                   { metadata = metadata
-                  , generator =
-                      StaticGenerator
-                        <| Markov.generatorFromExamples
-                        <| String.words
-                        <| Result.withDefault "" spaceSeparatedExamples
+                  , generator = generator
                   })
-          }
+      )
+    MarkovLanguageSetup { url } ->
+      ( loadingLanguage
+      , loadGeneratorFromUrl url Markov.generator
+          |> Cmd.map
+              (\generator ->
+                LoadedLanguage index
+                  { metadata = metadata
+                  , generator = generator
+                  })
       )
     CustomMarkovLanguageSetup ->
       ( { metadata = metadata
@@ -273,6 +292,40 @@ loadLangauge index { metadata, setupData } =
         }
       , Cmd.none
       )
+    DummyLanguageSetup ->
+      ( { metadata = metadata
+        , generator = emptyLanguage.generator
+        }
+      , Cmd.none
+      )
+
+loadGeneratorFromUrl : String -> Parser (Random.Generator String) -> Cmd LanguageGenerator
+loadGeneratorFromUrl url parser =
+  Http.get
+    { url = url
+    , expect =
+        Http.expectString
+        (\result ->
+          case result of
+            Ok body ->
+              case Parser.run parser body of
+                Ok generator ->
+                  StaticGenerator generator
+                Err deadEnds ->
+                  StaticGenerator
+                    <| Random.constant
+                    <| String.concat
+                        [ "Error parsing "
+                        , url
+                        , ": "
+                        , ParserDebug.deadEndsToString deadEnds
+                        ]
+            Err httpError ->
+              StaticGenerator
+                <| Random.constant
+                <| "Error accessing " ++ url
+        )
+    }
 
 
 

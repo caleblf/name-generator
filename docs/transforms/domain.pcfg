@@ -2,7 +2,6 @@
 !name: Divine Domains
 !author: Iguanotron
 !description: Divine domains
-!priority: 2  # low priority = acts earlier
 !input: name
 !output: output
 

@@ -1,49 +1,137 @@
 module Pcfg exposing (..)
 
+import Dict exposing (Dict)
+import Maybe
+import Parser exposing (Parser, (|=), (|.))
 import Random
-import Random.Extra
+import Set
+import String
+
+import Pcfg.Grammar exposing (Form, Pcfg, PcfgTransform)
+import Pcfg.Parser exposing (pcfgSpecification)
 
 
 type alias Language =
   { name : String
   , description : String
-  , priority : Int
-  , generator : Form
+  , generator : Random.Generator String
   }
 
 type alias Transform =
   { name : String
   , description : String
-  , priority : Int
-  , transform : Form -> Form
+  , transform : Random.Generator String -> Random.Generator String
   }
 
 
-type alias Form = Random.Generator String
+
+-- PARSERS WITH VALIDATION
 
 
--- Constructors for Forms
+language : Parser Language
+language =
+  pcfgSpecification
+    |> Parser.andThen
+        (\{ header, definitions } ->
+          withHeaderFields
+            [ "name", "description", "root" ]
+            header
+            |> Parser.andThen
+                (\_ ->
+                  let
+                    name = getPresentHeaderField "name" header
+                    description = getPresentHeaderField "description" header
+                    rootTag = getPresentHeaderField "root" header
+                  in
+                    case Dict.get rootTag definitions of
+                      Nothing ->
+                        Parser.problem ("Root tag not defined: " ++ rootTag)
+                      Just rootForm ->
+                        case
+                          Pcfg.Grammar.freeTagsInDefinitions definitions
+                            |> Set.toList
+                        of
+                          [] ->  -- no references to undefined tags
+                            Parser.succeed 
+                              { name = name
+                              , description = description
+                              , generator =
+                                  Pcfg.Grammar.languageGenerator
+                                    { formsByTag = definitions
+                                    , rootForm = rootForm
+                                    }
+                              }
+                          unrecognizedTags ->
+                            Parser.problem
+                              ("References to unrecognized tags: "
+                                ++ String.join ", " unrecognizedTags)
+                )
+        )
 
-literalForm : String -> Form
-literalForm s = Random.constant s
+transform : Parser Transform
+transform =
+  pcfgSpecification
+    |> Parser.andThen
+        (\{ header, definitions } ->
+          withHeaderFields
+            [ "name", "description", "input", "output" ]
+            header
+            |> Parser.andThen
+                (\_ ->
+                  let
+                    name = getPresentHeaderField "name" header
+                    description = getPresentHeaderField "description" header
+                    inputTag = getPresentHeaderField "input" header
+                    outputTag = getPresentHeaderField "output" header
+                  in
+                    case Dict.get outputTag definitions of
+                      Nothing ->
+                        Parser.problem ("Root tag not defined: " ++ outputTag)
+                      Just rootForm ->
+                        case
+                          Set.remove
+                            inputTag
+                            (Pcfg.Grammar.freeTagsInDefinitions definitions)
+                            |> Set.toList
+                        of
+                          [] ->  -- no references to undefined tags
+                            Parser.succeed
+                              { name = name
+                              , description = description
+                              , transform =
+                                  Pcfg.Grammar.transformGenerator
+                                    { formsByTag = definitions
+                                    , rootForm = rootForm
+                                    , inputTag = inputTag
+                                    }
+                              }
+                          unrecognizedTags ->
+                            Parser.problem
+                              ("References to unrecognized tags: "
+                                ++ String.join ", " unrecognizedTags)
+                )
+        )
 
-concatForms : List Form -> Form
-concatForms forms =
-  List.foldr
-    (Random.map2 (++))
-    (Random.constant "")
-    forms
 
-pickWeightedForm : List (Float, Form) -> Random.Generator String
-pickWeightedForm weightedForms =
-  case weightedForms of
-    (firstWeight, firstForm)::rest ->
-      Random.Extra.frequency (firstWeight, Random.lazy <| always firstForm)
-        <| List.map (Tuple.mapSecond (always >> Random.lazy)) rest
-    _ -> Random.constant "" -- Should never occur
+keysNotPresentIn : List comparable -> Dict comparable a -> List comparable
+keysNotPresentIn requiredFields dict =
+  Set.diff (Set.fromList requiredFields) (Set.fromList <| Dict.keys dict)
+    |> Set.toList
 
--- aliases
 
-lit = literalForm
-cat = concatForms
-pick = pickWeightedForm
+withHeaderFields : List String -> Dict String String -> Parser ()
+withHeaderFields requiredFields header =
+  case
+    keysNotPresentIn requiredFields header
+  of
+    [] ->
+      Parser.succeed ()
+    missingHeaderFields ->
+      Parser.problem
+        ("Missing required header fields: "
+          ++ String.join ", " missingHeaderFields)
+
+
+getPresentHeaderField : String -> Dict String String -> String
+getPresentHeaderField fieldName header =
+  Dict.get fieldName header |> Maybe.withDefault ""
