@@ -1,8 +1,7 @@
-!encoding: utf-8
+!type: pcfg-language
 !name: Elven
 !author: Iguanotron
 !description: Elf names
-!priority: 2 # low priority = earlier in display
 !root: root
 
 root:

@@ -1,8 +1,7 @@
-!encoding: utf-8
-!name: Dwarven
+!type: pcfg-language
+!name: Fiendish
 !author: Iguanotron
-!description: Dwarf language
-!priority: 2 # low priority = earlier in display
+!description: Strange names
 !root: name
 
 name:
@@ -32,55 +31,46 @@ v-name-1:
 link: # connectors between vowels
   3 $tc
   2 [$tc $c]
-  1 '
+  2 '
 
 v:
-  2 a
-  2 i
-  2 o
+  3 a
+  3 i
+  3 e
+  3 o
   3 u
-  ai
-  ia
-  oi
-  eo
-  ua
+  aa
+  uu
+
 tc:
-  r
-  t
-  d
-  f
-  g
-  k
-  l
-  z
-  x
-  v
-  n
-  m
-  rt
-  th
-  sh
-c:
-  w
-  r
-  t
-  p
-  s
-  d
-  f
-  g
+  2 k
+  2 r
+  2 t
+  2 n
+  2 g
+  2 l
+  2 x
+  2 th
+  rg
   h
-  k
-  l
-  z
-  v
-  b
-  n
+  f
   m
-  tr
-  gr
-  dv
+  tch
+  ss
+  z
+c:
+  2 g
+  2 n
+  2 l
+  2 f
+  2 p
+  2 y
+  2 v
+  2 z
+  2 b
+  2 k
+  2 t
+  2 d
+  w
   th
-  thr
-  dr
-  br
+  tch

@@ -1,4 +1,4 @@
-module Pcfg.Parser exposing (PcfgSpecification, pcfgSpecification)
+module Pcfg.Parser exposing (definitions)
 
 import Parser exposing (Parser, (|.), (|=))
 import Dict exposing (Dict)
@@ -8,24 +8,8 @@ import Tuple
 import Char
 import List.Extra
 
-import CommonParser exposing (header, lineEnd, newLine, spaces, number, stringLiteral)
+import CommonParser exposing (lineEnd, newLine, spaces, number, stringLiteral)
 import Pcfg.Grammar exposing (Form(..), Pcfg, PcfgTransform)
-
-
--- PARSER
-
-
-type alias PcfgSpecification =
-  { header : Dict String String
-  , definitions : Dict String Form
-  }
-
-
-pcfgSpecification : Parser PcfgSpecification
-pcfgSpecification =
-  Parser.succeed PcfgSpecification
-    |= header
-    |= definitions
 
 
 
@@ -38,7 +22,8 @@ definitions =
     []
     (\formDefinitions ->
       Parser.oneOf
-        [ Parser.succeed (\definition -> Parser.Loop (definition :: formDefinitions))
+        [ Parser.succeed
+            (\definition -> Parser.Loop (definition :: formDefinitions))
             |= formDefinition
         , Parser.map (\_ -> Parser.Loop formDefinitions) newLine
         , Parser.succeed <| Parser.Done formDefinitions

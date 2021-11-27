@@ -1,17 +1,12 @@
-module Markov exposing (generatorFromExamples, generator)
+module Markov exposing (generatorFromExamples, generatorParser)
 
 import Parser exposing (Parser, (|=), (|.))
 import Random
 import Dict exposing (Dict)
 
-import CommonParser exposing (header, lineEnd, newLine, spaces, number, stringLiteral)
+import CommonParser exposing (lineEnd, newLine, spaces, number, stringLiteral)
 import Markov.Chain
 
-
-type alias MarkovSpecification =
-  { header : Dict String String
-  , examples : List String
-  }
 
 
 generatorFromExamples : Int -> List String -> Random.Generator String
@@ -21,25 +16,10 @@ generatorFromExamples endingLength =
     >> Markov.Chain.express
 
 
-generator : Parser (Random.Generator String)
-generator =
-  markovSpecification
-    |> Parser.map
-        (\{ header, examples } ->
-          generatorFromExamples
-            (Dict.get "ending-length" header
-              |> Maybe.andThen String.toInt
-              |> Maybe.withDefault 1
-            )
-            examples
-        )
-
-
-markovSpecification : Parser MarkovSpecification
-markovSpecification =
-  Parser.succeed MarkovSpecification
-    |= header
-    |= markovExamples
+generatorParser : Int -> Parser (Random.Generator String)
+generatorParser endingLength =
+  markovExamples
+    |> Parser.map (generatorFromExamples endingLength)
 
 
 markovExamples : Parser (List String)

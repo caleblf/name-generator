@@ -1,12 +1,12 @@
 # name-generator
-A random character name generator for sci-fi/fantasy settings.
+A random character name generator for fantasy settings.
 
 ## Web app usage
 The name generator is accessible online at <https://iguanotron.github.io/name-generator/>.
 
 ## Languages
 Language files specify the generation of names using a probabilistic
-context-free grammar.
+context-free grammar or Markov chain.
 
 ## Language Transforms
 Additional output can be added to the generated names using "Transforms."

@@ -1,4 +1,4 @@
-!encoding: utf-8
+!type: pcfg-transform
 !name: Title
 !author: Iguanotron
 !description: Heroic titles

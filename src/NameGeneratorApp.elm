@@ -87,7 +87,8 @@ viewApp : (Msg -> msg) -> Model -> List (Html msg) -> Html msg
 viewApp msgWrapper ({ toGenerate, names, savedNames } as model) settingsPanels =
   Html.div [ Attr.class "column-container" ]
     [ Html.div [ Attr.class "column" ]
-        <| settingsPanels ++ [ Html.map msgWrapper <| Lazy.lazy savedNamesPanel savedNames ]
+        <| settingsPanels
+            ++ [ Html.map msgWrapper <| Lazy.lazy savedNamesPanel savedNames ]
     , Html.map msgWrapper
         <| Html.div [ Attr.class "column" ]
           [ Lazy.lazy generatePanel toGenerate

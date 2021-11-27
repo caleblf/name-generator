@@ -15,11 +15,19 @@ type alias Distribution a = List ( Float, a )
 
 type alias TransitionFunction a = Dict a ( Distribution a )
 
+{-| Markov process
+
+    firstClusters - Distribution of initial clusters
+    clusterCounts - Distribution of cluster count
+    transitions - Distributions of next cluster by previous cluster
+    finalTransitions - Distributions of terminal cluster by previous cluster
+
+-}
 type alias Process =
-  { firstClusters : Distribution Cluster  -- distribution of initial clusters
-  , clusterCounts : Distribution Int  -- distribution of cluster count
-  , transitions : TransitionFunction Cluster  -- distributions of next cluster by previous cluster
-  , finalTransitions : TransitionFunction Cluster  -- distributions of last cluster by previous cluster
+  { firstClusters : Distribution Cluster
+  , clusterCounts : Distribution Int
+  , transitions : TransitionFunction Cluster
+  , finalTransitions : TransitionFunction Cluster
   }
 
 

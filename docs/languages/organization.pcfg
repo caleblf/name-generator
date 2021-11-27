@@ -1,8 +1,7 @@
-!encoding: utf-8
+!type: pcfg-language
 !name: Organization
 !author: Iguanotron
 !description: Names for organizations
-!priority: 10 # low priority = earlier in display
 !root: root
 
 root:

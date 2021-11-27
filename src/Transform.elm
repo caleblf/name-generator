@@ -10,7 +10,7 @@ import Html.Events as Events
 import Http
 import Parser
 
-import Pcfg
+import GeneratorParser
 import ParserError
 
 
@@ -172,8 +172,8 @@ loadTransformFromUrl url =
         (\result ->
           case result of
             Ok body ->
-              case Parser.run Pcfg.transform body of
-                Ok pcfgTransform -> pcfgTransform.transform
+              case Parser.run GeneratorParser.transform body of
+                Ok transform -> transform
                 Err deadEnds ->
                   (\_ ->
                     Random.constant

@@ -10,7 +10,7 @@ import Html.Events as Events
 import Json.Encode as Enc
 import Parser exposing (Parser)
 
-import Pcfg
+import GeneratorParser
 import Markov
 import ParserError
 
@@ -153,10 +153,7 @@ type alias LanguageSpec =
   }
 
 type LanguageSetup
-  = PcfgLanguageSetup
-      { url : String }
-  | MarkovLanguageSetup
-      { url : String }
+  = UrlLanguageSetup String
   | CustomMarkovLanguageSetup
   | DummyLanguageSetup
 
@@ -175,43 +172,43 @@ allLanguageGroups =
               { name = "Common"
               , description = "Generic fantasy names"
               }
-          , setupSpec = MarkovLanguageSetup { url = "languages/markov/common.txt" }
+          , setupSpec = UrlLanguageSetup "languages/common.pcfg"
           }
         , { metadata =
               { name = "Nickname"
               , description = "Melodramatic nicknames"
               }
-          , setupSpec = PcfgLanguageSetup { url = "languages/pcfg/nickname.pcfg" }
+          , setupSpec = UrlLanguageSetup "languages/nickname.pcfg"
           }
         , { metadata =
               { name = "Elven"
               , description = "Fantasy elf names"
               }
-          , setupSpec = PcfgLanguageSetup { url = "languages/pcfg/elven.pcfg" }
+          , setupSpec = UrlLanguageSetup "languages/elven.pcfg"
           }
         , { metadata =
               { name = "Halfling"
               , description = "Fantasy halfling/hobbit names"
               }
-          , setupSpec = PcfgLanguageSetup { url = "languages/pcfg/halfling.pcfg" }
+          , setupSpec = UrlLanguageSetup "languages/halfling.pcfg"
           }
         , { metadata =
               { name = "Dwarven"
               , description = "Fantasy dwarf names"
               }
-          , setupSpec = PcfgLanguageSetup { url = "languages/pcfg/dwarven.pcfg" }
+          , setupSpec = UrlLanguageSetup "languages/dwarven.pcfg"
           }
         , { metadata =
               { name = "Orcish"
               , description = "Fantasy orc names"
               }
-          , setupSpec = PcfgLanguageSetup { url = "languages/pcfg/orcish.pcfg" }
+          , setupSpec = UrlLanguageSetup "languages/orcish.pcfg"
           }
         , { metadata =
               { name = "Fiendish"
               , description = "Demonic-sounding names"
               }
-          , setupSpec = PcfgLanguageSetup { url = "languages/pcfg/fiendish.pcfg" }
+          , setupSpec = UrlLanguageSetup "languages/fiendish.pcfg"
           }
         ]
     }
@@ -221,13 +218,13 @@ allLanguageGroups =
               { name = "Roman"
               , description = "Ancient Roman names"
               }
-          , setupSpec = MarkovLanguageSetup { url = "languages/markov/roman.txt" }
+          , setupSpec = UrlLanguageSetup "languages/roman.pcfg"
           }
         , { metadata =
               { name = "Arthurian"
               , description = "Names reminiscent of Arthurian legend"
               }
-          , setupSpec = MarkovLanguageSetup { url = "languages/markov/arthurian.txt" }
+          , setupSpec = UrlLanguageSetup "languages/arthurian.pcfg"
           }
         ]
     }
@@ -237,13 +234,13 @@ allLanguageGroups =
               { name = "Town"
               , description = "Generic city/town names"
               }
-          , setupSpec = PcfgLanguageSetup { url = "languages/pcfg/town.pcfg" }
+          , setupSpec = UrlLanguageSetup "languages/town.pcfg"
           }
         , { metadata =
               { name = "Organization"
               , description = "Names for organizations and orders"
               }
-          , setupSpec = PcfgLanguageSetup { url = "languages/pcfg/organization.pcfg" }
+          , setupSpec = UrlLanguageSetup "languages/organization.pcfg"
           }
         ]
     }
@@ -266,19 +263,9 @@ customMarkovLanguageSpec =
 loadLangauge : LanguageIndex -> LanguageSpec -> (Language, Cmd Msg)
 loadLangauge index { metadata, setupSpec } =
   case setupSpec of
-    PcfgLanguageSetup { url } ->
+    UrlLanguageSetup url ->
       ( loadingLanguage
-      , loadGeneratorFromUrl url (Parser.map .generator Pcfg.language)
-          |> Cmd.map
-              (\generator ->
-                LoadedLanguage index
-                  { metadata = metadata
-                  , generator = generator
-                  })
-      )
-    MarkovLanguageSetup { url } ->
-      ( loadingLanguage
-      , loadGeneratorFromUrl url Markov.generator
+      , loadGeneratorFromUrl url (GeneratorParser.language)
           |> Cmd.map
               (\generator ->
                 LoadedLanguage index

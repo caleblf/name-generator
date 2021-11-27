@@ -1,8 +1,7 @@
-!encoding: utf-8
+!type: pcfg-language
 !name: Halfling
 !author: Iguanotron
 !description: Hobbit names
-!priority: 2 # low priority = earlier in display
 !root: root
 
 root:

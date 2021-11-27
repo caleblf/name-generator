@@ -121,8 +121,10 @@ view { generatorModel, languageModel, transformsModel } =
     [ header
     , NameGeneratorApp.viewApp GeneratorMsg
         generatorModel
-        [ Html.map LanguageMsg <| Lazy.lazy Language.viewSettings languageModel
-        , Html.map TransformMsg <| Lazy.lazy Transform.viewSettings transformsModel
+        [ Html.map LanguageMsg
+            <| Lazy.lazy Language.viewSettings languageModel
+        , Html.map TransformMsg
+            <| Lazy.lazy Transform.viewSettings transformsModel
         ]
     ]
 
