@@ -3,6 +3,7 @@ module Language exposing (Model, Msg, init, update, viewSettings, languageGenera
 import List
 import List.Extra
 import Random
+import Random.Extra
 import Http
 import Html exposing (Html)
 import Html.Attributes as Attr
@@ -24,7 +25,18 @@ languageGenerator model =
     StaticGenerator generator -> generator
     FromCustomExamples ->
       Markov.generatorFromExamples 1 <| String.words <| model.customExamples
+    FromCustomParts ->
+      List.take model.customPartCount model.customPartsBuffers
+        |> List.map String.words
+        |> componentwiseGenerator
+            (if model.separateCustomParts then " " else "")
 
+
+componentwiseGenerator : String -> List (List String) -> Random.Generator String
+componentwiseGenerator separator partOptions =
+  Random.Extra.traverse Random.Extra.sample partOptions
+    |> Random.map (List.filterMap identity)
+    |> Random.map (String.join separator)
 
 
 -- MODEL
@@ -34,17 +46,25 @@ type alias Model =
   { activeLanguageIndex : LanguageIndex
   , activeLanguage : Language
   , customExamples : String  -- only visible when in user Markov mode
+  , customPartsBuffers : List String  -- only visible when in user parts mode
+  , customPartCount : Int  -- number of buffers visible at once
+  , separateCustomParts : Bool  -- whether to separate custom parts with spaces
   }
 
 
 init : (Model, Cmd Msg)
 init =
   let
+    defaultModel =
+      { activeLanguageIndex = (-1, -1)
+      , activeLanguage = emptyLanguage
+      , customExamples = ""
+      , customPartsBuffers = List.repeat maxCustomParts ""
+      , customPartCount = 2
+      , separateCustomParts = False
+      }
     defaultInit =
-      ( { activeLanguageIndex = (-1, -1)
-        , activeLanguage = emptyLanguage
-        , customExamples = ""
-        }
+      ( defaultModel
       , Cmd.none
       )
   in
@@ -57,9 +77,9 @@ init =
             let
               (language, loadCmd) = loadLangauge (0, 0) languageSpec
             in
-              ( { activeLanguageIndex = (0, 0)
+              ( { defaultModel
+                | activeLanguageIndex = (0, 0)
                 , activeLanguage = language
-                , customExamples = ""
                 }
               , loadCmd
               )
@@ -79,6 +99,7 @@ type alias Language =
 type LanguageGenerator
   = StaticGenerator (Random.Generator String)
   | FromCustomExamples
+  | FromCustomParts
 
 
 emptyLanguage : Language
@@ -99,6 +120,7 @@ loadingLanguage =
   , generator = StaticGenerator <| Random.constant "Loading..."
   }
 
+maxCustomParts = 4
 
 
 -- UPDATE
@@ -108,11 +130,25 @@ type Msg
   = SelectLanguage LanguageIndex LanguageSpec
   | LoadedLanguage LanguageIndex Language
   | SetExamples String  -- Custom Markov only
+  | SetPartsBuffer Int String  -- Custom Parts only
+  | SetPartCount Int  -- Custom Parts only
+  | SetSeparateParts Bool  -- Custom Parts only
 
 type alias LanguageIndex = (Int, Int)
 
 update : Msg -> Model -> (Model, Cmd Msg)
-update msg ({ activeLanguageIndex, activeLanguage, customExamples } as model) =
+update
+  msg
+  (
+    { activeLanguageIndex
+    , activeLanguage
+    , customExamples
+    , customPartsBuffers
+    , customPartCount
+    , separateCustomParts
+    }
+    as model
+  ) =
   case msg of
     SelectLanguage index languageSpec ->
       let
@@ -135,6 +171,21 @@ update msg ({ activeLanguageIndex, activeLanguage, customExamples } as model) =
       ( { model | customExamples = examples }
       , Cmd.none
       )
+    SetPartsBuffer index bufferContent ->
+      ( { model
+        | customPartsBuffers =
+            List.Extra.setAt index bufferContent customPartsBuffers
+        }
+      , Cmd.none
+      )
+    SetPartCount numVisible ->
+      ( { model | customPartCount = numVisible }
+      , Cmd.none
+      )
+    SetSeparateParts separateParts ->
+      ( { model | separateCustomParts = separateParts }
+      , Cmd.none
+      )
 
 
 
@@ -155,6 +206,7 @@ type alias LanguageSpec =
 type LanguageSetup
   = UrlLanguageSetup String
   | CustomMarkovLanguageSetup
+  | CustomPartsLanguageSetup
   | DummyLanguageSetup
 
 emptyLanguageSpec : LanguageSpec
@@ -246,7 +298,9 @@ allLanguageGroups =
     }
   , { name = "Configurable"
     , languages =
-        [ customMarkovLanguageSpec ]
+        [ customMarkovLanguageSpec
+        , customPartsLanguageSpec
+        ]
     }
   ]
 
@@ -259,6 +313,16 @@ customMarkovLanguageSpec =
       }
   , setupSpec = CustomMarkovLanguageSetup
   }
+
+customPartsLanguageSpec : LanguageSpec
+customPartsLanguageSpec =
+  { metadata =
+      { name = "Custom Componentwise"
+      , description = "Custom names built from parts"
+      }
+  , setupSpec = CustomPartsLanguageSetup
+  }
+
 
 loadLangauge : LanguageIndex -> LanguageSpec -> (Language, Cmd Msg)
 loadLangauge index { metadata, setupSpec } =
@@ -276,6 +340,12 @@ loadLangauge index { metadata, setupSpec } =
     CustomMarkovLanguageSetup ->
       ( { metadata = metadata
         , generator = FromCustomExamples
+        }
+      , Cmd.none
+      )
+    CustomPartsLanguageSetup ->
+      ( { metadata = metadata
+        , generator = FromCustomParts
         }
       , Cmd.none
       )
@@ -320,7 +390,14 @@ loadGeneratorFromUrl url parser =
 
 
 viewSettings : Model -> Html Msg
-viewSettings { activeLanguageIndex, activeLanguage, customExamples } =
+viewSettings
+  { activeLanguageIndex
+  , activeLanguage
+  , customExamples
+  , customPartsBuffers
+  , customPartCount
+  , separateCustomParts
+  } =
   Html.div [ Attr.class "language-settings" ]
     <| case activeLanguage.generator of
         StaticGenerator generator ->
@@ -329,6 +406,14 @@ viewSettings { activeLanguageIndex, activeLanguage, customExamples } =
           [ languageSelector activeLanguageIndex activeLanguage
           , customExamplesArea customExamples
           ]
+        FromCustomParts ->
+          ( languageSelector activeLanguageIndex activeLanguage
+          :: partCountSelector customPartCount
+          :: bufferSeparationSelector separateCustomParts
+          :: List.indexedMap
+              customPartBuffer
+              (List.take customPartCount customPartsBuffers)
+          )
 
 
 customExamplesArea : String -> Html Msg
@@ -339,6 +424,57 @@ customExamplesArea customExamples =
     , Events.onInput SetExamples
     ]
     []
+
+
+customPartBuffer : Int -> String -> Html Msg
+customPartBuffer bufferIndex bufferContent =
+  Html.textarea
+    [ Attr.class "examples-area"
+    , Attr.value bufferContent
+    , Events.onInput <| SetPartsBuffer bufferIndex
+    ]
+    []
+
+partCountSelector : Int -> Html Msg
+partCountSelector customPartCount =
+  Html.select
+    [ Attr.class "component-count-selector"
+    , Events.onInput
+        (\countString ->
+          let
+            partCount =
+              Maybe.withDefault maxCustomParts
+                <| String.toInt countString
+          in
+            min maxCustomParts (max 1 partCount)
+              |> SetPartCount
+        )
+    ]
+    <| List.Extra.initialize
+        maxCustomParts
+        (\index ->
+          let
+            countString = String.fromInt <| index + 1
+          in
+            Html.option
+              [ Attr.value countString
+              , Attr.selected <| customPartCount == index + 1
+              ]
+              [ Html.text <| countString ++ " components" ]
+        )
+
+bufferSeparationSelector : Bool -> Html Msg
+bufferSeparationSelector separateCustomParts =
+  Html.label
+    [ Attr.class "component-separation-selector" ]
+    [ Html.input
+        [ Attr.type_ "checkbox"
+        , Attr.checked separateCustomParts
+        , Events.onCheck SetSeparateParts
+        ]
+        []
+    , Html.text "Space Separated"
+    ]
 
 
 encodeLanguageIndex : (Int, Int) -> String
@@ -372,17 +508,23 @@ languageSelector activeLanguageIndex activeLanguage =
                       Just spec -> spec)
     , Attr.class "language-selector"
     , Attr.title activeLanguage.metadata.description
-    , Attr.value <| encodeLanguageIndex activeLanguageIndex
     ]
-    <| List.indexedMap languageOptionGroup allLanguageGroups
+    <| List.indexedMap
+        (languageOptionGroup activeLanguageIndex)
+        allLanguageGroups
 
-languageOptionGroup : Int -> LanguageGroup -> Html Msg
-languageOptionGroup groupIndex languageGroup =
-  Html.optgroup [ Attr.property "label" <| Enc.string languageGroup.name ]
-    <| List.indexedMap (languageOption groupIndex) languageGroup.languages
+languageOptionGroup : LanguageIndex -> Int -> LanguageGroup -> Html Msg
+languageOptionGroup activeLanguageIndex groupIndex languageGroup =
+  Html.optgroup
+    [ Attr.property "label" <| Enc.string languageGroup.name ]
+    <| List.indexedMap
+        (languageOption activeLanguageIndex groupIndex)
+        languageGroup.languages
 
-languageOption : Int -> Int -> LanguageSpec -> Html Msg
-languageOption groupIndex itemIndex languageSpec =
+languageOption : LanguageIndex -> Int -> Int -> LanguageSpec -> Html Msg
+languageOption activeLanguageIndex groupIndex itemIndex languageSpec =
   Html.option
-    [ Attr.value <| encodeLanguageIndex (groupIndex, itemIndex) ]
+    [ Attr.value <| encodeLanguageIndex (groupIndex, itemIndex)
+    , Attr.selected <| activeLanguageIndex == (groupIndex, itemIndex)
+    ]
     [ Html.text languageSpec.metadata.name ]

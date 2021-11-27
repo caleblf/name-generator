@@ -203,8 +203,7 @@ transformToggle transformStates index transformSpec =
   Html.div
     [ Attr.class "transform-entry" ]
     [ Html.label
-        [ Attr.title transformSpec.metadata.description
-        ]
+        [ Attr.title transformSpec.metadata.description ]
         [ Html.input
             [ Attr.type_ "checkbox"
             , Attr.checked
