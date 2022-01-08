@@ -1,4 +1,4 @@
-module Language exposing (Model, Msg, init, update, viewSettings, languageGenerator)
+module Language exposing (Model, Msg, init, update, viewSettings, languageGenerator, LanguageGroup, LanguageSetup(..))
 
 import List
 import List.Extra
@@ -43,7 +43,8 @@ componentwiseGenerator separator partOptions =
 
 
 type alias Model =
-  { activeLanguageIndex : LanguageIndex
+  { languageGroups: List LanguageGroup
+  , activeLanguageIndex : LanguageIndex
   , activeLanguage : Language
   , customExamples : String  -- only visible when in user Markov mode
   , customPartsBuffers : List String  -- only visible when in user parts mode
@@ -52,37 +53,48 @@ type alias Model =
   }
 
 
-init : (Model, Cmd Msg)
-init =
+init : List LanguageGroup -> (Model, Cmd Msg)
+init languageGroups =
   let
+    allLanguageGroups = languageGroups ++ [ configurableLanguageGroup ]
     defaultModel =
-      { activeLanguageIndex = (-1, -1)
+      { languageGroups = []
+      , activeLanguageIndex = (-1, -1)
       , activeLanguage = emptyLanguage
       , customExamples = ""
       , customPartsBuffers = List.repeat maxCustomParts ""
       , customPartCount = 2
       , separateCustomParts = False
       }
-    defaultInit =
-      ( defaultModel
-      , Cmd.none
-      )
+    firstIndexAndLanguageSpec : Maybe ((Int, Int), LanguageSpec)
+    firstIndexAndLanguageSpec =
+      List.indexedMap
+        (\groupIndex languageGroup ->
+          Maybe.map
+            (Tuple.pair (groupIndex, 0))
+            (List.head languageGroup.languages)
+        )
+        allLanguageGroups
+        |> List.filterMap identity
+        |> List.head
   in
-    case List.head allLanguageGroups of
-      Nothing -> defaultInit
-      Just languageGroup ->
-        case List.head languageGroup.languages of
-          Nothing -> defaultInit
-          Just languageSpec ->
-            let
-              (language, loadCmd) = loadLangauge (0, 0) languageSpec
-            in
-              ( { defaultModel
-                | activeLanguageIndex = (0, 0)
-                , activeLanguage = language
-                }
-              , loadCmd
-              )
+    case firstIndexAndLanguageSpec of
+      Just (firstLanguageIndex, firstLanguageSpec) ->
+        let
+          (initialLanguage, loadCmd) =
+            loadLanguage firstLanguageIndex firstLanguageSpec
+        in
+          ( { defaultModel
+            | languageGroups = allLanguageGroups
+            , activeLanguageIndex = firstLanguageIndex
+            , activeLanguage = initialLanguage
+            }
+          , loadCmd
+          )
+      Nothing ->
+        ( defaultModel
+        , Cmd.none
+        )
 
 
 type alias LanguageMetadata =
@@ -152,7 +164,7 @@ update
   case msg of
     SelectLanguage index languageSpec ->
       let
-        (language, loadCmd) = loadLangauge index languageSpec
+        (language, loadCmd) = loadLanguage index languageSpec
       in
         ( { model
           | activeLanguageIndex = index
@@ -216,93 +228,14 @@ emptyLanguageSpec =
   }
 
 
-allLanguageGroups : List LanguageGroup
-allLanguageGroups =
-  [ { name = "Fantasy"
-    , languages =
-        [ { metadata =
-              { name = "Common"
-              , description = "Generic fantasy names"
-              }
-          , setupSpec = UrlLanguageSetup "languages/common.pcfg"
-          }
-        , { metadata =
-              { name = "Nickname"
-              , description = "Melodramatic nicknames"
-              }
-          , setupSpec = UrlLanguageSetup "languages/nickname.pcfg"
-          }
-        , { metadata =
-              { name = "Elven"
-              , description = "Fantasy elf names"
-              }
-          , setupSpec = UrlLanguageSetup "languages/elven.pcfg"
-          }
-        , { metadata =
-              { name = "Halfling"
-              , description = "Fantasy halfling/hobbit names"
-              }
-          , setupSpec = UrlLanguageSetup "languages/halfling.pcfg"
-          }
-        , { metadata =
-              { name = "Dwarven"
-              , description = "Fantasy dwarf names"
-              }
-          , setupSpec = UrlLanguageSetup "languages/dwarven.pcfg"
-          }
-        , { metadata =
-              { name = "Orcish"
-              , description = "Fantasy orc names"
-              }
-          , setupSpec = UrlLanguageSetup "languages/orcish.pcfg"
-          }
-        , { metadata =
-              { name = "Fiendish"
-              , description = "Demonic-sounding names"
-              }
-          , setupSpec = UrlLanguageSetup "languages/fiendish.pcfg"
-          }
-        ]
-    }
-  , { name = "History and Literature"
-    , languages =
-        [ { metadata =
-              { name = "Roman"
-              , description = "Ancient Roman names"
-              }
-          , setupSpec = UrlLanguageSetup "languages/roman.pcfg"
-          }
-        , { metadata =
-              { name = "Arthurian"
-              , description = "Names reminiscent of Arthurian legend"
-              }
-          , setupSpec = UrlLanguageSetup "languages/arthurian.pcfg"
-          }
-        ]
-    }
-  , { name = "Places and Organizations"
-    , languages =
-        [ { metadata =
-              { name = "Town"
-              , description = "Generic city/town names"
-              }
-          , setupSpec = UrlLanguageSetup "languages/town.pcfg"
-          }
-        , { metadata =
-              { name = "Organization"
-              , description = "Names for organizations and orders"
-              }
-          , setupSpec = UrlLanguageSetup "languages/organization.pcfg"
-          }
-        ]
-    }
-  , { name = "Configurable"
-    , languages =
-        [ customMarkovLanguageSpec
-        , customPartsLanguageSpec
-        ]
-    }
-  ]
+configurableLanguageGroup : LanguageGroup
+configurableLanguageGroup =
+  { name = "Configurable"
+  , languages =
+      [ customMarkovLanguageSpec
+      , customPartsLanguageSpec
+      ]
+  }
 
 
 customMarkovLanguageSpec : LanguageSpec
@@ -324,8 +257,8 @@ customPartsLanguageSpec =
   }
 
 
-loadLangauge : LanguageIndex -> LanguageSpec -> (Language, Cmd Msg)
-loadLangauge index { metadata, setupSpec } =
+loadLanguage : LanguageIndex -> LanguageSpec -> (Language, Cmd Msg)
+loadLanguage index { metadata, setupSpec } =
   case setupSpec of
     UrlLanguageSetup url ->
       ( loadingLanguage
@@ -391,7 +324,8 @@ loadGeneratorFromUrl url parser =
 
 viewSettings : Model -> Html Msg
 viewSettings
-  { activeLanguageIndex
+  { languageGroups
+  , activeLanguageIndex
   , activeLanguage
   , customExamples
   , customPartsBuffers
@@ -401,13 +335,13 @@ viewSettings
   Html.div [ Attr.class "language-settings" ]
     <| case activeLanguage.generator of
         StaticGenerator generator ->
-          [ languageSelector activeLanguageIndex activeLanguage ]
+          [ languageSelector languageGroups activeLanguageIndex activeLanguage ]
         FromCustomExamples ->
-          [ languageSelector activeLanguageIndex activeLanguage
+          [ languageSelector languageGroups activeLanguageIndex activeLanguage
           , customExamplesArea customExamples
           ]
         FromCustomParts ->
-          ( languageSelector activeLanguageIndex activeLanguage
+          ( languageSelector languageGroups activeLanguageIndex activeLanguage
           :: partCountSelector customPartCount
           :: bufferSeparationSelector separateCustomParts
           :: List.indexedMap
@@ -491,8 +425,8 @@ decodeLanguageIndex indexString =
     _ -> (0, 0)
 
 
-languageSelector : LanguageIndex -> Language -> Html Msg
-languageSelector activeLanguageIndex activeLanguage =
+languageSelector : List LanguageGroup -> LanguageIndex -> Language -> Html Msg
+languageSelector languageGroups activeLanguageIndex activeLanguage =
   Html.select
     [ Events.onInput
         (\indexString ->
@@ -500,7 +434,7 @@ languageSelector activeLanguageIndex activeLanguage =
             (groupIndex, itemIndex) = decodeLanguageIndex indexString
           in
             SelectLanguage (groupIndex, itemIndex)
-              <| case List.Extra.getAt groupIndex allLanguageGroups of
+              <| case List.Extra.getAt groupIndex languageGroups of
                   Nothing -> emptyLanguageSpec
                   Just group ->
                     case List.Extra.getAt itemIndex group.languages of
@@ -511,7 +445,7 @@ languageSelector activeLanguageIndex activeLanguage =
     ]
     <| List.indexedMap
         (languageOptionGroup activeLanguageIndex)
-        allLanguageGroups
+        languageGroups
 
 languageOptionGroup : LanguageIndex -> Int -> LanguageGroup -> Html Msg
 languageOptionGroup activeLanguageIndex groupIndex languageGroup =

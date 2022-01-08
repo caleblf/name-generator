@@ -1,4 +1,4 @@
-module Transform exposing (Model, Msg, init, update, viewSettings, applyTransforms)
+module Transform exposing (Model, Msg, init, update, viewSettings, applyTransforms, TransformSpec)
 
 import Dict exposing (Dict)
 import List
@@ -19,7 +19,7 @@ import ParserError
 
 
 applyTransforms : Model -> Random.Generator String -> Random.Generator String
-applyTransforms { transformStates } generator =
+applyTransforms { transformSpecs, transformStates } generator =
   let
     transforms : List Transform
     transforms =
@@ -31,7 +31,7 @@ applyTransforms { transformStates } generator =
                   if active then maybeTransform else Nothing
                 Nothing -> Nothing -- won't happen
             )
-            allTransformSpecs
+            transformSpecs
   in
     List.foldl identity generator transforms
 
@@ -41,7 +41,8 @@ applyTransforms { transformStates } generator =
 
 
 type alias Model =
-  { transformStates : Dict Int TransformState -- by index in allTransformSpecs
+  { transformSpecs : List TransformSpec
+  , transformStates : Dict Int TransformState -- by index in transformSpecs
   }
 
 type alias TransformState =
@@ -50,25 +51,23 @@ type alias TransformState =
   }
 
 
-init : (Model, Cmd Msg)
-init =
-  ( { transformStates =
-        Dict.fromList
-          <| List.indexedMap
-              (\index transformSpec ->
-                ( index, { active = False, maybeTransform = Nothing } )
-              )
-              allTransformSpecs
-    }
-  , loadAllTransforms
-  )
+init : List TransformSpec -> (Model, Cmd Msg)
+init transformSpecs =
+  let
+    sortedTransformSpecs = List.sortBy .priority transformSpecs
+  in
+    ( { transformSpecs = sortedTransformSpecs
+      , transformStates =
+          Dict.fromList
+            <| List.indexedMap
+                (\index transformSpec ->
+                  ( index, { active = False, maybeTransform = Nothing } )
+                )
+                sortedTransformSpecs
+      }
+    , loadTransforms sortedTransformSpecs
+    )
 
-
-type alias TransformMetadata =
-  { name : String
-  , description : String
-  , priority : Int  -- how early it should be applied (smallest first)
-  }
 
 type alias Transform = Random.Generator String -> Random.Generator String
 
@@ -118,40 +117,15 @@ update msg ({ transformStates } as model) =
 
 
 type alias TransformSpec =
-  { metadata : TransformMetadata
+  { name : String
+  , description : String
+  , priority : Int  -- how early it should be applied (smallest first)
   , url : String
   }
 
 
-allTransformSpecs : List TransformSpec
-allTransformSpecs =
-  List.sortBy (.metadata >> .priority)
-    [ { metadata = 
-        { name = "Title"
-        , description = "Heroic titles"
-        , priority = 1
-        }
-      , url = "transforms/title.pcfg"
-      }
-    , { metadata = 
-        { name = "Profession"
-        , description = "Medieval professions"
-        , priority = 3
-        }
-      , url = "transforms/profession.pcfg"
-      }
-    , { metadata = 
-        { name = "Divine Domain"
-        , description = "Divine domains"
-        , priority = 2
-        }
-      , url = "transforms/domain.pcfg"
-      }
-    ]
-
-
-loadAllTransforms : Cmd Msg
-loadAllTransforms =
+loadTransforms : List TransformSpec -> Cmd Msg
+loadTransforms transformSpecs =
   Cmd.batch
     <| List.indexedMap
         (\index transformSpec ->
@@ -161,7 +135,7 @@ loadAllTransforms =
                   LoadedTransform index transform
                 )
         )
-        allTransformSpecs
+        transformSpecs
 
 loadTransformFromUrl : String -> Cmd Transform
 loadTransformFromUrl url =
@@ -182,7 +156,8 @@ loadTransformFromUrl url =
                           , url
                           , ": "
                           , ParserError.deadEndsToString deadEnds
-                          ])
+                          ]
+                  )
             Err httpError ->
               (\_ -> Random.constant <| "Error accessing " ++ url)
         )
@@ -194,16 +169,16 @@ loadTransformFromUrl url =
 
 
 viewSettings : Model -> Html Msg
-viewSettings { transformStates } =
+viewSettings { transformSpecs, transformStates } =
   Html.div [ Attr.class "transform-selector" ]
-    <| List.indexedMap (transformToggle transformStates) allTransformSpecs
+    <| List.indexedMap (transformToggle transformStates) transformSpecs
 
 transformToggle : Dict Int TransformState -> Int -> TransformSpec -> Html Msg
 transformToggle transformStates index transformSpec =
   Html.div
     [ Attr.class "transform-entry" ]
     [ Html.label
-        [ Attr.title transformSpec.metadata.description ]
+        [ Attr.title transformSpec.description ]
         [ Html.input
             [ Attr.type_ "checkbox"
             , Attr.checked
@@ -216,6 +191,6 @@ transformToggle transformStates index transformSpec =
             , Events.onCheck <| ToggleTransformAtIndexTo index
             ]
             []
-        , Html.text transformSpec.metadata.name
+        , Html.text transformSpec.name
         ]
     ]

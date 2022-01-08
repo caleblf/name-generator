@@ -1,0 +1,94 @@
+{
+    "languageGroups": [
+        {
+            "name": "Fantasy",
+            "languages": [
+                {
+                    "name": "Common",
+                    "description": "Generic fantasy names",
+                    "url": "languages/common.pcfg"
+                },
+                {
+                    "name": "Nickname",
+                    "description": "Melodramatic nicknames",
+                    "url": "languages/common.pcfg"
+                },
+                {
+                    "name": "Elven",
+                    "description": "Fantasy elf names",
+                    "url": "languages/elven.pcfg"
+                },
+                {
+                    "name": "Halfling",
+                    "description": "Fantasy halfling/hobbit names",
+                    "url": "languages/halfling.pcfg"
+                },
+                {
+                    "name": "Dwarven",
+                    "description": "Fantasy dwarf names",
+                    "url": "languages/dwarven.pcfg"
+                },
+                {
+                    "name": "Orcish",
+                    "description": "Fantasy orc names",
+                    "url": "languages/orcish.pcfg"
+                },
+                {
+                    "name": "Fiendish",
+                    "description": "Demonic-sounding names",
+                    "url": "languages/fiendish.pcfg"
+                }
+            ]
+        },
+        {
+            "name": "History and Literature",
+            "languages": [
+                {
+                    "name": "Roman",
+                    "description": "Ancient Roman names",
+                    "url": "languages/roman.pcfg"
+                },
+                {
+                    "name": "Arthurian",
+                    "description": "Names reminiscent of Arthurian legend",
+                    "url": "languages/arthurian.pcfg"
+                }
+            ]
+        },
+        {
+            "name": "Places and Organizations",
+            "languages": [
+                {
+                    "name": "Town",
+                    "description": "Generic city/town names",
+                    "url": "languages/town.pcfg"
+                },
+                {
+                    "name": "Organization",
+                    "description": "Names for organizations and orders",
+                    "url": "languages/organization.pcfg"
+                }
+            ]
+        }
+    ],
+    "transforms": [
+        {
+            "name": "Title",
+            "description": "Heroic titles",
+            "priority": 1,
+            "url": "transforms/title.pcfg"
+        },
+        {
+            "name": "Profession",
+            "description": "Medieval professions",
+            "priority": 3,
+            "url": "transforms/profession.pcfg"
+        },
+        {
+            "name": "Divine Domain",
+            "description": "Domains of influence for gods",
+            "priority": 2,
+            "url": "transforms/domain.pcfg"
+        }
+    ]
+}

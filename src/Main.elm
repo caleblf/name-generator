@@ -1,14 +1,14 @@
 module Main exposing (main)
 
 import Browser
+import Result
 import Html exposing (Html)
-import Html.Lazy as Lazy
 import Html.Attributes as Attr
-import Random
+import Http
+import Json.Decode as Dec
 
-import NameGeneratorApp
-import Language
-import Transform
+import App
+import Manifest exposing (Manifest)
 
 
 
@@ -19,7 +19,7 @@ main =
   Browser.element
     { init = init
     , update = update
-    , subscriptions = subscriptions
+    , subscriptions = (\_ -> Sub.none)
     , view = view
     }
 
@@ -28,30 +28,45 @@ main =
 -- MODEL
 
 
-type alias Model =
-  { generatorModel : NameGeneratorApp.Model  -- app/generation state
-  , languageModel : Language.Model  -- either a PCFG or Markov model
-  , transformsModel : Transform.Model  -- a PCFG model, separate
-  }
-
+type Model
+  = DisplayingText String
+  | RunningApp App.Model
 
 init : () -> (Model, Cmd Msg)
 init _ =
-  let
-    (languageModel, languageCmd) = Language.init
-    (transformsModel, transformsCmd) = Transform.init
-    (generatorModel, generatorCmd) = NameGeneratorApp.init
-  in
-    ( { generatorModel = generatorModel
-      , languageModel = languageModel
-      , transformsModel = transformsModel
-      }
-    , Cmd.batch
-        [ Cmd.map GeneratorMsg generatorCmd
-        , Cmd.map LanguageMsg languageCmd
-        , Cmd.map TransformMsg transformsCmd
-        ]
-    )
+  ( DisplayingText ""
+  , loadManifestFromUrl "manifest.json"
+      |> Cmd.map
+          (\manifestResult ->
+            case manifestResult of
+              Ok manifest ->
+                LoadedManifest manifest
+              Err errorMessage ->
+                FailedWithError errorMessage
+          )
+  )
+
+
+loadManifestFromUrl : String -> Cmd (Result String Manifest)
+loadManifestFromUrl url =
+  Http.get
+    { url = url
+    , expect =
+        Http.expectString
+        (\result ->
+          case result of
+            Ok body ->
+              Dec.decodeString Manifest.decoder body
+                |> Result.mapError
+                    (\jsonError ->
+                      "Failed to parse manifest: "
+                      ++ Dec.errorToString jsonError
+                    )
+            Err httpError ->
+              Err
+                <| "Error accessing " ++ url
+        )
+    }
 
 
 
@@ -59,73 +74,46 @@ init _ =
 
 
 type Msg
-  = GeneratorMsg NameGeneratorApp.Msg
-  | LanguageMsg Language.Msg
-  | TransformMsg Transform.Msg
+  = LoadedManifest Manifest
+  | FailedWithError String
+  | AppMsg App.Msg
 
 
 update : Msg -> Model -> (Model, Cmd Msg)
-update msg ({ generatorModel, languageModel, transformsModel } as model) =
-  case msg of
-    GeneratorMsg generatorMsg ->
+update msg model =
+  case (msg, model) of
+    (LoadedManifest manifest, DisplayingText _) ->
       let
-        generator : Random.Generator String
-        generator =
-          Transform.applyTransforms transformsModel
-          <| Random.map capitalize
-          <| Language.languageGenerator languageModel
-        (newGeneratorModel, generatorCmd) =
-          NameGeneratorApp.updateFrom generator generatorMsg generatorModel
+        (appModel, appCmd) = App.init manifest
       in
-        ( { model | generatorModel = newGeneratorModel }
-        , Cmd.map GeneratorMsg generatorCmd
+        ( RunningApp appModel
+        , Cmd.map AppMsg appCmd
         )
-    LanguageMsg languageMsg ->
+    (AppMsg appMsg, RunningApp appModel) ->
       let
-        (newLanguageModel, languageCmd) =
-          Language.update languageMsg languageModel
+        (updatedAppModel, appCmd) = App.update appMsg appModel
       in
-        ( { model | languageModel = newLanguageModel }
-        , Cmd.map LanguageMsg languageCmd
+        ( RunningApp updatedAppModel
+        , Cmd.map AppMsg appCmd
         )
-    TransformMsg transformsMsg ->
-      let
-        (newTransformModel, transformsCmd) =
-          Transform.update transformsMsg transformsModel
-      in
-        ( { model | transformsModel = newTransformModel }
-        , Cmd.map TransformMsg transformsCmd
-        )
-
-
-capitalize : String -> String
-capitalize string =
-  String.toUpper (String.left 1 string) ++ String.dropLeft 1 string
-
-
-
--- SUBSCRIPTIONS
-
-
-subscriptions : Model -> Sub Msg
-subscriptions model =
-  Sub.none
+    (FailedWithError errorMessage, _) ->
+      (DisplayingText errorMessage, Cmd.none)
+    _ ->
+      (DisplayingText "Illegal state", Cmd.none)  -- Should not happen
 
 
 
 -- VIEW
 
 view : Model -> Html Msg
-view { generatorModel, languageModel, transformsModel } =
+view model =
   Html.div [ Attr.class "container" ]
     [ header
-    , NameGeneratorApp.viewApp GeneratorMsg
-        generatorModel
-        [ Html.map LanguageMsg
-            <| Lazy.lazy Language.viewSettings languageModel
-        , Html.map TransformMsg
-            <| Lazy.lazy Transform.viewSettings transformsModel
-        ]
+    , case model of
+        DisplayingText text ->
+          Html.text text
+        RunningApp appModel ->
+          Html.map AppMsg <| App.view appModel
     ]
 
 

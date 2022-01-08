@@ -1,127 +1,84 @@
-!type: pcfg-language
-!name: Halfling
-!author: Iguanotron
-!description: Hobbit names
-!root: root
+!type: markov
 
-root:
-  [$start $end]
-  [$onset $connector $coda]
-start:
-  [$v $tc]
-  $syllable
-  $chunk
-end:
-  [$v $tc]
-  $v
-  $syllable
-  $chunk
-syllable: [$c $v $tc]
-onset:
-  $v
-  [$c $v]
-coda:
-  5 $v
-  5 [$v $tc]
-  2 y
-
-chunk:
-  sam
-  wise
-  gam
-  gee
-  ben
-  drew
-  took
-  brook
-  hill
-  half
-  mill
-  wood
-  ton
-
-connector:
-  rd
-  2 rr
-  2 gg
-  2 pp
-  rt
-  tr
-  d
-  lb
-  lt
-  ln
-  lm
-  mm
-  nn
-  cl
-  2 sh
-  sw
-  vl
-  lv
-  cr
-  sn
-  sp
-  pl
-  pr
-  fr
-  st
-  th
-  rl
-  fl
-  nd
-  ld
-  gl
-  ff
-  ll
-
-tc:
-  r
-  s
-  d
-  g
-  l
-  3 n
-  3 m
-c:
-  w
-  r
-  t
-  tr
-  th
-  y
-  p
-  pl
-  s
-  sh
-  st
-  sm
-  sn
-  sl
-  d
-  dr
-  f
-  fr
-  fl
-  g
-  gr
-  gl
-  h
-  j
-  k
-  l
-  c
-  cr
-  cl
-  v
-  b
-  br
-  bl
-  n
-  m
-v:
-  3 a
-  3 i
-  3 o
-  u
-  ia
+Pod
+Madwise
+Drisa
+Parra
+Ramon
+Orrio
+Allo
+Iggam
+Harran
+Carria
+Colin
+Custer
+Arton
+Raffia
+Soffia
+Dasha
+Shisho
+Brada
+Flamma
+Grista
+Gara
+Gorgo
+Tona
+Fossia
+Hidi
+Arrin
+Tappo
+Isa
+Drotho
+Anton
+Willa
+Ather
+Vara
+Tontook
+Onwood
+Cardrew
+Porris
+Drewton
+Arran
+Malda
+Romma
+Triston
+Volin
+Progo
+Domi
+Moppo
+Millben
+Ginna
+Hilla
+Obrook
+Took
+Hillos
+Mossa
+Toni
+Jimma
+Naroni
+Hatti
+Shala
+Pili
+Cora
+Tora
+Cari
+Shasa
+Milo
+Cato
+Bludo
+Palla
+Parto
+Drono
+Frogo
+Leston
+Valli
+Wastia
+Panni
+Palla
+Harra
+Hanna
+Colda
+Appo
+Laston
+Frigo
+Martin

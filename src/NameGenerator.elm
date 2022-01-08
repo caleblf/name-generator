@@ -1,4 +1,4 @@
-module NameGeneratorApp exposing (..)
+module NameGenerator exposing (..)
 
 import Html exposing (Html)
 import Html.Events as Events
