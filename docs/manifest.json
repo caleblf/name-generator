@@ -11,7 +11,7 @@
                 {
                     "name": "Nickname",
                     "description": "Melodramatic nicknames",
-                    "url": "languages/common.pcfg"
+                    "url": "languages/nickname.pcfg"
                 },
                 {
                     "name": "Elven",
