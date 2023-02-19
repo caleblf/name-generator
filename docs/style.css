@@ -10,7 +10,7 @@ html, body {
 
 body {
     font-family: "Lato", Calibri, Candara, Segoe, Segoe UI, Optima, Arial, sans-serif;
-    padding: 1em;
+    padding-inline: 1rem;
 }
 
 h1 {
@@ -36,7 +36,7 @@ button {
     background-color: #eee;
     cursor: pointer;
 }
-button:hover {
+button:hover, button:active {
     background-color: turquoise;
 }
 
@@ -49,6 +49,7 @@ select {
 }
 
 textarea {
+    border: solid 1px #ccc;
     padding: 0.4em;
 }
 
@@ -58,7 +59,7 @@ textarea {
     margin: 0 auto;
     width: 100%;
     height: 100%;
-    max-width: 50em;
+    max-width: 50rem;
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
@@ -68,19 +69,16 @@ textarea {
     width: 100%;
     display: flex;
     flex-flow: row wrap;
-    align-items: stretch;
+    gap: 1rem;
 }
 
 .column {
-    min-width: 50%;
-    max-width: 25em;
-    flex-grow: 1;
-    padding: 1em;
+    min-width: calc(50% - 1rem);
+    max-width: 24.5rem;
 }
 
-
-.names-panel, .saved-names-panel {
-    margin-top: 1em;
+.column > * + * {
+    margin-top: 0.4rem;
 }
 
 .saved-names-list {
@@ -91,7 +89,7 @@ textarea {
 }
 
 .generated-name-entry {
-    padding: 0.2em;
+    margin-block: 0.4em;
 }
 .generated-name {
     padding: 0.2em;
@@ -108,7 +106,8 @@ textarea {
     color: transparent;
     font-weight: bold;
 }
-.generated-name:after {
+.generated-name:hover:after,
+.generated-name:active:after {
     color: white;
 }
 
@@ -128,8 +127,8 @@ textarea {
     align-items: flex-start;
 }
 
-.transform-selector {
-    margin-top: 0.4em;
+.language-settings > * + * {
+    margin-top: 0.4rem;
 }
 
 /* Widgets */
@@ -140,12 +139,8 @@ textarea {
     padding: 0.8em;
 }
 
-.amount-selector, .language-selector {
-    margin-right: 0.4em;
-}
-
 .transform-entry {
-    padding: 0.2em 0;
+    margin-block: 0.4em;
 }
 
 .examples-area {
@@ -158,10 +153,6 @@ textarea {
     margin-top: 0.4em;
 }
 
-.component-count-selector, .component-separation-selector {
-    margin-top: 0.4em;
-}
-
 .forget-name-button {
     margin-right: 0.2em;
     padding: 0.2em;
@@ -170,6 +161,7 @@ textarea {
     -ms-user-select: none;
     user-select: none;
 }
-.forget-name-button:hover {
+.forget-name-button:hover,
+.forget-name-button:active {
     background-color: salmon;
 }
