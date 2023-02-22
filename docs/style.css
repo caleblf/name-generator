@@ -37,7 +37,7 @@ button {
     background-color: #eee;
     cursor: pointer;
 }
-button:hover, button:active {
+button:hover, button:focus-visible {
     background-color: turquoise;
 }
 
@@ -72,12 +72,10 @@ textarea {
     flex-flow: row wrap;
     gap: 1rem;
 }
-
 .column {
     width: 24.5rem;
     flex-grow: 1;
 }
-
 .column > * + * {
     margin-top: 0.4rem;
 }
@@ -98,17 +96,17 @@ textarea {
     box-decoration-break: clone;
     cursor: pointer;
 }
-
-.generated-name:hover {
-    background-color: turquoise;
-}
-.generated-name:after {
+.generated-name::after {
     content: "\00a0+";
     color: transparent;
     font-weight: bold;
 }
-.generated-name:hover:after,
-.generated-name:active:after {
+.generated-name:hover,
+.generated-name:focus-visible {
+    background-color: turquoise;
+}
+.generated-name:hover::after,
+.generated-name:focus-visible::after {
     color: white;
 }
 
@@ -162,6 +160,6 @@ textarea {
     user-select: none;
 }
 .forget-name-button:hover,
-.forget-name-button:active {
+.forget-name-button:focus-visible {
     background-color: salmon;
 }
