@@ -1,11 +1,16 @@
+:root {
+    color-scheme: light dark;
+}
+
 * {
     box-sizing: border-box;
 }
 
 html, body {
-    height: 100%;
     margin: 0;
     padding: 0;
+    background-color: white;
+    color: black;
 }
 
 body {
@@ -58,7 +63,6 @@ textarea {
 
 .container {
     margin: 0 auto;
-    width: 100%;
     height: 100%;
     max-width: 50rem;
     display: flex;
@@ -162,4 +166,45 @@ textarea {
 .forget-name-button:hover,
 .forget-name-button:focus-visible {
     background-color: salmon;
+}
+
+/* Browser dark mode */
+@media (prefers-color-scheme: dark) {
+    html, body {
+        background-color: #1e1d23;
+        color: white;
+    }
+    input, select, textarea {
+        color: white;
+        background-color: #2b2a33;
+        border: solid 1px #777;
+    }
+    button {
+        background-color: #42424c;
+        color: white;
+    }
+    button:hover, button:focus-visible {
+        background-color: turquoise;
+        color: black;
+    }
+    textarea {
+        border: solid 1px #777;
+    }
+    .saved-names-list {
+        border: solid 1px #777;
+    }
+    .generated-name:hover,
+    .generated-name:focus-visible {
+        background-color: turquoise;
+        color: black;
+    }
+    .generated-name:hover::after,
+    .generated-name:focus-visible::after {
+        color: #1e1d23;
+    }
+    .forget-name-button:hover,
+    .forget-name-button:focus-visible {
+        background-color: salmon;
+        color: black;
+    }
 }

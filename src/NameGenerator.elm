@@ -130,8 +130,10 @@ amountSelector amount =
     Html.input
         [ Attr.class "amount-selector"
         , Attr.type_ "number"
+        , Attr.attribute "inputmode" "numeric"
         , Attr.min "1"
         , Attr.max "512"
+        , Attr.pattern "[0-9]+"
         , Attr.placeholder "1"
         , Attr.value <| String.fromInt amount
         , Events.onInput <|

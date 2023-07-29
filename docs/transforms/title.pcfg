@@ -142,6 +142,7 @@ sigil: # must pluralize with -s suffix
   Tarn
   Desert
   Glen
+  Sea
   # Astronomical bodies
   Moon
   Sun
@@ -237,7 +238,6 @@ description:
   Reckless
   Unladylike
   Truculent
-  Flirtatious
   Boorish
   Forthright
   Swanky
@@ -298,10 +298,6 @@ description:
   Drunkard
   Sober
   # Region of origin
-  Northron
-  Southron
-  Westron
-  Eastron
   Beyonder
   Barbarian
   Lost
@@ -346,6 +342,12 @@ description:
   Fish
   Weasel
   Tortoise
+  Caracal
+  Vulture
+  Tiger
+  Viper
+  Beetle
+  Crow
   # Fanciful titles
   Myrmidon
   Zephyr
